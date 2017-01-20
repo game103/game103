@@ -1,0 +1,38 @@
+<html>
+<head>
+
+<script type = "text/javascript">
+function showcode() {
+document.getElementById('code').style.display = "inline";
+document.getElementById('clock').style.display = "none";
+document.getElementById('code').innerHTML = '<iframe src = "http://game103.net/apppages/clock.html" style = "width:285;height:80;border:0;"></iframe>';
+}
+function dogrun() {
+document.getElementById('cocoa').innerHTML = '<marquee behavior ="scroll" direction="right"><img id = "cocoa" src = "http://game103.net/images/cocoarunning.gif" height = 45 width = 70 onclick = "showclock()"></marquee>';
+document.getElementById('time').style.display = "none";
+document.getElementById('date').style.display = "none";
+}
+function showclock() {
+document.getElementById('cocoa').innerHTML = '<img src = "http://game103.net/images/cocoarunning.gif" height = 45 width = 70 onclick = "dogrun()" oncontextmenu = "showcode()">';
+document.getElementById('time').style.display = "inline";
+document.getElementById('date').style.display = "inline";
+}
+</script>
+</head>
+<div  id = "clock">
+<div style="width:295;height:50;border:outset">
+<div style="text-align:center;">
+<div id = "time" style = "display:inline">
+<iframe src = "http://game103.net/apppages/time.html" height = 40 width = 105 frameBorder = 0></iframe>
+</div>
+<div id = "cocoa" style = "display:inline">
+<img src = "http://game103.net/images/cocoarunning.gif" height = 45 width = 70 onclick = "dogrun()" oncontextmenu = "showcode()">
+</div>
+<div id = "date" style = "display:inline">
+<iframe src = "http://game103.net/apppages/date.html" height = 40 width = 110 frameBorder = 0></iframe>
+</div>
+</div>
+</div>
+</div>
+<textarea id = "code" style = "display:none;height:50px;width:270px;"></textarea>
+</html>

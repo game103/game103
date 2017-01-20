@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "scripts"
+AuthUserFile "/home/hallaby/.htpasswds/public_html/scripts/passwd"
+require valid-user
