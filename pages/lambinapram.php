@@ -1,0 +1,76 @@
+<?php
+	if(!isset($routed)) {
+		throw new Exception($direct_access_message);
+	}
+	
+	$display_title = "Lamb in a Pram";
+	$display_description = "Gameplay tips, screenshots from the tutorial, credits, an FAQ, and a way to contact the developer for the Game 103 App, Lamb in a Pram.";
+	$display_page = <<<HTML
+	<div class='box-content box-content'>
+		<div class='box-content-title'>$display_title</div>
+		<div class='box-content-container'>
+			<iframe src="//banners.itunes.apple.com/banner.html?partnerId=&aId=&bt=catalog&t=catalog_black&id=894750816&c=us&l=en-US&w=728&h=90&store=apps" frameborder=0 style="overflow-x:hidden;overflow-y:hidden;width:728px;height:90px;border:0px"></iframe>
+			<iframe src="//banners.itunes.apple.com/banner.html?partnerId=&aId=&bt=catalog&t=catalog_black&id=898885941&c=us&l=en-US&w=728&h=90&store=apps" frameborder=0 style="overflow-x:hidden;overflow-y:hidden;width:728px;height:90px;border:0px"></iframe>
+			<p>Thanks for playing the Game 103 iOS app, Lamb in a Pram. On this page you will find some gameplay tips, screenshots from the tutorial, credits, an FAQ, and a way to contact the developer with any questions that you have.</p>
+			<h3>Gameplay Tips and Tricks</h3>
+			<p style = "text-align:left">
+				<ul style = "text-align:left">
+					<li>Not every coin is worth going for. If you are aiming for a high score, you will want to be certain that you can get out of the way of the next enemy before jumping for a coin.</li>
+					<li>The store is available from the main menu.</li>
+					<li>If items in the store seem expensive, try completing missions. Missions give 1000-3000 coins per mission.</li>
+					<li>Levels 1-5 contain easy missions providing 1000 coins each, levels 5-10 contain medium missions providing 2000 coins each, levels 11+ contain hard missions providing 3000 coins each.</li>
+					<li>Mute the game in the pause menu.</li>
+					<li>When exiting the app while in the middle of a game, it is best to pause the game manually before quitting. Otherwise, the game delays about a second from where you left off and then pauses.</li>
+					<li>If you cannot connect to Game Center when you get a high score, do not worry. It will be uploaded later.</li>
+					<li>Tap the pram to change the pram's color.</li>
+				</ul>
+			</p>
+			<h3>Tutorial</h3>
+			<div id="tutorial" style="margin: 0 auto;">
+				<div>
+					<img alt = "Lamb in a Pram Tutorial" src="/images/screenshots/lambinpramtutorial/1.png" width = "480" height = "320" name="show">
+				</div>
+
+				<select id="tutorial-slide" onChange="rotate(this.selectedIndex);">
+					<option value="/images/screenshots/lambinpramtutorial/1.png"></option>
+					<option value="/images/screenshots/lambinpramtutorial/2.png"></option>
+					<option value="/images/screenshots/lambinpramtutorial/3.png"></option>
+					<option value="/images/screenshots/lambinpramtutorial/4.png"></option>
+					<option value="/images/screenshots/lambinpramtutorial/5.png"></option>
+				</select>
+
+				<button onclick="rotate(0);" title="Jump to beginning">First</button>
+				<button onclick="rotate(x-1);" title="Last Picture">Previous</button>
+				<button onclick="rotate(x+1);" title="Next Picture">Next</button>
+				<button onclick="rotate(document.getElementById('tutorial-slide').length-1);" title="Jump to end">Last</button>
+			</div>
+			<h3>FAQ</h3>
+			<ul style = "text-align:left">
+				<li><b>What's the difference between the free and paid versions?</b> The free version includes ads and only has 4 items in the store. The paid version has 16 items in the store.</li>
+				<li><b>What items are in the store?</b> In the free version, the store items include a red cap, a bow tie, a rain hat, and a bandana. The paid version has all of those as well as a top hat, a necklace, a crown, a bell, a blue cap, a collar, a straw hat, a tie, a helmet, a pair of glasses, a pirate hat, and an eyepatch.</li>
+				<li><b>How many updates have there been?</b> Both Lamb in a Pram and Lamb in a Pram Lite are on version 1.1.0 and have had one update each.</li>
+				<li><b>When was Lamb in a Pram released?</b>July 11th, 2014. Version 1.1.0 was released on July 22nd 2014.</li>
+				<li><b>When was Lamb in a Pram Lite released?</b>July 21th, 2014. Version 1.1.0 was released on July 30nd 2014.</li>
+			</ul>
+			<h3>Contact</h3>
+			<p>To contact me, James Grams, the developer of Lamb in a Pram, send an email to <a href = "mailto:james@game103.net">james@game103.net</a>. Thanks for playing!</p>
+			<h3>Credits and other information</h3>
+			<p><b>Programming, Art, and Music</b>: James Grams</p>
+			<p><b>Product Testing</b>: Rachel Grams, James Grams</p>
+			<p><b>Font (Conformity)</b>: Unitech Fonts</p>
+		</div>
+	</div>
+HTML;
+	$display_javascript = "
+	// Author: ricocheting.com
+	// Description: slideshow that allows visitors to flip through a series of images on your website
+	var x=0;
+	function rotate(num){
+		fs=document.getElementById('tutorial-slide');
+		x=num%fs.length;
+		if(x<0) x=fs.length-1;
+		document.images.show.src=fs.options[x].value;
+		fs.selectedIndex=x;
+	}
+	";
+?>

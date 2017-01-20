@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "archive"
+AuthUserFile "/home/hallaby/.htpasswds/public_html/archive/passwd"
+require valid-user

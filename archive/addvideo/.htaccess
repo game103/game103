@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "addvideo"
+AuthUserFile "/home/hallaby/.htpasswds/public_html/addvideo/passwd"
+require valid-user

@@ -1,0 +1,48 @@
+<html>
+<head>
+<style>
+body {font-family:Tahoma;}
+</style>
+</head>
+<script type = "text/javascript">
+var refresh = setInterval(function() {gettime()},1000);
+function gettime()
+{
+var date = new Date();
+var timezone = 0;
+var offset = (new Date().getTimezoneOffset()) + (timezone * 60);
+var hoursoffset = 0;
+var daysoffset = 0;
+while(offset >= 1) {
+offset = offset - 60;
+hoursoffset = hoursoffset + 1;
+}
+while(offset <= -1) {
+offset = offset + 60;
+hoursoffset = hoursoffset - 1;
+}
+var h = (date.getHours() + hoursoffset);
+var hours = h;
+while (hours >= 24) {
+hours = hours - 24;
+daysoffset = daysoffset + 1;
+}
+while (hours <= -1) {
+hours = hours + 24;
+daysoffset = daysoffset - 1;
+}
+
+var d = date.getDate() + daysoffset;
+var day = (d < 10) ? '0' + d : d;
+var m = date.getMonth() + 1;
+var month = (m < 10) ? '0' + m : m;
+var yy = date.getYear();
+var year = (yy < 1000) ? yy + 1900 : yy;
+var displaydate = (month + "/" + day + "/" + year);
+document.getElementById("updatedate").innerHTML = displaydate;
+}
+</script>
+<div style = "text-align:center" id = "updatedate">
+
+</div>
+</html>
