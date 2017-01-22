@@ -837,7 +837,9 @@
 				}
                 changePage(event.state.page);
                 changeSort(event.state.sort);
-				changeType(event.state.type);
+				if(resetCategories) {
+					changeType(event.state.type);
+				}
                 // No need to replace the url, since we are already there!
                 // The point of this fetch is to make the data match the url
                 fetch(false, resetCategories, event.state.category);
