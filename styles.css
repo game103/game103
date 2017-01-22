@@ -20,7 +20,7 @@ body {
 	margin: auto;
 	color: #3274DA;
 	font-family: "Open Sans", sans-serif;
-	min-width: 750px;
+	min-width: 800px;
 	position: relative;
 	background-color: #DBF7FF;
 	font-size: 16px;
@@ -630,14 +630,14 @@ input[type=range]::-ms-track {
 
 .search {
 	display: inline-block;
-	width: 100%;
+	margin-top: 5px;
 }
 
 .search input {
 	background-color: #3274DA;
 	color: white;
 	border: 1px solid white;
-	width: 220px;
+	width: 175px;
 	height: 20px;
 	display: inline-block;
 	padding: 5px;

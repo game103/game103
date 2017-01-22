@@ -30,33 +30,34 @@
 			}
 			break;
 		case 'games':
+			$type = 'games';
 			if(count($routes) == 2) {
 				$category = 'all';
 				$search = '';
 				$sort = 'popularity';
 				$page = 1;
-				include $path . '/pages/games.php';
+				include $path . '/pages/find.php';
 			}
 			else if(count($routes) == 3) {
 				$category = $routes[2];
 				$search = '';
 				$sort = 'popularity';
 				$page = 1;
-				include $path . '/pages/games.php';
+				include $path . '/pages/find.php';
 			}
 			else if(count($routes) == 5) {
 				$category = $routes[2];
 				$search = '';
 				$sort = $routes[3];
 				$page = $routes[4];
-				include $path . '/pages/games.php';
+				include $path . '/pages/find.php';
 			}
 			else if(count($routes) == 6) {
 				$category = $routes[2];
 				$search = $routes[3];
 				$sort = $routes[4];
 				$page = $routes[5];
-				include $path . '/pages/games.php';
+				include $path . '/pages/find.php';
 			}
 			else if(count($routes) == 7) {
 				if($routes[2] == 'ws') {
@@ -65,7 +66,7 @@
 					$search = $routes[4];
 					$sort = $routes[5];
 					$page = $routes[6];
-					include $path . '/pages/games.php';
+					include $path . '/pages/find.php';
 				}
 				else {
 					$is_404 = true;
@@ -85,33 +86,34 @@
 			}
 			break;
 		case 'videos':
+			$type = 'videos';
 			if(count($routes) == 2) {
 				$category = 'all';
 				$search = '';
 				$sort = 'popularity';
 				$page = 1;
-				include $path . '/pages/videos.php';
+				include $path . '/pages/find.php';
 			}
 			else if(count($routes) == 3) {
 				$category = $routes[2];
 				$search = '';
 				$sort = 'popularity';
 				$page = 1;
-				include $path . '/pages/videos.php';
+				include $path . '/pages/find.php';
 			}
 			else if(count($routes) == 5) {
 				$category = $routes[2];
 				$search = '';
 				$sort = $routes[3];
 				$page = $routes[4];
-				include $path . '/pages/videos.php';
+				include $path . '/pages/find.php';
 			}
 			else if(count($routes) == 6) {
 				$category = $routes[2];
 				$search = $routes[3];
 				$sort = $routes[4];
 				$page = $routes[5];
-				include $path . '/pages/videos.php';
+				include $path . '/pages/find.php';
 			}
 			else if(count($routes) == 7) {
 				if($routes[2] == 'ws') {
@@ -120,7 +122,7 @@
 					$search = $routes[4];
 					$sort = $routes[5];
 					$page = $routes[6];
-					include $path . '/pages/videos.php';
+					include $path . '/pages/find.php';
 				}
 				else {
 					$is_404 = true;
@@ -131,33 +133,34 @@
 			}
 			break;
 		case 'resources':
+			$type = 'resources';
 			if(count($routes) == 2) {
 				$category = 'all';
 				$search = '';
 				$sort = 'date';
 				$page = 1;
-				include $path . '/pages/resources.php';
+				include $path . '/pages/find.php';
 			}
 			else if(count($routes) == 3) {
 				$category = $routes[2];
 				$search = '';
 				$sort = 'date';
 				$page = 1;
-				include $path . '/pages/resources.php';
+				include $path . '/pages/find.php';
 			}
 			else if(count($routes) == 5) {
 				$category = $routes[2];
 				$search = '';
 				$sort = $routes[3];
 				$page = $routes[4];
-				include $path . '/pages/resources.php';
+				include $path . '/pages/find.php';
 			}
 			else if(count($routes) == 6) {
 				$category = $routes[2];
 				$search = $routes[3];
 				$sort = $routes[4];
 				$page = $routes[5];
-				include $path . '/pages/resources.php';
+				include $path . '/pages/find.php';
 			}
 			else if(count($routes) == 7) {
 				if($routes[2] == 'ws') {
@@ -166,7 +169,47 @@
 					$search = $routes[4];
 					$sort = $routes[5];
 					$page = $routes[6];
-					include $path . '/pages/resources.php';
+					include $path . '/pages/find.php';
+				}
+				else {
+					$is_404 = true;
+				}
+			}
+			else {
+				$is_404 = true;
+			}
+			break;
+		case 'everything':
+			$type = 'everything';
+			if(count($routes) == 2) {
+				$category = '';
+				$search = '';
+				$sort = 'popularity';
+				$page = 1;
+				include $path . '/pages/find.php';
+			}
+			else if(count($routes) == 4) {
+				$category = '';
+				$search = '';
+				$sort = $routes[2];
+				$page = $routes[3];
+				include $path . '/pages/find.php';
+			}
+			else if(count($routes) == 5) {
+				$category = '';
+				$search = $routes[2];
+				$sort = $routes[3];
+				$page = $routes[4];
+				include $path . '/pages/find.php';
+			}
+			else if(count($routes) == 6) {
+				if($routes[2] == 'ws') {
+					$ws = true;
+					$category = '';
+					$search = $routes[3];
+					$sort = $routes[4];
+					$page = $routes[5];
+					include $path . '/pages/find.php';
 				}
 				else {
 					$is_404 = true;
