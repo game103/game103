@@ -1314,6 +1314,7 @@
 				document.getElementById('rating').parentNode.style.display = 'block';
 				document.getElementById('popularity').parentNode.style.display = 'block';
 			}
+			document.getElementById('creation').parentNode.style.display = 'none';
 		}
 		// Change the page
 		function changePage(newPage) {
