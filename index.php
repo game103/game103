@@ -220,8 +220,40 @@
 			}
 			break;
 		case 'apps':
+			$type = 'apps';
 			if(count($routes) == 2) {
-				include $path . '/pages/apps.php';
+				$category = '';
+				$search = '';
+				$sort = 'date';
+				$page = 1;
+				include $path . '/pages/find.php';
+			}
+			else if(count($routes) == 4) {
+				$category = '';
+				$search = '';
+				$sort = $routes[2];
+				$page = $routes[3];
+				include $path . '/pages/find.php';
+			}
+			else if(count($routes) == 5) {
+				$category = '';
+				$search = $routes[2];
+				$sort = $routes[3];
+				$page = $routes[4];
+				include $path . '/pages/find.php';
+			}
+			else if(count($routes) == 6) {
+				if($routes[2] == 'ws') {
+					$ws = true;
+					$category = '';
+					$search = $routes[3];
+					$sort = $routes[4];
+					$page = $routes[5];
+					include $path . '/pages/find.php';
+				}
+				else {
+					$is_404 = true;
+				}
 			}
 			else {
 				$is_404 = true;
@@ -379,6 +411,12 @@
 		
 		<script>
 			<?php echo $display_javascript ?>
+			function siteSearch() {
+				console.log('hi');
+				var searchValue = document.getElementById('site-search-input').value;
+				window.location.href = '/everything/' + searchValue + '/popularity/1';
+				return false;
+			}
 		</script>
 		
 	</head>
@@ -391,6 +429,9 @@
 				<div class='header-title'>
 					<a href="/"><img src='/images/logo2016.png' alt='Game 103 logo' class='logo'/></a>
 				</div>
+				<form class='site-search' onsubmit='return siteSearch()'>
+					<input placeholder="Find games and more!" id="site-search-input" autocomplete="off" type="text"><input type='submit' value='Search' class='button' id='site-search-go'></input>
+				</form>
 			</div>
 			
 			<!-- Navbar -->
