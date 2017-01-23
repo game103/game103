@@ -121,6 +121,10 @@ button::-moz-focus-inner, .button::-moz-focus-inner {
 	border-left: none;
 }
 
+.none-view {
+	display: none !important;
+}
+
 .content {
 	text-align: center;
 }

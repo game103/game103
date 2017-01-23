@@ -10,7 +10,7 @@
 		$dropdown_selected_in_list_class = "dropdown-selected-in-list";
 		$paging_selected_page_class = "paging-selected-page";
 		$hide_style = 'style="visibility:hidden"';
-		$none_style = 'style="display:none"';
+		$none_class = 'none-view';
 		$items_per_page = 15;
 		$display_page = '';
 		// For paging
@@ -641,9 +641,9 @@
 				</span>
 			</li>";
 		}
-		$categories_display_style = "";
+		$categories_display_class = "";
 		if($type == 'everything' || $type == 'apps') {
-			$categories_display_style = $none_style;
+			$categories_display_class = $none_class;
 		}
 		
 		// *************************
@@ -732,10 +732,10 @@
 		// Create everything else needed on the page and put it together.
 		
 		if($game103_games) {
-			$creation_style = "";
+			$creation_hidden_class = "";
 		}
 		else {
-			$creation_style = $none_style;
+			$creation_hidden_class = $none_class;
 		}
 		
 		if($category != "all" && $category != '') {
@@ -746,9 +746,9 @@
 		}
 		$display_title = $category_for_title . $type_capital;
 		
-		$hidden_sorts_style = "";
+		$hidden_sorts_class = "";
 		if($type == 'resources' || $type == 'apps') {
-			$hidden_sorts_style = $none_style;
+			$hidden_sorts_class = $none_class;
 		}
 		
 		$display_page = "
@@ -767,14 +767,19 @@
 							</span>
 						</div>
 						<ul class='dropdown-menu' id='sort-dropdown-menu'>
-							<li $hidden_sorts_style class='dropdown-item $popularity_class' onclick='sortAndFetch(\"popularity\")'>
+							<li class='dropdown-item $popularity_class $hidden_sorts_class' onclick='sortAndFetch(\"popularity\")'>
 								<span id='popularity' class='dropdown-item-text'>
 									Sort by popularity
 								</span>
 							</li>
-							<li $hidden_sorts_style class='dropdown-item $rating_class' onclick='sortAndFetch(\"rating\")'>
+							<li class='dropdown-item $rating_class $hidden_sorts_class' onclick='sortAndFetch(\"rating\")'>
 								<span id='rating' class='dropdown-item-text'>
 									Sort by rating
+								</span>
+							</li>
+							<li class='dropdown-item $creation_class $creation_hidden_class' onclick='sortAndFetch(\"creation\")'>
+								<span id='creation' class='dropdown-item-text'>
+									Sort by creation
 								</span>
 							</li>
 							<li class='dropdown-item $date_class' onclick='sortAndFetch(\"date\")'>
@@ -785,11 +790,6 @@
 							<li class='dropdown-item $alphabetically_class' onclick='sortAndFetch(\"alphabetical\")'>
 								<span id='alphabetical' class='dropdown-item-text'>
 									Sort alphabetically
-								</span>
-							</li>
-							<li $creation_style class='dropdown-item $creation_class' onclick='sortAndFetch(\"creation\")'>
-								<span id='creation' class='dropdown-item-text'>
-									Sort by creation
 								</span>
 							</li>
 						</ul>
@@ -833,7 +833,7 @@
 							</li>
 						</ul>
 					</div>
-					<div class='dropdown' $categories_display_style>
+					<div class='dropdown $categories_display_class'>
 						<div class='dropdown-selected' onclick='openDropDown(event, \"categories\")'>
 							<span class='dropdown-selected-text'>
 								<span class='dropdown-selected-text-no-arrow' id='categories-dropdown-selected-text-no-arrow'>
@@ -1015,7 +1015,7 @@
 							}
 							// If successful, this should always be shown (unless type is everything)
 							if(type != 'everything' && type != 'apps') {
-								document.getElementById('categories-dropdown-menu').parentNode.style.display = '';
+								document.getElementById('categories-dropdown-menu').parentNode.classList.remove('$none_class');
 							}
 							if(status != 'success') {
 								items.innerHTML = object['message'];
@@ -1200,7 +1200,7 @@
 			// If the categories dropdown menu is invisible, there was either an error fetching categories
 			// or we are waiting to load categories. Either way, we want to load new categories.
 			var resetCategories = false;
-			if(document.getElementById('categories-dropdown-menu').parentNode.style.display == 'none') {
+			if(document.getElementById('categories-dropdown-menu').parentNode.classList.contains('$none_class')) {
 				resetCategories = true;
 			}
 			fetchTimeout = setTimeout(function() {fetch(true, resetCategories, 'all')}, 500);
@@ -1214,7 +1214,7 @@
 			}
 			changeCategory(newCategory);
 			var resetCategories = false;
-			if(document.getElementById('categories-dropdown-menu').parentNode.style.display == 'none') {
+			if(document.getElementById('categories-dropdown-menu').parentNode.classList.contains('$none_class')) {
 				resetCategories = true;
 			}
 			fetchTimeout = setTimeout(function() {fetch(true, resetCategories, 'all')}, 500);
@@ -1228,7 +1228,7 @@
 			}
 			changeSort(newSort);
 			var resetCategories = false;
-			if(document.getElementById('categories-dropdown-menu').parentNode.style.display == 'none') {
+			if(document.getElementById('categories-dropdown-menu').parentNode.classList.contains('$none_class')) {
 				resetCategories = true;
 			}
 			fetchTimeout = setTimeout(function() {fetch(true, resetCategories, 'all')}, 500);
@@ -1241,7 +1241,7 @@
 			}
 			changePage(newPage);
 			var resetCategories = false;
-			if(document.getElementById('categories-dropdown-menu').parentNode.style.display == 'none') {
+			if(document.getElementById('categories-dropdown-menu').parentNode.classList.contains('$none_class')) {
 				resetCategories = true;
 			}
 			fetchTimeout = setTimeout(function() {fetch(true, resetCategories, 'all')}, 500);
@@ -1268,10 +1268,10 @@
 			document.getElementById('categories-dropdown-selected-text-no-arrow').innerHTML = 
 			document.getElementById(category).innerHTML;
 			if(newCategory == 'game103' && type == 'games') {
-				document.getElementById('creation').parentNode.style.display = 'block';
+				document.getElementById('creation').parentNode.classList.remove('$none_class');
 			}
 			else {
-				document.getElementById('creation').parentNode.style.display = 'none';
+				document.getElementById('creation').parentNode.classList.add('$none_class');
 				if(sort == 'creation') {
 					changeSort('date');
 				}
@@ -1288,7 +1288,7 @@
 		// Change the type
 		function changeType(newType) {
 			// Hide the categories since new ones will be loaded
-			document.getElementById('categories-dropdown-menu').parentNode.style.display = 'none';
+			document.getElementById('categories-dropdown-menu').parentNode.classList.add('$none_class');
 			document.getElementById(type).parentNode.classList.remove('$dropdown_selected_in_list_class');
 			document.getElementById(type + '-entries').id = newType + '-entries';
 			// Switch the category (display will be taken care of on reload)
@@ -1304,17 +1304,17 @@
 			document.getElementById('type-dropdown-selected-text-no-arrow').innerHTML = 
 			document.getElementById(type).innerHTML;
 			if(newType == 'resources' || newType == 'apps') {
-				document.getElementById('rating').parentNode.style.display = 'none';
-				document.getElementById('popularity').parentNode.style.display = 'none';
+				document.getElementById('rating').parentNode.classList.add('$none_class');
+				document.getElementById('popularity').parentNode.classList.add('$none_class');
 				if(sort == 'rating' || sort == 'popularity') {
 					changeSort('date');
 				}
 			}
 			else {
-				document.getElementById('rating').parentNode.style.display = 'block';
-				document.getElementById('popularity').parentNode.style.display = 'block';
+				document.getElementById('rating').parentNode.classList.remove('$none_class');
+				document.getElementById('popularity').parentNode.classList.remove('$none_class');
 			}
-			document.getElementById('creation').parentNode.style.display = 'none';
+			document.getElementById('creation').parentNode.classList.add('$none_class');
 		}
 		// Change the page
 		function changePage(newPage) {
