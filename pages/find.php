@@ -1068,9 +1068,9 @@
 												interactionsStr = interactionsVerb + 's';
 											}
 											interactionsSpan = \"<span class = 'entry-plays'> \" + itemsArr[i]['interactions'] + ' ' + interactionsStr + \"</span>\";
-											itemURL = '/' + urlBase + '/' +  itemsArr[i]['url_name'];
-											target = '_self';
 										}
+										itemURL = '/' + urlBase + '/' +  itemsArr[i]['url_name'];
+										target = '_self';
 									}
 									else if(curType == 'resources') {
 										if(type != 'everything') {
