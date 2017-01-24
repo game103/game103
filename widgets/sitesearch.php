@@ -13,16 +13,26 @@
 	var siteSearchSelected = false;
 	var pageOnLoad = window.onload;
 	window.onload = function() {
+		if(pageOnLoad) {
+			pageOnLoad();
+		}
+		var pageOnClick = document.onclick;
+		var pageOnKeyDown = document.onkeydown;
 		// Close drop down on click
 		document.onclick = function() {
+			if(pageOnClick) {
+				pageOnClick();
+			}
 			if(!siteSearchSelected) {
 				document.getElementById('site-search-results-dropdown').style.display = 'none';
 			}
 		}
-		document.onkeydown = navigateSiteSearch;
-		if(pageOnLoad) {
-			pageOnLoad();
-		}
+		document.onkeydown = function(event) {
+			if(pageOnKeyDown) {
+				pageOnKeyDown();
+			}
+			navigateSiteSearch(event);
+		};
 	}
 	// Oninput for the form
 	function suggest() {
