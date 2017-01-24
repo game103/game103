@@ -938,6 +938,7 @@
 			if(document.getElementById(dropDown + '-dropdown-menu').style.display != 'inline-block') {
 				document.getElementById(dropDown + '-dropdown-arrow').innerHTML = '&#9650;';
 				document.getElementById(dropDown + '-dropdown-menu').style.display = 'inline-block';
+				document.getElementById('site-search-results-dropdown').style.display = 'none';
 				event.stopPropagation();
 				if(dropDown == 'sort') {
 					closeDropDown('categories');
@@ -958,6 +959,7 @@
 		function addToSite(event, urlName) {
 			event.preventDefault();
 			window.location.href = '/game103games/distribute/' + urlName + '.zip';
+			document.getElementById('site-search-results-dropdown').style.display = 'none';
 			event.stopPropagation();
 		}
 		// Fetch another page
@@ -1432,6 +1434,7 @@
 		function openURL(event, url) {
 			event.preventDefault();
 			window.open(url, '_blank');
+			document.getElementById('site-search-results-dropdown').style.display = 'none';
 			event.stopPropagation();
 		}
 		";
