@@ -359,6 +359,8 @@
 			$is_404 = true;
 	}
 	
+	include $path . '/widgets/sitesearch.php';
+	
 	if($is_404) {
 		$display_title = "Error #404";
 		$display_description = $display_title;
@@ -411,12 +413,7 @@
 		
 		<script>
 			<?php echo $display_javascript ?>
-			function siteSearch() {
-				console.log('hi');
-				var searchValue = document.getElementById('site-search-input').value;
-				window.location.href = '/everything/' + searchValue + '/popularity/1';
-				return false;
-			}
+			<?php echo $site_search_javascript ?>
 		</script>
 		
 	</head>
@@ -429,9 +426,7 @@
 				<div class='header-title'>
 					<a href="/"><img src='/images/logo2016.png' alt='Game 103 logo' class='logo'/></a>
 				</div>
-				<form class='site-search' onsubmit='return siteSearch()'>
-					<input placeholder="Find games and more!" id="site-search-input" autocomplete="off" type="text"><input type='submit' value='Search' class='button' id='site-search-go'></input>
-				</form>
+				<?php echo $site_search ?>
 			</div>
 			
 			<!-- Navbar -->

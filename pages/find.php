@@ -1081,8 +1081,6 @@
 									}
 									// Type must be apps
 									else {
-										console.dir(itemsArr[i]);
-										console.log(itemsArr[i]['url_name']);
 										if(!itemsArr[i]['url_name']) {
 											itemURL = itemsArr[i]['store_url'];
 											target = '_blank';
