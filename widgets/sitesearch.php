@@ -11,20 +11,18 @@
 	$site_search_javascript = "
 	var siteSearchFetchTimeout;
 	var siteSearchSelected = false;
+	var pageOnLoad = window.onload;
 	window.onload = function() {
 		// Close drop down on click
 		document.onclick = function() {
 			if(!siteSearchSelected) {
 				document.getElementById('site-search-results-dropdown').style.display = 'none';
 			}
-			// For find click listener
-			if(closeDropDown) {
-				closeDropDown('categories');
-				closeDropDown('sort');
-				closeDropDown('type');
-			}
 		}
 		document.onkeydown = navigateSiteSearch;
+		if(pageOnLoad) {
+			pageOnLoad();
+		}
 	}
 	// Oninput for the form
 	function suggest() {
