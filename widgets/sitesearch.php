@@ -17,6 +17,12 @@
 			if(!siteSearchSelected) {
 				document.getElementById('site-search-results-dropdown').style.display = 'none';
 			}
+			// For find click listener
+			if(closeDropDown) {
+				closeDropDown('categories');
+				closeDropDown('sort');
+				closeDropDown('type');
+			}
 		}
 		document.onkeydown = navigateSiteSearch;
 	}
