@@ -279,7 +279,7 @@ button::-moz-focus-inner, .button::-moz-focus-inner {
 	font-size: 90%;
 }
 
-#weekly-box {
+#weekly-box, #editors-pick-box {
 	display: block;
 }
 

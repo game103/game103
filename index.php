@@ -342,7 +342,7 @@
 			include $path . '/widgets/featuredgames.php';
 			$display_description = "Game 103 creates and hosts family-friendly games, entertainment, and development resources. Come see what you can find on Game 103!";
 			$display_title = "";
-			$display_javascript = $top_games_js . $new_games_js;
+			$display_javascript = $top_games_js . $new_games_js . $featured_games_js;
 			$display_page = "
 					
 			<!--Newest Games-->
