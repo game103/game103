@@ -2,7 +2,7 @@
 	$error_val = 'Sorry, there was an error loading top games. Please try again later.';
 	$featured_games = '<div class="box-content" id="featured-games"><div class="box-content-title">Featured Games</div>';
 	//$featured_games .= '<div class="box-hidden-subheading">These are some of the editor\'s favorite games!</div>';
-	$featured_games .= '<button class="box-content-button-selected box-content-button" id="editors-pick-button" onclick="changeViewFeatured(\'editors-pick\')">Editor\'s Picks</button>';
+	$featured_games .= '<button class="box-content-button-selected box-content-button" id="editors-pick-button" onclick="changeViewFeatured(\'editors-pick\')">Editor\'s Choices</button>';
 	$featured_games .= '<button class="box-content-button" id="daily-game-button" onclick="changeViewFeatured(\'daily-game\')">Daily Games</button>';
 	$featured_games .= "<div class='box-content-container'>";
 	$all_games = [];
