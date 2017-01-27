@@ -442,7 +442,7 @@
 				<!--Contact and Copyright-->
 				<div class="footer">
 					<div class="additional-links"><a href="/about">About Us</a> | <a href="/privacy">Privacy Policy</a> | <a href="/facts">Fun Facts</a> | <a href="/games/distributable">Developers</a></div>
-					<div class="copyright">&copy; 2016 <a href="https://game103.net">Game 103</a></div>
+					<div class="copyright">&copy; 2017 <a href="https://game103.net">Game 103</a></div>
 				</div>
 			</div>
 		</div>
