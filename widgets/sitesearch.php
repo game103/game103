@@ -74,7 +74,7 @@
 										url = itemsArr[i]['type'] + '/' + itemsArr[i]['url_name'];
 										target = '_self';
 									}
-									suggestionsHTML += '<li class=\"header-dropdown-item\" onclick=\"openSiteSearchURL(`' + url + '`,`' + target + '`)\" '
+									suggestionsHTML += '<li class=\"header-dropdown-item\" onclick=\"openSiteSearchURL(`' + url + '`,`' + target + '`,`' + itemsArr[i]['type'] + '`)\" '
 									+ 'onmouseover=\"addSelected(this)\" onmouseout=\"this.classList.remove(`header-dropdown-item-selected`)\">'
 									+ '<span class=\"dropdown-item-text\">'
 									+ itemsArr[i]['name'] + ' <span class=\"header-dropdown-item-type\">' + itemsArr[i]['type'] + '</span>'
@@ -114,12 +114,13 @@
 		return false;
 	}
 	// Open a URL
-	function openSiteSearchURL(url, target) {
+	function openSiteSearchURL(url, target, interactionType) {
 		console.log(url);
 		if(target == '_self') {
 			window.location.href = '/' + url;
 		}
 		else {
+			logSiteSearchInteraction(interactionType + 's', url);
 			window.open(url, '_blank');
 		}
 	}
@@ -197,6 +198,13 @@
 				}
 			}
 		}
+	}
+	// Log an event for statistics
+	function logSiteSearchInteraction(interactionType, url) {
+		console.log('asd');
+		var xhttp = new XMLHttpRequest();
+		xhttp.open('GET', '/ws/addview.php?type='+interactionType+'&url_name='+url, true);
+		xhttp.send();
 	}
 	";
 ?>
