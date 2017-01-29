@@ -19,7 +19,7 @@
 		// Get the required url params
 		$url_name = $mysqli->real_escape_string($url_name);
 		// String to query the database with
-		$str = "SELECT id, name, url, description, screenshot_url
+		$str = "SELECT id, name, url, description, screenshot_url, FORMAT(saves, 0)
 		FROM downloads WHERE url_name = ? LIMIT 1";
 		// Prepare the statement
 		$statement = $mysqli->prepare($str);
@@ -34,13 +34,19 @@
 			throw new Exception($mysql_message);
 		}
 		// Get the one result
-		$statement->bind_result($id, $name, $url, $description, $screenshot_url);
+		$statement->bind_result($id, $name, $url, $description, $screenshot_url, $saves);
 		// Fetch the result
 		$statement->fetch();
 		// Close the statement
 		$statement->close();
 		if(!isset($id)) {
 			throw new Exception($game_does_not_exist_message);
+		}
+		if($saves == 1) {
+			$saves_str = 'download';
+		}
+		else {
+			$saves_str = 'downloads';
 		}
 
 		//////////////
@@ -218,7 +224,8 @@
 					<!--Info-->
 					<div id='information' class='side-box-item responsive'>
 						<span class='side-box-title'>Information</span>
-						Compatible with Microsoft Windows only
+						Compatible with Microsoft Windows only<br>
+						$saves $saves_str
 						$characters_display
 						$videos_display
 					</div>

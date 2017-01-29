@@ -9,8 +9,12 @@
 	<div class='box-content box-content'>
 		<div class='box-content-title'>$display_title</div>
 		<div class='box-content-container'>
-			<iframe src="//banners.itunes.apple.com/banner.html?partnerId=&aId=&bt=catalog&t=catalog_black&id=894750816&c=us&l=en-US&w=728&h=90&store=apps" frameborder=0 style="overflow-x:hidden;overflow-y:hidden;width:728px;height:90px;border:0px"></iframe>
-			<iframe src="//banners.itunes.apple.com/banner.html?partnerId=&aId=&bt=catalog&t=catalog_black&id=898885941&c=us&l=en-US&w=728&h=90&store=apps" frameborder=0 style="overflow-x:hidden;overflow-y:hidden;width:728px;height:90px;border:0px"></iframe>
+			<a href='https://itunes.apple.com/us/app/lamb-in-a-pram/id894750816' target='_blank' onclick="logInteraction('https://itunes.apple.com/us/app/lamb-in-a-pram/id894750816')">
+				<img src='/images/banners/lambinapram.png'/>
+			</a>
+			<a href='https://itunes.apple.com/us/app/lamb-in-a-pram-lite/id898885941' target='_blank' onclick="logInteraction('https://itunes.apple.com/us/app/lamb-in-a-pram/id894750816')">
+				<img src='/images/banners/lambinapramlite.png'/>
+			</a>
 			<p>Thanks for playing the Game 103 iOS app, Lamb in a Pram. On this page you will find some gameplay tips, screenshots from the tutorial, credits, an FAQ, and a way to contact the developer with any questions that you have.</p>
 			<h3>Gameplay Tips and Tricks</h3>
 			<p style = "text-align:left">
@@ -71,6 +75,12 @@ HTML;
 		if(x<0) x=fs.length-1;
 		document.images.show.src=fs.options[x].value;
 		fs.selectedIndex=x;
+	}
+	// Log an interaction
+	function logInteraction(url) {
+		var xhttp = new XMLHttpRequest();
+		xhttp.open('GET', '/ws/addview.php?type=apps&url_name='+url, true);
+		xhttp.send();
 	}
 	";
 ?>

@@ -137,7 +137,7 @@
 			if(count($routes) == 2) {
 				$category = 'all';
 				$search = '';
-				$sort = 'date';
+				$sort = 'popularity';
 				$page = 1;
 				include $path . '/pages/find.php';
 			}
@@ -224,7 +224,7 @@
 			if(count($routes) == 2) {
 				$category = '';
 				$search = '';
-				$sort = 'date';
+				$sort = 'popularity';
 				$page = 1;
 				include $path . '/pages/find.php';
 			}
