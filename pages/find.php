@@ -137,7 +137,7 @@
 				$game103_extra_select = ", YEAR(entries.creation_date), entries.added_date as added_date, entries.creation_date as creation_date";
 				$union_sql = "
 				UNION
-				SELECT downloads.name as name, downloads.description, downloads.url_name, downloads.image_url, -1 as rating, -1 as plays, -1 as numeric_plays,
+				SELECT downloads.name as name, downloads.description, downloads.url_name, downloads.image_url, -1 as rating,  FORMAT(downloads.saves, 0) as plays, downloads.saves as numeric_plays,
 				YEAR(downloads.creation_date), downloads.added_date as added_date, downloads.creation_date as creation_date
 				FROM downloads";
 				$union_count_sql = "
@@ -164,25 +164,25 @@
 		$all_items_class = "";
 		if($type == 'games') {
 			$interactions_verb_sing = 'play';
-			$interactions_verb = $interactions_verb_sing . "s";
 			$games_class = $dropdown_selected_in_list_class;
 		}
 		else if($type == 'videos') {
 			$interactions_verb_sing = 'view';
-			$interactions_verb = $interactions_verb_sing . "s";
 			$videos_class = $dropdown_selected_in_list_class;
 		}
 		else if($type == 'resources') {
+			$interactions_verb_sing = 'visit';
 			$resources_class = $dropdown_selected_in_list_class;
 		}
 		else if($type == 'apps') {
+			$interactions_verb_sing = 'visit';
 			$apps_class = $dropdown_selected_in_list_class;
 		}
 		else {
 			$interactions_verb_sing = 'interaction';
-			$interactions_verb = $interactions_verb_sing . "s";
 			$all_items_class = $dropdown_selected_in_list_class;
 		}
+		$interactions_verb = $interactions_verb_sing . "s";
 		
 		// *************************
 		// ****** FOR SORTING ******
@@ -213,8 +213,13 @@
 			$sort_selected_str = 'Sort by rating';
 			$rating_class = $dropdown_selected_in_list_class;
 		}
-		else if($sort == "popularity" && $type != 'resources' && $type != 'apps') {
-			$sort_sql = "numeric_$interactions_verb DESC, rating DESC";
+		else if($sort == "popularity") {
+			if($type != 'resources' && $type != 'apps') {
+				$sort_sql = "numeric_$interactions_verb DESC, rating DESC";
+			}
+			else {
+				$sort_sql = "numeric_$interactions_verb DESC, added_date DESC";
+			}
 			$sort_selected_str = 'Sort by popularity';
 			$popularity_class = $dropdown_selected_in_list_class;
 		}
@@ -313,7 +318,7 @@
 		}
 		else if($type == 'resources') {
 			$select_str = "SELECT * FROM (
-						SELECT entries.name as name, entries.description, entries.url, entries.image_url
+						SELECT entries.name as name, entries.description, entries.url, entries.image_url, FORMAT(entries.visits, 0), entries.visits as numeric_visits
 						FROM entries JOIN categories_entries ON entries.id = categories_entries.entry_id
 						JOIN categories ON categories_entries.category_id = categories.id
 						$where_sql
@@ -331,7 +336,7 @@
 		}
 		else if($type == 'apps') {
 			$select_str = "SELECT * FROM(
-			SELECT apps.name as name, apps.description, apps.url_name, apps.image_url, apps.store_url, apps.type 
+			SELECT apps.name as name, apps.description, apps.url_name, apps.image_url, FORMAT(apps.visits, 0), apps.visits as numeric_visits, apps.store_url, apps.type 
 			FROM apps $apps_sql
 			ORDER BY $sort_sql
 			LIMIT $items_per_page
@@ -347,13 +352,13 @@
 				SELECT * FROM(
 				SELECT name, description, url_name, image_url, rating, FORMAT(plays, 0), plays as numeric_interactions, added_date, -1 as store_url, -1 as type, 'game' FROM hallaby_games.entries $where_sql
 				UNION
-				SELECT name, description, url_name, image_url, -1 as rating, -1 as plays, -1 as numeric_interactions, added_date, -1 as store_url, -1 as type, 'download' FROM hallaby_games.downloads $downloads_sql
+				SELECT name, description, url_name, image_url, -1 as rating, FORMAT(saves, 0), saves as numeric_interactions, added_date, -1 as store_url, -1 as type, 'download' FROM hallaby_games.downloads $downloads_sql
 				UNION
 				SELECT name, description, url_name, image_url, rating, FORMAT(views, 0), views as numeric_interactions, added_date, -1 as store_url, -1 as type, 'video' FROM hallaby_videos.entries $where_sql
 				UNION
-				SELECT name, description, url, image_url, -1 as rating, -1 as plays, -1 as numeric_interactions, added_date, -1 as store_url, -1 as type, 'resource' FROM hallaby_resources.entries $where_sql
+				SELECT name, description, url, image_url, -1 as rating, FORMAT(visits, 0), visits as numeric_interactions, added_date, -1 as store_url, -1 as type, 'resource' FROM hallaby_resources.entries $where_sql
 				UNION
-				SELECT name, description, url_name, image_url, -1 as rating, -1 as plays, -1 as numeric_interactions, added_date, store_url, type, 'app' FROM hallaby_games.apps $apps_sql
+				SELECT name, description, url_name, image_url, -1 as rating, FORMAT(visits, 0), visits as numeric_interactions, added_date, store_url, type, 'app' FROM hallaby_games.apps $apps_sql
 				ORDER BY $sort_sql
 				LIMIT $items_per_page
 				OFFSET $offset) AS main
@@ -434,10 +439,10 @@
 			}
 		}
 		else if($type == 'resources') {
-			$select_statement->bind_result($name, $description, $url, $image_url, $total_count);
+			$select_statement->bind_result($name, $description, $url, $image_url, $interactions, $numeric_interactions, $total_count);
 		}
 		else {
-			$select_statement->bind_result($name, $description, $url_name, $image_url, $store_url, $app_type, $total_count);
+			$select_statement->bind_result($name, $description, $url_name, $image_url, $interactions, $numeric_interactions, $store_url, $app_type, $total_count);
 		}
 		
 		// *************************
@@ -450,7 +455,8 @@
 				$item_object = array (
 					"name" => htmlentities($name, ENT_QUOTES),
 					"description" => $description,
-					"image_url" => $image_url
+					"image_url" => $image_url,
+					"interactions" => $interactions
 				);
 				if($game103_games) {
 					// Add the creation date to description
@@ -459,7 +465,6 @@
 				if($type != 'resources' && $type != 'apps') {
 					$item_object["url_name"] = $url_name;
 					$item_object["rating"] = $rating;
-					$item_object["interactions"] = $interactions;
 				}
 				else if($type == 'resources') {
 					$item_object["url"] = $url;
@@ -511,14 +516,20 @@
 			$name = htmlentities($name, ENT_QUOTES);
 			
 			$app_store_logo = "";
+			$onclick = "";
 			if($type == 'everything') {
 				$cur_type = $item_type . "s";
 				if($cur_type == 'games') {
 					$cur_interactions_verb_sing = 'play';
 				}
-				// Must be a video
-				else {
+				else if($cur_type == 'videos') {
 					$cur_interactions_verb_sing = 'view';
+				}
+				else if($cur_type == 'apps' || $cur_type == 'resources') {
+					$cur_interactions_verb_sing = 'visit';
+				}
+				else if($cur_type == 'downloads') {
+					$cur_interactions_verb_sing = 'download';
 				}
 				$cur_interactions_verb = $cur_interactions_verb_sing . "s";
 			}
@@ -532,8 +543,11 @@
 				// This is if it is a downloadable game
 				if($rating < 0) {
 					$rating_span = "";
-					$interactions_span = "";
 					$url_base = "download";
+					// Change the rest of the logic
+					$cur_type = $url_base . "s";
+					$cur_interactions_verb_sing = $url_base;
+					$cur_interactions_verb = $cur_type;
 				}
 				else {
 					$rating_width = ($rating * 22) . 'px';
@@ -544,40 +558,32 @@
 						$url_base = "video";
 					} 
 					$rating_span = "<span class='stars entry-stars'><span style='width: $rating_width'></span></span>";
-					if($interactions == 1) {
-						$interactions_str = $cur_interactions_verb_sing;
-					}
-					else {
-						$interactions_str = $cur_interactions_verb;
-					}
-					$interactions_span = "<span class = 'entry-plays'> $interactions $interactions_str</span>";
 				}
 				$url = "/$url_base/$url_name";
 				$target = "_self";
 			}
 			else if ($cur_type == 'resources') {
-				$interactions_span = "";
 				$rating_span = "";
 				$target = "_blank";
 				if($type == 'everything') {
 					$url = $url_name;
 				}
+				$onclick = "onclick=\"logInteraction('$cur_type','$url')\"";
 			}
 			// Type must be apps
 			else {
-				$interactions_span = "";
 				$rating_span = "";
 				if($url_name == NULL) {
 					$url = $store_url;
 					$target = "_blank";
+					$onclick = "onclick=\"logInteraction('$cur_type','$url')\"";
 				}
 				else {
 					$url = "/app/$url_name";
 					$target = "_self";
 				}
 				if($app_type == "iOS") {
-					$app_store_logo = "<span onclick='openURL(event, \"$store_url\")' style=\"position:absolute;top:0;right:0;display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/images/badges/en-us/badge_appstore-sm.svg) no-repeat;width:61px;height:15px;\"></span>
-					</span>";
+					$app_store_logo = "<span onclick='openURL(event, \"$store_url\")' style=\"position:absolute;top:0;right:0;display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/images/badges/en-us/badge_appstore-sm.svg) no-repeat;width:61px;height:15px;\"></span>";
 				}
 				else if($app_type == "Android") {
 					$app_store_logo = "<span onclick='openURL(event, \"$store_url\")' style=\"position:absolute;top:0;right:0;display:inline-block;overflow:hidden;width:80px;height:31px;\">
@@ -586,6 +592,13 @@
 					</span>";
 				}
 			}
+			if($interactions == 1) {
+				$interactions_str = $cur_interactions_verb_sing;
+			}
+			else {
+				$interactions_str = $cur_interactions_verb;
+			}
+			$interactions_span = "<span class = 'entry-plays'> $interactions $interactions_str</span>";
 			
 			// This doesn't need to be done in the JS since it is done in the ws
 			if($game103_games) {
@@ -599,7 +612,7 @@
 				$add_to_site = "";
 			}
 			
-			$display_page .= "<a href=\"$url\" target='$target' class = 'entry-link'>
+			$display_page .= "<a href=\"$url\" target='$target' class = 'entry-link' $onclick>
 			<span class = 'entry-item'>
 			<img alt = '$name' src = '$image_url'>
 			<span class = 'entry-title'>$name</span>
@@ -767,7 +780,7 @@
 							</span>
 						</div>
 						<ul class='dropdown-menu' id='sort-dropdown-menu'>
-							<li class='dropdown-item $popularity_class $hidden_sorts_class' onclick='sortAndFetch(\"popularity\")'>
+							<li class='dropdown-item $popularity_class' onclick='sortAndFetch(\"popularity\")'>
 								<span id='popularity' class='dropdown-item-text'>
 									Sort by popularity
 								</span>
@@ -1033,8 +1046,11 @@
 									var urlBase;
 									var curType;
 									var appStoreLogo = '';
+									var onclickVar = '';
 									var itemURL;
 									var target;
+									var interactionsVerb;
+									var interactionsStr;
 									
 									if(type == 'everything') {
 										curType = itemsArr[i]['type'] + 's';
@@ -1045,13 +1061,12 @@
 									if(curType != 'resources' && curType != 'apps') {
 										if(itemsArr[i]['rating'] < 0) {
 											ratingSpan = \"\";
-											interactionsSpan = \"\";
 											urlBase = 'download';
+											interactionsVerb = urlBase;
 										}
 										else {
 											ratingWidth = itemsArr[i]['rating'] * 22 + 'px';
 											ratingSpan = \"<span class='stars entry-stars'><span style='width: \" + ratingWidth + \"'></span></span> \";
-											var interactionsVerb;
 											if(curType == 'games') {
 												urlBase = 'game';
 												interactionsVerb = 'play';
@@ -1060,14 +1075,6 @@
 												urlBase = 'video';
 												interactionsVerb = 'view';
 											}
-											var interactionsStr;
-											if(itemsArr[i]['interactions'] == 1) {
-												interactionsStr = interactionsVerb;
-											}
-											else {
-												interactionsStr = interactionsVerb + 's';
-											}
-											interactionsSpan = \"<span class = 'entry-plays'> \" + itemsArr[i]['interactions'] + ' ' + interactionsStr + \"</span>\";
 										}
 										itemURL = '/' + urlBase + '/' +  itemsArr[i]['url_name'];
 										target = '_self';
@@ -1080,12 +1087,15 @@
 											itemURL = itemsArr[i]['url_name'];
 										}
 										target= '_blank';
+										interactionsVerb = 'visit';
+										onclickVar = 'onclick=\"logInteraction(`' + curType + '`,`' + itemURL + '`)\"';
 									}
 									// Type must be apps
 									else {
 										if(!itemsArr[i]['url_name']) {
 											itemURL = itemsArr[i]['store_url'];
 											target = '_blank';
+											onclickVar = 'onclick=\"logInteraction(`' + curType + '`,`' + itemURL + '`)\"';
 										}
 										else {
 											itemURL = '/app/' + itemsArr[i]['url_name'];
@@ -1094,8 +1104,7 @@
 										if(itemsArr[i]['app_type'] == 'iOS') {
 											appStoreLogo = `<span onclick='openURL(event, \"` + itemsArr[i]['store_url'] + `\")' 
 											style=\"position:absolute;top:0;right:0;display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/images/badges/en-us/badge_appstore-sm.svg) 
-											no-repeat;width:61px;height:15px;\"></span>
-											</span>`;
+											no-repeat;width:61px;height:15px;\"></span>`;
 										}
 										else if(itemsArr[i]['app_type'] == 'Android') {
 											appStoreLogo = `<span onclick='openURL(event, \"` + itemsArr[i]['store_url'] + `\")' style=\"position:absolute;top:0;right:0;display:inline-block;overflow:hidden;width:80px;height:31px;\">
@@ -1103,8 +1112,17 @@
 											style ='height:100%;width:100%'/>
 											</span>`;
 										}
+										interactionsVerb = 'visit';
 									}
-									itemsHTML += \"<a href='\" + itemURL + \"' target='\" + target + \"'class = 'entry-link'> \"
+									if(itemsArr[i]['interactions'] == 1) {
+										interactionsStr = interactionsVerb;
+									}
+									else {
+										interactionsStr = interactionsVerb + 's';
+									}
+									interactionsSpan = \"<span class = 'entry-plays'> \" + itemsArr[i]['interactions'] + ' ' + interactionsStr + \"</span>\";
+									
+									itemsHTML += \"<a href='\" + itemURL + \"' target='\" + target + \"'class = 'entry-link'\" + onclickVar + \"> \"
 									+ \"<span class = 'entry-item'> \"
 									+ \"<img alt = '\" + itemsArr[i]['name'] + \"' src = '\" + itemsArr[i]['image_url'] + \"'> \"
 									+ \"<span class = 'entry-title'>\" + itemsArr[i]['name'] + \"</span> \"
@@ -1306,7 +1324,7 @@
 			if(newType == 'resources' || newType == 'apps') {
 				document.getElementById('rating').parentNode.classList.add('$none_class');
 				document.getElementById('popularity').parentNode.classList.add('$none_class');
-				if(sort == 'rating' || sort == 'popularity') {
+				if(sort == 'rating') {
 					changeSort('date');
 				}
 			}
@@ -1430,12 +1448,19 @@
 				document.getElementById('last-paging').onclick = function() { pageAndFetch(maxPage) };
 			}
 		}
-		// Open URL
+		// Open URL (This is only used for store links on apps)
 		function openURL(event, url) {
 			event.preventDefault();
+			logInteraction('apps', url);
 			window.open(url, '_blank');
 			document.getElementById('site-search-results-dropdown').style.display = 'none';
 			event.stopPropagation();
+		}
+		// Log an interaction
+		function logInteraction(type, url) {
+			var xhttp = new XMLHttpRequest();
+			xhttp.open('GET', '/ws/addview.php?type='+type+'&url_name='+url, true);
+			xhttp.send();
 		}
 		";
 	}

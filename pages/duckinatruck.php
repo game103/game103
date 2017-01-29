@@ -9,7 +9,9 @@
 	<div class='box-content'>
 		<div class='box-content-title'>$display_title</div>
 		<div class='box-content-container'>
-			<iframe src="//banners.itunes.apple.com/banner.html?partnerId=&aId=&bt=catalog&t=catalog_black&id=907135188&c=us&l=en-US&w=728&h=90&store=apps" frameborder=0 style="overflow-x:hidden;overflow-y:hidden;width:728px;height:90px;border:0px"></iframe>
+			<a href='https://itunes.apple.com/us/app/duck-in-a-truck/id907135188' target='_blank' onclick="logInteraction('https://itunes.apple.com/us/app/duck-in-a-truck/id907135188')">
+				<img src='/images/banners/duckinatruck.png'/>
+			</a>
 			<p>Thanks for playing the Game 103 iOS app, Duck in a Truck. On this page you will find some gameplay tips tricks, and mechanics, credits, and a way to contact the developer with any questions that you have.</p>
 			<h3>Gameplay Tips, Tricks, and Mechanics</h3>
 			<p style = "text-align:left">
@@ -33,5 +35,16 @@
 		</div>
 	</div>
 HTML;
-	$display_javascript = "";
+	$display_javascript = "
+	// Log an interaction
+	function logInteraction(url) {
+		var xhttp = new XMLHttpRequest();
+		xhttp.open('GET', '/ws/addview.php?type=apps&url_name='+url, true);
+		xhttp.send();
+	}
+	
+	window.onload = function() {
+	
+	}
+	";
 ?>
