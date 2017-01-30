@@ -337,9 +337,16 @@
 			break;
 		case 'index';
 		case '':
+			// Use the same connection for all the parts of the homepage
+			$mysqli = new mysqli("game103.net", "hallaby", "***REMOVED***", "hallaby_games");
+			if (mysqli_connect_errno()) {
+				$mysqli->close();
+				exit();
+			}
 			include $path . '/widgets/newgames.php';
 			include $path . '/widgets/topgames.php';
 			include $path . '/widgets/featuredgames.php';
+			$mysqli->close();
 			$display_description = "Game 103 creates and hosts family-friendly games, entertainment, and development resources. Come see what you can find on Game 103!";
 			$display_title = "";
 			$display_javascript = $top_games_js . $new_games_js . $featured_games_js;
