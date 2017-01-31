@@ -1144,6 +1144,7 @@
 						}
 						catch(e) {
 							items.innerHTML = errorText;
+							items.style.opacity = 1;
 							pagingControls.style.display = 'none';
 							console.log(e);
 						}
