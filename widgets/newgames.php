@@ -262,6 +262,7 @@
 									}
 									catch(e) {
 										games.innerHTML = errorText;
+										games.style.opacity = 1;
 										console.log(e);
 									}
 								}

@@ -205,7 +205,8 @@
 								}
 							}
 							catch(e) {
-								games.innerHTML = errorText;
+								games.innerHTML = '<span class=\"box-content-error-display-force\">' + errorText + '</span>';
+								games.style.opacity = 1;
 								console.log(e);
 							}
 						}
