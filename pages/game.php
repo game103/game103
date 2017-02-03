@@ -420,17 +420,17 @@
 		// Function to make the game full screen
 		function fullScreen() {
 			var movie = document.getElementById('game');
-			var gameTop = 199;
+			var gameTop = 209;
 			var scrollX = 0;
-			var sizeToSetGame = document.documentElement.clientHeight;
-			var sizeToSetGameWidth = document.documentElement.clientWidth-10;
+			var sizeToSetGame = window.innerHeight;
+			var sizeToSetGameWidth = window.innerWidth-10;
 			var percentToSetGame = sizeToSetGame/originalHeight;
 			var percentToSetGameWidth = sizeToSetGameWidth/originalWidth;
 			if(percentToSetGameWidth < percentToSetGame) {
 				percentToSetGame = percentToSetGameWidth;
 			}
 			changeZoom(percentToSetGame);
-			window.scrollTo(0, gameTop);
+			window.scrollTo(document.getElementById('game-container').offsetLeft - 5, gameTop);
 			ensureValue();
 		}
 		// Set an element's size based on the offset of the original game size
