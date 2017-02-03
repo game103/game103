@@ -422,8 +422,17 @@
 			var movie = document.getElementById('game');
 			var gameTop = 209;
 			var scrollX = 0;
-			var sizeToSetGame = document.body.clientHeight;
-			var sizeToSetGameWidth = document.body.clientWidth;
+			var widthCalculator = document.createElement('div');
+			widthCalculator.style.position = 'fixed';
+			widthCalculator.style.width = '1px';
+			widthCalculator.style.height = '1px';
+			widthCalculator.style.bottom = '0';
+			widthCalculator.style.right = '0';
+			widthCalculator.style.visibility = 'hidden';
+			document.body.appendChild(widthCalculator);
+			var sizeToSetGame = widthCalculator.offsetTop + 1;
+			var sizeToSetGameWidth = widthCalculator.offsetLeft + 1;
+			console.log(sizeToSetGame);
 			var percentToSetGame = sizeToSetGame/originalHeight;
 			var percentToSetGameWidth = sizeToSetGameWidth/originalWidth;
 			if(percentToSetGameWidth < percentToSetGame) {
@@ -432,6 +441,7 @@
 			changeZoom(percentToSetGame);
 			window.scrollTo(document.getElementById('game-container').offsetLeft, gameTop);
 			ensureValue();
+			widthCalculator.parentNode.removeChild(widthCalculator);
 		}
 		// Set an element's size based on the offset of the original game size
 		function setSizeFromGameSize(element, value) {
