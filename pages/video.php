@@ -2,7 +2,7 @@
 	try {
 		$video_does_not_exist_message = "The video specified does not exist.";
 		$original_width = 800;
-		$original_height = 482;
+		$original_height = 450;
 		$ip = $_SERVER['REMOTE_ADDR'];
 		
 		if(!isset($routed)) {
@@ -230,10 +230,6 @@
 				document.getElementById('shrink').style.display = 'inline-block';
 				document.getElementById('grow').style.display = 'inline-block';
 			}
-			// Respsonsive zoom
-			if(window.innerWidth <= 800) {
-				fullScreen();
-			}
 		}
 		// Change the zoom of the movie
 		// This is called on input from the slider
@@ -336,31 +332,6 @@
 			changeZoom(curValue);
 			ensureValue();
 		}
-		// Function to make the video full screen
-		function fullScreen() {
-			var movie = document.getElementById('video');
-			var gameTop = 209;
-			var scrollX = 0;
-			var widthCalculator = document.createElement('div');
-			widthCalculator.style.position = 'fixed';
-			widthCalculator.style.width = '1px';
-			widthCalculator.style.height = '1px';
-			widthCalculator.style.bottom = '0';
-			widthCalculator.style.right = '0';
-			widthCalculator.style.visibility = 'hidden';
-			document.body.appendChild(widthCalculator);
-			var sizeToSetGame = widthCalculator.offsetTop + 1;
-			widthCalculator.style.position = 'absolute';
-			var sizeToSetGameWidth = widthCalculator.offsetLeft + 1;
-			var percentToSetGame = sizeToSetGame/originalHeight;
-			var percentToSetGameWidth = (sizeToSetGameWidth-10)/originalWidth;
-			if(percentToSetGameWidth < percentToSetGame) {
-				percentToSetGame = percentToSetGameWidth;
-			}
-			changeZoom(percentToSetGame);
-			ensureValue();
-			widthCalculator.parentNode.removeChild(widthCalculator);
-		}
 		// Set an element's size based on the offset of the original video size
 		function setSizeFromVideoSize(element, value) {
 			element.style.width = (originalWidth * value).toString().concat('px');
@@ -425,7 +396,7 @@
 		$display_page = 
 		"
 		<!--Video-->
-			<div class='box-content box-content-tight'>
+			<div class='box-content box-content-tight video-box-content'>
 				<div class='box-content-title'>$name</div>
 				<div class='box-content-container box-content-container-tight'>
 					<div id='preview-box' style='width:$original_width"."px;height:$original_height"."px;'></div>
@@ -477,11 +448,13 @@
 						<span class='side-box-title'>
 							Options
 						</span>
-						Zoom<br>
-						<input type='range' min='50' max='175' step='5' value='100' id='zoom-slider' autocomplete='off' 
-						onmousedown='hideGame()' onmouseup='changeZoom()' onchange='ensureValue()' oninput='preview()'/>
-						<button id='shrink' onclick='shrink()'>Smaller</button>
-						<button id='grow' onclick='grow()'>Larger</button>
+						<span class='video-zoom-options'>
+							Zoom<br>
+							<input type='range' min='50' max='175' step='5' value='100' id='zoom-slider' autocomplete='off' 
+							onmousedown='hideGame()' onmouseup='changeZoom()' onchange='ensureValue()' oninput='preview()'/>
+							<button id='shrink' onclick='shrink()'>Smaller</button>
+							<button id='grow' onclick='grow()'>Larger</button>
+						</span>
 						<button onclick='window.open(\"https://www.facebook.com/sharer/sharer.php?u=http%3A//game103.net/video/$url_name\")'>Share on Facebook</button>
 						<button onclick='window.open(\"https://twitter.com/home?status=Check%20out%20$name%20on%20game103.net%3A%20http%3A//game103.net/video/$url_name\")'>Share on Twitter</button>
 						<button onclick='window.open(\"https://plus.google.com/share?url=http%3A//game103.net/video/$url_name\")'>Share on Google+</button>
