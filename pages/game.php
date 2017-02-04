@@ -429,10 +429,10 @@
 			widthCalculator.style.bottom = '0';
 			widthCalculator.style.right = '0';
 			widthCalculator.style.visibility = 'hidden';
-			document.body.appendChild(widthCalculator);
+			document.getElementsByClassName('page')[0].appendChild(widthCalculator);
 			var sizeToSetGame = widthCalculator.offsetTop + 1;
+			widthCalculator.style.position = 'absolute';
 			var sizeToSetGameWidth = widthCalculator.offsetLeft + 1;
-			console.log(sizeToSetGame);
 			var percentToSetGame = sizeToSetGame/originalHeight;
 			var percentToSetGameWidth = (sizeToSetGameWidth-10)/originalWidth;
 			if(percentToSetGameWidth < percentToSetGame) {

@@ -230,6 +230,10 @@
 				document.getElementById('shrink').style.display = 'inline-block';
 				document.getElementById('grow').style.display = 'inline-block';
 			}
+			// Respsonsive zoom
+			if(window.innerWidth <= 800) {
+				fullScreen();
+			}
 		}
 		// Change the zoom of the movie
 		// This is called on input from the slider
@@ -331,6 +335,32 @@
 			}
 			changeZoom(curValue);
 			ensureValue();
+		}
+		// Function to make the video full screen
+		function fullScreen() {
+			var movie = document.getElementById('video');
+			var gameTop = 209;
+			var scrollX = 0;
+			var widthCalculator = document.createElement('div');
+			widthCalculator.style.position = 'fixed';
+			widthCalculator.style.width = '1px';
+			widthCalculator.style.height = '1px';
+			widthCalculator.style.bottom = '0';
+			widthCalculator.style.right = '0';
+			widthCalculator.style.visibility = 'hidden';
+			document.body.appendChild(widthCalculator);
+			var sizeToSetGame = widthCalculator.offsetTop + 1;
+			widthCalculator.style.position = 'absolute';
+			var sizeToSetGameWidth = widthCalculator.offsetLeft + 1;
+			var percentToSetGame = sizeToSetGame/originalHeight;
+			var percentToSetGameWidth = (sizeToSetGameWidth-10)/originalWidth;
+			if(percentToSetGameWidth < percentToSetGame) {
+				percentToSetGame = percentToSetGameWidth;
+			}
+			changeZoom(percentToSetGame);
+			window.scrollTo(document.getElementById('video-container').offsetLeft-5, gameTop);
+			ensureValue();
+			widthCalculator.parentNode.removeChild(widthCalculator);
 		}
 		// Set an element's size based on the offset of the original video size
 		function setSizeFromVideoSize(element, value) {
