@@ -1,5 +1,5 @@
 <?php
-
+	$mysql_message = "Sorry, there was an error connecting to the database.";
 	$error_val = 'Sorry, an error occurred while trying to download your file.';
 	if(!isset($_GET['name'])) {
 		echo $error_val;
@@ -53,11 +53,11 @@
 		$plays_insert_statement = $mysqli->prepare($plays_insert_str);
 		$plays_insert_statement->bind_param("is", $id, $ip);
 		$plays_insert_statement->execute();
-		if(mysqli_stmt_error($plays_insert_statement) != "") {
-			$plays_insert_statement->close();
-			$mysqli->close();
-			throw new Exception($mysql_message);
-		}
+		//if(mysqli_stmt_error($plays_insert_statement) != "") {
+		//	$plays_insert_statement->close();
+		//	$mysqli->close();
+		//	throw new Exception($mysql_message);
+		//}
 		$plays_insert_statement->close();
 
 		//Get file type and set it as Content Type

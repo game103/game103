@@ -130,11 +130,11 @@
 		$plays_insert_statement = $mysqli->prepare($plays_insert_str);
 		$plays_insert_statement->bind_param("is", $id, $ip);
 		$plays_insert_statement->execute();
-		if(mysqli_stmt_error($plays_insert_statement) != "") {
-			$plays_insert_statement->close();
-			$mysqli->close();
-			throw new Exception($mysql_message);
-		}
+		//if(mysqli_stmt_error($plays_insert_statement) != "") {
+		//	$plays_insert_statement->close();
+		//	$mysqli->close();
+		//	throw new Exception($mysql_message);
+		//}
 		$plays_insert_statement->close();
 
 		////////////

@@ -78,11 +78,11 @@
 	$insert_statement = $mysqli->prepare($insert_str);
 	$insert_statement->bind_param("is", $id, $ip);
 	$insert_statement->execute();
-	if(mysqli_stmt_error($insert_statement) != "") {
-		echo $error_val;
-		$mysqli->close();
-		exit();
-	}
+	//if(mysqli_stmt_error($insert_statement) != "") {
+	//	echo $error_val;
+	//	$mysqli->close();
+	//	exit();
+	//}
 	$insert_statement->close();
 	
 	$mysqli->close();
