@@ -421,6 +421,24 @@
 		<script>
 			<?php echo $display_javascript ?>
 			<?php echo $site_search_javascript ?>
+			// Toggle the display of the menu
+			function toggleMobileMenuDisplay() {
+				var navElements = document.getElementsByClassName('nav-item');
+				// menu is closed
+				if(!navElements[1].classList.contains('mobile-visible')) {
+					for(var i = 1; i < navElements.length; i++) {
+						navElements[i].classList.add('mobile-visible');
+					}
+					document.getElementById('nav-dropdown-arrow').innerHTML = '&#9650;';
+				}
+				// menu is open
+				else {
+					for(var i = 1; i < navElements.length; i++) {
+						navElements[i].classList.remove('mobile-visible');
+					}
+					document.getElementById('nav-dropdown-arrow').innerHTML = '&#9660;';
+				}
+			}
 		</script>
 		
 	</head>
@@ -448,7 +466,7 @@
 				
 				<!--Contact and Copyright-->
 				<div class="footer">
-					<div class="additional-links"><a href="/about">About Us</a> | <a href="/privacy">Privacy Policy</a> | <a href="/facts">Fun Facts</a> | <a href="/games/distributable">Developers</a></div>
+					<div class="additional-links"><a href="/about">About Us</a> | <a href="/privacy">Privacy Policy</a> | <a href="/facts">Fun Facts</a> | <a href="/characters">Characters</a> | <a href="/games/distributable">Developers</a></div>
 					<div class="copyright">&copy; 2017 <a href="https://game103.net">Game 103</a></div>
 				</div>
 			</div>

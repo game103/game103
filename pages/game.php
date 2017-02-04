@@ -434,12 +434,12 @@
 			var sizeToSetGameWidth = widthCalculator.offsetLeft + 1;
 			console.log(sizeToSetGame);
 			var percentToSetGame = sizeToSetGame/originalHeight;
-			var percentToSetGameWidth = sizeToSetGameWidth/originalWidth;
+			var percentToSetGameWidth = (sizeToSetGameWidth-10)/originalWidth;
 			if(percentToSetGameWidth < percentToSetGame) {
 				percentToSetGame = percentToSetGameWidth;
 			}
 			changeZoom(percentToSetGame);
-			window.scrollTo(document.getElementById('game-container').offsetLeft, gameTop);
+			window.scrollTo(document.getElementById('game-container').offsetLeft-5, gameTop);
 			ensureValue();
 			widthCalculator.parentNode.removeChild(widthCalculator);
 		}

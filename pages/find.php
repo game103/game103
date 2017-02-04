@@ -768,43 +768,20 @@
 		<div class='box-content'>
 			<div class='box-content-title'>
 				<div class='search'>
-					<div class='dropdown'>
-						<div class='dropdown-selected' onclick='openDropDown(event, \"sort\")'>
+					<input type='text' value='$search' placeholder='Search' id='search' oninput='searchAndFetch()' autocomplete='off' />
+					<div class='dropdown $categories_display_class'>
+						<div class='dropdown-selected' onclick='openDropDown(event, \"categories\")'>
 							<span class='dropdown-selected-text'>
-								<span class='dropdown-selected-text-no-arrow' id='sort-dropdown-selected-text-no-arrow'>
-									$sort_selected_str
+								<span class='dropdown-selected-text-no-arrow' id='categories-dropdown-selected-text-no-arrow'>
+									$dropdown_selected_str
 								</span>
-								<span id='sort-dropdown-arrow' class='dropdown-arrow'>
+								<span id='categories-dropdown-arrow' class='dropdown-arrow'>
 									&#9660;
 								</span>
 							</span>
 						</div>
-						<ul class='dropdown-menu' id='sort-dropdown-menu'>
-							<li class='dropdown-item $popularity_class' onclick='sortAndFetch(\"popularity\")'>
-								<span id='popularity' class='dropdown-item-text'>
-									Sort by popularity
-								</span>
-							</li>
-							<li class='dropdown-item $rating_class $hidden_sorts_class' onclick='sortAndFetch(\"rating\")'>
-								<span id='rating' class='dropdown-item-text'>
-									Sort by rating
-								</span>
-							</li>
-							<li class='dropdown-item $creation_class $creation_hidden_class' onclick='sortAndFetch(\"creation\")'>
-								<span id='creation' class='dropdown-item-text'>
-									Sort by creation
-								</span>
-							</li>
-							<li class='dropdown-item $date_class' onclick='sortAndFetch(\"date\")'>
-								<span id='date' class='dropdown-item-text'>
-									Sort by date
-								</span>
-							</li>
-							<li class='dropdown-item $alphabetically_class' onclick='sortAndFetch(\"alphabetical\")'>
-								<span id='alphabetical' class='dropdown-item-text'>
-									Sort alphabetically
-								</span>
-							</li>
+						<ul class='dropdown-menu' id='categories-dropdown-menu'>
+							$categories_options
 						</ul>
 					</div>
 					<div class='dropdown'>
@@ -846,22 +823,45 @@
 							</li>
 						</ul>
 					</div>
-					<div class='dropdown $categories_display_class'>
-						<div class='dropdown-selected' onclick='openDropDown(event, \"categories\")'>
+					<div class='dropdown'>
+						<div class='dropdown-selected' onclick='openDropDown(event, \"sort\")'>
 							<span class='dropdown-selected-text'>
-								<span class='dropdown-selected-text-no-arrow' id='categories-dropdown-selected-text-no-arrow'>
-									$dropdown_selected_str
+								<span class='dropdown-selected-text-no-arrow' id='sort-dropdown-selected-text-no-arrow'>
+									$sort_selected_str
 								</span>
-								<span id='categories-dropdown-arrow' class='dropdown-arrow'>
+								<span id='sort-dropdown-arrow' class='dropdown-arrow'>
 									&#9660;
 								</span>
 							</span>
 						</div>
-						<ul class='dropdown-menu' id='categories-dropdown-menu'>
-							$categories_options
+						<ul class='dropdown-menu' id='sort-dropdown-menu'>
+							<li class='dropdown-item $popularity_class' onclick='sortAndFetch(\"popularity\")'>
+								<span id='popularity' class='dropdown-item-text'>
+									Sort by popularity
+								</span>
+							</li>
+							<li class='dropdown-item $rating_class $hidden_sorts_class' onclick='sortAndFetch(\"rating\")'>
+								<span id='rating' class='dropdown-item-text'>
+									Sort by rating
+								</span>
+							</li>
+							<li class='dropdown-item $creation_class $creation_hidden_class' onclick='sortAndFetch(\"creation\")'>
+								<span id='creation' class='dropdown-item-text'>
+									Sort by creation
+								</span>
+							</li>
+							<li class='dropdown-item $date_class' onclick='sortAndFetch(\"date\")'>
+								<span id='date' class='dropdown-item-text'>
+									Sort by date
+								</span>
+							</li>
+							<li class='dropdown-item $alphabetically_class' onclick='sortAndFetch(\"alphabetical\")'>
+								<span id='alphabetical' class='dropdown-item-text'>
+									Sort alphabetically
+								</span>
+							</li>
 						</ul>
 					</div>
-					<input type='text' value='$search' placeholder='Search' id='search' oninput='searchAndFetch()' autocomplete='off' />
 				</div>
 			</div>
 			<div class='box-content-container'>
