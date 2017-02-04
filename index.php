@@ -7,6 +7,7 @@
 	$no_results_message = "Sorry, no results were found for your search.";
 	$routed = true;
 	$display_meta = ""; // Most pages don't need to define this, so set it to be empty on default.
+	$display_css = "";
 	
 	if(end($routes) == '') {
 		array_pop($routes);
@@ -403,6 +404,9 @@
 		
 		<!-- Load Style Sheet -->
 		<link rel="stylesheet" type="text/css" href="/styles.css">
+		<style>
+			<?php echo $display_css ?>
+		</style>
 		
 		<!--Google Analytics Function-->
 		<script type="text/javascript">

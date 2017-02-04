@@ -507,7 +507,7 @@
 		$display_page = 
 		"
 		<!--Game-->
-			<div class='box-content box-content-tight'>
+			<div class='box-content box-content-tight game-box-content'>
 				<div class='box-content-title'>$name</div>
 				<div class='box-content-container box-content-container-tight'>
 					<div id='preview-box' style='width:$width"."px;height:$height"."px;'></div>
@@ -564,12 +564,14 @@
 						<span class='side-box-title'>
 							Options
 						</span>
-						Zoom<br>
-						<input type='range' min='50' max='175' step='5' value='100' id='zoom-slider' autocomplete='off' 
-						onmousedown='hideGame()' onmouseup='changeZoom()' onchange='ensureValue()' oninput='preview()'/>
-						<button id='full' onclick='fullScreen()'>Fit Screen</button>
-						<button id='shrink' onclick='shrink()'>Smaller</button>
-						<button id='grow' onclick='grow()'>Larger</button>
+						<span class='game-zoom-options'>
+							Zoom<br>
+							<input type='range' min='50' max='175' step='5' value='100' id='zoom-slider' autocomplete='off' 
+							onmousedown='hideGame()' onmouseup='changeZoom()' onchange='ensureValue()' oninput='preview()'/>
+							<button id='full' onclick='fullScreen()'>Fit Screen</button>
+							<button id='shrink' onclick='shrink()'>Smaller</button>
+							<button id='grow' onclick='grow()'>Larger</button>
+						</span>
 						<br>Share<br>
 						<button onclick='window.open(\"https://www.facebook.com/sharer/sharer.php?u=http%3A//game103.net/game/$url_name\")'>Share on Facebook</button>
 						<button onclick='window.open(\"https://twitter.com/home?status=Check%20out%20$name%20on%20game103.net%3A%20http%3A//game103.net/game/$url_name\")'>Share on Twitter</button>
@@ -579,6 +581,38 @@
 			</div>
 			
 			<div class='random-games'><div class='box-content'><div class='box-content-title'>Similar Games</div><div class='box-content-container'>$random_games</div></div></div>
+		";
+		
+		$screen_width = ( (string) $width + 10 ) . 'px';
+		$game_ratio = $height/$width;
+		$padding_bottom = ( (string) $game_ratio * 100) . '%';
+		$display_css = "
+			/* This has a known issue when scrollbars are included in the media screen width
+			as part of the game will be cut of to the user, even though it would be visible
+			if the scrollbars were gone */
+			@media screen and (max-width: $screen_width) {
+				.game-box-content {
+					width: calc(100% - 10px);
+				}
+				#game-container {
+					position: relative;
+					width: 100%;
+					height: 0;
+					padding-bottom: $padding_bottom;
+				}
+				#game {
+					position: absolute;
+					width: 100% !important;
+					height: 100% !important;
+					visibility: visible;
+				}
+				.box-content, .random-games {
+					overflow: hidden;
+				}
+				.game-zoom-options {
+					display: none;
+				}
+			}
 		";
 	}
 	catch(Exception $e) {
