@@ -63,11 +63,11 @@
 		$views_insert_statement = $mysqli->prepare($views_insert_str);
 		$views_insert_statement->bind_param("is", $id, $ip);
 		$views_insert_statement->execute();
-		if(mysqli_stmt_error($views_insert_statement) != "") {
-			$views_insert_statement->close();
-			$mysqli->close();
-			throw new Exception($mysql_message);
-		}
+		//if(mysqli_stmt_error($views_insert_statement) != "") {
+		//	$views_insert_statement->close();
+		//	$mysqli->close();
+		//	throw new Exception($mysql_message);
+		//}
 		$views_insert_statement->close();
 
 		////////////
