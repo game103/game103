@@ -20,7 +20,7 @@ body {
 	margin: auto;
 	color: #3274DA;
 	font-family: "Open Sans", sans-serif;
-	min-width: 800px;
+	min-width: 320px;
 	position: relative;
 	background-color: #DBF7FF;
 	font-size: 16px;
@@ -50,7 +50,7 @@ button::-moz-focus-inner, .button::-moz-focus-inner {
 	height: 130px;
 	background-image: url("images/header2016.png");
 	background-repeat: no-repeat;
-    background-position: center;
+    background-position: bottom center;
 	background-color: #4E85DB;
 }
 
@@ -600,7 +600,7 @@ input[type=range]::-ms-track {
 }
 
 .dropdown {
-	float: right;
+	float: left;
 	-webkit-user-select: none;      
 	-moz-user-select: none; 
 	-ms-user-select: none;
@@ -718,7 +718,7 @@ input[type=range]::-ms-track {
 	height: 20px;
 	display: inline-block;
 	padding: 5px;
-	float: right;
+	float: left;
 }
 
 .search input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -850,7 +850,7 @@ input[type=range]::-ms-track {
 	text-decoration: none;
 }
 
-.nav-item:nth-child(even) {
+.nav-item:nth-child(odd) {
 	background-color: #2d68c4;
 }
 
@@ -904,11 +904,11 @@ input[type=range]::-ms-track {
 	font-size: 90%;
 }
 
-.nav-item:nth-child(odd) .nav-item-list-item:nth-child(odd) {
+.nav-item:nth-child(even) .nav-item-list-item:nth-child(odd) {
 	background-color: #2d68c4 ;
 }
 
-.nav-item:nth-child(even) .nav-item-list-item:nth-child(even) {
+.nav-item:nth-child(odd) .nav-item-list-item:nth-child(even) {
 	background-color: #2d68c4 ;
 }
 
@@ -1056,3 +1056,146 @@ input[type=range]::-ms-track {
 .social-links .fb_iframe_widget span {
 	vertical-align: inherit !important;
 }
+
+/* Begin Mobile Display */
+
+#nav-menu-opener {
+	display: none;
+	cursor: pointer;
+}
+
+#nav-dropdown-arrow {
+	position: absolute;
+	right: 10px;
+	top: 5px;
+	font-size: 16px;
+	color: white;
+}
+
+@media screen and (max-width: 800px) {
+	.header {
+		height: 150px;
+	}
+	
+	.logo {
+		min-height: 17px;
+		width: 100px;
+	}
+	
+	.site-search {
+		float: none;
+		right: 0;
+		top: 50px;
+		display: inline-block;
+	}
+	
+	.header-dropdown {
+		margin: 0 !important;
+	}
+	
+	.nav {
+		height: initial;
+	}
+	
+	.nav-item {
+		width: 100%;
+		float: none;
+		display: none;
+	}
+ 	
+	.nav-item-list {
+		display: none;
+	}
+	
+	.nav-item-list-title {
+		border-left: none;
+		border-top: none;
+	}
+	
+	#nav-menu-opener {
+		display: block;
+		border-top: 1px solid #285cae;
+	}
+	
+	.search {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: center;
+	}
+	
+	.dropdown:not(.header-dropdown) {
+		float: none;
+		margin: 5px;
+		max-width: initial;
+	}
+	
+	.dropdown-selected {
+		float: none;
+		border-left: 1px solid white;
+	}
+	
+	.search input {
+		float: none;
+		margin: 5px;
+		direction: ltr;
+	}
+	
+	.box-content {
+		overflow: hidden;
+	}
+	
+	.mobile-visible {
+		display: block !important;
+	}
+	
+}
+
+/* At this point, entries need to change! */
+@media screen and (max-width: 540px) {
+	.box-content {
+		margin: 10px 0 10px 0;
+	}
+	
+	.entry-item {
+		width: 17em;
+		text-align: left;
+		overflow: initial;
+		min-height: 100px;
+		height: initial;
+	}
+	
+	.entry-title {
+		position: relative;
+		left: 80px;
+	}
+	
+	.entry-stars {
+		left: 80px;
+		position: relative;
+	}
+	
+	.entry-description {
+		left: 80px;
+		position: relative;
+		margin-top: 5px;
+		width: 180px;
+		padding-bottom: 5px;
+		top: 0;
+	}
+	
+	.entry-plays {
+		left: 0;
+		top: 80px;
+		bottom: initial;
+		right: initial;
+		width: 75px;
+		font-size: 55%;
+		text-align: center;
+	}
+	
+	.word-paging {
+		display: block;
+	} 
+}
+
+/* End Mobile Display */

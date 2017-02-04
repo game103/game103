@@ -68,7 +68,7 @@
 			
 			$random_videos .= "<a href = '/video/$random_url_name' class = 'entry-link'>
 			<span class = 'entry-item'>
-			<img alt = '$random_name' src = '$random_image_url'><br>
+			<img alt = '$random_name' src = '$random_image_url'>
 			<span class = 'entry-title'>$random_name</span>
 			<span class='stars entry-stars'><span style='width: $random_rating_width'></span></span>";
 			$random_videos .= "<span class = 'entry-description'> $random_description</span>

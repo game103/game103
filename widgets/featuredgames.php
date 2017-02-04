@@ -112,7 +112,7 @@
 				
 				$featured_games .= "
 				<span class = 'entry-item'>
-				<img alt = '$name' src = '$image_url'><br>
+				<img alt = '$name' src = '$image_url'>
 				<span class = 'entry-title'>$name</span>
 				<span class='stars entry-stars'><span style='width: $rating_width'></span></span>
 				<span class = 'entry-description'> $description</span>
