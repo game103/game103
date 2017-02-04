@@ -358,7 +358,6 @@
 				percentToSetGame = percentToSetGameWidth;
 			}
 			changeZoom(percentToSetGame);
-			window.scrollTo(document.getElementById('video-container').offsetLeft-5, gameTop);
 			ensureValue();
 			widthCalculator.parentNode.removeChild(widthCalculator);
 		}
