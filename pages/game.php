@@ -606,7 +606,7 @@
 					height: 100% !important;
 					visibility: visible;
 				}
-				.box-content, .random-games {
+				.box-content-container {
 					overflow: hidden;
 				}
 				.game-zoom-options {
