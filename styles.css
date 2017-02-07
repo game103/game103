@@ -1146,8 +1146,8 @@ input[type=range]::-ms-track {
 		display: block !important;
 	}
 	
-	/* This is for the videos page and is tacked on here */
-	.box-content, .random-games {
+	/* This is for the videos page (mostly) and is tacked on here */
+	.box-content-container {
 		overflow: hidden;
 	}
 	
@@ -1177,6 +1177,11 @@ input[type=range]::-ms-track {
 
 /* At this point, entries need to change! */
 @media screen and (max-width: 600px) {
+	/*
+	* The margin only becomes a problem when 20px
+	* is greater than 5% of the screen (Box content is 95% of screen,
+	* and the margin is 20px)
+	*/
 	.box-content {
 		margin: 10px 0 10px 0;
 	}
