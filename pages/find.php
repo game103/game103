@@ -922,21 +922,20 @@
                 changeSearch();
 				// If the category is being reset, this will be taken care of
 				// once new categories load
+				// we also make sure that categories exist for the popped state
 				if(!resetCategories && event.state.category != '') {
 					changeCategory(event.state.category);
 				}
 				// if the popped category is nothing, we don't want any visual indication
 				// but, we do want to set category to blank
+				// i.e. we don't call changeCategory
 				else if(event.state.category == '') {
 					category = '';
 				}
                 changePage(event.state.page);
                 changeSort(event.state.sort);
 				if(resetCategories) {
-					changeType(event.state.type);
-					// While displaying the category as set is taken care of once loaded,
-					// It is important to set this here, so that the correct information is fetched
-					category = event.state.category;
+					changeType(event.state.type, event.state.category);
 				}
                 // No need to replace the url, since we are already there!
                 // The point of this fetch is to make the data match the url
@@ -1286,7 +1285,7 @@
 			if(fetchTimeout) {
 				clearTimeout(fetchTimeout);
 			}
-			changeType(newType);
+			changeType(newType, 'all');
 			fetchTimeout = setTimeout(function() {fetch(true, true, 'all')}, 500);
 			page = 1;
 		}
@@ -1320,14 +1319,17 @@
 			document.getElementById(sort).innerHTML;
 		}
 		// Change the type
-		function changeType(newType) {
+		// Note that a newCategory is specified. One must know the possible categories for the new type
+		// to do this. After running this method and then fetch with resetCategories as true, the category
+		// with be set to the newCategory specified here (the newCategory will also be used to load AJAX data)
+		function changeType(newType, newCategory) {
 			// Hide the categories since new ones will be loaded
 			document.getElementById('categories-dropdown-menu').parentNode.classList.add('$none_class');
 			document.getElementById(type).parentNode.classList.remove('$dropdown_selected_in_list_class');
 			document.getElementById(type + '-entries').id = newType + '-entries';
 			// Switch the category (display will be taken care of on reload)
-			category = 'all';
-			if(sort == 'creation') {
+			category = newCategory;
+			if(sort == 'creation' && !(newType == 'games' && newCategory=='game103') ) {
 				changeSort('date');
 			}
 			type = newType;
