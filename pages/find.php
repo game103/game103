@@ -343,7 +343,7 @@
 			OFFSET $offset) AS main
 			LEFT JOIN (select count(1) AS total_count
 			FROM apps 
-			$where_sql) AS count
+			$apps_sql) AS count
 			ON 1=1";
 		}
 		// type is all
@@ -934,6 +934,9 @@
                 changeSort(event.state.sort);
 				if(resetCategories) {
 					changeType(event.state.type);
+					// While displaying the category as set is taken care of once loaded,
+					// It is important to set this here, so that the correct information is fetched
+					category = event.state.category;
 				}
                 // No need to replace the url, since we are already there!
                 // The point of this fetch is to make the data match the url
@@ -1004,17 +1007,10 @@
 							sort: sort,
 							type: type
 						}, '', '/' + type + actualCategory + paramSearch + '/' + sort + '/' + page);
+					}
+					if(!resetCategories) {
 						// Update the title
-						var keepTitle = document.title.split(' - ')[1];
-						
-						var categoryForTitle = '';
-						if(category != 'all' && category != '') {
-							categoryForTitle = document.getElementById(category).innerHTML + ' ' + type.charAt(0).toUpperCase() + type.slice(1);
-						}
-						else {
-							categoryForTitle = type.charAt(0).toUpperCase() + type.slice(1);
-						}
-						document.title = categoryForTitle + ' - ' + keepTitle;
+						updateTitle();
 						
 						// Update the description
 						updateMeta();
@@ -1026,6 +1022,7 @@
 							var status = object['status'];
 							if(resetCategories) {
 								updateCategories(object['categories'], newCategory);
+								updateTitle();
 								updateMeta();
 							}
 							// If successful, this should always be shown (unless type is everything)
@@ -1157,6 +1154,19 @@
 			};
 			xhttp.open('GET', '/' + type + '/ws' + actualCategory + '/' + actualSearch + '/' + sort + '/' + page, true);
 			xhttp.send();
+		}
+		// Update the title
+		function updateTitle() {
+			var keepTitle = document.title.split(' - ')[1];
+						
+			var categoryForTitle = '';
+			if(category != 'all' && category != '') {
+				categoryForTitle = document.getElementById(category).innerHTML + ' ' + type.charAt(0).toUpperCase() + type.slice(1);
+			}
+			else {
+				categoryForTitle = type.charAt(0).toUpperCase() + type.slice(1);
+			}
+			document.title = categoryForTitle + ' - ' + keepTitle;
 		}
 		// Update the meta description
 		function updateMeta() {
@@ -1324,14 +1334,12 @@
 			document.getElementById(type).innerHTML;
 			if(newType == 'resources' || newType == 'apps') {
 				document.getElementById('rating').parentNode.classList.add('$none_class');
-				document.getElementById('popularity').parentNode.classList.add('$none_class');
 				if(sort == 'rating') {
-					changeSort('date');
+					changeSort('popularity');
 				}
 			}
 			else {
 				document.getElementById('rating').parentNode.classList.remove('$none_class');
-				document.getElementById('popularity').parentNode.classList.remove('$none_class');
 			}
 			document.getElementById('creation').parentNode.classList.add('$none_class');
 		}
