@@ -815,13 +815,13 @@ input[type=range]::-ms-track {
 /* Downloads */
 
 .download-body {
-	width: 800px;
+	max-width: 800px;
 	margin-left: auto;
 	margin-right: auto;
 }
 
 .download-body img {
-	max-width: 800px;
+	width: 100%;
 	padding-top: 10px;
 }
 
@@ -1171,6 +1171,26 @@ input[type=range]::-ms-track {
 	
 	.video-zoom-options {
 		display: none;
+	}
+	
+	.character-entry {
+		text-align: center;
+	}
+	
+	.character-image-container {
+		height: initial;
+		text-align: center;
+	}
+	
+	.character-image-size-boundaries {
+		height: 200px;
+		display: table-cell;
+		vertical-align: bottom;
+	}
+	
+	.character-text-container {
+		display: block;
+		width: 100%;
 	}
 }
 
