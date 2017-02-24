@@ -1217,6 +1217,11 @@
 				}
 			}
 			categoriesMenu.innerHTML = newCategoriesHTML;
+			if(category) {
+				// Called here to ensure that the special cases defined in changeCategory are applied
+				// (namely, game103 creation sort)
+				changeCategory(category);
+			}
 			
 		}
 		// The search has changed
