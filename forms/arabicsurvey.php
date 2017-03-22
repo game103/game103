@@ -43,19 +43,19 @@
 		//move the files to the correct location
 		//if the upload is successful that is the url
 		if(move_uploaded_file($_FILES["ali_airplane_upload"]["tmp_name"],$ali_airplane_target_file)) {
-			$ali_airplane_url = 'https://game103.net/forms/uploads/' . $ali_airplane_target_file;
+			$ali_airplane_url = 'https://game103.net/forms' . ltrim($ali_airplane_target_file,'.');
 		}
 		if(move_uploaded_file($_FILES["ali_omar_upload"]["tmp_name"],$ali_omar_target_file)) {
-			$ali_omar_url = 'https://game103.net/forms/uploads/' .$ali_omar_target_file;
+			$ali_omar_url = 'https://game103.net/forms' . ltrim($ali_omar_target_file,'.');
 		}
 		if(move_uploaded_file($_FILES["ali_sara_upload"]["tmp_name"],$ali_sara_target_file)) {
-			$ali_sara_url = 'https://game103.net/forms/uploads/' .$ali_sara_target_file;
+			$ali_sara_url = 'https://game103.net/forms' . ltrim($ali_sara_target_file,'.');
 		}
 		if(move_uploaded_file($_FILES["amr_diab_upload"]["tmp_name"],$amr_diab_target_file)) {
-			$amr_diab_url = 'https://game103.net/forms/uploads/' .$amr_diab_target_file;
+			$amr_diab_url = 'https://game103.net/forms' . ltrim($amr_diab_target_file,'.');
 		}
 		if(move_uploaded_file($_FILES["computer_upload"]["tmp_name"],$computer_target_file)) {
-			$computer_url = 'https://game103.net/forms/uploads/' .$computer_target_file;
+			$computer_url = 'https://game103.net/forms' . ltrim($computer_target_file,'.');
 		}
 		
 		$message = "
@@ -85,6 +85,11 @@
 		$headers .= "MIME-Version: 1.0\r\n";
 		$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n"; 
 		$send=mail($to,$subject,$message,$headers);
+		
+		echo <<<EOD
+	<h2>Thank you</h2>
+	<p>Your responses have been successfully recorded.</p>
+EOD;
 	}
 	else {
 		echo <<<EOD
