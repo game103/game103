@@ -106,7 +106,7 @@
 	<br><label for='computer_upload'>Audio translation: </label><input required=1 type = "file" name = "computer_upload" id = "computer_upload">
 </div>
 
-<br><input type='submit' value='submit'/>
+<br><input type='submit' value='Submit' name='submit'/>
 
 </form>
 	
