@@ -94,6 +94,8 @@ EOD;
 	}
 	else {
 		echo <<<EOD
+
+<p>I am a senior linguistics major at Gordon College.  For my senior project, I have been studying sentence structure and the use of certain words in Arabic.  In order to further my study, I would like to gather more data through this survey.  Please begin by answering the three background questions.  Then, record and upload the best possible Arabic translations of the five sentences listed below.  All information will be kept confidential.  Thank you for your contribution!</p>
 	
 <form action = "arabicsurvey.php" method = "POST" enctype = "multipart/form-data">
 
