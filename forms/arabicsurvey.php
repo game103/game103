@@ -18,29 +18,44 @@
 		$picture = $_POST['picture'];
 		$ip = $_SERVER['REMOTE_ADDR'];
 		
-		$target_dir = "./uploads";
-		$ali_airplane_target_file = $target_dir . 'ali_airplane_' . uniqid();
-		$ali_omar_target_file = $target_dir . 'ali_omar_' . uniqid();
-		$ali_sara_target_file = $target_dir . 'ali_sara_' . uniqid();
-		$amr_diab_target_file = $target_dir . 'amr_diab_' . uniqid();
-		$computer_target_file = $target_dir . 'computer_' . uniqid();
+		$target_dir = "./uploads/";
+		
+		$filename = $_FILES['ali_airplane_upload']['name'];
+		$ext = pathinfo($filename, PATHINFO_EXTENSION);
+		$ali_airplane_target_file = $target_dir . 'ali_airplane_' . uniqid() . '.' . $ext;
+		
+		$filename = $_FILES['ali_omar_upload']['name'];
+		$ext = pathinfo($filename, PATHINFO_EXTENSION);
+		$ali_omar_target_file = $target_dir . 'ali_omar_' . uniqid() . '.' . $ext;
+		
+		$filename = $_FILES['ali_sara_upload']['name'];
+		$ext = pathinfo($filename, PATHINFO_EXTENSION);
+		$ali_sara_target_file = $target_dir . 'ali_sara_' . uniqid() . '.' . $ext;
+		
+		$filename = $_FILES['amr_diab_upload']['name'];
+		$ext = pathinfo($filename, PATHINFO_EXTENSION);
+		$amr_diab_target_file = $target_dir . 'amr_diab_' . uniqid() . '.' . $ext;
+		
+		$filename = $_FILES['computer_upload']['name'];
+		$ext = pathinfo($filename, PATHINFO_EXTENSION);
+		$computer_target_file = $target_dir . 'computer_' . uniqid() . '.' . $ext;
 		
 		//move the files to the correct location
 		//if the upload is successful that is the url
 		if(move_uploaded_file($_FILES["ali_airplane_upload"]["tmp_name"],$ali_airplane_target_file)) {
-			$ali_airplane_url = $ali_airplane_target_file;
+			$ali_airplane_url = 'https://game103.net/forms/uploads/' . $ali_airplane_target_file;
 		}
 		if(move_uploaded_file($_FILES["ali_omar_upload"]["tmp_name"],$ali_omar_target_file)) {
-			$ali_omar_url = $ali_omar_target_file;
+			$ali_omar_url = 'https://game103.net/forms/uploads/' .$ali_omar_target_file;
 		}
 		if(move_uploaded_file($_FILES["ali_sara_upload"]["tmp_name"],$ali_sara_target_file)) {
-			$ali_sara_url = $ali_sara_target_file;
+			$ali_sara_url = 'https://game103.net/forms/uploads/' .$ali_sara_target_file;
 		}
 		if(move_uploaded_file($_FILES["amr_diab_upload"]["tmp_name"],$amr_diab_target_file)) {
-			$amr_diab_url = $amr_diab_target_file;
+			$amr_diab_url = 'https://game103.net/forms/uploads/' .$amr_diab_target_file;
 		}
 		if(move_uploaded_file($_FILES["computer_upload"]["tmp_name"],$computer_target_file)) {
-			$computer_url = $computer_target_file;
+			$computer_url = 'https://game103.net/forms/uploads/' .$computer_target_file;
 		}
 		
 		$message = "
