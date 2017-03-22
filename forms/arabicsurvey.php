@@ -71,6 +71,7 @@
 		Ali Omar question: <a href='$ali_omar_url'>$ali_omar_url</a> <br><br>
 		Ali Sara question: <a href='$ali_sara_url'>$ali_sara_url</a> <br><br>
 		Amr Diab question: <a href='$amr_diab_url'>$amr_diab_url</a> <br><br>
+		Answer to the picture question: $picture <br><br>
 		Computer question: <a href='$computer_url'>$computer_url</a> <br><br>
 		Well, that's it.<br>
 		P.S. I love you,<br>
