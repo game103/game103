@@ -336,16 +336,6 @@
 				$is_404 = true;
 			}
 			break;
-		case 'flip-a-blox':
-			if(count($routes) == 3) {
-				$level = $routes[2];
-				$url = 'https://game103.net/game103games/javascript/flip-a-blox/ws/playlevel.php?l=' . $level;
-				header($url);
-			}
-			else {
-				$is_404 = true;
-			}
-			break;
 		case 'index';
 		case '':
 			// Use the same connection for all the parts of the homepage
