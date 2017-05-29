@@ -339,7 +339,8 @@
 		case 'flip-a-blox':
 			if(count($routes) == 3) {
 				$level = $routes[2];
-				header('/game103games/javascript/flip-a-blox/ws/playlevel.php?l=' . $level);
+				$url = '/game103games/javascript/flip-a-blox/ws/playlevel.php?l=' . $level;
+				header($url);
 			}
 			else {
 				$is_404 = true;
