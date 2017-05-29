@@ -340,7 +340,7 @@
 			if(count($routes) == 3) {
 				$level = $routes[2];
 				$url = '/game103games/javascript/flip-a-blox/ws/playlevel.php?l=' . $level;
-				header($url);
+				header('https://game103.net');
 			}
 			else {
 				$is_404 = true;
