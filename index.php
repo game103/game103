@@ -269,6 +269,9 @@
 				else if($app == 'duckinatruck') {
 					include $path . '/pages/duckinatruck.php';
 				}
+				else if($app == 'flip-a-blox') {
+					include $path . '/pages/flip-a-blox.php';
+				}
 				else {
 					$is_404 = true;
 				}
