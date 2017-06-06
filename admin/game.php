@@ -176,6 +176,10 @@ Category 2:
 	<option value = "10">Tower Defense</option>
 	<option value = "6">Upgrade</option>
 </select><br><br>
+<select name = "type">
+	<option value = "Flash">Flash</option>
+	<option value = "JavaScript">JavaScript</option>
+</select>
 <input type = "submit" value = "submit" name = "submit"><br>
 </form>
 
@@ -188,6 +192,7 @@ Category 2:
 
 	$description = $_POST['description'];
 	$image_url = $_POST['image_url'];
+	$game_type = $_POST['type'];
 	$submit = $_POST['submit'];
 	$url_name = str_replace(' ','',$name);
 	$url_name = str_replace('&','',$url_name);
@@ -324,7 +329,7 @@ Category 2:
 		$url = substr($url, 2);
 		$image_url = substr($image_url, 2);
 		
-		$sql = "INSERT INTO entries(name, url, width, height, description, image_url, url_name) VALUES ('$name','$url','$width','$height','$description','$image_url','$url_name')";
+		$sql = "INSERT INTO entries(name, url, width, height, description, image_url, url_name, type) VALUES ('$name','$url','$width','$height','$description','$image_url','$url_name','$game_type')";
 		$mysqli->query($sql);
 		$id = $mysqli->insert_id;
 		for($i=0;$i<count($actions_controls_arr);$i++) {

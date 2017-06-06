@@ -3,6 +3,19 @@
 		throw new Exception($direct_access_message);
 	}
 	
+	$mysqli = new mysqli("game103.net", "hallaby", "***REMOVED***", "hallaby_flipablox");
+	$update_str = "DELETE FROM levels WHERE id = 31";
+	$update_statement = $mysqli->prepare($update_str);
+	$update_statement->execute();
+	if(mysqli_stmt_error($update_statement) != "") {
+		echo $error_val;
+		$mysqli->close();
+		exit();
+	}
+	$update_statement->close();
+	
+	$mysqli->close();
+	
 	$display_title = "Flip-a-Blox";
 	$display_description = "The privacy policy and other information for the Game 103 game, Flip-a-Blox.";
 	$display_page = <<<HTML

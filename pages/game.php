@@ -21,7 +21,7 @@
 		$url_name = $mysqli->real_escape_string($url_name);
 		// String to query the database with
 		$str = "SELECT id, name, url, width, height, DATE_FORMAT(added_date, '%M %D, %Y'), description,
-		FORMAT(plays, 0), image_url FROM entries WHERE url_name = ? LIMIT 1";
+		FORMAT(plays, 0), image_url, type FROM entries WHERE url_name = ? LIMIT 1";
 		// Prepare the statement
 		$statement = $mysqli->prepare($str);
 		// Bind parameters
@@ -35,7 +35,7 @@
 			throw new Exception($mysql_message);
 		}
 		// Get the one result
-		$statement->bind_result($id, $name, $url, $width, $height, $added_date, $description, $plays, $image_url);
+		$statement->bind_result($id, $name, $url, $width, $height, $added_date, $description, $plays, $image_url, $game_type);
 		// Fetch the result
 		$statement->fetch();
 		// Close the statement
@@ -51,6 +51,13 @@
 		}
 		else {
 			$plays_str = 'plays';
+		}
+		
+		if($game_type == "JavaScript") {
+			$game_code = "<iframe src='$url' style='width:$width"."px;height:$height"."px;' id='game'/>";
+		}
+		else {
+			$game_code = "<embed wmode='direct' src='$url' style='width:$width"."px;height:$height"."px;' id='game'/>";
 		}
 
 		//////////////
@@ -512,7 +519,7 @@
 				<div class='box-content-container box-content-container-tight'>
 					<div id='preview-box' style='width:$width"."px;height:$height"."px;'></div>
 					<div id='game-container' class='responsive'>
-						<embed wmode='direct' src='$url' style='width:$width"."px;height:$height"."px;' id='game'>
+						$game_code
 					</div>
 				</div>
 			</div>
