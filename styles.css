@@ -46,6 +46,10 @@ button::-moz-focus-inner, .button::-moz-focus-inner {
 	margin: 0 -15px;
 }
 
+iframe {
+	border: none;
+}
+
 .header {
 	height: 130px;
 	background-image: url("images/header2016.png");

@@ -54,7 +54,7 @@
 		}
 		
 		if($game_type == "JavaScript") {
-			$game_code = "<iframe src='$url' style='width:$width"."px;height:$height"."px;' id='game'/>";
+			$game_code = "<iframe src='$url' style='width:$width"."px;height:$height"."px;' id='game'></iframe>";
 		}
 		else {
 			$game_code = "<embed wmode='direct' src='$url' style='width:$width"."px;height:$height"."px;' id='game'/>";
