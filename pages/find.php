@@ -435,7 +435,7 @@
 				$select_statement->bind_result($name, $description, $url_name, $image_url, $rating, $interactions, $numeric_interactions, $total_count);
 			}
 			else {
-				$select_statement->bind_result($name, $description, $url_name, $image_url, $rating, $interactions, $numeric_interactions, $added_date, $store_url, $app_type, $item_type, $total_count);
+				$select_statement->bind_result($name, $description, $url_name, $image_url, $rating, $interactions, $numeric_interactions, $added_date, $store_url_android, $store_url_apple, $app_type, $item_type, $total_count);
 			}
 		}
 		else if($type == 'resources') {
@@ -479,7 +479,8 @@
 				if($type == 'everything') {
 					$item_object["type"] = $item_type;
 					$item_object["app_type"] = $app_type;
-					$item_object["store_url"] = $store_url;
+					$item_object["store_url_android"] = $store_url_android;
+					$item_object["store_url_apple"] = $store_url_apple;
 				}
 				$items[] = $item_object;
 			}
@@ -575,7 +576,7 @@
 			else {
 				$rating_span = "";
 				if($url_name == NULL) {
-					$url = $store_url;
+					$url = $store_url_android;
 					$target = "_blank";
 					$onclick = "onclick=\"logInteraction('$cur_type','$url')\"";
 				}
@@ -583,11 +584,11 @@
 					$url = "/app/$url_name";
 					$target = "_self";
 				}
-				if($app_type == "iOS") {
-					$app_store_logo = "<span onclick='openURL(event, \"$store_url\")' style=\"position:absolute;top:0;right:0;display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/images/badges/en-us/badge_appstore-sm.svg) no-repeat;width:61px;height:15px;\"></span>";
+				if($app_type == "iOS" || $type == "Both") {
+					$app_store_logo .= "<span onclick='openURL(event, \"$store_url_apple\")' style=\"position:absolute;top:0;right:0;display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/images/badges/en-us/badge_appstore-sm.svg) no-repeat;width:61px;height:15px;\"></span>";
 				}
-				else if($app_type == "Android") {
-					$app_store_logo = "<span onclick='openURL(event, \"$store_url\")' style=\"position:absolute;top:0;right:0;display:inline-block;overflow:hidden;width:80px;height:31px;\">
+				else if($app_type == "Android" || $type == "Both") {
+					$app_store_logo .= "<span onclick='openURL(event, \"$store_url_android\")' style=\"position:absolute;top:0;right:0;display:inline-block;overflow:hidden;width:80px;height:31px;\">
 						<img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'
 						style ='height:100%;width:100%'/>
 					</span>";
