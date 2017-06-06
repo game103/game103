@@ -286,6 +286,14 @@
 		include $_SERVER['DOCUMENT_ROOT'] . '/widgets/randomgames.php';
 
 		$mysqli->close();
+		
+		/////////////////
+		// Full Screen //
+		/////////////////
+		$play_fullscreen = "";
+		if($game_type == "JavaScript") {
+			$play_fullscreen = "<br/><a class='side-box-link' href='$url'>Play Full Screen</a>";
+		}
 
 		$display_description = "$description Play $name on Game 103!";
 		$display_meta = "<meta property='og:image' content='http://game103.net$image_url'>
@@ -537,6 +545,7 @@
 						Added on $added_date
 						$characters_display
 						$videos_display
+						$play_fullscreen
 					</div>
 				</div>
 				
