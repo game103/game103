@@ -336,7 +336,7 @@
 		}
 		else if($type == 'apps') {
 			$select_str = "SELECT * FROM(
-			SELECT apps.name as name, apps.description, apps.url_name, apps.image_url, FORMAT(apps.visits, 0), apps.visits as numeric_visits, apps.store_url, apps.type 
+			SELECT apps.name as name, apps.description, apps.url_name, apps.image_url, FORMAT(apps.visits, 0), apps.visits as numeric_visits, apps.store_url_android, apps.store_url_apple, apps.type 
 			FROM apps $apps_sql
 			ORDER BY $sort_sql
 			LIMIT $items_per_page
@@ -350,15 +350,15 @@
 		else {
 			$select_str = "
 				SELECT * FROM(
-				SELECT name, description, url_name, image_url, rating, FORMAT(plays, 0), plays as numeric_interactions, added_date, -1 as store_url, -1 as type, 'game' FROM hallaby_games.entries $where_sql
+				SELECT name, description, url_name, image_url, rating, FORMAT(plays, 0), plays as numeric_interactions, added_date, -1 as store_url_android, -1 as store_url_apple, -1 as type, 'game' FROM hallaby_games.entries $where_sql
 				UNION
-				SELECT name, description, url_name, image_url, -1 as rating, FORMAT(saves, 0), saves as numeric_interactions, added_date, -1 as store_url, -1 as type, 'download' FROM hallaby_games.downloads $downloads_sql
+				SELECT name, description, url_name, image_url, -1 as rating, FORMAT(saves, 0), saves as numeric_interactions, added_date, -1 as store_url_android, -1 as store_url_apple, -1 as type, 'download' FROM hallaby_games.downloads $downloads_sql
 				UNION
-				SELECT name, description, url_name, image_url, rating, FORMAT(views, 0), views as numeric_interactions, added_date, -1 as store_url, -1 as type, 'video' FROM hallaby_videos.entries $where_sql
+				SELECT name, description, url_name, image_url, rating, FORMAT(views, 0), views as numeric_interactions, added_date, -1 as store_url_android, -1 as store_url_apple, -1 as type, 'video' FROM hallaby_videos.entries $where_sql
 				UNION
-				SELECT name, description, url, image_url, -1 as rating, FORMAT(visits, 0), visits as numeric_interactions, added_date, -1 as store_url, -1 as type, 'resource' FROM hallaby_resources.entries $where_sql
+				SELECT name, description, url, image_url, -1 as rating, FORMAT(visits, 0), visits as numeric_interactions, added_date, -1 as store_url_android, -1 as store_url_apple, -1 as type, 'resource' FROM hallaby_resources.entries $where_sql
 				UNION
-				SELECT name, description, url_name, image_url, -1 as rating, FORMAT(visits, 0), visits as numeric_interactions, added_date, store_url, type, 'app' FROM hallaby_games.apps $apps_sql
+				SELECT name, description, url_name, image_url, -1 as rating, FORMAT(visits, 0), visits as numeric_interactions, added_date, store_url_android, store_url_apple, type, 'app' FROM hallaby_games.apps $apps_sql
 				ORDER BY $sort_sql
 				LIMIT $items_per_page
 				OFFSET $offset) AS main
@@ -442,7 +442,7 @@
 			$select_statement->bind_result($name, $description, $url, $image_url, $interactions, $numeric_interactions, $total_count);
 		}
 		else {
-			$select_statement->bind_result($name, $description, $url_name, $image_url, $interactions, $numeric_interactions, $store_url, $app_type, $total_count);
+			$select_statement->bind_result($name, $description, $url_name, $image_url, $interactions, $numeric_interactions, $store_url_android, $store_url_apple, $app_type, $total_count);
 		}
 		
 		// *************************
@@ -473,7 +473,8 @@
 				else {
 					$item_object["url_name"] = $url_name;
 					$item_object["app_type"] = $app_type;
-					$item_object["store_url"] = $store_url;
+					$item_object["store_url_android"] = $store_url_android;
+					$item_object["store_url_apple"] = $store_url_apple;
 				}
 				if($type == 'everything') {
 					$item_object["type"] = $item_type;
@@ -1089,7 +1090,7 @@
 									// Type must be apps
 									else {
 										if(!itemsArr[i]['url_name']) {
-											itemURL = itemsArr[i]['store_url'];
+											itemURL = itemsArr[i]['store_url_android'];
 											target = '_blank';
 											onclickVar = 'onclick=\"logInteraction(`' + curType + '`,`' + itemURL + '`)\"';
 										}
@@ -1098,12 +1099,12 @@
 											target = '_self';
 										}
 										if(itemsArr[i]['app_type'] == 'iOS') {
-											appStoreLogo = `<span onclick='openURL(event, \"` + itemsArr[i]['store_url'] + `\")' 
+											appStoreLogo += `<span onclick='openURL(event, \"` + itemsArr[i]['store_url_ios'] + `\")' 
 											style=\"position:absolute;top:0;right:0;display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/images/badges/en-us/badge_appstore-sm.svg) 
 											no-repeat;width:61px;height:15px;\"></span>`;
 										}
 										else if(itemsArr[i]['app_type'] == 'Android') {
-											appStoreLogo = `<span onclick='openURL(event, \"` + itemsArr[i]['store_url'] + `\")' style=\"position:absolute;top:0;right:0;display:inline-block;overflow:hidden;width:80px;height:31px;\">
+											appStoreLogo += `<span onclick='openURL(event, \"` + itemsArr[i]['store_url_android'] + `\")' style=\"position:absolute;top:0;right:0;display:inline-block;overflow:hidden;width:80px;height:31px;\">
 											<img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'
 											style ='height:100%;width:100%'/>
 											</span>`;
