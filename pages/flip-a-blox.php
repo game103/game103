@@ -22,6 +22,15 @@
 	<div class='box-content box-content'>
 		<div class='box-content-title'>$display_title</div>
 		<div class='box-content-container'>
+			<a href='https://itunes.apple.com/us/app/flip-a-blox/id1241934713' target='_blank' onclick="logInteraction('https://itunes.apple.com/us/app/flip-a-blox/id1241934713')">
+				<img src='/images/banners/flip-a-blox.png'/>
+			</a>
+			<br/>
+			<a href='https://play.google.com/store/apps/details?id=net.game103.flipablox' target='_blank' onclick="logInteraction('https://play.google.com/store/apps/details?id=net.game103.flipablox')">
+				<img style='height: 50px' src='/images/banners/googleplay.png'/>
+			</a>
+			<br/>
+			<a href='/game/flip-a-blox'>Play online</a>
 			<p>Thanks for playing the Game 103 game, Flip-a-Blox. On this page you will a detailed account of how your data is handled, and a way to contact the developer with any questions that you have.</p>
 			<h3>Privacy Policy</h3>
 			<p>
