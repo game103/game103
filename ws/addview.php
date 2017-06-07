@@ -29,13 +29,15 @@
 	
 	$table = '';
 	$url_field = '';
+	$url_field2 = '';
 	if($type == 'downloads') {
 		$table = 'downloads';
 		$url_field = 'url_name';
 	}
 	else if($type == 'apps') {
 		$table = 'apps';
-		$url_field = 'store_url';
+		$url_field = 'store_url_android';
+		$url_field2 = 'store_url_apple';
 	}
 	else if($type == 'resources') {
 		$table = 'hallaby_resources.entries';
@@ -43,8 +45,16 @@
 	}
 	// Get the game id
 	$fetch_id_str = "SELECT id FROM $table WHERE $url_field = ?";
+	if($url_field2) {
+		$fetch_id_str .= " or $url_field2 = ?";
+	}
 	$fetch_id_statement = $mysqli->prepare($fetch_id_str);
-	$fetch_id_statement->bind_param("s", $url_name);
+	if($url_field2) {
+		$fetch_id_statement->bind_param("ss", $url_name, $url_name);
+	}
+	else {
+		$fetch_id_statement->bind_param("s", $url_name);
+	}
 	$fetch_id_statement->execute();
 	if(mysqli_stmt_error($fetch_id_statement) != "") {
 		echo $error_val;
