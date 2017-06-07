@@ -1104,7 +1104,7 @@
 											target = '_self';
 										}
 										if(itemsArr[i]['app_type'] == 'iOS' || itemsArr[i]['app_type'] == 'Both') {
-											appStoreLogo += `<span onclick='openURL(event, \"` + itemsArr[i]['store_url_ios'] + `\")' 
+											appStoreLogo += `<span onclick='openURL(event, \"` + itemsArr[i]['store_url_apple'] + `\")' 
 											style=\"position:absolute;top:0;right:0;display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/images/badges/en-us/badge_appstore-sm.svg) 
 											no-repeat;width:61px;height:15px;\"></span>`;
 										}
