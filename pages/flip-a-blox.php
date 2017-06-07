@@ -57,4 +57,16 @@
 		</div>
 	</div>
 HTML;
+	$display_javascript = "
+	// Log an interaction
+	function logInteraction(url) {
+		var xhttp = new XMLHttpRequest();
+		xhttp.open('GET', '/ws/addview.php?type=apps&url_name='+url, true);
+		xhttp.send();
+	}
+	
+	window.onload = function() {
+	
+	}
+	";
 ?>
