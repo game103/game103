@@ -1,4 +1,6 @@
 <?php
+	error_reporting(0);
+
 	$range = $_POST['range'];
 	
 	if($range == "day") {
