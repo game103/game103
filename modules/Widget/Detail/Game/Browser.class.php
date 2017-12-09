@@ -111,13 +111,13 @@ HTML;
 					.box-content-tight {
 						width: calc(100% - 10px);
 					}
-					#game-container {
+					#movie-container {
 						position: relative;
 						width: 100%;
 						height: 0;
 						padding-bottom: $padding_bottom;
 					}
-					#game {
+					#movie {
 						position: absolute;
 						width: 100% !important;
 						height: 100% !important;
