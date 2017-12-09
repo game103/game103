@@ -1,6 +1,13 @@
 <?php
+	/**
+	* Script to post daily games to Twitter and Facebook
+	*/
+	
+	set_include_path($_SERVER['DOCUMENT_ROOT']  . "/" . "modules");
+	require_once( 'Constants.class.php');
+
 	// Connect to database
-	$mysqli = new mysqli("game103.net", "hallaby", "***REMOVED***", "hallaby_games");
+	$mysqli = new mysqli( Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD, "hallaby_games");
 	if (mysqli_connect_errno()) {
 		$mysqli->close();
 		throw new Exception($mysql_message);
