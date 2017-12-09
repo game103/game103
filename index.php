@@ -400,7 +400,7 @@
 	if( $is_404 ) {
 		$title = "Error #404";
 		$description = $title;
-		$content = "Sorry, the page that you are looking for does not exist.
+		$content = "Sorry, the page that you are looking for does not exist.<br>
 		<a href='/games'>Click here to go to our games page.</a>";
 		http_response_code( 404 );
 	}
