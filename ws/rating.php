@@ -7,7 +7,7 @@
 	*/
 	
 	// Require Constants
-	require_once( $_SERVER['DOCUMENT_ROOT'] . '\modules\Constants.class.php');
+	require_once( $_SERVER['DOCUMENT_ROOT'] . '/modules/Constants.class.php');
 
 	// Failure for error
 	$error_val = json_encode(array(

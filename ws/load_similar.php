@@ -10,9 +10,9 @@
 	
 	// Require modules
 	require_once( 'Constants.class.php');
-	require_once( 'Service\Find\GameFind\Random.class.php');
-	require_once( 'Service\Find\VideoFind\Random.class.php');
-	require_once( 'Widget\Find.class.php');
+	require_once( 'Service/Find/GameFind/Random.class.php');
+	require_once( 'Service/Find/VideoFind/Random.class.php');
+	require_once( 'Widget/Find.class.php');
 
 	// A standard error message
 	$error_val = json_encode(array(
