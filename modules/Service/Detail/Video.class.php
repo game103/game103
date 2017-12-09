@@ -70,19 +70,19 @@
 		/**
 		* Generate games
 		*/
-		protected function generate_videos() {
+		protected function generate_games() {
 			$games_str = "
-			SELECT hallaby_games.entries.name as name, hallaby_games.entries.url_name, hallaby_games.entries_videos.video_id as video_id, 0
+			SELECT hallaby_games.entries.name as name, hallaby_games.entries.url_name, hallaby_games.entries_videos.video_id as video_id, 'game'
 			FROM hallaby_games.entries_videos
 			JOIN hallaby_games.entries on hallaby_games.entries_videos.entry_id = hallaby_games.entries.id
 			WHERE video_id = ?
 			UNION
-			SELECT hallaby_games.downloads.name as name, hallaby_games.downloads.url_name, hallaby_games.downloads_videos.video_id as video_id, 1
+			SELECT hallaby_games.downloads.name as name, hallaby_games.downloads.url_name, hallaby_games.downloads_videos.video_id as video_id, 'download'
 			FROM hallaby_games.downloads_videos
 			JOIN hallaby_games.downloads on hallaby_games.downloads_videos.download_id = hallaby_games.downloads.id
 			WHERE video_id = ?
 			UNION
-			SELECT hallaby_games.apps.name as name, hallaby_games.apps.url_name, hallaby_games.apps_videos.video_id as video_id, 2
+			SELECT hallaby_games.apps.name as name, hallaby_games.apps.url_name, hallaby_games.apps_videos.video_id as video_id, 'app'
 			FROM hallaby_games.apps_videos
 			JOIN hallaby_games.apps on hallaby_games.apps_videos.app_id = hallaby_games.apps.id
 			WHERE video_id = ?
@@ -112,7 +112,7 @@
 			
 			try {
 				$response = $this->generate_video();
-				$response['videos'] = $this->generate_videos();
+				$response['games'] = $this->generate_games();
 				$response['rating'] = $this->generate_rating();
 				return $response;
 			}

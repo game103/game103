@@ -83,7 +83,7 @@ HTML;
 			array_push( $parts, $this->generate_views() );
 			array_push( $parts, $this->generate_date() );
 			if( $this->properties['games'] ) {
-				array_push( $parts, $this->generate_videos() );
+				array_push( $parts, $this->generate_games() );
 			}
 			$content = implode("<br>", $parts);
 			return <<<INFO
