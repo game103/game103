@@ -1,5 +1,5 @@
 <?php
-	//error_reporting(E_ERROR);
+	error_reporting(E_ERROR);
 	
 	date_default_timezone_set('America/New_York');
 	$path = $_SERVER['DOCUMENT_ROOT'];
