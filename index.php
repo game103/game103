@@ -6,7 +6,7 @@
 	$routes = explode('/', strtok($_SERVER["REQUEST_URI"],'?'));
 	$ajax = $_GET['ws'];
 	$widgets = array();
-	set_include_path(get_include_path() . PATH_SEPARATOR . "modules");
+	set_include_path($_SERVER['DOCUMENT_ROOT']  . "/" . "modules");
 	
 	require_once("/Service/Find/GameFind.class.php");
 	require_once("/Service/Find/VideoFind.class.php");
