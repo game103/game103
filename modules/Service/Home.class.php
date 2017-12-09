@@ -3,12 +3,12 @@
 
 	require_once('Constants.class.php');
 	require_once('Service.class.php');
-	require_once("/Service/Find.class.php");
-	require_once("/Service/Find/GameFind.class.php");
-	require_once("/Service/Find/GameFind/Top.class.php");
-	require_once("/Service/Find/GameFind/Random.class.php");
-	require_once("/Service/Find/GameFind/Featured.class.php");
-	require_once("/Service/Find/GameFind/Daily.class.php");
+	require_once("Service/Find.class.php");
+	require_once("Service/Find/GameFind.class.php");
+	require_once("Service/Find/GameFind/Top.class.php");
+	require_once("Service/Find/GameFind/Random.class.php");
+	require_once("Service/Find/GameFind/Featured.class.php");
+	require_once("Service/Find/GameFind/Daily.class.php");
 	
 	/**
 	* Class represening the home page

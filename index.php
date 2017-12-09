@@ -8,30 +8,30 @@
 	$widgets = array();
 	set_include_path($_SERVER['DOCUMENT_ROOT']  . "/" . "modules");
 	
-	require_once("/Service/Find/GameFind.class.php");
-	require_once("/Service/Find/VideoFind.class.php");
-	require_once("/Service/Find/ResourceFind.class.php");
-	require_once("/Service/Find/AppFind.class.php");
-	require_once("/Service/Detail/Game/Browser.class.php");
-	require_once("/Service/Detail/Game/Download.class.php");
-	require_once("/Service/Detail/Video.class.php");
+	require_once("Service/Find/GameFind.class.php");
+	require_once("Service/Find/VideoFind.class.php");
+	require_once("Service/Find/ResourceFind.class.php");
+	require_once("Service/Find/AppFind.class.php");
+	require_once("Service/Detail/Game/Browser.class.php");
+	require_once("Service/Detail/Game/Download.class.php");
+	require_once("Service/Detail/Video.class.php");
 	
-	require_once("/Widget/Find.class.php");
-	require_once("/Widget/Detail/Game/Browser.class.php");
-	require_once("/Widget/Detail/Game/Download.class.php");
-	require_once("/Widget/Detail/Video.class.php");
+	require_once("Widget/Find.class.php");
+	require_once("Widget/Detail/Game/Browser.class.php");
+	require_once("Widget/Detail/Game/Download.class.php");
+	require_once("Widget/Detail/Video.class.php");
 	
-	require_once("/Widget/Box.class.php");
-	require_once("/Widget/App/LambInAPram.class.php");
-	require_once("/Widget/App/DuckInATruck.class.php");
-	require_once("/Widget/App/FlipABlox.class.php");
-	require_once("/Service/Characters.class.php");
-	require_once("/Widget/Characters.class.php");
-	require_once("/Service/Home.class.php");
-	require_once("/Widget/Home.class.php");
-	require_once("/Widget/About.class.php");
-	require_once("/Widget/FunFacts.class.php");
-	require_once("/Widget/PrivacyPolicy.class.php");
+	require_once("Widget/Box.class.php");
+	require_once("Widget/App/LambInAPram.class.php");
+	require_once("Widget/App/DuckInATruck.class.php");
+	require_once("Widget/App/FlipABlox.class.php");
+	require_once("Service/Characters.class.php");
+	require_once("Widget/Characters.class.php");
+	require_once("Service/Home.class.php");
+	require_once("Widget/Home.class.php");
+	require_once("Widget/About.class.php");
+	require_once("Widget/FunFacts.class.php");
+	require_once("Widget/PrivacyPolicy.class.php");
 	require_once('Constants.class.php');
 	
 	ob_start("\Constants::sanitize_output");
