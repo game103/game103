@@ -82,7 +82,7 @@ function suggestFetch() {
 									target = '_blank';
 								}
 								else if(itemsArr[i]['type'] == 'app' && !itemsArr[i]['url_name']) {
-									url = itemsArr[i]['store_url'];
+									url = itemsArr[i]['store_url_android'];
 									target = '_blank';
 								}
 								else {
@@ -100,6 +100,10 @@ function suggestFetch() {
 								suggestionLink.setAttribute("target", target);
 								if( itemsArr[i]['type'] == 'resource' ) {
 									suggestionLink.onclick = function() { logInteraction('resource', this.getAttribute('href')); };
+								}
+								// Apps that go straight to the app store
+								else if( itemsArr[i]['type'] == 'app' && !itemsArr[i]['url_name'] ) {
+									suggestionLink.onclick = function() { logInteraction('app', this.getAttribute('href')); };
 								}
 								suggestionLink.classList.add('header-dropdown-item-text');
 								suggestionLink.innerHTML = itemsArr[i]['title'] + ' <span class=\"header-dropdown-item-type\">' + itemsArr[i]['type'] + '</span>';
