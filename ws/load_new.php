@@ -1,6 +1,6 @@
 <?php
 
-	error_reporting(E_ERROR);
+	//error_reporting(E_ERROR);
 
 	/**
 	* Script to load random games of a certain category
@@ -10,8 +10,8 @@
 	
 	// Require modules
 	require_once( 'Constants.class.php');
-	require_once( 'Service\Find.class.php');
-	require_once( 'Widget\Find\Dated.class.php');
+	require_once( 'Service/Find.class.php');
+	require_once( 'Widget/Find/Dated.class.php');
 
 	// A standard error message
 	$error_val = json_encode(array(
