@@ -39,6 +39,16 @@ function entrySetLinks() {
 			entryOpenURL( event, this.getAttribute('data-store-url') );
 		};
 	}
+	
+	// call log interaction for items that go straight to the store
+	var apps = document.querySelectorAll('.entry-link');
+	for( var i=0; i<apps.length; i++ ) {
+		if( apps[i].getAttribute('target') == '_blank' ) {
+			apps[i].onclick = function(event) { 
+				logInteraction('app', this.getAttribute('href') );
+			};
+		}
+	}
 
 	// call add to site for entry-distribute-button
 	var distributeButtons = document.querySelectorAll(".entry-distribute-button");

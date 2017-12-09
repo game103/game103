@@ -178,4 +178,12 @@
 		font-size: 55%;
 		text-align: center;
 	}
+	
+	.entry-ios-link {
+		display: none;
+	}	
+
+	.entry-android-link {
+		display: none;
+	}
 }

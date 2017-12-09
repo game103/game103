@@ -24,7 +24,9 @@
 		// Log the interaction - just set the required parameters
 		$_GET['type'] = 'download';
 		$_GET['url_name'] = $url_name;
+		ob_start();
 		include( 'log_interaction.php' );
+		ob_end_clean();
 
 		//Get file type and set it as Content Type
 		$finfo = finfo_open(FILEINFO_MIME_TYPE);
