@@ -10,7 +10,7 @@
 	
 	// Require modules
 	require_once( 'Constants.class.php' );
-	require_once( 'Service\Find.class.php' );
+	require_once( 'Service/Find.class.php' );
 	
 	$search = $_GET['search'];
 	$mysqli = new mysqli( Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD);

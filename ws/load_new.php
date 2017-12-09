@@ -1,6 +1,6 @@
 <?php
 
-	//error_reporting(E_ERROR);
+	error_reporting(E_ERROR);
 
 	/**
 	* Script to load random games of a certain category
