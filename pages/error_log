@@ -1,8 +1,0 @@
-[13-Oct-2016 22:37:11 America/Detroit] PHP Fatal error:  Uncaught exception 'Exception' in /home/hallaby/public_html/pages/apps.php:3
-Stack trace:
-#0 {main}
-  thrown in /home/hallaby/public_html/pages/apps.php on line 3
-[13-Oct-2016 22:37:24 America/Detroit] PHP Fatal error:  Uncaught exception 'Exception' in /home/hallaby/public_html/pages/privacy.php:3
-Stack trace:
-#0 {main}
-  thrown in /home/hallaby/public_html/pages/privacy.php on line 3

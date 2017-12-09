@@ -1,64 +1,30 @@
 <?php
-	$mysql_message = "Sorry, there was an error connecting to the database.";
-	$error_val = 'Sorry, an error occurred while trying to download your file.';
+
+	/**
+	* Script to provide a download service for items
+	* This hides the download links
+	*/
+	
+	// A standard error message
+	$error_val = "Sorry, an error occured while trying to get your download link.";
+	
 	if(!isset($_GET['name'])) {
 		echo $error_val;
 		exit();
 	}
-		
+	
+	// Create the link
 	$path = $_SERVER['DOCUMENT_ROOT'];
 	$url_name = $_GET['name'];
 	$name = $path . "/game103games/download/" . $url_name . ".exe";
 
+	// Try to open the file
 	if(file_exists($name)){
 		
-		// Connect to database
-		$mysqli = new mysqli("game103.net", "hallaby", "***REMOVED***", "hallaby_games");
-		if (mysqli_connect_errno()) {
-			$mysqli->close();
-			throw new Exception($mysql_message);
-		}
-		
-		// Get the id
-		// String to query the database with
-		$str = "SELECT id FROM downloads WHERE url_name = ?";
-		// Prepare the statement
-		$statement = $mysqli->prepare($str);
-		// Bind parameters
-		$url_name = $mysqli->real_escape_string($url_name);
-		$statement->bind_param("s", $url_name);
-		// Execute the statement
-		$statement->execute();
-		// Check for errors {
-		if(mysqli_stmt_error($statement) != "") {
-			$statement->close();
-			$mysqli->close();
-			echo $error_val;
-			exit();
-		}
-		// Get the one result
-		$statement->bind_result($id);
-		// Fetch the result
-		$statement->fetch();
-		// Close the statement
-		$statement->close();
-		if(!isset($id)) {
-			echo $error_val;
-			exit();
-		}
-		
-		// Update the downloads counter
-		$ip = $_SERVER['REMOTE_ADDR'];
-		$plays_insert_str = "INSERT INTO saves(download_id, ip_address) VALUES (?, ?)";
-		$plays_insert_statement = $mysqli->prepare($plays_insert_str);
-		$plays_insert_statement->bind_param("is", $id, $ip);
-		$plays_insert_statement->execute();
-		//if(mysqli_stmt_error($plays_insert_statement) != "") {
-		//	$plays_insert_statement->close();
-		//	$mysqli->close();
-		//	throw new Exception($mysql_message);
-		//}
-		$plays_insert_statement->close();
+		// Log the interaction - just set the required parameters
+		$_GET['type'] = 'download';
+		$_GET['url_name'] = $url_name;
+		include( 'log_interaction.php' );
 
 		//Get file type and set it as Content Type
 		$finfo = finfo_open(FILEINFO_MIME_TYPE);

@@ -1,19 +1,47 @@
 <?php
+	error_reporting(E_ERROR);
+	
 	date_default_timezone_set('America/New_York');
 	$path = $_SERVER['DOCUMENT_ROOT'];
-	$routes = explode('/', $_SERVER['REQUEST_URI']);
-	$mysql_message = "Sorry, there was an error connecting to the database.";
-	$direct_access_message = "You are not allowed to access this page.";
-	$no_results_message = "Sorry, no results were found for your search.";
-	$routed = true;
-	$display_meta = ""; // Most pages don't need to define this, so set it to be empty on default.
-	$display_css = "";
+	$routes = explode('/', strtok($_SERVER["REQUEST_URI"],'?'));
+	$ajax = $_GET['ws'];
+	$widgets = array();
+	set_include_path(get_include_path() . PATH_SEPARATOR . "modules");
+	
+	require_once("/Service/Find/GameFind.class.php");
+	require_once("/Service/Find/VideoFind.class.php");
+	require_once("/Service/Find/ResourceFind.class.php");
+	require_once("/Service/Find/AppFind.class.php");
+	require_once("/Service/Detail/Game/Browser.class.php");
+	require_once("/Service/Detail/Game/Download.class.php");
+	require_once("/Service/Detail/Video.class.php");
+	
+	require_once("/Widget/Find.class.php");
+	require_once("/Widget/Detail/Game/Browser.class.php");
+	require_once("/Widget/Detail/Game/Download.class.php");
+	require_once("/Widget/Detail/Video.class.php");
+	
+	require_once("/Widget/Box.class.php");
+	require_once("/Widget/App/LambInAPram.class.php");
+	require_once("/Widget/App/DuckInATruck.class.php");
+	require_once("/Widget/App/FlipABlox.class.php");
+	require_once("/Service/Characters.class.php");
+	require_once("/Widget/Characters.class.php");
+	require_once("/Service/Home.class.php");
+	require_once("/Widget/Home.class.php");
+	require_once("/Widget/About.class.php");
+	require_once("/Widget/FunFacts.class.php");
+	require_once("/Widget/PrivacyPolicy.class.php");
+	require_once('Constants.class.php');
+	
+	ob_start("\Constants::sanitize_output");
 	
 	if(end($routes) == '') {
 		array_pop($routes);
 	}
 	
-	$is_404 = false;
+	// Routing
+	//$is_404 = false;
 	if(isset($routes[1])) {
 		$base_route = $routes[1];
 	}
@@ -24,11 +52,22 @@
 		case 'game':
 			if(count($routes) == 3) {
 				$url_name = $routes[2];
-				include $path . '/pages/game.php';
 			}
 			else {
 				$is_404 = true;
+				break;
 			}
+			$mysqli = new mysqli( Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD );
+			$service = new \Service\Detail\Game\Browser( $url_name, $mysqli );
+			$generated = $service->generate();
+			$widget = new \Widget\Detail\Game\Browser( $generated );
+			$widget->generate();
+			array_push( $widgets, $widget );
+			$content = $widget->get_HTML();
+			$title = $generated['name'];
+			$description = $generated['description'] . "Play $title on Game 103!";
+			$meta = "<meta property='og:image' content='http://game103.net{$generated['image_url']}'>
+			<meta property='og:description' content=\"{$generated['description']}n\">";
 			break;
 		case 'games':
 			$type = 'games';
@@ -37,54 +76,52 @@
 				$search = '';
 				$sort = 'popularity';
 				$page = 1;
-				include $path . '/pages/find.php';
 			}
 			else if(count($routes) == 3) {
 				$category = $routes[2];
 				$search = '';
 				$sort = 'popularity';
 				$page = 1;
-				include $path . '/pages/find.php';
 			}
 			else if(count($routes) == 5) {
 				$category = $routes[2];
 				$search = '';
 				$sort = $routes[3];
 				$page = $routes[4];
-				include $path . '/pages/find.php';
 			}
 			else if(count($routes) == 6) {
 				$category = $routes[2];
 				$search = $routes[3];
 				$sort = $routes[4];
 				$page = $routes[5];
-				include $path . '/pages/find.php';
-			}
-			else if(count($routes) == 7) {
-				if($routes[2] == 'ws') {
-					$ws = true;
-					$category = $routes[3];
-					$search = $routes[4];
-					$sort = $routes[5];
-					$page = $routes[6];
-					include $path . '/pages/find.php';
-				}
-				else {
-					$is_404 = true;
-				}
 			}
 			else {
 				$is_404 = true;
+				break;
 			}
+			
+			$response = find_response( 'games', $search, $sort, $category, $page, '\Service\Find\GameFind', $ajax, $widgets );
+			$content = $response[0];
+			$title = $response[1];
+			$description = $response[2];
 			break;
 		case 'video':
 			if(count($routes) == 3) {
 				$url_name = $routes[2];
-				include $path . '/pages/video.php';
 			}
 			else {
 				$is_404 = true;
+				break;
 			}
+			$mysqli = new mysqli( Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD );
+			$service = new \Service\Detail\Video( $url_name, $mysqli );
+			$generated = $service->generate();
+			$widget = new \Widget\Detail\Video( $generated );
+			$widget->generate();
+			array_push( $widgets, $widget );
+			$content = $widget->get_HTML();
+			$title = $generated['name'];
+			$description = $generated['description'] . "Watch $title on Game 103!";
 			break;
 		case 'videos':
 			$type = 'videos';
@@ -93,45 +130,34 @@
 				$search = '';
 				$sort = 'popularity';
 				$page = 1;
-				include $path . '/pages/find.php';
 			}
 			else if(count($routes) == 3) {
 				$category = $routes[2];
 				$search = '';
 				$sort = 'popularity';
 				$page = 1;
-				include $path . '/pages/find.php';
 			}
 			else if(count($routes) == 5) {
 				$category = $routes[2];
 				$search = '';
 				$sort = $routes[3];
 				$page = $routes[4];
-				include $path . '/pages/find.php';
 			}
 			else if(count($routes) == 6) {
 				$category = $routes[2];
 				$search = $routes[3];
 				$sort = $routes[4];
 				$page = $routes[5];
-				include $path . '/pages/find.php';
-			}
-			else if(count($routes) == 7) {
-				if($routes[2] == 'ws') {
-					$ws = true;
-					$category = $routes[3];
-					$search = $routes[4];
-					$sort = $routes[5];
-					$page = $routes[6];
-					include $path . '/pages/find.php';
-				}
-				else {
-					$is_404 = true;
-				}
 			}
 			else {
 				$is_404 = true;
+				break;
 			}
+			
+			$response = find_response( 'videos', $search, $sort, $category, $page, '\Service\Find\VideoFind', $ajax, $widgets );
+			$content = $response[0];
+			$title = $response[1];
+			$description = $response[2];
 			break;
 		case 'resources':
 			$type = 'resources';
@@ -140,45 +166,33 @@
 				$search = '';
 				$sort = 'popularity';
 				$page = 1;
-				include $path . '/pages/find.php';
 			}
 			else if(count($routes) == 3) {
 				$category = $routes[2];
 				$search = '';
 				$sort = 'date';
 				$page = 1;
-				include $path . '/pages/find.php';
 			}
 			else if(count($routes) == 5) {
 				$category = $routes[2];
 				$search = '';
 				$sort = $routes[3];
 				$page = $routes[4];
-				include $path . '/pages/find.php';
 			}
 			else if(count($routes) == 6) {
 				$category = $routes[2];
 				$search = $routes[3];
 				$sort = $routes[4];
 				$page = $routes[5];
-				include $path . '/pages/find.php';
-			}
-			else if(count($routes) == 7) {
-				if($routes[2] == 'ws') {
-					$ws = true;
-					$category = $routes[3];
-					$search = $routes[4];
-					$sort = $routes[5];
-					$page = $routes[6];
-					include $path . '/pages/find.php';
-				}
-				else {
-					$is_404 = true;
-				}
 			}
 			else {
 				$is_404 = true;
+				break;
 			}
+			$response = find_response( 'resources', $search, $sort, $category, $page, '\Service\Find\ResourceFind', $ajax, $widgets );
+			$content = $response[0];
+			$title = $response[1];
+			$description = $response[2];
 			break;
 		case 'everything':
 			$type = 'everything';
@@ -187,38 +201,27 @@
 				$search = '';
 				$sort = 'popularity';
 				$page = 1;
-				include $path . '/pages/find.php';
 			}
 			else if(count($routes) == 4) {
 				$category = '';
 				$search = '';
 				$sort = $routes[2];
 				$page = $routes[3];
-				include $path . '/pages/find.php';
 			}
 			else if(count($routes) == 5) {
 				$category = '';
 				$search = $routes[2];
 				$sort = $routes[3];
 				$page = $routes[4];
-				include $path . '/pages/find.php';
-			}
-			else if(count($routes) == 6) {
-				if($routes[2] == 'ws') {
-					$ws = true;
-					$category = '';
-					$search = $routes[3];
-					$sort = $routes[4];
-					$page = $routes[5];
-					include $path . '/pages/find.php';
-				}
-				else {
-					$is_404 = true;
-				}
 			}
 			else {
 				$is_404 = true;
+				break;
 			}
+			$response = find_response( 'everything', $search, $sort, $category, $page, '\Service\Find', $ajax, $widgets );
+			$content = $response[0];
+			$title = $response[1];
+			$description = $response[2];
 			break;
 		case 'apps':
 			$type = 'apps';
@@ -227,50 +230,54 @@
 				$search = '';
 				$sort = 'popularity';
 				$page = 1;
-				include $path . '/pages/find.php';
 			}
 			else if(count($routes) == 4) {
 				$category = '';
 				$search = '';
 				$sort = $routes[2];
 				$page = $routes[3];
-				include $path . '/pages/find.php';
 			}
 			else if(count($routes) == 5) {
 				$category = '';
 				$search = $routes[2];
 				$sort = $routes[3];
 				$page = $routes[4];
-				include $path . '/pages/find.php';
-			}
-			else if(count($routes) == 6) {
-				if($routes[2] == 'ws') {
-					$ws = true;
-					$category = '';
-					$search = $routes[3];
-					$sort = $routes[4];
-					$page = $routes[5];
-					include $path . '/pages/find.php';
-				}
-				else {
-					$is_404 = true;
-				}
 			}
 			else {
 				$is_404 = true;
+				break;
 			}
+			$response = find_response( 'apps', $search, $sort, $category, $page, '\Service\Find\AppFind', $ajax, $widgets );
+			$content = $response[0];
+			$title = $response[1];
+			$description = $response[2];
 			break;
 		case 'app':
 			if(count($routes) == 3) {
 				$app = $routes[2];
 				if($app == 'lambinapram') {
-					include $path . '/pages/lambinapram.php';
+					$widget = new \Widget\App\LambInAPram();
+					$widget->generate();
+					$content = $widget->get_HTML();
+					$title = "Lamb in a Pram";
+					$description = "Gameplay tips, screenshots from the tutorial, credits, an FAQ, and a way to contact the developer for the Game 103 App, Lamb in a Pram.";
+					array_push( $widgets, $widget );
 				}
 				else if($app == 'duckinatruck') {
-					include $path . '/pages/duckinatruck.php';
+					$widget = new \Widget\App\DuckInATruck();
+					$widget->generate();
+					$content = $widget->get_HTML();
+					$title = "Duck in a Truck";
+					$description = "Gameplay tips, tricks, and mechanics, credits, and a way to contact the developer for the Game 103 iOS app, Duck in a Truck.";
+					array_push( $widgets, $widget );
 				}
 				else if($app == 'flip-a-blox') {
-					include $path . '/pages/flip-a-blox.php';
+					$widget = new \Widget\App\FlipABlox();
+					$widget->generate();
+					$content = $widget->get_HTML();
+					$title = "Flip-a-Blox";
+					$description = "The privacy policy and other information for the Game 103 game, Flip-a-Blox.";
+					array_push( $widgets, $widget );
 				}
 				else {
 					$is_404 = true;
@@ -301,15 +308,29 @@
 		case 'download': 
 			if(count($routes) == 3) {
 				$url_name = $routes[2];
-				include $path . '/pages/download.php';
 			}
 			else {
 				$is_404 = true;
+				break;
 			}
+			$mysqli = new mysqli( Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD );
+			$service = new \Service\Detail\Game\Download( $url_name, $mysqli );
+			$generated = $service->generate();
+			$widget = new \Widget\Detail\Game\Download( $generated );
+			$widget->generate();
+			array_push( $widgets, $widget );
+			$content = $widget->get_HTML();
+			$title = $generated['name'];
+			$description = $generated['description'] . "Play $title on Game 103!";
 			break;
 		case 'about':
 			if(count($routes) == 2) {
-				include $path . '/pages/about.php';
+				$widget = new \Widget\About();
+				$widget->generate();
+				$content = $widget->get_HTML();
+				$title = "About Us";
+				$description = "A description of Game 103, which is run by James Grams, a Christian, and was founded in 2008.";
+				array_push( $widgets, $widget );
 			}
 			else {
 				$is_404 = true;
@@ -317,7 +338,12 @@
 			break;
 		case 'facts':
 			if(count($routes) == 2) {
-				include $path . '/pages/facts.php';
+				$widget = new \Widget\FunFacts();
+				$widget->generate();
+				$content = $widget->get_HTML();
+				$title = "Fun Facts";
+				$description = "A list of fun facts about some of the different features and history of Game 103.";
+				array_push( $widgets, $widget );
 			}
 			else {
 				$is_404 = true;
@@ -325,7 +351,12 @@
 			break;
 		case 'privacy':
 			if(count($routes) == 2) {
-				include $path . '/pages/privacy.php';
+				$widget = new \Widget\PrivacyPolicy();
+				$widget->generate();
+				$content = $widget->get_HTML();
+				$title = "About Us";
+				$description = "The privacy policy of Game 103.";
+				array_push( $widgets, $widget );
 			}
 			else {
 				$is_404 = true;
@@ -333,7 +364,15 @@
 			break;
 		case 'characters':
 			if(count($routes) == 2) {
-				include $path . '/pages/characters.php';
+				$mysqli = new mysqli( Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD );
+				$service = new \Service\Characters( $mysqli );
+				$generated = $service->generate();
+				$widget = new \Widget\Characters( $generated );
+				$widget->generate();
+				array_push( $widgets, $widget );
+				$content = $widget->get_HTML();
+				$title = 'Characters';
+				$description = "The tales behind the various characters that have been in Game 103 games over the years.";
 			}
 			else {
 				$is_404 = true;
@@ -341,52 +380,85 @@
 			break;
 		case 'index';
 		case '':
-			// Use the same connection for all the parts of the homepage
-			$mysqli = new mysqli("game103.net", "hallaby", "***REMOVED***", "hallaby_games");
-			if (mysqli_connect_errno()) {
-				$mysqli->close();
-				exit();
-			}
-			include $path . '/widgets/newgames.php';
-			include $path . '/widgets/topgames.php';
-			include $path . '/widgets/featuredgames.php';
-			$mysqli->close();
-			$display_description = "Game 103 creates and hosts family-friendly games, entertainment, and development resources. Come see what you can find on Game 103!";
-			$display_title = "";
-			$display_javascript = $top_games_js . $new_games_js . $featured_games_js;
-			$display_page = "
-					
-			<!--Newest Games-->
-			<div class='new-entries'>
-				$top_games
-				$featured_games
-				$new_games
-			</div>
-					
-			<a href='/games/'>Click here to view many more games!</a>
-			";
+			$mysqli = new mysqli( Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD );
+			$service = new \Service\Home( $mysqli );
+			$generated = $service->generate();
+			$widget = new \Widget\Home( $generated );
+			$widget->generate();
+			array_push( $widgets, $widget );
+			$content = $widget->get_HTML();
+			$description = "Game 103 creates and hosts family-friendly games, entertainment, and development resources. Come see what you can find on Game 103!";
 			break;
 		default:
 			$is_404 = true;
 	}
 	
-	include $path . '/widgets/sitesearch.php';
+	// Closing mysqli is not necessary 
+	// https://stackoverflow.com/questions/2879500/mysqli-do-i-really-need-to-do-result-close-mysqli-close
 	
-	if($is_404) {
-		$display_title = "Error #404";
-		$display_description = $display_title;
-		$display_page = "Sorry, the page that you are looking for does not exist.
+	// We have a 404
+	if( $is_404 ) {
+		$title = "Error #404";
+		$description = $title;
+		$content = "Sorry, the page that you are looking for does not exist.
 		<a href='/games'>Click here to go to our games page.</a>";
-		$display_javascript = "";
+		http_response_code( 404 );
+	}
+
+	// We need a title, description, content variables, and hopefully
+	// and array of widgets at this point
+	// If we have a main service providing our title and description (maybe meta too)
+	
+	// Generate js and css
+	foreach( $widgets as $widget ) {	
+		foreach ( array_unique($widget->get_CSS()) as $css_file ) {
+			$css .= "<link rel='stylesheet' type='text/css' href='$css_file'>";
+		}
+		foreach( array_unique($widget->get_JS()) as $js_file ) {
+			$js .= "<script src='$js_file'></script>";
+		}
 	}
 	
-	if($display_title != "") {
-		$display_title = $display_title . " - Game 103: Family-Friendly Games and Entertainment";
+	// Response for a find page
+	// search redirect -> for non JS searches
+	function find_response( $type, $search, $sort, $category, $page, $service_class, $ajax, &$widgets ) {
+		if( isset( $_GET['search'] ) ) {
+			$search = $_GET['search'];
+			if( $ajax ) {
+				$ws = '?ws=1';
+			}
+			if( $category ) {
+				$category .= '/';
+			}
+			if( $search ) {
+				header( "Location: /$type/$category$search/$sort/$page$ws" );
+			}
+			else {
+				header( "Location: /$type/$category/$sort/$page$ws" );
+			}
+		}
+		
+		$service = new $service_class( $search, $sort, $category, $page, 15, new mysqli( Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD ) );
+		$generated = $service->generate();
+		$widget = new \Widget\Find( $generated );
+		$widget->generate();
+		if( $ajax ) {
+			$response = array( 
+				'content' => \Constants::sanitize_output($widget->get_HTML()), 
+				'status' => $generated['status'],
+				'title' => $generated['title'] . " - " . Constants::TITLE_APPEND,
+				'description' => $generated['description']
+			);
+			print json_encode( $response );
+			die;
+		}
+		$content = $widget->get_HTML();
+		$title = $generated['title'];
+		$description = $generated['description'];
+		// For JS and CSS
+		array_push( $widgets, $widget );
+		return array( $content, $title, $description );
 	}
-	else {
-		$display_title = $display_title . "Game 103: Family-Friendly Games and Entertainment";
-	}
-	
 ?>
 
 <!DOCTYPE html>
@@ -395,21 +467,23 @@
 	
 	<head>
 		<!-- Meta Tags -->
-		<meta name="description" content="<?php echo $display_description ?>">
+		<meta name="description" content="<?php echo $description ?>">
 		<meta name="keywords" content="Games, Development, Internet, Computers, Online, Projects, Programming">
 		<meta name="author" content="James Grams">
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1">
-		<?php echo $display_meta ?>
+		<?php echo $meta ?>
 		
 		<!-- Title -->
-		<title><?php echo $display_title ?></title>
+		<title><?php echo $title ? $title . " - " . Constants::TITLE_APPEND : Constants::TITLE_APPEND?></title>
 		
 		<!-- Load Style Sheet -->
-		<link rel="stylesheet" type="text/css" href="/styles.css">
-		<style>
-			<?php echo $display_css ?>
-		</style>
+		<link rel="stylesheet" type="text/css" href="/css/base.min.css">
+		<?php echo $css ?>
+		
+		<!-- Load JS -->
+		<script src='/javascript/base.min.js'></script>
+		<?php echo $js ?>
 		
 		<!--Google Analytics Function-->
 		<script type="text/javascript">
@@ -426,29 +500,6 @@
 		<!--Google JavaScript-->
 		<script type="text/javascript" src="https://apis.google.com/js/platform.js"></script>
 		
-		<script>
-			<?php echo $display_javascript ?>
-			<?php echo $site_search_javascript ?>
-			// Toggle the display of the menu
-			function toggleMobileMenuDisplay() {
-				var navElements = document.getElementsByClassName('nav-item');
-				// menu is closed
-				if(!navElements[1].classList.contains('mobile-visible')) {
-					for(var i = 1; i < navElements.length; i++) {
-						navElements[i].classList.add('mobile-visible');
-					}
-					document.getElementById('nav-dropdown-arrow').innerHTML = '&#9650;';
-				}
-				// menu is open
-				else {
-					for(var i = 1; i < navElements.length; i++) {
-						navElements[i].classList.remove('mobile-visible');
-					}
-					document.getElementById('nav-dropdown-arrow').innerHTML = '&#9660;';
-				}
-			}
-		</script>
-		
 	</head>
 	
 	<body>
@@ -459,7 +510,13 @@
 				<div class='header-title'>
 					<a href="/"><img src='/images/logo2016.png' alt='Game 103 logo' class='logo'/></a>
 				</div>
-				<?php echo $site_search ?>
+				<form class="site-search" action="/everything/popularity/1">
+					<input name='search' placeholder="Find games and more!" id="site-search-input" autocomplete="off" type="text"><input type="submit" value="Search" class="button" id="site-search-go">
+					<div class="header-dropdown">
+						<ul class="header-dropdown-menu" id="site-search-results-dropdown" style="display: block;">
+						</ul>
+					</div>
+				</form>
 			</div>
 			
 			<!-- Navbar -->
@@ -468,15 +525,15 @@
 			<!-- Content -->
 			<div class="content">
 			
-				<?php echo $display_page ?>
+				<?php echo $content ?>
 				
 				<!-- End main part of the page -->
 				
-				<!--Contact and Copyright-->
-				<div class="footer">
-					<div class="additional-links"><a href="/about">About Us</a> | <a href="/privacy">Privacy Policy</a> | <a href="/facts">Fun Facts</a> | <a href="/characters">Characters</a> | <a href="/games/distributable">Developers</a></div>
-					<div class="copyright">&copy; 2017 <a href="https://game103.net">Game 103</a></div>
-				</div>
+			</div>
+			<!--Contact and Copyright-->
+			<div class="footer">
+				<div class="additional-links"><a href="/about">About Us</a> | <a href="/privacy">Privacy Policy</a> | <a href="/facts">Fun Facts</a> | <a href="/characters">Characters</a> | <a href="/games/distributable">Developers</a></div>
+				<div class="copyright">&copy; 2017 <a href="https://game103.net">Game 103</a></div>
 			</div>
 		</div>
 
