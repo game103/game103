@@ -10,7 +10,7 @@
 	class Find extends \Service {
 		
 		const PAGE_MAX = 2;
-		const PAGE_MIN = - self::PAGE_MAX;
+		const PAGE_MIN = -2;
 		const EVERYTHING_DESCRIPTION = "A list including most of the items on Game 103.";
 		const APPS_DESCRIPTION = "A listing of family-friendly mobile games and apps that Game 103 has developed for iOS and android.";
 		const AJAX_ERROR =  "Sorry, an error occured while trying to fetch more items. Please try again later.";
