@@ -2,8 +2,8 @@
 
 	class Constants {
 		
-		const DB_HOST = 'game103.net';
-		const DB_USER = 'hallaby';
+		const DB_HOST = 'localhost';
+		const DB_USER = 'root';
 		const DB_PASSWORD = '***REMOVED***';
 		const TITLE_APPEND = 'Game 103: Family-Friendly Games and Entertainment';
 		const MYSQL_MESSAGE = "Sorry, there was an error connecting to the database.";
