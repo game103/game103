@@ -41,7 +41,7 @@ function entrySetLinks() {
 	}
 	
 	// call log interaction for items that go straight to the store
-	var apps = document.querySelectorAll('.entry-link');
+	var apps = document.querySelectorAll('.entry-link[data-type="app"]');
 	for( var i=0; i<apps.length; i++ ) {
 		if( apps[i].getAttribute('target') == '_blank' ) {
 			apps[i].onclick = function(event) { 
