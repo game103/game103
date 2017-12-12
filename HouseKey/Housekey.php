@@ -1,4 +1,10 @@
 <?php
+
+	set_include_path($_SERVER['DOCUMENT_ROOT']  . "/" . "modules");
+		
+	// Require modules
+	require_once( 'Constants.class.php');
+
 	$username = $_POST['username'];
 	$trimmedusername = trim($username);
 	$password = $_POST['password'];
@@ -6,7 +12,7 @@
 	$room = $_POST['room'];
 	$trimmedroom = trim($room);
 	
-	$connect = mysql_connect("localhost","hallaby","***REMOVED***");
+	$connect = mysql_connect(Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD);
 	mysql_select_db("hallaby_housekey");
 
 	$str = "SELECT * FROM variables WHERE BINARY username = '$trimmedusername' AND BINARY password='$trimmedpassword'";

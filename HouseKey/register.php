@@ -1,12 +1,17 @@
 <?php
 
+set_include_path($_SERVER['DOCUMENT_ROOT']  . "/" . "modules");
+	
+// Require modules
+require_once( 'Constants.class.php');
+
 $username = trim($_POST['username']);
 $password = trim($_POST['password']);
 $email = trim($_POST['email']);
 $date = date("Y-m-d");
 $job = $_POST['job'];
 
-	$connect = mysql_connect("localhost","hallaby","***REMOVED***");
+	$connect = mysql_connect(Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD);
 			mysql_select_db("hallaby_housekey");
 
 			$query = mysql_query

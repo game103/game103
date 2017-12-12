@@ -1,5 +1,10 @@
 <?php
-	$mysqli = new mysqli("game103.net", "hallaby", "***REMOVED***", "hallaby_games");
+	set_include_path($_SERVER['DOCUMENT_ROOT']  . "/" . "modules");
+	
+	// Require modules
+	require_once( 'Constants.class.php');
+
+	$mysqli = new mysqli(Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD, "hallaby_games");
 	//////////////
 	// CONTROLS //
 	//////////////

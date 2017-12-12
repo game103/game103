@@ -1,4 +1,10 @@
 <?php
+
+set_include_path($_SERVER['DOCUMENT_ROOT']  . "/" . "modules");
+	
+// Require modules
+require_once( 'Constants.class.php');
+
 $username = $_POST['username'];
 $trimmedusername = trim($username);
 				$hi1 = $_POST['hi1'];
@@ -196,7 +202,7 @@ $trimmedusername = trim($username);
 		$y63 = $_POST['y63'];
 		$y64 = $_POST['y64'];
 
-$connect = mysql_connect("localhost","hallaby","***REMOVED***");
+$connect = mysql_connect(Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD);
 	mysql_select_db("hallaby_housekey");
 
 	$str = "SELECT * FROM house WHERE username = '$trimmedusername'";

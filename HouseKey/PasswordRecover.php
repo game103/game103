@@ -1,10 +1,15 @@
 <?php
 
+set_include_path($_SERVER['DOCUMENT_ROOT']  . "/" . "modules");
+	
+// Require modules
+require_once( 'Constants.class.php');
+
 $email = $_POST['email'];
 
 if ($email)
 {
-$connect = mysql_connect("localhost","hallaby","***REMOVED***") or die("Could not connect");
+$connect = mysql_connect(Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD) or die("Could not connect");
 mysql_select_db("hallaby_housekey") or die("Could not find database");
 
 $query = mysql_query("SELECT * FROM userlist WHERE email='$email'");
