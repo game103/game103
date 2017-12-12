@@ -1,6 +1,11 @@
 <?php
 
-	$connect = mysql_connect("localhost","hallaby","***REMOVED***");
+	set_include_path($_SERVER['DOCUMENT_ROOT']  . "/" . "modules");
+	
+	// Require modules
+	require_once( 'Constants.class.php');
+
+	$connect = mysql_connect(Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD);
 	mysql_select_db("hallaby_clicktheelephant");
 
 	$str = "SELECT * FROM clicktheelephant";

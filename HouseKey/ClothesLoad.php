@@ -1,10 +1,15 @@
 <?php
 
+	set_include_path($_SERVER['DOCUMENT_ROOT']  . "/" . "modules");
+		
+	// Require modules
+	require_once( 'Constants.class.php');
+
 	$playwith = $_POST['playwith'];
 	$trimmedplaywith = trim($playwith);
 	$playwith2 = $_POST['playwith2'];
 	$trimmedplaywith2 = trim($playwith2);
-	$connect = mysql_connect("localhost","hallaby","***REMOVED***");
+	$connect = mysql_connect(Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD);
 	mysql_select_db("hallaby_housekey");
 
 	$str = "SELECT * FROM variables WHERE username = '$trimmedplaywith'";

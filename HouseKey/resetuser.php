@@ -6,8 +6,14 @@
 <input type = "submit">
 
 <?php
-$user = $_POST['username'];
-	$connect = mysql_connect("localhost","hallaby","***REMOVED***");
+
+	set_include_path($_SERVER['DOCUMENT_ROOT']  . "/" . "modules");
+		
+	// Require modules
+	require_once( 'Constants.class.php');
+
+	$user = $_POST['username'];
+	$connect = mysql_connect(Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD);
 	mysql_select_db("hallaby_housekey");
 
 	$str = "SELECT * FROM variables WHERE username = '$user'";
