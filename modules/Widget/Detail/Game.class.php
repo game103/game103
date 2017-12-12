@@ -114,7 +114,7 @@ INFO;
 		* Generate fullscreen.
 		*/
 		protected function generate_fullscreen() {
-			return "<a class='side-box-link' href='{$this->properties['url_name']}'>Play Full Screen</a>";
+			return "<a class='detail-side-box-link' href='{$this->properties['url']}'>Play Full Screen</a>";
 		}
 		
 	}
