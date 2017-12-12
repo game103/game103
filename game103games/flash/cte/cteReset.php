@@ -1,6 +1,6 @@
 <?php
 
-	set_include_path($_SERVER['DOCUMENT_ROOT']  . "/" . "modules");
+	set_include_path("/var/www/game103/modules");
 	
 	// Require modules
 	require_once( 'Constants.class.php');

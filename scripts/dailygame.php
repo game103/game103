@@ -3,7 +3,7 @@
 	* Script to post daily games to Twitter and Facebook
 	*/
 	
-	set_include_path("/home/hallaby/public_html/modules");
+	set_include_path("/var/www/game103/modules");
 	require_once( 'Constants.class.php');
 
 	// Connect to database
