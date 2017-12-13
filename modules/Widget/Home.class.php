@@ -60,7 +60,7 @@
 										array( 'title' => 'Top Games This Month', 'content' => $monthly_section->get_HTML() ),
 										array( 'title' => 'Top Games of All Time', 'content' => $top_section->get_HTML() ),
 										array( 'title' => 'Highest Rated Games', 'content' => $rating_section->get_HTML() ),
-										array( 'title' => 'Random Games', 'content' => "<span class='home-random-items-placeholder'><span>" )
+										array( 'title' => 'Random Games', 'content' => "<span class='home-random-items-placeholder'></span>" )
 										),
 					'title'			=> "Top Games",
 					'footer'		=> "",
