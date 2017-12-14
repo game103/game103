@@ -33,8 +33,6 @@
 				$this->properties['rating']['no_box'] = true;
 				$this->properties['featured']['no_box'] = true;
 				$this->properties['daily']['no_box'] = true;
-				$this->properties['new']['header'] = "New Content";
-				$this->properties['new']['footer'] = "<span id='load-earlier-content' class='box-content-footer-link'>Load earlier content</span>";
 				
 				// Create the sections
 				$weekly_section = new \Widget\Find( $this->properties['weekly'] );
@@ -43,7 +41,7 @@
 				$rating_section = new \Widget\Find( $this->properties['rating'] );
 				$featured_section = new \Widget\Find( $this->properties['featured'] );
 				$daily_section = new \Widget\Find( $this->properties['daily'] );
-				$new_section = new \Widget\Find\Dated( $this->properties['new'] );
+				$new_dummy_section = new \Widget\Find\Dated( array() );
 				
 				// Generate the sections
 				$weekly_section->generate();
@@ -52,7 +50,6 @@
 				$rating_section->generate();
 				$featured_section->generate();
 				$daily_section->generate();
-				$new_section->generate();
 				
 				$top_box = new \Widget\Box( array(
 					'content'		=> array( 
@@ -78,10 +75,10 @@
 				$featured_box->generate();
 				
 				// Get box the find JS and CSS (includes box and entry)
-				$this->JS = array_merge( $this->JS, $new_section->get_JS() );
-				$this->CSS = array_merge( $this->CSS, $new_section->get_CSS() );
+				$this->JS = array_merge( $this->JS, $top_box->get_JS(), $daily_section->get_JS(), $new_dummy_section->get_JS() );
+				$this->CSS = array_merge( $this->CSS, $top_box->get_CSS(), $daily_section->get_CSS(), $new_dummy_section->get_CSS() );
 				
-				$this->HTML = $top_box->get_HTML() . $featured_box->get_HTML() . $new_section->get_HTML();
+				$this->HTML = $top_box->get_HTML() . $featured_box->get_HTML() . "<span id='home-new-content-placeholder'></span>";
 			}
 			// Failure
 			else {

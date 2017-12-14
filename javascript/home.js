@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 	
 	// Earlier content on click
-	document.querySelector('#load-earlier-content').onclick = homeLoadNew;
+	homeLoadNew();
 	
 }, false );
 
@@ -45,12 +45,21 @@ function homeLoadRandom() {
 	}
 }
 
-var homePage = 1;
+var homePage = 0;
 
 // Load new content
 function homeLoadNew() {
 	var errorText = 'Sorry, there was an error loading similar items. Please try again later.';
-	var content = document.querySelector(".box-content:last-child .box-content-tab");
+	var content;
+	var noBox = '';
+	// We need to load the box if we are on the initial load
+	if( homePage == 0 ) {
+		content = document.querySelector("#home-new-content-placeholder");
+	}
+	else {
+		noBox = '&no_box=true';
+		content = document.querySelector(".box-content:last-child .box-content-tab");
+	}
 	// Don'y load if we are already loading
 	if(content.style.opacity != 0.5) {
 		var xhttp = new XMLHttpRequest();
@@ -79,7 +88,8 @@ function homeLoadNew() {
 						dateBoxTitles = document.getElementsByClassName('find-date-box-title');
 						var newestLoadedDateBox = dateBoxes[previousDateBoxCount];
 						
-						if(newestLoadedDateBox) {
+						// We are on neither the first or last update (where last update contains nothing)
+						if(newestLoadedDateBox && lastDateBox) {
 							var newestLoadedDateBoxTitle = dateBoxTitles[previousDateBoxCount];
 							
 							// If the previous last and newest loaded boxes have the same title (date)
@@ -102,12 +112,17 @@ function homeLoadNew() {
 						}
 						// We didn't load any new content, so hide
 						// Also, hide the error message by going back to previous content
-						else {
+						else if(lastDateBox) {
 							content.innerHTML = previousContent;
 							document.querySelector('.box-content:last-child .box-content-footer').style.display = 'none';
 						}
+						// This must be the first content load, so we allow for more content to load
+						else {
+							document.querySelector('#load-earlier-content').onclick = homeLoadNew;
+						}
 					}
 					catch(e) {
+						console.log(e);
 						content.innerHTML = errorText;
 						content.style.opacity = 1;
 					}
@@ -120,7 +135,7 @@ function homeLoadNew() {
 		var gameOffset = document.getElementsByClassName('game-entry').length;
 		var videoOffset = document.getElementsByClassName('video-entry').length;
 		homePage ++;
-		xhttp.open('GET', '/ws/load_new.php?page=' + homePage, true);
+		xhttp.open('GET', '/ws/load_new.php?page=' + homePage + noBox, true);
 		xhttp.send();
 	};
 }
