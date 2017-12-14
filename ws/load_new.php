@@ -20,6 +20,7 @@
 	));
 	
 	$page = $_GET['page'];
+	$no_box = $_GET['no_box'];
 	
 	// Connect to database
 	$mysqli = new mysqli( Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD);
@@ -27,7 +28,9 @@
 	// Generate the response
 	$service = new \Service\Find( "", "date", "", $page, \Constants::NEW_CONTENT_ITEMS_PER_PAGE, $mysqli );
 	$properties = $service->generate();
-	$properties['no_box'] = true;
+	$properties['no_box'] = $no_box;
+	$properties['header'] = "New Content";
+	$properties['footer'] = "<span id='load-earlier-content' class='box-content-footer-link'>Load earlier content</span>";
 	
 	$widget = new \Widget\Find\Dated( $properties );
 	$widget->generate();

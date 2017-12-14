@@ -105,7 +105,7 @@
 		* Parse the result of a sql statement
 		*/
 		protected function parse_result( $select_statement ) {
-			$select_statement->bind_result($name, $description, $url, $image_url, $interactions, $numeric_interactions, $total_count, $added_date);
+			$select_statement->bind_result($name, $description, $url, $image_url, $interactions, $numeric_interactions, $added_date, $total_count);
 			
 			$items = array();
 			while($select_statement->fetch()) {

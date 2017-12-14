@@ -3,7 +3,6 @@
 
 	require_once('Constants.class.php');
 	require_once('Service.class.php');
-	require_once("Service/Find.class.php");
 	require_once("Service/Find/GameFind.class.php");
 	require_once("Service/Find/GameFind/Top.class.php");
 	require_once("Service/Find/GameFind/Random.class.php");
@@ -38,7 +37,6 @@
 				$rating_service = new \Service\Find\GameFind( "", 'rating', "all", 1, 6, $this->mysqli );
 				$featured_service = new \Service\Find\GameFind\Featured( $this->mysqli );
 				$daily_service = new \Service\Find\GameFind\Daily( $this->mysqli );
-				$new_service = new \Service\Find( "", "date", "all", 1, \Constants::NEW_CONTENT_ITEMS_PER_PAGE, $this->mysqli );
 				
 				return array(
 					'status' => 'success',
@@ -47,8 +45,7 @@
 					'top' => $top_service->generate(),
 					'rating' => $rating_service->generate(),
 					'featured' => $featured_service->generate(),
-					'daily' => $daily_service->generate(),
-					'new' => $new_service->generate()
+					'daily' => $daily_service->generate()
 				);
 			}
 			catch (\Exception $e) {
