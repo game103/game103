@@ -1,6 +1,17 @@
 <?php
 	error_reporting(E_ERROR);
 	
+	// Check if we can respond with Cache
+	
+	$cached_file = str_replace( "?", "-", str_replace("/", "-", $_SERVER["REQUEST_URI"]) );
+	$cached_file = $_SERVER['DOCUMENT_ROOT'] . "/cache/" . $cached_file . ".html";
+	if( file_exists( $cached_file ) ) {
+		print file_get_contents( $cached_file );
+		exit;
+	}
+	
+	// End cache section
+	
 	date_default_timezone_set('America/New_York');
 	$path = $_SERVER['DOCUMENT_ROOT'];
 	$routes = explode('/', strtok($_SERVER["REQUEST_URI"],'?'));
