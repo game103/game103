@@ -37,7 +37,7 @@ def crawl(root):
 		# Occurs if there is a 500 error
 		bad_pages[root] = root
 
-crawl('/');
+crawl('/?no_cache=1');
 
 os.chdir('/var/www/game103/cache')
 
