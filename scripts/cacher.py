@@ -29,9 +29,9 @@ def crawl(root):
 			# we don't want to crawl links we've already been to
 			if not link in pages and not link in bad_pages:
 				# add ws if we want to 
-				crawl(link)
+				crawl(link + "?no_cache=1")
 				if re.match('^\/games[^?]*$|^\/videos[^?]*$^\/everything[^?]*$|^\/apps[^?]*$|^\/resources[^?]*$', link):
-					crawl(link + '?ws=1')
+					crawl(link + '?ws=1&no_cache=1')
 	except Exception as e:
 		print e
 		# Occurs if there is a 500 error
