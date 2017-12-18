@@ -36,7 +36,7 @@
 			}
 			
 			$html = <<<HTML
-					<div id='preview-box' style='width:{$this->properties['width']}"."px;height:{$this->properties['height']}"."px;'></div>
+					<div id='preview-box' style='width:{$this->properties['width']}px;height:{$this->properties['height']}px;'></div>
 					<div id='movie-container' class='responsive'>
 						$game_code
 					</div>
