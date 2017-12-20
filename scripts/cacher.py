@@ -23,7 +23,6 @@ def crawl(root):
 		context = ssl.SSLContext(ssl.PROTOCOL_TLSv1)
 		# read
 		u = urllib2.urlopen(request, context=context)
-		#
 		pages[root] = u.read()
 		# Find all relative links that are not to a file (see valid characters in regex)
 		links = re.findall(r"href\s*=\s*[\"'](\/[A-Za-z\d!_\-\/]*)[\"']", pages[root])

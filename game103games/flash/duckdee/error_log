@@ -1,2 +1,0 @@
-[21-Oct-2017 09:18:31 America/Chicago] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home1/hallaby/public_html/game103games/flash/duckdee/saveScore.php on line 5
-[21-Oct-2017 09:18:31 America/Chicago] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home1/hallaby/public_html/game103games/flash/duckdee/loadScores.php on line 3

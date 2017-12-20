@@ -1,4 +1,4 @@
 AuthType Basic
 AuthName "admin"
-AuthUserFile "/home/hallaby/.htpasswds/public_html/admin/passwd"
+AuthUserFile "/etc/apache2/.htpasswds/admin"
 require valid-user
