@@ -76,7 +76,7 @@
 		*/
 		protected function error_check() {
 			// Ensure the Page is valid
-			if( !is_numeric($this->page) ) {
+			if( !is_numeric($this->page) || $this->page <= 0 ) {
 				throw new \Exception(self::BAD_PARAMS_MESSAGE);
 			}
 			// Ensure that we have a valid sort
