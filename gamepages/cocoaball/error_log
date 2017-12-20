@@ -1,2 +1,0 @@
-[03-Nov-2016 07:24:14 America/Detroit] PHP Warning:  mysql_close(): no MySQL-Link resource supplied in /home/hallaby/public_html/gamepages/cocoaball/CocoaBallHighScoresSave.php on line 238
-[11-Nov-2016 14:48:17 America/Detroit] PHP Warning:  mysql_close(): no MySQL-Link resource supplied in /home/hallaby/public_html/gamepages/cocoaball/CocoaBallHighScoresSave.php on line 238
