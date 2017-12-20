@@ -80,6 +80,7 @@
 			$title = $generated['name'];
 			$description = $generated['description'] . "Play $title on Game 103!";
 			$meta = "<meta property='og:image' content='http://game103.net{$generated['image_url']}'>
+			<meta property='og:title' content='$title'>
 			<meta property='og:description' content=\"{$generated['description']}\">";
 			break;
 		case 'games':
