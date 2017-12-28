@@ -81,7 +81,7 @@
 			$description = $generated['description'] . "Play $title on Game 103!";
 			$fb_image_url = "/images/icons/games/bordered/" . basename($generated['image_url']);
 			$fb_image_url = file_exists( $_SERVER['DOCUMENT_ROOT'] . $fb_image_url ) ? $fb_image_url : $generated['image_url'];
-			$meta = "<meta property='og:image' content='http://game103.net{$fb_image_url}'>
+			$meta = "<meta property='og:image' content='https://game103.net{$fb_image_url}'>
 			<meta property='og:description' content=\"{$generated['description']}\">";
 			break;
 		case 'games':
