@@ -314,10 +314,13 @@ Category 2:
 
 	if($submit) {
 		$gamefile_target_dir = "../stock/games/flash/";
-		$gamefile_target_file = $gamefile_target_dir . basename($_FILES["gamefile_upload"]["name"]);
+		//$gamefile_target_file = $gamefile_target_dir . basename($_FILES["gamefile_upload"]["name"]);
+		$gamefile_target_file = $gamefile_target_dir . $url_name;
+		$gamefile_target_file = $gamefile_target_dir. $url_name . "." .  pathinfo($_FILES["gamefile_upload"]["name"], PATHINFO_EXTENSION);
 
 		$imagefile_target_dir = "../images/icons/games/";
-		$imagefile_target_file = $imagefile_target_dir. basename($_FILES["imagefile_upload"]["name"]);
+		//$imagefile_target_file = $imagefile_target_dir. basename($_FILES["imagefile_upload"]["name"]);
+		$imagefile_target_file = $imagefile_target_dir. $url_name . "." . pathinfo($_FILES["imagefile_upload"]["name"], PATHINFO_EXTENSION);
 
 		
 		//move the files to the correct location

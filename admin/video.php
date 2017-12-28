@@ -67,7 +67,8 @@ Category 2:
 
 	if($submit) {
 		$imagefile_target_dir = "../images/icons/videos/";
-		$imagefile_target_file = $imagefile_target_dir. basename($_FILES["imagefile_upload"]["name"]);
+		//$imagefile_target_file = $imagefile_target_dir. basename($_FILES["imagefile_upload"]["name"]);
+		$imagefile_target_file = $imagefile_target_dir. $url_name . "." . pathinfo($_FILES["imagefile_upload"]["name"], PATHINFO_EXTENSION);
 
 		
 		//move the files to the correct location
