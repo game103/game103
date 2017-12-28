@@ -100,7 +100,9 @@ HTML;
 		* Generate special responsive css
 		*/
 		protected function generate_responsive_css() {
-			$screen_width = ( (string) $this->properties['width'] + 10 ) . 'px';
+			// We add an extra 20 pixels to account for a possible scrollbar.
+			// It's OK if we switch to responsive a little early (the 10 is the border).
+			$screen_width = ( (string) $this->properties['width'] + 10 + 20 ) . 'px';
 			$game_ratio = $this->properties['height']/$this->properties['width'];
 			$padding_bottom = ( (string) $game_ratio * 100) . '%';
 			$css = "<style>
