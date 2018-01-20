@@ -8,6 +8,8 @@
 
 	$range = $_GET['range'];
 	$game = $_GET['game'];
+	$page = $_GET['page'] ? $_GET['page'] : 1;
+	$items_per_page = 25;
 	
 	$where_clause = "WHERE game = ?";
 	if($range == "day") {
@@ -27,9 +29,10 @@
 	
 	$select_str = "SELECT users.username, high_scores.score, high_scores.score_date 
 	FROM high_scores join users on high_scores.user_id = users.id " 
-	. $where_clause . " ORDER BY score DESC, score_date DESC LIMIT 25";
+	. $where_clause . " ORDER BY score DESC, score_date DESC LIMIT $items_per_page OFFSET ?";
 	$statement = $mysqli->prepare($select_str);
-	$statement->bind_param("s", $game);
+	$offset = ($page-1) * $items_per_page;
+	$statement->bind_param("si", $game, $offset);
 	$statement->execute();
 	$statement->bind_result($username, $score, $score_date);
 	
