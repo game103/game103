@@ -15,6 +15,7 @@
 			'status'	=> 'failure',
 			'message'	=> 'Usernames and passwords must be between 5 and 15 characters'
 		) );
+		die;
 	}
 	
 	$password = md5($password);
