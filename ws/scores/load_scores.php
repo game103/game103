@@ -27,9 +27,9 @@
 		
 	$mysqli = new mysqli(Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD, "hallaby_scores");
 	
-	$select_str = "SELECT users.username, high_scores.score, high_scores.score_date 
+	$select_str = "SELECT users.username, max(high_scores.score) as max, high_scores.score_date 
 	FROM high_scores join users on high_scores.user_id = users.id " 
-	. $where_clause . " ORDER BY score DESC, score_date DESC LIMIT $items_per_page OFFSET ?";
+	. $where_clause . " GROUP BY users.username ORDER BY max DESC, score_date DESC LIMIT $items_per_page OFFSET ?";
 	$statement = $mysqli->prepare($select_str);
 	$offset = ($page-1) * $items_per_page;
 	$statement->bind_param("si", $game, $offset);
