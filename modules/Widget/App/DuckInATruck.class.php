@@ -24,7 +24,13 @@
 			<a href='https://itunes.apple.com/us/app/duck-in-a-truck/id907135188' target='_blank' class='app-store-link'>
 				<img src='/images/banners/duckinatruck.png'/>
 			</a>
-			<p>Thanks for playing the Game 103 iOS app, Duck in a Truck. On this page you will find some gameplay tips tricks, and mechanics, credits, and a way to contact the developer with any questions that you have.</p>
+			<br/>
+			<a href='https://play.google.com/store/apps/details?id=air.net.game103.duckinatruck' target='_blank' class='app-store-link'>
+				<img style='height: 50px' src='/images/banners/googleplay.png'/>
+			</a>
+			<br/>
+			<a href='/game/duckinatruck'>Play online</a>
+			<p>Thanks for playing the Game 103 iOS and Android app, Duck in a Truck. On this page you will find some gameplay tips tricks, and mechanics, credits, and a way to contact the developer with any questions that you have.</p>
 			<h3>Gameplay Tips, Tricks, and Mechanics</h3>
 			<p style = "text-align:left">
 				<ul style = "text-align:left">
