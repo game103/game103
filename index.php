@@ -15,7 +15,7 @@
 	// End cache section
 	
 	date_default_timezone_set('America/New_York');
-	$path = 'https://game103.net;
+	$path = 'https://game103.net';
 	$request_uri = strtok($_SERVER["REQUEST_URI"],'?');
 	$routes = explode('/', $request_uri);
 	$ajax = $_GET['ws'];
