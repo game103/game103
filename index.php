@@ -388,7 +388,7 @@
 				$widget = new \Widget\PrivacyPolicy();
 				$widget->generate();
 				$content = $widget->get_HTML();
-				$title = "About Us";
+				$title = "Privacy Policy";
 				$description = "The privacy policy of Game 103.";
 				array_push( $widgets, $widget );
 			}
