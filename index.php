@@ -15,7 +15,7 @@
 	// End cache section
 	
 	date_default_timezone_set('America/New_York');
-	$path = 'https://game103.net';
+	$base_url = 'https://game103.net';
 	$request_uri = strtok($_SERVER["REQUEST_URI"],'?');
 	$routes = explode('/', $request_uri);
 	$ajax = $_GET['ws'];
@@ -95,7 +95,7 @@
 			$fb_image_url = file_exists( $_SERVER['DOCUMENT_ROOT'] . $fb_image_url ) ? $fb_image_url : $generated['image_url'];
 			$meta = "<meta property='og:image' content='https://game103.net{$fb_image_url}'>
 			<meta property='og:description' content=\"{$generated['description']}\">";
-			$breadcrumbs = add_breadcrumb( $breadcrumbs, $path . "/games", $GAMES_BREADCRUMBS_NAME ); 
+			$breadcrumbs = add_breadcrumb( $breadcrumbs, $base_url . "/games", $GAMES_BREADCRUMBS_NAME ); 
 			break;
 		case 'games':
 			$type = 'games';
@@ -151,7 +151,7 @@
 			$content = $widget->get_HTML();
 			$title = $generated['name'];
 			$description = $generated['description'] . " Watch $title on Game 103!";
-			$breadcrumbs = add_breadcrumb( $breadcrumbs, $path . "/videos", $VIDEOS_BREADCRUMBS_NAME ); 
+			$breadcrumbs = add_breadcrumb( $breadcrumbs, $base_url . "/videos", $VIDEOS_BREADCRUMBS_NAME ); 
 			break;
 		case 'videos':
 			$type = 'videos';
@@ -319,7 +319,7 @@
 			else {
 				$is_404 = true;
 			}
-			$breadcrumbs = add_breadcrumb( $breadcrumbs, $path . '/apps', $APPS_BREADCRUMBS_NAME );
+			$breadcrumbs = add_breadcrumb( $breadcrumbs, $base_url . '/apps', $APPS_BREADCRUMBS_NAME );
 			break;
 		// For legacy iTunes support
 		case 'help':
@@ -422,6 +422,16 @@
 			array_push( $widgets, $widget );
 			$content = $widget->get_HTML();
 			$description = "Game 103 creates and hosts family-friendly games, entertainment, and development resources. Come see what you can find on Game 103!";
+			$website_schema = array(
+				"@context" => "http://schema.org",
+				"@type" => "WebSite",
+				"url"	=>	$base_url,
+				"potentialAction"	=> array(
+					"@type"		=>	"SearchAction",
+					"target"	=>	"$base_url/everything/{search_term_string}/popularity/1",
+					"query-input"=> "required name=search_term_string"
+				)
+			);
 			break;
 		default:
 			$is_404 = true;
@@ -441,18 +451,27 @@
 	
 	// If this is not a 404 and not home, use a breadcrumb
 	if( $title && !$is_404 ) {
-		$breadcrumbs = add_breadcrumb( $breadcrumbs, $path . $request_uri, $breadcrumb_title ? $breadcrumb_title : $title );
+		$breadcrumbs = add_breadcrumb( $breadcrumbs, $base_url . $request_uri, $breadcrumb_title ? $breadcrumb_title : $title );
 	}
 
 	// We need a title (or not for home page ), description, content variables, and hopefully
 	// and array of widgets at this point
 	// we may also have metadata and some schema objects to encode as json
-	if( sizeof( $breadcrumbs['itemListElement'] ) > 0 ) {
-		$schema_json = "<script type='application/ld+json'>" . json_encode( $breadcrumbs ) . "</script>";
+	if( sizeof( $breadcrumbs['itemListElement'] ) > 0 || $website_schema) {
+		$schema_json = "<script type='application/ld+json'>";
+
+		if( sizeof( $breadcrumbs['itemListElement'] ) > 0 ) {
+			$schema_json .= json_encode( $breadcrumbs );
+		}
+		if( $website_schema ) {
+			$schema_json .= json_encode( $website_schema );
+		}
+		
+		$schema_json .= "</script>";
 	}
 	
 	// Generate js and css for all the widgets
-	foreach( $widgets as $widget ) {	
+	foreach( $widgets as $widget ) {
 		foreach ( array_unique($widget->get_CSS()) as $css_file ) {
 			$css .= "<link rel='stylesheet' type='text/css' href='$css_file'>";
 		}
@@ -541,7 +560,7 @@
 		
 		<!-- Load JS -->
 		<script src='/javascript/base.min.js'></script>
-		
+		<?php echo $js ?>
 		
 		<!--Google Analytics Function-->
 		<script type="text/javascript">
@@ -580,7 +599,7 @@
 			</div>
 			
 			<!-- Navbar -->
-			<?php include $path . '/navbar.html';?>
+			<?php include $_SERVER['DOCUMENT_ROOT'] . '/navbar.html';?>
 				
 			<!-- Content -->
 			<div class="content">
