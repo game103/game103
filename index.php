@@ -16,7 +16,8 @@
 	
 	date_default_timezone_set('America/New_York');
 	$path = $_SERVER['DOCUMENT_ROOT'];
-	$routes = explode('/', strtok($_SERVER["REQUEST_URI"],'?'));
+	$request_uri = strtok($_SERVER["REQUEST_URI"],'?');
+	$routes = explode('/', $request_uri);
 	$ajax = $_GET['ws'];
 	$widgets = array();
 	set_include_path($_SERVER['DOCUMENT_ROOT']  . "/" . "modules");
@@ -53,6 +54,17 @@
 		array_pop($routes);
 	}
 	
+	// Schema JSON object for breadcrumbs (good for SEO, they use this in results)
+	$breadcrumbs = array(
+		"@context" 	=> "http://schema.org",
+		"@type"		=>	"BreadcrumbList",
+		"itemListElement" => array()
+	);
+	$GAMES_BREADCRUMBS_NAME = "Games";
+	$VIDEOS_BREADCRUMBS_NAME = "Videos";
+	$APPS_BREADCRUMBS_NAME = "Apps";
+	$RESOURCES_BREADCRUMBS_NAME = "Resources";
+	
 	// Routing
 	//$is_404 = false;
 	if(isset($routes[1])) {
@@ -83,6 +95,7 @@
 			$fb_image_url = file_exists( $_SERVER['DOCUMENT_ROOT'] . $fb_image_url ) ? $fb_image_url : $generated['image_url'];
 			$meta = "<meta property='og:image' content='https://game103.net{$fb_image_url}'>
 			<meta property='og:description' content=\"{$generated['description']}\">";
+			$breadcrumbs = add_breadcrumb( $breadcrumbs, $path . "/games", $GAMES_BREADCRUMBS_NAME ); 
 			break;
 		case 'games':
 			$type = 'games';
@@ -119,6 +132,7 @@
 			$content = $response[0];
 			$title = $response[1];
 			$description = $response[2];
+			$breadcrumb_title = $GAMES_BREADCRUMBS_NAME;
 			break;
 		case 'video':
 			if(count($routes) == 3) {
@@ -137,6 +151,7 @@
 			$content = $widget->get_HTML();
 			$title = $generated['name'];
 			$description = $generated['description'] . "Watch $title on Game 103!";
+			$breadcrumbs = add_breadcrumb( $breadcrumbs, $path . "/videos", $VIDEOS_BREADCRUMBS_NAME ); 
 			break;
 		case 'videos':
 			$type = 'videos';
@@ -173,6 +188,7 @@
 			$content = $response[0];
 			$title = $response[1];
 			$description = $response[2];
+			$breadcrumb_title = $VIDEOS_BREADCRUMBS_NAME;
 			break;
 		case 'resources':
 			$type = 'resources';
@@ -208,6 +224,7 @@
 			$content = $response[0];
 			$title = $response[1];
 			$description = $response[2];
+			$breadcrumb_title = $RESOURCES_BREADCRUMBS_NAME;
 			break;
 		case 'everything':
 			$type = 'everything';
@@ -266,6 +283,7 @@
 			$content = $response[0];
 			$title = $response[1];
 			$description = $response[2];
+			$breadcrumb_title = $APPS_BREADCRUMBS_NAME;
 			break;
 		case 'app':
 			if(count($routes) == 3) {
@@ -301,6 +319,7 @@
 			else {
 				$is_404 = true;
 			}
+			$breadcrumbs = add_breadcrumb( $breadcrumbs, $path . '/apps', $APPS_BREADCRUMBS_NAME );
 			break;
 		// For legacy iTunes support
 		case 'help':
@@ -419,12 +438,20 @@
 		<a href='/games'>Click here to go to our games page.</a>";
 		http_response_code( 404 );
 	}
-
-	// We need a title, description, content variables, and hopefully
-	// and array of widgets at this point
-	// If we have a main service providing our title and description (maybe meta too)
 	
-	// Generate js and css
+	// If this is not a 404 and not home, use a breadcrumb
+	if( $title && !$is_404 ) {
+		$breadcrumbs = add_breadcrumb( $breadcrumbs, $path . $request_uri, $breadcrumb_title ? $breadcrumb_title : $title );
+	}
+
+	// We need a title (or not for home page ), description, content variables, and hopefully
+	// and array of widgets at this point
+	// we may also have metadata and some schema objects to encode as json
+	if( sizeof( $breadcrumbs['itemListElement'] ) > 0 ) {
+		$schema_json = "<script type='application/ld+json'>" . json_encode( $breadcrumbs ) . "</script>";
+	}
+	
+	// Generate js and css for all the widgets
 	foreach( $widgets as $widget ) {	
 		foreach ( array_unique($widget->get_CSS()) as $css_file ) {
 			$css .= "<link rel='stylesheet' type='text/css' href='$css_file'>";
@@ -474,6 +501,22 @@
 		array_push( $widgets, $widget );
 		return array( $content, $title, $description );
 	}
+	
+	
+	// Add a breadcrumb to the breadcrumbs schema
+	function add_breadcrumb( $breadcrumbs, $url, $name ) {
+		$item = array(
+			"@type" 	=> "ListItem",
+			"position"	=>	sizeof( $breadcrumbs['itemListElement'] ) + 1,
+			"item"		=>	array(
+				"@id"	=>	$url,
+				"name"	=>	$name
+			)
+		);
+		array_push( $breadcrumbs['itemListElement'], $item );
+		return $breadcrumbs;
+	}
+	
 ?>
 
 <!DOCTYPE html>
@@ -498,7 +541,7 @@
 		
 		<!-- Load JS -->
 		<script src='/javascript/base.min.js'></script>
-		<?php echo $js ?>
+		
 		
 		<!--Google Analytics Function-->
 		<script type="text/javascript">
@@ -515,6 +558,8 @@
 		<!--Google JavaScript-->
 		<script type="text/javascript" src="https://apis.google.com/js/platform.js"></script>
 		
+		<!--Include schema-->
+		<?php echo $schema_json ?>
 	</head>
 	
 	<body>
