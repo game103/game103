@@ -150,7 +150,7 @@
 			array_push( $widgets, $widget );
 			$content = $widget->get_HTML();
 			$title = $generated['name'];
-			$description = $generated['description'] . "Watch $title on Game 103!";
+			$description = $generated['description'] . " Watch $title on Game 103!";
 			$breadcrumbs = add_breadcrumb( $breadcrumbs, $path . "/videos", $VIDEOS_BREADCRUMBS_NAME ); 
 			break;
 		case 'videos':
@@ -355,7 +355,7 @@
 			array_push( $widgets, $widget );
 			$content = $widget->get_HTML();
 			$title = $generated['name'];
-			$description = $generated['description'] . "Play $title on Game 103!";
+			$description = $generated['description'] . " Play $title on Game 103!";
 			break;
 		case 'about':
 			if(count($routes) == 2) {
