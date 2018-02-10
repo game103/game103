@@ -30,7 +30,7 @@
 			</a>
 			<br/>
 			<a href='/game/duckinatruck'>Play online</a>
-			<p>Thanks for playing the Game 103 iOS and Android app, Duck in a Truck. On this page you will find some gameplay tips tricks, and mechanics, credits, and a way to contact the developer with any questions that you have.</p>
+			<p>Thanks for playing the Game 103 app, Duck in a Truck. On this page you will find some gameplay tips tricks, and mechanics, credits, and a way to contact the developer with any questions that you have.</p>
 			<h3>Gameplay Tips, Tricks, and Mechanics</h3>
 			<p style = "text-align:left">
 				<ul style = "text-align:left">

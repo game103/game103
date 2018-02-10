@@ -27,7 +27,13 @@
 			<a href='https://itunes.apple.com/us/app/lamb-in-a-pram-lite/id898885941' target='_blank' class='app-store-link' data-store-url='https://itunes.apple.com/us/app/lamb-in-a-pram/id894750816' ">
 				<img src='/images/banners/lambinapramlite.png'/>
 			</a>
-			<p>Thanks for playing the Game 103 iOS app, Lamb in a Pram. On this page you will find some gameplay tips, screenshots from the tutorial, credits, an FAQ, and a way to contact the developer with any questions that you have.</p>
+			<br/>
+			<a href='https://play.google.com/store/apps/details?id=air.net.game103.lambinapram' target='_blank' class='app-store-link'>
+				<img style='height: 50px' src='/images/banners/googleplay.png'/>
+			</a>
+			<br/>
+			<a href='/game/lambinapram'>Play online</a>
+			<p>Thanks for playing the Game 103 app, Lamb in a Pram. On this page you will find some gameplay tips, screenshots from the tutorial, credits, an FAQ, and a way to contact the developer with any questions that you have.</p>
 			<h3>Gameplay Tips and Tricks</h3>
 			<p style = "text-align:left">
 				<ul style = "text-align:left">
