@@ -83,7 +83,7 @@ HTML;
 		* (this method is called in super class)
 		*/
 		protected function generate_plays() {
-			if($this->properties['saves'] == 1) {
+			if($this->properties['saves'] == 1 && strpos($this->properties['saves'], ',') == false) {
 				$plays_str = 'download';
 			}
 			else {

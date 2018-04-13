@@ -5,6 +5,7 @@
 	require_once( 'Constants.class.php');
 
 	$mysqli = new mysqli(Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD, "hallaby_games");
+	$json_controls_only = $_GET['json_controls_only'];
 	//////////////
 	// CONTROLS //
 	//////////////
@@ -17,7 +18,12 @@
 	$controls_keys_arr = array();
 	while($controls_statement->fetch()) {
 		$controls_ids_arr[] = $controls_id;
-		$controls_keys_arr[] = "'" . $controls_key . "'";
+		if( !$json_controls_only) { 
+			$controls_keys_arr[] = "'" . $controls_key . "'";
+		}
+		else {
+			$controls_keys_arr[] = $controls_key;
+		}
 	}
 	$controls_statement->close();
 	
@@ -30,7 +36,12 @@
 	$actions_names_arr = array();
 	while($actions_statement->fetch()) {
 		$actions_ids_arr[] = $actions_id;
-		$actions_names_arr[] = "'" . $actions_key . "'";
+		if( !$json_controls_only ) {
+			$actions_names_arr[] = "'" . $actions_key . "'";
+		}
+		else {
+			$actions_names_arr[] = $actions_key;
+		}
 	}
 	
 	$controls_ids = '[' . implode(',',$controls_ids_arr) . ']';
@@ -39,6 +50,16 @@
 	$actions_names = '[' . implode(',',$actions_names_arr) . ']';
 	
 	$actions_statement->close();
+
+	if( $json_controls_only ) {
+		$response = array();
+		$response['controls_ids'] = $controls_ids_arr;
+		$response['controls_keys'] = $controls_keys_arr;
+		$response['actions_ids'] = $actions_ids_arr;
+		$response['actions_names'] = $actions_names_arr;
+		echo json_encode($response);
+		exit;
+	}
 ?>
 
 <html>

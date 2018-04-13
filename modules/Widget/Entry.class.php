@@ -42,7 +42,7 @@
 			$target;
 			if( $this->properties['count'] ) {
 				$count_verb = $this->properties['count_verb'] ?: 'visit';
-				if( $this->properties['count'] > 1 ) {
+				if( $this->properties['count'] > 1 || strpos($this->properties['count'], ',') ) {
 					$count_verb = $this->properties['count_verb_plural'] ?: 'visits';
 				}
 				// Time frame count

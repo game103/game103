@@ -98,7 +98,7 @@ INFO;
 		* Generate views.
 		*/
 		protected function generate_views() {
-			if($this->properties['views'] == 1) {
+			if($this->properties['views'] == 1 && strpos($this->properties['views'], ',') == false) {
 				$plays_str = 'view';
 			}
 			else {

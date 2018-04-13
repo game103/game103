@@ -87,7 +87,7 @@ HTML;
 		* Generate plays.
 		*/
 		protected function generate_plays() {
-			if($this->properties['plays'] == 1) {
+			if($this->properties['plays'] == 1 && strpos($this->properties['plays'], ',') == false) {
 				$plays_str = 'play';
 			}
 			else {
