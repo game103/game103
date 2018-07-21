@@ -56,6 +56,10 @@ Category 2:
 <?php
 
 	$name = $_POST['name'];
+	$url_name = str_replace(' ','',$name);
+	$url_name = str_replace('&','',$url_name);
+	$url_name = str_replace("'","",$url_name);
+	$url_name = strtolower($url_name);
 	$url = $_POST['url'];
 	$description = $_POST['description'];
 	$image_url = $_POST['image_url'];
