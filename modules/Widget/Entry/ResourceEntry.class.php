@@ -16,6 +16,7 @@
 			$properties['count_verb'] = 'visit';
 			$properties['count_verb_plural'] = $properties['count_verb'] . 's';
 			$properties['target'] = '_blank';
+			unset( $properties['rating'] );
 			// For data attribute
 			if( !$properties['link'] ) {
 				$properties['link'] = $properties['url_name'];
