@@ -72,8 +72,8 @@
 	// initialize Facebook class using your own Facebook App credentials
 	// see: https://developers.facebook.com/docs/php/gettingstarted/#install
 	$config = array();
-	$config['app_id'] = '***REMOVED***';
-	$config['app_secret'] = '***REMOVED***';
+	$config['app_id'] = Constants::FB_APP_ID;
+	$config['app_secret'] = Constants::FB_APP_SECRET;
 	$config['fileUpload'] = false; // optional
 	 
 	$fb = new Facebook\Facebook($config);
