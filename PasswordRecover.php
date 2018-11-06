@@ -1,6 +1,11 @@
 <?php
 
-$connect = mysql_connect("localhost","hallaby","***REMOVED***") or die("Could not connect");
+error_reporting(E_ERROR);
+set_include_path($_SERVER['DOCUMENT_ROOT']  . "/" . "modules");
+
+require_once( 'Constants.class.php');
+
+$connect = mysql_connect( Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD) or die("Could not connect");
 mysql_select_db("hallaby_housekey") or die("Could not find database");
 
 $email = $_POST['email'];
