@@ -2,10 +2,9 @@
 Thumbs.db
 cache/
 modules/Constants.class.php
-flip-a-blox/
-.swf
-.exe
-.zip
-fonts/
+*.swf
+*.exe
+*.zip
 stock/
-.fla
+*.fla
+game103games/javascript/flip-a-blox
