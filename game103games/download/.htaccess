@@ -1,4 +1,0 @@
-AuthType Basic
-AuthName "download"
-AuthUserFile "/home/hallaby/.htpasswds/public_html/game103games/download/passwd"
-require valid-user
