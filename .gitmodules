@@ -1,3 +1,3 @@
 [submodule "flip-a-blox"]
-	path = flip-a-blox
+	path = game103games/javascript/flip-a-blox
 	url = https://github.com/game103/flip-a-blox.git
