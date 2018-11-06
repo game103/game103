@@ -1,4 +1,0 @@
-AuthType Basic
-AuthName "addgame"
-AuthUserFile "/home/hallaby/.htpasswds/public_html/addgame/passwd"
-require valid-user
