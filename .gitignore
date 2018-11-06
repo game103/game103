@@ -7,5 +7,5 @@ modules/Constants.class.php
 *.zip
 stock/
 *.fla
-game103games/javascript/flip-a-blox
+game103games/javascript/flip-a-blox/
 *.mp4
