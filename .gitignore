@@ -1,3 +1,11 @@
 .DS_Store
 Thumbs.db
 cache/
+modules/Constants.class.php
+flip-a-blox/
+.swf
+.exe
+.zip
+fonts/
+stock/
+.fla

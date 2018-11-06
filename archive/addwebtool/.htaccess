@@ -1,4 +1,0 @@
-AuthType Basic
-AuthName "addwebtool"
-AuthUserFile "/home/hallaby/.htpasswds/public_html/addwebtool/passwd"
-require valid-user
