@@ -4,3 +4,6 @@
 [submodule "game103games/download"]
 	path = game103games/download
 	url = https://github.com/game103/download.git
+[submodule "game103games/distribute"]
+	path = game103games/distribute
+	url = https://github.com/game103/distribute.git
