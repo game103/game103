@@ -80,7 +80,7 @@
 	 
 	// define your POST parameters (replace with your own values)
 	$params = array(
-	  "access_token" => "***REMOVED***w", // see: https://developers.facebook.com/docs/facebook-login/access-tokens/
+	  "access_token" => Constants::FB_TOKEN, // see: https://developers.facebook.com/docs/facebook-login/access-tokens/
 	  "message" => "Check out today's daily game, $name!",
 	  "link" => "https://game103.net/game/$url_name",
 	  "picture" => "https://game103.net$image_url",
@@ -103,9 +103,9 @@
 	// require codebird
 	require_once __DIR__ . '/codebird/codebird.php';
 	 
-	\Codebird\Codebird::setConsumerKey("***REMOVED***", "***REMOVED***");
+	\Codebird\Codebird::setConsumerKey(Constants::TWITTER_CONSUMER_KEY, Constants::TWITTER_CONSUMER_KEY_SECRET);
 	$cb = \Codebird\Codebird::getInstance();
-	$cb->setToken("***REMOVED***", "***REMOVED***");
+	$cb->setToken(Constants::TWITTER_TOKEN, Constants::TWITTER_TOKEN_SECRET);
 	 
 	$params = array(
 	  'status' => "Check out today's daily game, $name, at https://game103.net/game/$url_name!"
