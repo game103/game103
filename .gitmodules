@@ -7,3 +7,48 @@
 [submodule "game103games/distribute"]
 	path = game103games/distribute
 	url = https://github.com/game103/distribute.git
+[submodule "game103games/flash/abeerpg"]
+	path = game103games/flash/abeerpg
+	url = https://github.com/game103/abeerpg.git
+[submodule "game103games/flash/ageofbunnies"]
+	path = game103games/flash/ageofbunnies
+	url = https://github.com/game103/ageofbunnies.git
+[submodule "game103games/flash/carotzandmore"]
+	path = game103games/flash/carotzandmore
+	url = https://github.com/game103/carotzandmore.git
+[submodule "game103games/flash/clicktheelephant"]
+	path = game103games/flash/clicktheelephant
+	url = https://github.com/game103/clicktheelephant.git
+[submodule "game103games/flash/cocoacatch"]
+	path = game103games/flash/cocoacatch
+	url = https://github.com/game103/cocoacatch.git
+[submodule "game103games/flash/cocoacatch3"]
+	path = game103games/flash/cocoacatch3
+	url = https://github.com/game103/cocoacatch3.git
+[submodule "game103games/flash/cocoarpg"]
+	path = game103games/flash/cocoarpg
+	url = https://github.com/game103/cocoarpg
+[submodule "game103games/flash/cocoaball"]
+	path = game103games/flash/cocoaball
+	url = https://github.com/game103/cocoaball.git
+[submodule "game103games/flash/daxpythedino"]
+	path = game103games/flash/daxpythedino
+	url = https://github.com/game103/daxpythedino.git
+[submodule "game103games/flash/duckinatruck"]
+	path = game103games/flash/duckinatruck
+	url = https://github.com/game103/duckinatruck.git
+[submodule "game103games/flash/flashfishy"]
+	path = game103games/flash/flashfishy
+	url = https://github.com/game103/flashfishy.git
+[submodule "game103games/flash/grandestuary"]
+	path = game103games/flash/grandestuary
+	url = https://github.com/game103/grandestuary.git
+[submodule "game103games/flash/game103rpg"]
+	path = game103games/flash/game103rpg
+	url = https://github.com/game103/game103rpg.git
+[submodule "game103games/flash/game103world"]
+	path = game103games/flash/game103world
+	url = https://github.com/game103/game103world.git
+[submodule "game103games/flash/lambinapram"]
+	path = game103games/flash/lambinapram
+	url = https://github.com/game103/lambinapram.git
