@@ -1,4 +1,4 @@
 AuthType Basic
-AuthName "sources"
-AuthUserFile "/home/hallaby/.htpasswds/public_html/images/sources/passwd"
+AuthName "archive"
+AuthUserFile "/etc/apache2/.htpasswds/admin"
 require valid-user
