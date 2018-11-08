@@ -52,3 +52,33 @@
 [submodule "game103games/flash/lambinapram"]
 	path = game103games/flash/lambinapram
 	url = https://github.com/game103/lambinapram.git
+[submodule "game103games/flash/marula"]
+	path = game103games/flash/marula
+	url = https://github.com/game103/marula.git
+[submodule "game103games/flash/mousiesadventure"]
+	path = game103games/flash/mousiesadventure
+	url = https://github.com/game103/mousiesadventure.git
+[submodule "game103games/flash/pilotkeepup"]
+	path = game103games/flash/pilotkeepup
+	url = https://github.com/game103/pilotkeepup.git
+[submodule "game103games/flash/pixelmunk"]
+	path = game103games/flash/pixelmunk
+	url = https://github.com/game103/pixelmunk.git
+[submodule "game103games/flash/ponyspredicament"]
+	path = game103games/flash/ponyspredicament
+	url = https://github.com/game103/ponyspredicament.git
+[submodule "game103games/flash/rainincatsanddogs"]
+	path = game103games/flash/rainincatsanddogs
+	url = https://github.com/game103/rainincatsanddogs.git
+[submodule "game103games/flash/thegreatduckdeechase"]
+	path = game103games/flash/thegreatduckdeechase
+	url = https://github.com/game103/thegreatduckdeechase.git
+[submodule "game103games/flash/trampolinechickadee"]
+	path = game103games/flash/trampolinechickadee
+	url = https://github.com/game103/trampolinechickadee.git
+[submodule "game103games/flash/wooltycoon"]
+	path = game103games/flash/wooltycoon
+	url = https://github.com/game103/wooltycoon.git
+[submodule "game103games/flash/postalpup"]
+	path = game103games/flash/postalpup
+	url = https://github.com/game103/postalpup.git
