@@ -16,9 +16,6 @@
 [submodule "game103games/flash/carotzandmore"]
 	path = game103games/flash/carotzandmore
 	url = https://github.com/game103/carotzandmore.git
-[submodule "game103games/flash/clicktheelephant"]
-	path = game103games/flash/clicktheelephant
-	url = https://github.com/game103/clicktheelephant.git
 [submodule "game103games/flash/cocoacatch"]
 	path = game103games/flash/cocoacatch
 	url = https://github.com/game103/cocoacatch.git
@@ -82,3 +79,6 @@
 [submodule "game103games/flash/postalpup"]
 	path = game103games/flash/postalpup
 	url = https://github.com/game103/postalpup.git
+[submodule "game103games/flash/clicktheelephant"]
+	path = game103games/flash/clicktheelephant
+	url = https://github.com/game103/clicktheelephant.git
