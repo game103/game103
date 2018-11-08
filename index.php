@@ -22,6 +22,38 @@
 	$widgets = array();
 	set_include_path($_SERVER['DOCUMENT_ROOT']  . "/" . "modules");
 	
+	// Redirects
+	$redirects = array(
+		"/gamepages/cocoaball/Ball%20Launch.swf" => "/game103games/flash/cocoaball/build/game.swf",
+		"/gamepages/cocoaball/" => "/game103games/flash/cocoaball/src/",
+		"/PasswordRecover.php" => "/game103games/flash/grandestuary/PasswordRecover.php",
+		"/HouseKey/" => "/game103games/flash/grandestuary/",
+		"/HouseKey/HouseKey.swf" => "/game103games/flash/game.swf",
+		"/game103games/flash/duckdee/" => "/game103games/flash/thegreatduckdeechase/src/",
+		"/game103games/flash/thegreatduckdeechase.swf" => "/game103games/flash/thegreatduckdeechase/build/game.swf",
+		"/game103games/flash/cte/" => "/game103games/flash/clicktheelephant/src/",
+		"/game103games/flash/clicktheelephant.swf" => "/game103games/flash/clicktheelephant/build/game.swf",
+		"/game103games/flash/pony/" => "/game103games/flash/ponyspredicament/src/",
+		"/game103games/flash/pony/game.swf" => "/game103games/flash/ponyspredicament/build/game.swf",
+		"/game103games/flash/daxpy/" => "/game103games/flash/daxpythedino/src/",
+		"/game103games/flash/daxpy/game.swf" => "/game103games/flash/daxpythedino/build/game.swf"
+	);
+	// First check exact match
+	if( $redirects[$request_uri] ) {
+		header('Location: ' . $redirects[$request_uri]);
+		die();
+	}
+	// Then check for starts with
+	else {
+		foreach ( $redirects as $key => $value ) {
+			if( substr( $request_uri, 0, strlen($key) ) === $key ) {
+				$new_uri = substr_replace( $request_uri, $value, 0, strlen($key) );
+				header('Location: ' . $new_uri);
+				die();
+			}
+		}
+	}
+	
 	require_once("Service/Find/GameFind.class.php");
 	require_once("Service/Find/VideoFind.class.php");
 	require_once("Service/Find/ResourceFind.class.php");
@@ -64,22 +96,6 @@
 	$VIDEOS_BREADCRUMBS_NAME = "Videos";
 	$APPS_BREADCRUMBS_NAME = "Apps";
 	$RESOURCES_BREADCRUMBS_NAME = "Resources";
-
-	$redirects = array(
-		"/gamepages/cocoaball/Ball Launch.swf" => "/game103games/flash/cocoaball/build/game.swf",
-		"/gamepages/cocoaball/" => "/game103games/flash/cocoaball/src/"
-		"/PasswordRecover.php" => "/game103games/flash/grandestuary/PasswordRecover.php",
-		"/HouseKey/" => "/game103games/flash/grandestuary/",
-		"/HouseKey/HouseKey.swf" => "/game103games/flash/game.swf",
-		"/game103games/flash/duckdee/" => "/game103games/flash/thegreatduckdeechase/src/",
-		"/game103games/flash/thegreatduckdeechase.swf" => "/game103games/flash/thegreatduckdeechase/build/game.swf",
-		"/game103games/flash/cte/" => "/game103games/flash/clicktheelephant/src/",
-		"/game103games/flash/clicktheelephant.swf" => "/game103games/flash/clicktheelephant/build/game.swf",
-		"/game103games/flash/pony/" => "/game103games/flash/clicktheelephant/src/",
-		"/game103games/flash/pony/game.swf" => "/game103games/flash/ponyspredicament/build/game.swf",
-		"/game103games/flash/daxpy/" => "/game103games/flash/daxpythedino/src/",
-		"/game103games/flash/daxpy/game.swf" => "/game103games/flash/daxpythedino/build/game.swf"
-	);
 	
 	// Routing
 	//$is_404 = false;
