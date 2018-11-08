@@ -9,3 +9,5 @@ stock/
 *.fla
 *.mp4
 images/icons/games/bordered/
+*.min.css
+*.min.js
