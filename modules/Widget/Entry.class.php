@@ -33,7 +33,7 @@
 		public function __construct($properties) {
 			\Widget::__construct($properties);
 			$this->JS[] = "/javascript/entry.js";
-			$this->CSS[] = "/css/entry.min.css";
+			$this->CSS[] = "/css/entry.css";
 		}
 		
 		public function generate() {

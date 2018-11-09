@@ -1,0 +1,76 @@
+<?php
+
+	class Constants {
+		
+		const DB_HOST = '<mysql host>';
+		const DB_USER = '<mysql user>';
+		const DB_PASSWORD = '<mysql password>';
+		const FB_TOKEN = "<facebook token>"
+		const FB_APP_ID = "<facebook app id>";
+		const FB_APP_SECRET = "<facebook app secret>";
+		const TWITTER_CONSUMER_KEY = "<twitter consumer key>";
+		const TWITTER_CONSUMER_KEY_SECRET = "<twitter consumer key secret>";
+		const TWITTER_TOKEN = "<twitter token>";
+		const TWITTER_TOKEN_SECRET = "<twitter token secret>";
+		const TITLE_APPEND = 'Game 103: Family-Friendly Games and Entertainment';
+		const MYSQL_MESSAGE = "Sorry, there was an error connecting to the database.";
+		const STAR_WIDTH = 22;
+		const NEW_CONTENT_ITEMS_PER_PAGE = 10;
+		const GITHUB_WEBHOOK_TOKEN = "<github webook token>";
+		
+		// Sanitize output (remove unecessary space)
+		// https://stackoverflow.com/questions/6225351/how-to-minify-php-page-html-output
+		public static function sanitize_output($buffer) {
+
+			$search = array(
+				'/\>[^\S ]+/s',     // strip whitespaces after tags, except space
+				'/[^\S ]+\</s',     // strip whitespaces before tags, except space
+				'/(\s)+/s',         // shorten multiple whitespace sequences
+				'/<!--(.|\s)*?-->/' // Remove HTML comments
+			);
+
+			$replace = array(
+				'>',
+				'<',
+				'\\1',
+				''
+			);
+
+			$buffer = preg_replace($search, $replace, $buffer);
+
+			return $buffer;
+		}
+		
+		/**
+		 * Redirect with POST data.
+		 *
+		 * @param string $url URL.
+		 * @param array $post_data POST data. Example: array('foo' => 'var', 'id' => 123)
+		 * @param array $headers Optional. Extra headers to send.
+		 */
+		public function redirect_post($url, array $data, array $headers = null) {
+			$params = array(
+				'http' => array(
+					'method' => 'POST',
+					'content' => http_build_query($data)
+				)
+			);
+			if (!is_null($headers)) {
+				$params['http']['header'] = '';
+				foreach ($headers as $k => $v) {
+					$params['http']['header'] .= "$k: $v\n";
+				}
+			}
+			$ctx = stream_context_create($params);
+			$fp = @fopen($url, 'rb', false, $ctx);
+			if ($fp) {
+				echo @stream_get_contents($fp);
+				die();
+			} else {
+				// Error
+				throw new Exception("Error loading '$url', $php_errormsg");
+			}
+		}
+	}
+
+?>

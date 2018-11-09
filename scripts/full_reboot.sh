@@ -9,8 +9,8 @@ find . -name "*.ipa" -type f|xargs rm -f
 find . -name "*.apk" -type f|xargs rm -f
 cd ..
 cp -R game103_private/* game103_new
-find /var/www/game103_new/css ! -name "*.min.css" -not -path '/var/www/game103_new/css' -exec sh -c 'uglifycss {} > $(echo {} | cut -f 1 -d "." | xargs -L1 -I '"'"'$'"'"' echo '"'"'$.min.css'"'"')' \;
-find /var/www/game103_new/javascript ! -name "*.min.js" -not -path '/var/www/game103_new/javascript' -exec sh -c 'uglifyjs {} > $(echo {} | cut -f 1 -d "." | xargs -L1 -I '"'"'$'"'"' echo '"'"'$.min.js'"'"')' \;
+find /var/www/game103_new/css ! -name "*.min.css" -not -path '/var/www/game103_new/css' -exec sh -c 'uglifycss {} > $(echo {} | cut -f 1 -d "." | xargs -L1 -I '"'"'$'"'"' echo '"'"'$.css'"'"')' \;
+find /var/www/game103_new/javascript ! -name "*.min.js" -not -path '/var/www/game103_new/javascript' -exec sh -c 'uglifyjs {} > $(echo {} | cut -f 1 -d "." | xargs -L1 -I '"'"'$'"'"' echo '"'"'$.js'"'"')' \;
 mv game103_new game103
 python /var/www/game103/scripts/cacher.py
 /var/www/game103/scripts/border_maker.sh

@@ -32,8 +32,8 @@
 		public function __construct($properties) {
 			\Widget::__construct($properties);
 			if( !$this->properties['no_box'] ) {
-				$this->JS[] = "/javascript/find.min.js";
-				$this->CSS[] = "/css/find.min.css";
+				$this->JS[] = "/javascript/find.js";
+				$this->CSS[] = "/css/find.css";
 			}
 		}
 		

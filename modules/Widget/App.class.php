@@ -14,8 +14,8 @@
 		*/
 		public function __construct( $properties ) {
 			\Widget::__construct( $properties );
-			$this->JS[] = '/javascript/app.min.js';
-			$this->CSS[] = '/css/app.min.css';
+			$this->JS[] = '/javascript/app.js';
+			$this->CSS[] = '/css/app.css';
 		}
 		
 		/**

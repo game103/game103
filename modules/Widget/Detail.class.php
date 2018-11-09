@@ -17,11 +17,11 @@
 		*/
 		public function __construct($properties) {
 			\Widget::__construct($properties);
-			$this->JS[] = "/javascript/detail.min.js";
-			$this->CSS[] = "/css/detail.min.css";
+			$this->JS[] = "/javascript/detail.js";
+			$this->CSS[] = "/css/detail.css";
 			// Add entry JavaScript and CSS for similar items
-			$this->JS[] = "/javascript/entry.min.js";
-			$this->CSS[] = "/css/entry.min.css";
+			$this->JS[] = "/javascript/entry.js";
+			$this->CSS[] = "/css/entry.css";
 		}
 		
 		/**
