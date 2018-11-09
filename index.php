@@ -589,7 +589,7 @@
 		<title><?php echo $title ? $title . " - " . Constants::TITLE_APPEND : Constants::TITLE_APPEND?></title>
 		
 		<!-- Load Style Sheet -->
-		<link rel="stylesheet" type="text/css" href="/css/base.min.css">
+		<link rel="stylesheet" type="text/css" href="/css/base.css">
 		<?php echo $css ?>
 		
 		<!-- Load JS -->
