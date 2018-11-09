@@ -62,7 +62,7 @@
 
 			$id;
 			if ( $this->properties['id'] ) {
-				$id = " id='$id'";
+				$id = " id='{$this->properties['id']}'";
 			}
 			
 			$this->HTML .= <<<HTML
