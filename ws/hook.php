@@ -20,7 +20,7 @@
 
 	// If the signature is correct
 	if( $_SERVER['HTTP_X_HUB_SIGNATURE'] == 'sha1=' . $signature ) {
-		exec("touch /var/www/game103/ws/test.txt");
+		system("sudo /var/www/game103/scripts/minor_reboot.sh");
 	}
 	else {
 		http_response_code( 403 );
