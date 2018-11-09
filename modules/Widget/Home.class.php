@@ -61,6 +61,7 @@
 										),
 					'title'			=> "Top Games",
 					'footer'		=> "",
+					'id'			=> "top-games"
 				) );
 				$top_box->generate();
 				
@@ -71,6 +72,7 @@
 										),
 					'title'			=> "Featured Games",
 					'footer'		=> "",
+					'id'			=> "featured-games"
 				) );
 				$featured_box->generate();
 				
