@@ -18,6 +18,7 @@
 		*		title				string	the title for this box
 		*		footer				string	HTML to display in the footer
 		*		tight				boolean	render the box to tightly fit the content
+		*		id					string	the id for the box content
 		*/
 		public function __construct($properties) {
 			\Widget::__construct($properties);
@@ -58,9 +59,14 @@
 				$tight = " box-content-tight";
 				$tight_container = " box-content-container-tight";
 			}
+
+			$id;
+			if ( $this->properties['id'] ) {
+				$id = " id='$id'";
+			}
 			
 			$this->HTML .= <<<HTML
-<div class='box-content$tight'>
+<div class='box-content$tight'$id>
 	$title
 	$buttons
 	<div class='box-content-container$tight_container'>
