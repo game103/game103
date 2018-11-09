@@ -22,8 +22,8 @@
 		*/
 		public function __construct($properties) {
 			\Widget::__construct($properties);
-			$this->JS[] = "/javascript/box.min.js";
-			$this->CSS[] = "/css/box.min.css";
+			$this->JS[] = "/javascript/box.js";
+			$this->CSS[] = "/css/box.css";
 		}
 		
 		public function generate() {

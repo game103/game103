@@ -18,7 +18,7 @@
 		*/
 		public function __construct($properties) {
 			\Widget::__construct($properties);
-			$this->JS[] = "/javascript/home.min.js";
+			$this->JS[] = "/javascript/home.js";
 		}
 		
 		/**

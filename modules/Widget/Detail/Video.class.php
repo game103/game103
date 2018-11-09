@@ -17,7 +17,7 @@
 		*/
 		public function __construct($properties) {
 			\Widget\Detail::__construct($properties);
-			$this->CSS[] = "/css/detail-video.min.css";
+			$this->CSS[] = "/css/detail-video.css";
 		}
 		
 		/**

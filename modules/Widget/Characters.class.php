@@ -16,7 +16,7 @@
 		*/
 		public function __construct($properties) {
 			\Widget::__construct($properties);
-			$this->CSS[] = "/css/characters.min.css";
+			$this->CSS[] = "/css/characters.css";
 		}
 		
 		/**
