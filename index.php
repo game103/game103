@@ -593,7 +593,7 @@
 		<?php echo $css ?>
 		
 		<!-- Load JS -->
-		<script src='/javascript/base.min.js'></script>
+		<script src='/javascript/base.js'></script>
 		<?php echo $js ?>
 		
 		<!--Google Analytics Function-->
