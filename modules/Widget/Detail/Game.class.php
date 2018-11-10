@@ -60,7 +60,8 @@ CONTROLS;
 			if( $this->properties['videos'] ) {
 				array_push( $parts, $this->generate_videos() );
 			}
-			if( $this->properties['game_type'] == 'JavaScript' ) {
+			// Allow full screen if game type is JavaScript, and it is a Game 103 game (has a creation date)
+			if( $this->properties['game_type'] == 'JavaScript' && $this->properties['creation_date'] ) {
 				array_push( $parts, $this->generate_fullscreen() );
 			}
 			$content = implode("<br>", $parts);
