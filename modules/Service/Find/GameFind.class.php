@@ -55,7 +55,7 @@
 			$union_sql = "
 			UNION
 			SELECT downloads.name as name, downloads.description, downloads.url_name, downloads.image_url, -1 as rating,  FORMAT(downloads.saves, 0) as plays, downloads.saves as numeric_interactions,
-			downloads.added_date as added_date, YEAR(downloads.creation_date), downloads.creation_date as creation_date
+			downloads.added_date as added_date, -1 as game_type, YEAR(downloads.creation_date), downloads.creation_date as creation_date
 			FROM hallaby_games.downloads";
 			$union_count_sql = "
 			UNION
@@ -94,7 +94,7 @@
 				$union_sum_sql = $downloads_sections['union_sum_sql'];
 			}
 			$select_str = "SELECT * FROM (
-								SELECT entries.name as name, entries.description, entries.url_name, entries.image_url, entries.rating, FORMAT(entries.plays, 0) as plays, entries.plays as numeric_interactions, entries.added_date as added_date $game103_extra_select
+								SELECT entries.name as name, entries.description, entries.url_name, entries.image_url, entries.rating, FORMAT(entries.plays, 0) as plays, entries.plays as numeric_interactions, entries.added_date as added_date, entries.type as game_type $game103_extra_select
 								FROM hallaby_games.entries JOIN hallaby_games.categories_entries ON entries.id = categories_entries.entry_id
 								JOIN hallaby_games.categories ON categories_entries.category_id = categories.id
 								$where_sql
@@ -151,10 +151,10 @@
 		*/
 		protected function parse_result( $select_statement ) {
 			if( $this->category == 'game103' ) {
-				$select_statement->bind_result($name, $description, $url_name, $image_url, $rating, $interactions, $numeric_interactions, $added_date, $creation_date, $creation_unused, $total_count);
+				$select_statement->bind_result($name, $description, $url_name, $image_url, $rating, $interactions, $numeric_interactions, $added_date, $game_type, $creation_date, $creation_unused, $total_count);
 			}
 			else {
-				$select_statement->bind_result($name, $description, $url_name, $image_url, $rating, $interactions, $numeric_interactions, $added_date, $total_count);
+				$select_statement->bind_result($name, $description, $url_name, $image_url, $rating, $interactions, $numeric_interactions, $added_date, $game_type, $total_count);
 			}
 			
 			$items = array();
@@ -172,7 +172,8 @@
 					"url_name" => $url_name,
 					"rating" => $rating,
 					"type" => $type,
-					"added_date" => $added_date
+					"added_date" => $added_date,
+					"game_type" => $game_type
 				);
 				
 				if( $this->category == 'game103' ) {

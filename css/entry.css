@@ -73,6 +73,11 @@
 	font-style: italic;
 }	
 
+.entry-type {
+	font-size: 80%;
+	font-style: normal;
+}
+
 .entry-stars, .entry-stars span, .entry-stars-indication {
 	display: block;
 	background: url("/images/stars.png") 0 -23px repeat-x;
