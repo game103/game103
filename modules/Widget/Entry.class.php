@@ -29,6 +29,7 @@
 		*		add_to_site			string	HTML displaying add to site
 		*		time_count			number	the number of interactions within a time frame
 		*		time_frame			string	the time frame for the time count (i.e. weekly or monthly)
+		*		type_icon		string	an icon to display indicating the type of the entry
 		*/
 		public function __construct($properties) {
 			\Widget::__construct($properties);
@@ -40,6 +41,10 @@
 			$count;
 			$rating;
 			$target;
+			$type;
+			if ( isset( $this->properties['type_icon'] ) ) {
+				$type = "<span class=\"entry-type\">{$this->properties['type_icon']}</span>";
+			}
 			if( $this->properties['count'] ) {
 				$count_verb = $this->properties['count_verb'] ?: 'visit';
 				if( $this->properties['count'] > 1 || strpos($this->properties['count'], ',') ) {
@@ -49,7 +54,7 @@
 				if( $this->properties['time_frame'] && $this->properties['time_count'] ) {
 					$time_count = " ({$this->properties['time_count']} this {$this->properties['time_frame']})";
 				}
-				$count = "<span class='entry-plays'>{$this->properties['count']} $count_verb$time_count</span>";
+				$count = "<span class='entry-plays'>$type {$this->properties['count']} $count_verb$time_count</span>";
 			}
 			if( isset( $this->properties['rating'] ) ) {
 				$rating_width = \Constants::STAR_WIDTH * $this->properties['rating'] . 'px';
