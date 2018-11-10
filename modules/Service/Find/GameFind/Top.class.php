@@ -32,7 +32,7 @@
 			}
 			$items_per_page = $this->items_per_page;
 			$select_str = "SELECT * FROM (
-								SELECT entries.name as name, entries.description, entries.url_name, entries.image_url, entries.rating, FORMAT(entries.plays, 0) as plays, entries.plays as numeric_interactions, FORMAT(SUM(CASE WHEN plays.added_date > DATE_SUB(now(), INTERVAL 1 $period) THEN 1 ELSE 0 END), 0), entries.added_date
+								SELECT entries.name as name, entries.description, entries.url_name, entries.image_url, entries.rating, FORMAT(entries.plays, 0) as plays, entries.plays as numeric_interactions, FORMAT(SUM(CASE WHEN plays.added_date > DATE_SUB(now(), INTERVAL 1 $period) THEN 1 ELSE 0 END), 0), entries.added_date, entries.type
 								FROM hallaby_games.entries JOIN hallaby_games.plays on entries.id = plays.entry_id
 								GROUP BY entries.id
 								ORDER BY SUM(CASE WHEN plays.added_date > DATE_SUB(now(), INTERVAL 1 $period) THEN 1 ELSE 0 END) DESC
@@ -56,7 +56,7 @@
 		* Parse the result of a sql statement
 		*/
 		protected function parse_result( $select_statement ) {
-			$select_statement->bind_result($name, $description, $url_name, $image_url, $rating, $interactions, $numeric_interactions, $time_count, $added_date, $total_count);
+			$select_statement->bind_result($name, $description, $url_name, $image_url, $rating, $interactions, $numeric_interactions, $time_count, $added_date, $game_type, $total_count);
 			
 			$items = array();
 			while($select_statement->fetch()) {
@@ -72,6 +72,7 @@
 					"rating" => $rating,
 					"type" => 'game',
 					"added_date" => $added_date,
+					"game_type" => $game_type,
 				);
 				
 				$items[] = $item_object;
