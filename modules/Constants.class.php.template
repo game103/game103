@@ -5,7 +5,7 @@
 		const DB_HOST = '<mysql host>';
 		const DB_USER = '<mysql user>';
 		const DB_PASSWORD = '<mysql password>';
-		const FB_TOKEN = "<facebook token>"
+		const FB_TOKEN = "<facebook token>";
 		const FB_APP_ID = "<facebook app id>";
 		const FB_APP_SECRET = "<facebook app secret>";
 		const TWITTER_CONSUMER_KEY = "<twitter consumer key>";

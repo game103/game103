@@ -25,7 +25,7 @@
 		protected function generate_sql() {
 			$items_per_page = $this->items_per_page;
 			$select_str = "SELECT * FROM (
-								SELECT entries.name as name, entries.description, entries.url_name, entries.image_url, entries.rating, FORMAT(entries.plays, 0) as plays, entries.plays as numeric_interactions, entries.added_date
+								SELECT entries.name as name, entries.description, entries.url_name, entries.image_url, entries.rating, FORMAT(entries.plays, 0) as plays, entries.plays as numeric_interactions, entries.type, entries.added_date
 								FROM hallaby_games.entries JOIN hallaby_games.daily_game on entries.id = daily_game.entry_id
 								ORDER BY daily_game.added_date DESC
 								LIMIT $items_per_page) AS main
