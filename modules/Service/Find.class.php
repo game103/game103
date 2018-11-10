@@ -140,15 +140,15 @@
 			$sort_sql = $this->generate_sort();
 			$select_str = "
 					SELECT * FROM(
-					SELECT name, description, url_name, image_url, rating, FORMAT(plays, 0), plays as numeric_interactions, added_date, -1 as store_url_android, -1 as store_url_apple, -1 as type, 'game' FROM hallaby_games.entries $where_sql
+					SELECT name, description, url_name, image_url, rating, FORMAT(plays, 0), plays as numeric_interactions, added_date, -1 as store_url_android, -1 as store_url_apple, -1 as type, 'game', type as game_type FROM hallaby_games.entries $where_sql
 					UNION
-					SELECT name, description, url_name, image_url, -1 as rating, FORMAT(saves, 0), saves as numeric_interactions, added_date, -1 as store_url_android, -1 as store_url_apple, -1 as type, 'download' FROM hallaby_games.downloads $downloads_sql
+					SELECT name, description, url_name, image_url, -1 as rating, FORMAT(saves, 0), saves as numeric_interactions, added_date, -1 as store_url_android, -1 as store_url_apple, -1 as type, 'download', -1 as game_type FROM hallaby_games.downloads $downloads_sql
 					UNION
-					SELECT name, description, url_name, image_url, rating, FORMAT(views, 0), views as numeric_interactions, added_date, -1 as store_url_android, -1 as store_url_apple, -1 as type, 'video' FROM hallaby_videos.entries $where_sql
+					SELECT name, description, url_name, image_url, rating, FORMAT(views, 0), views as numeric_interactions, added_date, -1 as store_url_android, -1 as store_url_apple, -1 as type, 'video', -1 as game_type FROM hallaby_videos.entries $where_sql
 					UNION
-					SELECT name, description, url, image_url, -1 as rating, FORMAT(visits, 0), visits as numeric_interactions, added_date, -1 as store_url_android, -1 as store_url_apple, -1 as type, 'resource' FROM hallaby_resources.entries $where_sql
+					SELECT name, description, url, image_url, -1 as rating, FORMAT(visits, 0), visits as numeric_interactions, added_date, -1 as store_url_android, -1 as store_url_apple, -1 as type, 'resource', -1 as game_type FROM hallaby_resources.entries $where_sql
 					UNION
-					SELECT name, description, url_name, image_url, -1 as rating, FORMAT(visits, 0), visits as numeric_interactions, added_date, store_url_android, store_url_apple, type, 'app' FROM hallaby_games.apps $apps_sql
+					SELECT name, description, url_name, image_url, -1 as rating, FORMAT(visits, 0), visits as numeric_interactions, added_date, store_url_android, store_url_apple, type, 'app', -1 as game_type FROM hallaby_games.apps $apps_sql
 					ORDER BY $sort_sql
 					LIMIT $items_per_page
 					OFFSET $offset) AS main
@@ -213,7 +213,7 @@
 		* Parse the result of a sql statement
 		*/
 		protected function parse_result( $select_statement ) {
-			$select_statement->bind_result( $name, $description, $url_name, $image_url, $rating, $interactions, $numeric_interactions, $added_date, $store_url_android, $store_url_apple, $app_type, $item_type, $total_count );
+			$select_statement->bind_result( $name, $description, $url_name, $image_url, $rating, $interactions, $numeric_interactions, $added_date, $store_url_android, $store_url_apple, $app_type, $item_type, $game_type, $total_count );
 			
 			$items = array();
 			while($select_statement->fetch()) {
@@ -229,6 +229,7 @@
 					"store_url_android" => $store_url_android,
 					"store_url_apple" => $store_url_apple,
 					"added_date" => $added_date,
+					"game_type" => $game_type,
 				);
 				$items[] = $item_object;
 			}
