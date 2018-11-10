@@ -109,6 +109,8 @@ iframe {
 	display: inline-block;
 	padding: 5px;
 	position: relative;
+	border-radius: 0;
+	-webkit-appearance: none;
 }
 
 #site-search-input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -130,6 +132,7 @@ iframe {
 	margin: 0;
 	border-left: none;
 	vertical-align: top;
+	-webkit-appearance: none;
 }
 
 .none-view {
