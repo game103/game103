@@ -28,7 +28,7 @@
 				return;
 			}
 			
-			if($this->properties['game_type'] == "JavaScript") {
+			if($this->properties['game_type'] == "JavaScript" && $this->properties['creation_date']) {
 				$game_code = "<iframe src='{$this->properties['url']}' style='width:{$this->properties['width']}"."px;height:{$this->properties['height']}"."px;' id='movie'></iframe>";
 			}
 			else {
