@@ -25,7 +25,7 @@
 			$this->url_name = $this->mysqli->real_escape_string($this->url_name);
 			// String to query the database with
 			$str = "SELECT id, name, url, width, height, DATE_FORMAT(added_date, '%M %D, %Y'), description,
-			FORMAT(plays, 0), image_url, type FROM hallaby_games.{$this->table} WHERE url_name = ? LIMIT 1";
+			FORMAT(plays, 0), image_url, type, creation_date FROM hallaby_games.{$this->table} WHERE url_name = ? LIMIT 1";
 			// Prepare the statement
 			$statement = $this->mysqli->prepare($str);
 			// Bind parameters
@@ -39,7 +39,7 @@
 				throw new \Exception(\Constants::MYSQL_MESSAGE);
 			}
 			// Get the one result
-			$statement->bind_result($id, $name, $url, $width, $height, $added_date, $description, $plays, $image_url, $game_type);
+			$statement->bind_result($id, $name, $url, $width, $height, $added_date, $description, $plays, $image_url, $game_type, $creation_date);
 			// Fetch the result
 			$statement->fetch();
 			// Close the statement
@@ -65,7 +65,8 @@
 				'plays' => $plays,
 				'image_url' => $image_url,
 				'game_type' => $game_type,
-				'url_name' => $this->url_name
+				'url_name' => $this->url_name,
+				'creation_date' => $creation_date
 			);
 		}
 		
