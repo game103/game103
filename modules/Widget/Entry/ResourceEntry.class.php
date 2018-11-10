@@ -13,6 +13,7 @@
 		*/
 		public function __construct($properties) {
 			$properties['type'] = 'resource';
+			$properties['type_icon'] = '&#128218;';
 			$properties['count_verb'] = 'visit';
 			$properties['count_verb_plural'] = $properties['count_verb'] . 's';
 			$properties['target'] = '_blank';
