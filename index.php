@@ -48,7 +48,7 @@
 		foreach ( $redirects as $key => $value ) {
 			if( substr( $request_uri, 0, strlen($key) ) === $key ) {
 				$new_uri = substr_replace( $request_uri, $value, 0, strlen($key) );
-				header('Location: ' . $new_uri);
+				Constants::redirect_post( $new_uri, $_POST );
 				die();
 			}
 		}
