@@ -48,7 +48,7 @@
 		 * @param array $post_data POST data. Example: array('foo' => 'var', 'id' => 123)
 		 * @param array $headers Optional. Extra headers to send.
 		 */
-		public function redirect_post($url, array $data, array $headers = null) {
+		public static function redirect_post($url, array $data, array $headers = null) {
 			$params = array(
 				'http' => array(
 					'method' => 'POST',
