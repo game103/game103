@@ -1,8 +1,0 @@
-AuthType Basic
-AuthName "admin"
-AuthUserFile "/etc/apache2/.htpasswds/admin"
-require valid-user
-<FilesMatch "\.(php|swf|js|css|html|png|gif|jpe?g|mp3|wav|exe|zip|m4a|ttf)$">
-	Satisfy Any
-	Allow from all
-</FilesMatch>
