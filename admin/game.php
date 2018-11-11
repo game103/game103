@@ -348,15 +348,14 @@ Category 2:
 		//if the upload is successful that is the url
 		if(move_uploaded_file($_FILES["gamefile_upload"]["tmp_name"],$gamefile_target_file)) {
 			$url = $gamefile_target_file;
+			$url = substr($url, 2);
 			echo "uploading the game was a success.<br>";
 		}
 		if(move_uploaded_file($_FILES["imagefile_upload"]["tmp_name"],$imagefile_target_file)) {
 			$image_url = $imagefile_target_file;
+			$image_url = substr($image_url, 2);
 			echo "uploading the image was a success.<br>";
 		}
-		
-		$url = substr($url, 2);
-		$image_url = substr($image_url, 2);
 		
 		$sql = "INSERT INTO entries(name, url, width, height, description, image_url, url_name, type) VALUES ('$name','$url','$width','$height','$description','$image_url','$url_name','$game_type')";
 		$mysqli->query($sql);
