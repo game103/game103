@@ -48,7 +48,12 @@
 		foreach ( $redirects as $key => $value ) {
 			if( substr( $request_uri, 0, strlen($key) ) === $key ) {
 				$new_uri = substr_replace( $request_uri, $value, 0, strlen($key) );
-				Constants::redirect_post( $new_uri, $_POST );
+				if( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
+					Constants::redirect_post( $new_uri, $_POST );
+				}
+				else {
+					header('Location: ' . $new_uri);
+				}
 				die();
 			}
 		}
