@@ -34,6 +34,7 @@
 		"/game103games/flash/duckdee/" => "/game103games/flash/thegreatduckdeechase/src/",
 		"/game103games/flash/thegreatduckdeechase.swf" => "/game103games/flash/thegreatduckdeechase/build/game.swf",
 		"/game103games/flash/cte/" => "/game103games/flash/clicktheelephant/src/",
+		"/fun/" => "/game103games/flash/clicktheelephant/src/",
 		"/game103games/flash/clicktheelephant.swf" => "/game103games/flash/clicktheelephant/build/game.swf",
 		"/game103games/flash/pony/" => "/game103games/flash/ponyspredicament/src/",
 		"/game103games/flash/pony/game.swf" => "/game103games/flash/ponyspredicament/build/game.swf",
