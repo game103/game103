@@ -22,6 +22,8 @@
 	$widgets = array();
 	set_include_path($_SERVER['DOCUMENT_ROOT']  . "/" . "modules");
 	
+	require_once('Constants.class.php');
+	
 	// Redirects
 	$redirects = array(
 		"/gamepages/cocoaball/Ball%20Launch.swf" => "/game103games/flash/cocoaball/build/game.swf",
@@ -49,7 +51,7 @@
 			if( substr( $request_uri, 0, strlen($key) ) === $key ) {
 				$new_uri = substr_replace( $request_uri, $value, 0, strlen($key) );
 				if( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
-					Constants::redirect_post( $new_uri, $_POST );
+					Constants::redirect_post( $base_url . $new_uri, $_POST );
 				}
 				else {
 					header('Location: ' . $new_uri);
@@ -83,7 +85,6 @@
 	require_once("Widget/About.class.php");
 	require_once("Widget/FunFacts.class.php");
 	require_once("Widget/PrivacyPolicy.class.php");
-	require_once('Constants.class.php');
 	
 	ob_start("\Constants::sanitize_output");
 	
