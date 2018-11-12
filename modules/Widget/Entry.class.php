@@ -33,8 +33,8 @@
 		*/
 		public function __construct($properties) {
 			\Widget::__construct($properties);
-			$this->JS[] = "/javascript/entry.js";
-			$this->CSS[] = "/css/entry.css";
+			// The css and js for entries are included by default in base.css
+			// and base.js due to their use in the NavBar
 		}
 		
 		public function generate() {
