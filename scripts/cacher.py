@@ -3,6 +3,9 @@ import re
 import os
 import ssl
 
+# output the navbar
+os.system("php /var/www/game103/scripts/generate_navbar.php > /var/www/game103/navbar.html")
+
 pages = {}
 base_url = 'https://game103.net'
 # This is shared between all calls to crawl, so we never crawl the

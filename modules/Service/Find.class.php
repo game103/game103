@@ -312,8 +312,8 @@
 		* The javascript will use these IDs to perform web service requests to fetch new games
 		* This should be called within a try catch block as it throws an \Exception
 		*/
-		protected function generate_categories() {
-			$category_select_str = "SELECT name, url_name, description FROM {$this->db}.categories;";
+		public function generate_categories() {
+			$category_select_str = "SELECT name, url_name, description FROM {$this->db}.categories order by sort asc;";
 			$category_select_statement = $this->mysqli->prepare($category_select_str);
 			$category_select_statement->execute();
 			if(mysqli_stmt_error($category_select_statement) != "") {
@@ -340,6 +340,13 @@
 		*/
 		public function get_category_description() {
 			return $this->valid_categories[ $this->category ]['description'];
+		}
+
+		/**
+		 * Get valid categories
+		 */
+		public function get_valid_categories() {
+			return $this->valid_categories;
 		}
 		
 		/**
