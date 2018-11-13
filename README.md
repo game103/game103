@@ -7,4 +7,4 @@ This repository is the source code for game103.net.
 4. `cp modules/Constants.class.php.template modules/Constants.class.php`
 5. Fill in the passwords in `modules/Constants.class.php`
 6. `php scripts/generate_navbar.php > navbar.php` or `.\scripts\generate_navbar.php |Out-File -Encoding ascii .\navbar.html`
-6. Start a web server in this repo (e.g. Apache, the PHP build-in test server seems to work too)
+7. Start a web server in this repo (e.g. Apache, the PHP build-in test server seems to work too)
