@@ -21,11 +21,11 @@
 		*/
 		protected function generateContent() {
 			return <<<HTML
-			<a href='https://itunes.apple.com/us/app/duck-in-a-truck/id907135188' target='_blank' class='app-store-link'>
+			<a href='https://itunes.apple.com/us/app/duck-in-a-truck/id907135188' target='_blank' rel="noopener" class='app-store-link'>
 				<img src='/images/banners/duckinatruck.png'/>
 			</a>
 			<br/>
-			<a href='https://play.google.com/store/apps/details?id=air.net.game103.duckinatruck' target='_blank' class='app-store-link'>
+			<a href='https://play.google.com/store/apps/details?id=air.net.game103.duckinatruck' target='_blank' rel="noopener" class='app-store-link'>
 				<img style='height: 50px' src='/images/banners/googleplay.png'/>
 			</a>
 			<br/>

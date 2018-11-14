@@ -581,7 +581,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html land="en">
 	
 	<head>
 		<!-- Meta Tags -->
@@ -627,7 +627,7 @@
 		<div class="page">
 			
 			<!-- Header -->
-			<div class="header">
+			<header class="header">
 				<div class='header-title'>
 					<a href="/"><img src='/images/logo2016.png' alt='Game 103 logo' class='logo'/></a>
 				</div>
@@ -638,24 +638,26 @@
 						</ul>
 					</div>
 				</form>
-			</div>
+			</header>
 			
 			<!-- Navbar -->
-			<?php include $_SERVER['DOCUMENT_ROOT'] . '/navbar.html';?>
+			<nav>
+				<?php include $_SERVER['DOCUMENT_ROOT'] . '/navbar.html';?>
+			</nav>
 				
 			<!-- Content -->
-			<div class="content">
+			<main class="content">
 			
 				<?php echo $content ?>
 				
-				<!-- End main part of the page -->
-				
-			</div>
+			</main>
+			<!-- End main part of the page -->
+
 			<!--Contact and Copyright-->
-			<div class="footer">
-				<div class="additional-links"><a href="/about">About Us</a> | <a href="/privacy">Privacy Policy</a> | <a href="/facts">Fun Facts</a> | <a href="/characters">Characters</a> | <a href="/games/distributable">Developers</a> | <a href="https://github.com/game103/game103">Source</a></div>
+			<footer class="footer">
+				<div class="additional-links"><a href="/about">About Us</a> | <a href="/privacy">Privacy Policy</a> | <a href="/facts">Fun Facts</a> | <a href="/characters">Characters</a> | <a href="/games/distributable">Developers</a> | <a target="_blank" rel="noopener" href="https://github.com/game103/game103">Source</a></div>
 				<div class="copyright">&copy; 2018 <a href="https://game103.net">Game 103</a></div>
-			</div>
+			</footer>
 		</div>
 
 	</body>
