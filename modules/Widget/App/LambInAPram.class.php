@@ -21,14 +21,11 @@
 		*/
 		protected function generateContent() {
 			return <<<HTML
-			<a href='https://itunes.apple.com/us/app/lamb-in-a-pram/id894750816' target='_blank' class='app-store-link'">
+			<a href='https://itunes.apple.com/us/app/lamb-in-a-pram/id894750816' target='_blank' rel="noopener" class='app-store-link'">
 				<img src='/images/banners/lambinapram.png'/>
 			</a>
-			<a href='https://itunes.apple.com/us/app/lamb-in-a-pram-lite/id898885941' target='_blank' class='app-store-link' data-store-url='https://itunes.apple.com/us/app/lamb-in-a-pram/id894750816' ">
-				<img src='/images/banners/lambinapramlite.png'/>
-			</a>
 			<br/>
-			<a href='https://play.google.com/store/apps/details?id=air.net.game103.lambinapram' target='_blank' class='app-store-link'>
+			<a href='https://play.google.com/store/apps/details?id=air.net.game103.lambinapram' target='_blank' rel="noopener" class='app-store-link'>
 				<img style='height: 50px' src='/images/banners/googleplay.png'/>
 			</a>
 			<br/>

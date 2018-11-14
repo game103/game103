@@ -6,7 +6,7 @@
 	* Script to load random games of a certain category
 	*/
 	
-	set_include_path("/var/www/game103/modules");
+	set_include_path("/var/www/game103");
 	
 	// Require modules
 	require_once( 'Constants.class.php');
@@ -109,10 +109,10 @@
 					<div class="nav-item-list-item"><a href="/videos"><span class = "nav-item-list-item-text">Videos</span></a></div>
 					<div class="nav-item-list-item"><a href="/apps"><span class = "nav-item-list-item-text">Mobile Apps</span></a></div>
 					<div class="nav-item-list-item"><a href="/resources"><span class = "nav-item-list-item-text">Resources</span></a></div>
-					<div class="nav-item-list-item"><a target='_blank' href="http://blog.game103.net"><span class = "nav-item-list-item-text">Blog</span></a></div>
-					<div class="nav-item-list-item"><a target='_blank' href="https://www.facebook.com/game103"><span class = "nav-item-list-item-text">Facebook</span></a></div>
-					<div class="nav-item-list-item"><a target='_blank' href="https://twitter.com/game103games"><span class = "nav-item-list-item-text">Twitter</span></a></div>
-					<div class="nav-item-list-item"><a target='_blank' href="https://www.youtube.com/user/game103games"><span class = "nav-item-list-item-text">YouTube</span></a></div>
+					<div class="nav-item-list-item"><a target='_blank' rel="noopener" href="http://blog.game103.net"><span class = "nav-item-list-item-text">Blog</span></a></div>
+					<div class="nav-item-list-item"><a target='_blank' rel="noopener" href="https://www.facebook.com/game103"><span class = "nav-item-list-item-text">Facebook</span></a></div>
+					<div class="nav-item-list-item"><a target='_blank' rel="noopener" href="https://twitter.com/game103games"><span class = "nav-item-list-item-text">Twitter</span></a></div>
+					<div class="nav-item-list-item"><a target='_blank' rel="noopener" href="https://www.youtube.com/user/game103games"><span class = "nav-item-list-item-text">YouTube</span></a></div>
 				</div>
 			</div>
 		</div>
