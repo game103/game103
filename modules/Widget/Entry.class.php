@@ -12,7 +12,6 @@
 		/**
 		*	Constructor.
 		*	Required properties
-		*		id					number	the id of this entry
 		*		title				string	the title of of the entry
 		*		image_src			string	the image src of the entry
 		*		description			string	the description of the entry
@@ -25,6 +24,7 @@
 		*		count_verb_plural	string	the plural version of the count verb
 		*		rating				string	the rating for the entry
 		*		target				string	the target to open the link with
+		*		rel					string	the value for rel on the link
 		* 		app_store_logo		string	HTML displaying links to an app store(s)
 		*		add_to_site			string	HTML displaying add to site
 		*		time_count			number	the number of interactions within a time frame
@@ -42,6 +42,7 @@
 			$rating;
 			$target;
 			$type;
+			$rel;
 			if ( isset( $this->properties['type_icon'] ) ) {
 				$type = "<span class=\"entry-type\">{$this->properties['type_icon']}</span>";
 			}
@@ -63,9 +64,12 @@
 			if( $this->properties['target'] ) {
 				$target = 'target="' . $this->properties['target'] . '"';
 			}
+			if( $this->properties['rel'] ) {
+				$rel = 'rel="' . $this->properties['rel'] . '"';
+			}
 			
 			$this->HTML .= <<<HTML
-<a href="{$this->properties['link']}" $target class='entry-link' data-id="{$this->properties['id']}" data-type="{$this->properties['type']}" data-url-name="{$this->properties['url_name']}">
+<a href="{$this->properties['link']}" $target $rel class='entry-link' data-type="{$this->properties['type']}" data-url-name="{$this->properties['url_name']}">
 	<span class="entry-item">
 		<img alt="{$this->properties['title']}" src="{$this->properties['image_src']}">
 		<span class="entry-title">{$this->properties['title']}</span>

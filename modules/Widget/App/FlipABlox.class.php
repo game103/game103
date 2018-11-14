@@ -21,11 +21,11 @@
 		*/
 		protected function generateContent() {
 			return <<<HTML
-			<a href='https://itunes.apple.com/us/app/flip-a-blox/id1241934713' target='_blank' class='app-store-link'>
+			<a href='https://itunes.apple.com/us/app/flip-a-blox/id1241934713' target='_blank' rel="noopener" class='app-store-link'>
 				<img src='/images/banners/flip-a-blox.png'/>
 			</a>
 			<br/>
-			<a href='https://play.google.com/store/apps/details?id=net.game103.flipablox' target='_blank' class='app-store-link'>
+			<a href='https://play.google.com/store/apps/details?id=net.game103.flipablox' target='_blank' rel="noopener" class='app-store-link'>
 				<img style='height: 50px' src='/images/banners/googleplay.png'/>
 			</a>
 			<br/>

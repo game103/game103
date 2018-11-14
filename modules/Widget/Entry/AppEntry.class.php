@@ -30,6 +30,7 @@
 				// Default to android since most devices in the world are Android
 				$properties['link'] = $properties['store_url_android'];
 				$properties['target'] = '_blank';
+				$properties['rel'] = 'noopener';
 			}
 			
 			$properties['app_store_logo'] = "";
