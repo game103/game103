@@ -6,7 +6,7 @@
 	* Script to load random games of a certain category
 	*/
 	
-	set_include_path("/var/www/game103");
+	set_include_path("/var/www/game103/modules");
 	
 	// Require modules
 	require_once( 'Constants.class.php');
