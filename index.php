@@ -581,7 +581,7 @@
 
 <!DOCTYPE html>
 
-<html land="en">
+<html lang="en">
 	
 	<head>
 		<!-- Meta Tags -->
