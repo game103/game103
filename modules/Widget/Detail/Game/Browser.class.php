@@ -28,12 +28,7 @@
 				return;
 			}
 			
-			if($this->properties['game_type'] == "JavaScript") {
-				$game_code = "<iframe scrolling='no' src='{$this->properties['url']}' style='width:{$this->properties['width']}"."px;height:{$this->properties['height']}"."px;' id='movie'></iframe>";
-			}
-			else {
-				$game_code = "<embed wmode='direct' src='{$this->properties['url']}' style='width:{$this->properties['width']}"."px;height:{$this->properties['height']}"."px;' id='movie'/>";
-			}
+			$game_code = "<embed wmode='direct' src='{$this->properties['url']}' style='width:{$this->properties['width']}"."px;height:{$this->properties['height']}"."px;' id='movie'/>";
 			
 			$html = <<<HTML
 					<div id='preview-box' style='width:{$this->properties['width']}px;height:{$this->properties['height']}px;'></div>
