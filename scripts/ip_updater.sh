@@ -35,7 +35,6 @@ cat > /etc/bind/db.game103.net <<- EOM
 @	IN	MX	10	ALT4.ASPMX.L.GOOGLE.COM.
 ns      IN      A       $ip
 www	IN	CNAME	game103.net.
-blog	IN	CNAME	ghs.google.com.
 email	IN	CNAME	ghs.google.com.
 EOM
 rndc reload
