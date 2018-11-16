@@ -1,0 +1,37 @@
+.blog-post {
+    margin: 0 20px;
+    padding: 20px 0;
+    border-bottom: 50px solid;
+    border-image: url(/images/blogborder.png) 100 0 100 repeat;
+    text-align: left;
+}
+
+.blog-post:last-child {
+    border-bottom: none;
+}
+
+.blog-post-title {
+    font-weight: bold;
+    float: left;
+    letter-spacing: 1px;
+}
+
+.blog-post-date {
+    font-size: 75%;
+    font-style: italic;
+    float: right;
+}
+
+.blog-post-content {
+    padding-top: 15px;
+    clear: both;
+}
+
+.blog-post-comments {
+    padding-top: 5px;
+    font-size: 75%;
+}
+
+.blog-post-end {
+    clear: both;
+}
