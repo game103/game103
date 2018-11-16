@@ -86,6 +86,7 @@
 	require_once("Widget/About.class.php");
 	require_once("Widget/FunFacts.class.php");
 	require_once("Widget/PrivacyPolicy.class.php");
+	require_once("Widget/Blog.class.php");
 	
 	ob_start("\Constants::sanitize_output");
 	
@@ -448,6 +449,19 @@
 				$content = $widget->get_HTML();
 				$title = 'Characters';
 				$description = "The tales behind the various characters that have been in Game 103 games over the years.";
+			}
+			else {
+				$is_404 = true;
+			}
+			break;
+		case 'blog':
+			if(count($routes) == 2) {
+				$widget = new \Widget\Blog();
+				$widget->generate();
+				array_push( $widgets, $widget );
+				$content = $widget->get_HTML();
+				$title = 'Blog';
+				$description = "The Game 103 blog containing updates about the site.";
 			}
 			else {
 				$is_404 = true;
