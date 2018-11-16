@@ -669,7 +669,7 @@
 
 			<!--Contact and Copyright-->
 			<footer class="footer">
-				<div class="additional-links"><a href="/about">About Us</a> | <a href="/privacy">Privacy Policy</a> | <a href="/facts">Fun Facts</a> | <a href="/characters">Characters</a> | <a href="/games/distributable">Developers</a> | <a target="_blank" rel="noopener" href="https://github.com/game103/game103">Source</a></div>
+				<div class="additional-links"><a href="/about">About Us</a> | <a href="/privacy">Privacy Policy</a> | <a href="/facts">Fun Facts</a> | <a href="/characters">Characters</a> | <a href="/games/distributable">Developers</a> | <a href="/blog">Blog</a> | <a target="_blank" rel="noopener" href="https://github.com/game103/game103">Source</a></div>
 				<div class="copyright">&copy; 2018 <a href="https://game103.net">Game 103</a></div>
 			</footer>
 		</div>
