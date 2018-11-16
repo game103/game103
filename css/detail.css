@@ -131,6 +131,11 @@ input[type=range]::-ms-track {
 	display: block;
 }
 
+#movie-container iframe {
+	width: 1px;
+    min-width: 100%;
+}
+
 #movie {
 	display: block;
 }
