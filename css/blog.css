@@ -1,7 +1,8 @@
 .blog-post {
     margin: 0 20px;
     padding: 20px 0;
-    border-bottom: 50px solid;
+    border-bottom: 20px solid;
+    border-top: none;
     border-image: url(/images/blogborder.png) 100 0 100 repeat;
     text-align: left;
 }
