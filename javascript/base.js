@@ -280,3 +280,8 @@ function entrySetLinks() {
 }
 
 document.addEventListener('DOMContentLoaded', entrySetLinks, false );
+
+// Register service worker
+navigator.serviceWorker && navigator.serviceWorker.register('/javascript/sw.js').then(function(registration) {
+	console.log('Registered with scope: ', registration.scope);
+});

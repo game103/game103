@@ -20,8 +20,8 @@
 			$this->JS[] = "/javascript/detail.js";
 			$this->CSS[] = "/css/detail.css";
 			// Add entry JavaScript and CSS for similar items
-			$this->JS[] = "/javascript/entry.js";
-			$this->CSS[] = "/css/entry.css";
+			// Note, these are included in base.css now
+			// so they are not needed
 		}
 		
 		/**
