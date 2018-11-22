@@ -513,7 +513,7 @@ iframe {
 	position:relative;
 	width:25em;
 	height:75px;
-	transition: all .3s ease;
+	transition: background-color .3s ease;
 	display: block;
 }
 
@@ -656,7 +656,6 @@ iframe {
 
 .nav-item-preview-category .entry-item {
 	color: white;
-	transition: none;
 }
 
 /* At this point, entries need to change! */

@@ -9,7 +9,7 @@
 	*/
 	class Video extends \Service\Detail {
 		
-		const VIDO_DOES_NOT_EXIST_MESSAGE = "The game specified does not exist.";
+		const VIDEO_DOES_NOT_EXIST_MESSAGE = "The video specified does not exist.";
 		
 		/**
 		* Constructor.
@@ -26,7 +26,7 @@
 			$this->url_name = $this->mysqli->real_escape_string($this->url_name);
 			// String to query the database with
 			$str = "SELECT id, name, entries.string, DATE_FORMAT(added_date, '%M %D, %Y'), description,
-			FORMAT(views, 0), image_url FROM hallaby_videos.entries WHERE url_name = ? LIMIT 1";
+			FORMAT(views, 0), image_url, type FROM hallaby_videos.entries WHERE url_name = ? LIMIT 1";
 			// Prepare the statement
 			$statement = $this->mysqli->prepare($str);
 			// Bind parameters
@@ -40,16 +40,16 @@
 				throw new \Exception(\Constants::MYSQL_MESSAGE);
 			}
 			// Get the one result
-			$statement->bind_result($id, $name, $string, $added_date, $description, $views, $image_url);
+			$statement->bind_result($id, $name, $string, $added_date, $description, $views, $image_url, $type);
 			// Fetch the result
 			$statement->fetch();
 			// Close the statement
 			$statement->close();
 			if(!isset($id)) {
-				throw new \Exception(self::GAME_DOES_NOT_EXIST_MESSAGE);
+				throw new \Exception(self::VIDEO_DOES_NOT_EXIST_MESSAGE);
 			}
 			if($id == 0) {
-				throw new \Exception(self::GAME_DOES_NOT_EXIST_MESSAGE);
+				throw new \Exception(self::VIDEO_DOES_NOT_EXIST_MESSAGE);
 			}
 			
 			// Note that id is set here
@@ -63,7 +63,8 @@
 				'description' => $description,
 				'views' => $views,
 				'image_url' => $image_url,
-				'url_name' => $this->url_name
+				'url_name' => $this->url_name,
+				'video_type' => $type
 			);
 		}
 		
