@@ -40,6 +40,10 @@ Category 2:
 	<option value = "6">Nature</option>
 	<option value = "7">Story</option>
 </select><br><br>
+<select name = "type">
+	<option value = "Video">Video</option>
+	<option value = "Playlist">Playlist</option>
+</select>
 <input type = "submit" value = "submit" name = "submit"><br>
 </form>
 
@@ -49,6 +53,7 @@ Category 2:
 	$string = $_POST['string'];
 	$description = $_POST['description'];
 	$image_url = $_POST['image_url'];
+	$video_type = $_POST['type'];
 	$submit = $_POST['submit'];
 	$url_name = str_replace(' ','',$name);
 	$url_name = str_replace('&','',$url_name);
@@ -80,7 +85,7 @@ Category 2:
 		
 		$image_url = substr($image_url, 2);
 		
-		$sql = "INSERT INTO entries(name, string, description, image_url, url_name) VALUES ('$name','$string','$description','$image_url','$url_name')";
+		$sql = "INSERT INTO entries(name, string, description, image_url, url_name, type) VALUES ('$name','$string','$description','$image_url','$url_name','$video_type')";
 		$mysqli->query($sql);
 		$id = $mysqli->insert_id;
 		

@@ -28,11 +28,21 @@
 				$this->HTML = $this->properties['message'];
 				return;
 			}
+
+			$type_string = "";
+			// If this is a regular video
+			if( $this->properties['type'] == "Video" ) {
+				$type_string = "{$this->properties['string']}?";
+			}
+			// This is a playlist
+			else {
+				$type_string = "videoseries?list={$this->properties['string']}&";
+			}
 			
 			$html = <<<HTML
 					<div id='preview-box' style='width:800px;height:450px;'></div>
 					<div id='movie-container' class='responsive'>
-						<iframe style='width:800px;height:450px;' allowfullscreen="allowfullscreen" src="https://www.youtube.com/embed/{$this->properties['string']}?rel=0&amp;modestbranding=1&amp;theme=light&amp;iv_load_policy=3" frameborder="0" id="movie"></iframe>
+						<iframe style='width:800px;height:450px;' allowfullscreen="allowfullscreen" src="https://www.youtube.com/embed/{$type_string}rel=0&amp;modestbranding=1&amp;theme=light&amp;iv_load_policy=3" frameborder="0" id="movie"></iframe>
 					</div>
 HTML;
 			
