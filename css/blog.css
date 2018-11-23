@@ -28,7 +28,11 @@
     clear: both;
 }
 
-.blog-post-comments {
+.blog-post-contents-hidden {
+    display: none;
+}
+
+.blog-post-actions {
     padding-top: 5px;
     font-size: 75%;
 }
