@@ -15,19 +15,19 @@
 		public function __construct($properties) {
 			\Widget::__construct($properties);
             $this->CSS[] = "/css/blog.css";
-            $this->CSS[] = "https://alexgorbatchev.com/pub/sh/current/styles/shCore.css";
-            $this->CSS[] = "https://alexgorbatchev.com/pub/sh/current/styles/shThemeEmacs.css";
+            $this->CSS[] = "https://agorbatchev.typepad.com/pub/sh/3_0_83/styles/shCore.css";
+            $this->CSS[] = "https://agorbatchev.typepad.com/pub/sh/3_0_83/styles/shThemeEmacs.css";
             $this->JS[] = "/javascript/blog.js";
-            $this->JS[] = "https://alexgorbatchev.com/pub/sh/current/scripts/shCore.js";
-            $this->JS[] = "https://alexgorbatchev.com/pub/sh/current/scripts/shBrushAS3.js";
-            $this->JS[] = "https://alexgorbatchev.com/pub/sh/current/scripts/shBrushBash.js";
-            $this->JS[] = "https://alexgorbatchev.com/pub/sh/current/scripts/shBrushCss.js";
-            $this->JS[] = "https://alexgorbatchev.com/pub/sh/current/scripts/shBrushJScript.js";
-            $this->JS[] = "https://alexgorbatchev.com/pub/sh/current/scripts/shBrushJava.js";
-            $this->JS[] = "https://alexgorbatchev.com/pub/sh/current/scripts/shBrushPhp.js";
-            $this->JS[] = "https://alexgorbatchev.com/pub/sh/current/scripts/shBrushPython.js";
-            $this->JS[] = "https://alexgorbatchev.com/pub/sh/current/scripts/shBrushSql.js";
-            $this->JS[] = "https://alexgorbatchev.com/pub/sh/current/scripts/shBrushXml.js";
+            $this->JS[] = "https://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shCore.js";
+            $this->JS[] = "https://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushAS3.js";
+            $this->JS[] = "https://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushBash.js";
+            $this->JS[] = "https://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushCss.js";
+            $this->JS[] = "https://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushJScript.js";
+            $this->JS[] = "https://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushJava.js";
+            $this->JS[] = "https://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushPhp.js";
+            $this->JS[] = "https://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushPython.js";
+            $this->JS[] = "https://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushSql.js";
+            $this->JS[] = "https://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushXml.js";
         }
 		
 		/**
