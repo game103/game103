@@ -534,6 +534,11 @@ iframe {
 	top: 0;
 	left: 80px;
 	display: block;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	width: 210px;
+	text-align: left;
 }
 
 .entry-rating {
@@ -672,6 +677,7 @@ iframe {
 	.entry-title {
 		position: relative;
 		left: 80px;
+		width: calc(100% - 80px);
 	}
 	
 	.entry-stars {
