@@ -30,7 +30,7 @@
 	$i=0;
     // Loop through and get the top games for each category
     foreach( $categories as $category ) {
-		$service = new \Service\Find\GameFind( "", "popularity", $category, 1, 4, $mysqli );
+		$service = new \Service\Find\GameFind( "", "popularity", $category, 1, 4, "any", $mysqli );
 		$properties = $service->generate();
 		$properties['no_box'] = 1;
 		$widget = new \Widget\Find( $properties );

@@ -141,6 +141,7 @@
 			break;
 		case 'games':
 			$type = 'games';
+			$platform = 'any';
 			if(count($routes) == 2) {
 				$category = 'all';
 				$search = '';
@@ -160,17 +161,25 @@
 				$page = $routes[4];
 			}
 			else if(count($routes) == 6) {
-				$category = $routes[2];
-				$search = $routes[3];
+				$platform = $routes[2];
+				$category = $routes[3];
+				$search = '';
 				$sort = $routes[4];
 				$page = $routes[5];
+			}
+			else if(count($routes) == 7) {
+				$platform = $routes[2];
+				$category = $routes[3];
+				$search = $routes[4];
+				$sort = $routes[5];
+				$page = $routes[6];
 			}
 			else {
 				$is_404 = true;
 				break;
 			}
-			
-			$response = find_response( 'games', $search, $sort, $category, $page, '\Service\Find\GameFind', $ajax, $widgets );
+
+			$response = find_response( 'games', $search, $sort, $category, $page, '\Service\Find\GameFind', $ajax, $platform, $widgets );
 			$content = $response[0];
 			$title = $response[1];
 			$description = $response[2];
@@ -226,7 +235,7 @@
 				break;
 			}
 			
-			$response = find_response( 'videos', $search, $sort, $category, $page, '\Service\Find\VideoFind', $ajax, $widgets );
+			$response = find_response( 'videos', $search, $sort, $category, $page, '\Service\Find\VideoFind', $ajax, null, $widgets );
 			$content = $response[0];
 			$title = $response[1];
 			$description = $response[2];
@@ -262,7 +271,7 @@
 				$is_404 = true;
 				break;
 			}
-			$response = find_response( 'resources', $search, $sort, $category, $page, '\Service\Find\ResourceFind', $ajax, $widgets );
+			$response = find_response( 'resources', $search, $sort, $category, $page, '\Service\Find\ResourceFind', $ajax, null, $widgets );
 			$content = $response[0];
 			$title = $response[1];
 			$description = $response[2];
@@ -292,7 +301,7 @@
 				$is_404 = true;
 				break;
 			}
-			$response = find_response( 'everything', $search, $sort, $category, $page, '\Service\Find', $ajax, $widgets );
+			$response = find_response( 'everything', $search, $sort, $category, $page, '\Service\Find', $ajax, null, $widgets );
 			$content = $response[0];
 			$title = $response[1];
 			$description = $response[2];
@@ -321,7 +330,7 @@
 				$is_404 = true;
 				break;
 			}
-			$response = find_response( 'apps', $search, $sort, $category, $page, '\Service\Find\AppFind', $ajax, $widgets );
+			$response = find_response( 'apps', $search, $sort, $category, $page, '\Service\Find\AppFind', $ajax, null, $widgets );
 			$content = $response[0];
 			$title = $response[1];
 			$description = $response[2];
@@ -538,7 +547,7 @@
 	
 	// Response for a find page
 	// search redirect -> for non JS searches
-	function find_response( $type, $search, $sort, $category, $page, $service_class, $ajax, &$widgets ) {
+	function find_response( $type, $search, $sort, $category, $page, $service_class, $ajax, $platform, &$widgets ) {
 		if( isset( $_GET['search'] ) ) {
 			$search = $_GET['search'];
 			if( $ajax ) {
@@ -555,7 +564,13 @@
 			}
 		}
 		
-		$service = new $service_class( $search, $sort, $category, $page, 15, new mysqli( Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD ) );
+		if( $platform ) {
+			$service = new $service_class( $search, $sort, $category, $page, 15, $platform, new mysqli( Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD ) );
+		}
+		else {
+			$service = new $service_class( $search, $sort, $category, $page, 15, new mysqli( Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD ) );
+		}
+
 		$generated = $service->generate();
 		$widget = new \Widget\Find( $generated );
 		$widget->generate();

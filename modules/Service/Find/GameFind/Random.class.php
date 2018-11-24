@@ -15,7 +15,7 @@
 		*/
 		public function __construct( $category, $invalid_id, $mysqli ) {
 			// Add random to valid_sort
-			\Service\Find\GameFind::__construct( "", "random", $category, 1, 6, $mysqli );
+			\Service\Find\GameFind::__construct( "", "random", $category, 1, 6, "any", $mysqli );
 			$this->valid_sort['random'] = array('sql' => "RAND()", 'name' => '', 'link' => '' );
 			$this->invalid_id = $invalid_id;
 		}

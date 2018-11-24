@@ -25,6 +25,7 @@
 		protected $db;
 		protected $type;
 		protected $items_per_page;
+		protected $platform;
 		
 		// These are all similar arrays
 		// with keys of the url name to use they,
@@ -34,6 +35,7 @@
 		protected $valid_sort;
 		protected $valid_categories;
 		protected $valid_types;
+		protected $valid_platforms;
 		
 		// This is similar to the valid arrays
 		// The key is the display and the value
@@ -61,12 +63,13 @@
 				'alphabetical' => array('sql' => 'name', 'name' => 'Sort alphabetically', 'link' => $this->generate_state_link( array( 'sort' => 'alphabetical' ) ) )
 			);
 			$this->valid_types = array(
-				'everything' => array( 'name' => 'Everything', 'link' => $this->generate_state_link( array( 'type' => 'everything', 'page' => 1, 'category' => '' ) ) ), 
-				'games' => array( 'name' => 'Games','link' => $this->generate_state_link( array( 'type' => 'games', 'page' => 1, 'category' => 'all' ) ) ), 
-				'videos' => array( 'name' => 'Videos', 'link' => $this->generate_state_link( array( 'type' => 'videos', 'page' => 1, 'category' => 'all' ) ) ), 
-				'resources' => array( 'name' => 'Resources', 'link' => $this->generate_state_link( array( 'type' => 'resources', 'page' => 1, 'category' => 'all' ) ) ), 
-				'apps' => array( 'name' => 'Apps', 'link' => $this->generate_state_link( array( 'type' => 'apps', 'page' => 1, 'category' => '' ) ) )
+				'everything' => array( 'name' => 'Everything', 'link' => $this->generate_state_link( array( 'type' => 'everything', 'page' => 1, 'category' => '', 'platform' => '' ) ) ), 
+				'games' => array( 'name' => 'Games','link' => $this->generate_state_link( array( 'type' => 'games', 'page' => 1, 'category' => 'all', 'platform' => '' ) ) ), 
+				'videos' => array( 'name' => 'Videos', 'link' => $this->generate_state_link( array( 'type' => 'videos', 'page' => 1, 'category' => 'all', 'platform' => '' ) ) ), 
+				'resources' => array( 'name' => 'Resources', 'link' => $this->generate_state_link( array( 'type' => 'resources', 'page' => 1, 'category' => 'all', 'platform' => '' ) ) ), 
+				'apps' => array( 'name' => 'Apps', 'link' => $this->generate_state_link( array( 'type' => 'apps', 'page' => 1, 'category' => '', 'platform' => '' ) ) )
 			);
+			$this->valid_platforms = array();
 			$this->linked_pages = array();
 			// It is important that we don't error check yet unless the above arrays are altered
 		}
@@ -85,6 +88,10 @@
 			}
 			// Ensure we have a valid category
 			if( $this->valid_categories && !$this->valid_categories[$this->category] ) {
+				throw new \Exception(self::BAD_PARAMS_MESSAGE);
+			}
+			// Ensure we have a valid sub type
+			if( $this->valid_platforms && !$this->valid_platforms[$this->platform] ) {
 				throw new \Exception(self::BAD_PARAMS_MESSAGE);
 			}
 		}
@@ -201,6 +208,7 @@
 		protected function run_sql( $select_statement ) {
 			$select_statement->execute();
 			if(mysqli_stmt_error($select_statement) != "") {
+				print mysqli_stmt_error($select_statement);
 				throw new \Exception(\Constants::MYSQL_MESSAGE);
 				$this->mysqli->close();
 				exit();
@@ -257,14 +265,15 @@
 					"items" => $items,
 					"valid_categories" => $this->valid_categories,
 					"valid_types" => $this->valid_types,
-					// If we ever expose this publically, we should remove the sql from the sort array
 					"valid_sort" => $this->valid_sort,
+					"valid_platforms" => $this->valid_platforms,
 					"linked_pages" => $this->linked_pages,
 					"category" => $this->category,
 					"type" => $this->type,
 					"sort" => $this->sort,
 					"page" => $this->page,
 					"search" => $this->search,
+					"platform" => $this->platform,
 					"title" => $title,
 					"description" => $description
  				);
@@ -276,11 +285,13 @@
 					"valid_categories" => $this->valid_categories,
 					"valid_types" => $this->valid_types,
 					"valid_sort" => $this->valid_sort,
+					"valid_platforms" => $this->valid_platforms,
 					"category" => $this->category,
 					"type" => $this->type,
 					"sort" => $this->sort,
 					"page" => $this->page,
 					"search" => $this->search,
+					"platform" => $this->platform,
 					"title" => 'Error',
 					"description" => self::NO_RESULTS_MESSAGE
 				);
@@ -396,8 +407,17 @@
 			$sort = isset($values['sort']) ? $values['sort'] : $this->sort;
 			$page = isset($values['page']) ? $values['page'] : $this->page;
 			$search = isset($values['search']) ? $values['search'] : $this->search;
-			
+			$platform = isset($values['platform']) ? $values['platform'] : $this->platform;
+
+			if( !$platform && $type == 'games' ) {
+				$platform = 'any';
+			}
+
 			$link = '/' . $type;
+			if( $platform ) {
+				$link .= '/' . $platform;
+				$category = $category ? $category : 'all';
+			}
 			if( $category ) {
 				$link .= '/' . $category;
 			}
