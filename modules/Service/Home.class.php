@@ -33,8 +33,8 @@
 				// Create services
 				$weekly_service = new \Service\Find\GameFind\Top( 'weekly', $this->mysqli );
 				$monthly_service = new \Service\Find\GameFind\Top( 'monthly', $this->mysqli );
-				$top_service = new \Service\Find\GameFind( "", 'popularity', "all", 1, 6, $this->mysqli );
-				$rating_service = new \Service\Find\GameFind( "", 'rating', "all", 1, 6, $this->mysqli );
+				$top_service = new \Service\Find\GameFind( "", 'popularity', "all", 1, 6, "any", $this->mysqli );
+				$rating_service = new \Service\Find\GameFind( "", 'rating', "all", 1, 6, "any", $this->mysqli );
 				$featured_service = new \Service\Find\GameFind\Featured( $this->mysqli );
 				$daily_service = new \Service\Find\GameFind\Daily( $this->mysqli );
 				

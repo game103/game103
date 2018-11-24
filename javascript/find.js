@@ -35,6 +35,9 @@ function findMakeLinksAjax() {
 			if( currentPage[1] == 'everything' || currentPage[1] == 'apps' ) {
 				withSearchSize = 5;
 			}
+			if( currentPage[1] == 'games' ) {
+				withSearchSize = 7;
+			}
 			
 			// Remove current search
 			if( currentPage.length == withSearchSize ) {

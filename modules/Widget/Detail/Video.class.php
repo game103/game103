@@ -31,7 +31,7 @@
 
 			$type_string = "";
 			// If this is a regular video
-			if( $this->properties['type'] == "Video" ) {
+			if( $this->properties['video_type'] == "Video" ) {
 				$type_string = "{$this->properties['string']}?";
 			}
 			// This is a playlist
