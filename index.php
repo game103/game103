@@ -461,6 +461,7 @@
 				array_push( $widgets, $widget );
 				$content = $widget->get_HTML();
 				$title = 'Blog';
+				$meta = '<link rel="alternate" type="application/rss+xml" title="Subscribe" href="https://game103blog.blogspot.com/feeds/posts/default"/>';
 				$description = "The Game 103 blog containing updates about the site.";
 			}
 			else {
