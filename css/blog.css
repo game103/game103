@@ -23,6 +23,11 @@
     float: right;
 }
 
+.blog-post-tags {
+    font-size: 75%;
+    clear: both;
+}
+
 .blog-post-content {
     padding-top: 15px;
     clear: both;
