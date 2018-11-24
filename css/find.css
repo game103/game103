@@ -193,7 +193,7 @@
 	font-size: 80%;
 }
 
-@media screen and (max-width: 810px) {
+@media screen and (max-width: 1000px) {
 	.find-refine {
 		display: flex;
 		flex-flow: row wrap;

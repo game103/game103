@@ -15,7 +15,7 @@
 		*/
 		public function __construct( $sort, $mysqli ) {
 			// Add random to valid_sort
-			\Service\Find\GameFind::__construct( "", $sort, "all", 1, 6, $mysqli );
+			\Service\Find\GameFind::__construct( "", $sort, "all", 1, 6, "any", $mysqli );
 			$this->valid_sort['weekly'] = array('sql' => "", 'name' => '', 'link' => '' );
 			$this->valid_sort['monthly'] = array('sql' => "", 'name' => '', 'link' => '' );
 		}
