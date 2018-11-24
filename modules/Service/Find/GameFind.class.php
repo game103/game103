@@ -11,13 +11,19 @@
 		/**
 		* Constructor.
 		*/
-		public function __construct( $search, $sort, $category, $page, $items_per_page, $mysqli ) {
+		public function __construct( $search, $sort, $category, $page, $items_per_page, $platform, $mysqli ) {
 			$this->type = 'games';
+			$this->platform = $platform ? $platform : 'any';
 			\Service\Find::__construct( $search, $sort, $category, $page, $items_per_page, $mysqli );
 			$this->db = 'hallaby_games';
 			if( $this->category == 'game103' ) {
 				$this->valid_sort['creation'] = array( 'sql' => 'creation_date DESC', 'name' => 'Sort by creation', 'link' => $this->generate_state_link( array( 'sort' => 'creation' ) ) );
 			}
+			$this->valid_platforms = array(
+				'any' => array( 'name' => 'Any Platform', 'link' => $this->generate_state_link( array( 'platform' => 'any', 'page' => 1 ) ) ), 
+				'computer' => array( 'name' => 'Computer', 'link' => $this->generate_state_link( array( 'platform' => 'computer', 'page' => 1 ) ) ), 
+				'mobile' => array( 'name' => 'Mobile', 'link' => $this->generate_state_link( array( 'platform' => 'mobile', 'page' => 1 ) ) )
+			);
 		}
 		
 		/**
@@ -41,6 +47,16 @@
 			}
 			else {
 				$where_sql = $category_sql;
+			}
+			// We have a subtype
+			if( $this->platform != 'any' ) {
+				$subtype_sql = "entries.type = ?";
+				if( $where_sql ) {
+					$where_sql .= " AND $subtype_sql";
+				}
+				else {
+					$where_sql = "WHERE $subtype_sql";
+				}
 			}
 			
 			return $where_sql;
@@ -89,9 +105,11 @@
 			if( $this->category == 'game103' ) {
 				$downloads_sections = $this->generate_downloads_sql();
 				$game103_extra_select = $downloads_sections['game103_extra_select'];
-				$union_sql = $downloads_sections['union_sql'];
-				$union_count_sql = $downloads_sections['union_count_sql'];
-				$union_sum_sql = $downloads_sections['union_sum_sql'];
+				if( $this->platform == 'any' ) {
+					$union_sql = $downloads_sections['union_sql'];
+					$union_count_sql = $downloads_sections['union_count_sql'];
+					$union_sum_sql = $downloads_sections['union_sum_sql'];
+				}
 			}
 			$select_str = "SELECT * FROM (
 								SELECT entries.name as name, entries.description, entries.url_name, entries.image_url, entries.rating, FORMAT(entries.plays, 0) as plays, entries.plays as numeric_interactions, entries.added_date as added_date, entries.type as game_type $game103_extra_select
@@ -124,20 +142,39 @@
 			$select_statement = $this->mysqli->prepare( $this->generate_sql() );
 			$search_wildcards = '%' . $this->search . '%';
 
-			if ( $this->search || $this->category != 'all' ) {
+			if ( $this->search || $this->category != 'all' || $this->platform  != 'any'  ) {
 				
-				if( $this->category != 'all' && ! $this->search ) {
-					$select_statement->bind_param("ss", $this->category, $this->category);
-				}
-				else if( $this->category == 'all' ) {
-					$select_statement->bind_param("ss", $search_wildcards, $search_wildcards);
-				}
-				else {
-					if( $this->category == 'game103' ) {
-						$select_statement->bind_param("ssssss", $this->category, $search_wildcards, $search_wildcards, $this->category, $search_wildcards, $search_wildcards);
+				if( $this->platform == 'any' ) {
+					if( $this->category != 'all' && ! $this->search ) {
+						$select_statement->bind_param("ss", $this->category, $this->category);
+					}
+					else if( $this->category == 'all' ) {
+						$select_statement->bind_param("ss", $search_wildcards, $search_wildcards);
 					}
 					else {
-						$select_statement->bind_param("ssss", $this->category, $search_wildcards, $this->category, $search_wildcards);
+						if( $this->category == 'game103' ) {
+							$select_statement->bind_param("ssssss", $this->category, $search_wildcards, $search_wildcards, $this->category, $search_wildcards, $search_wildcards);
+						}
+						else {
+							$select_statement->bind_param("ssss", $this->category, $search_wildcards, $this->category, $search_wildcards);
+						}
+					}
+				}
+				else {
+					// We may need to change this at some point
+					$platform = $this->platform == 'mobile' ? 'JavaScript' : 'Flash';
+					if( $this->category == 'all' && ! $this->search ) {
+						$select_statement->bind_param("ss", $platform, $platform);
+					}
+					else if( ! $this->search ) {
+						$select_statement->bind_param("ssss", $this->category, $platform, $this->category, $platform);
+					}
+					else if( $this->category == 'all' ) {
+						$select_statement->bind_param("ssss", $search_wildcards, $platform, $search_wildcards, $platform);
+					}
+					else {
+						// No downloads in platform
+						$select_statement->bind_param("ssssss", $this->category, $search_wildcards, $platform, $this->category, $search_wildcards, $platform);
 					}
 				}
 				
