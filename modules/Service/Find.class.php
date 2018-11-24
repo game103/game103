@@ -208,7 +208,6 @@
 		protected function run_sql( $select_statement ) {
 			$select_statement->execute();
 			if(mysqli_stmt_error($select_statement) != "") {
-				print mysqli_stmt_error($select_statement);
 				throw new \Exception(\Constants::MYSQL_MESSAGE);
 				$this->mysqli->close();
 				exit();
