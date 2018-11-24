@@ -192,7 +192,7 @@ function detailGrow() {
 // Function to make the game full screen
 function detailFullscreen() {
 	var movie = document.getElementById('movie');
-	var gameTop = 209;
+	var gameTop = document.getElementsByClassName("header")[0].offsetHeight + 79;
 	var scrollX = 0;
 	var widthCalculator = document.createElement('div');
 	widthCalculator.style.position = 'fixed';
