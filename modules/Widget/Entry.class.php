@@ -69,7 +69,7 @@
 			}
 			
 			$this->HTML .= <<<HTML
-<a href="{$this->properties['link']}" $target $rel class='entry-link' data-type="{$this->properties['type']}" data-url-name="{$this->properties['url_name']}">
+<a title="{$this->properties['title']}" href="{$this->properties['link']}" $target $rel class='entry-link' data-type="{$this->properties['type']}" data-url-name="{$this->properties['url_name']}">
 	<span class="entry-item">
 		<img alt="{$this->properties['title']}" src="{$this->properties['image_src']}">
 		<span class="entry-title">{$this->properties['title']}</span>
