@@ -47,6 +47,18 @@
                 $date = date('l, F d, Y', strtotime($entries[$i]['published']['$t']));
                 $author = $entries[$i]['author'][0]['name']['$t'];
                 $comments_link = $entries[$i]['link'][1];
+                $tags = "";
+                $categories = $entries[$i]['category']; 
+                // Generate the tags
+                if( $categories ) {
+                    $tags = "<div class='blog-post-tags'>Tags: ";
+                    $tags_arr = array();
+                    foreach( $categories as $category ) {
+                        array_push( $tags_arr, $category['term'] );
+                    }
+                    $tags .= implode( ", ", $tags_arr );
+                    $tags .= "</div>";
+                }
                 $show_all_link = "";
                 // We might need to hide some
                 if( strlen($description) > $max_characters ) {
@@ -69,6 +81,7 @@
                 }
                 $html .= '<div class="blog-post"><div class="blog-post-title">'.$title.'</div>';
                 $html .= '<div class="blog-post-date">Posted on '.$date.' by '.$author.'</div>';
+                $html .= $tags;
                 $html .= '<div class="blog-post-content">'.$description.'</div>';
                 $html .= '<div class="blog-post-actions">' . $show_all_link . '<a target="_blank" rel="noopener" href="'.$comments_link['href'].'">'.$comments_link['title'].'</a></div>';
                 $html .= "<div class='blog-post-end'></div></div>";
