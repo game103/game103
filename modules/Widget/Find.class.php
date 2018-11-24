@@ -196,10 +196,14 @@
 			}
 			$types = $this->generate_types_dropdown();
 			$sort = $this->generate_sort_dropdown();
+			if( sizeof($this->properties['valid_platforms']) > 0 ) {
+				$platforms = $this->generate_platforms_dropdown();
+			}
 			return <<<DROPDOWNS
 				<div class='find-refine'>
 					$search
 					$categories
+					$platforms
 					$types
 					$sort
 				</div>
@@ -264,6 +268,13 @@ OPTIONS;
 		*/
 		protected function generate_types_dropdown() {
 			return $this->generate_dropdown( $this->properties['valid_types'], $this->properties['type'], 'type' );
+		}
+
+		/**
+		* Generate platforms dropdown
+		*/
+		protected function generate_platforms_dropdown() {
+			return $this->generate_dropdown( $this->properties['valid_platforms'], $this->properties['platform'], 'subtype' );
 		}
 		
 		/**
