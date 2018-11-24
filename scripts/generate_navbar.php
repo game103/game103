@@ -18,7 +18,7 @@
 	$mysqli = new mysqli( Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD);
     
 	// Get the categories
-	$service = new \Service\Find\GameFind( "", "popularity", $category, 1, 4, $mysqli );
+	$service = new \Service\Find\GameFind( "", "popularity", $category, 1, 4, "any", $mysqli );
 	$service->generate_categories();
 	$categories = array_keys($service->get_valid_categories());
 	array_unshift( $categories, "all" );
