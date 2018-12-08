@@ -68,8 +68,8 @@
 				<li><b>What's the difference between the free and paid versions?</b> The free version includes ads and only has 4 items in the store. The paid version has 16 items in the store.</li>
 				<li><b>What items are in the store?</b> In the free version, the store items include a red cap, a bow tie, a rain hat, and a bandana. The paid version has all of those as well as a top hat, a necklace, a crown, a bell, a blue cap, a collar, a straw hat, a tie, a helmet, a pair of glasses, a pirate hat, and an eyepatch.</li>
 				<li><b>How many updates have there been?</b> Both Lamb in a Pram and Lamb in a Pram Lite are on version 1.1.0 and have had one update each.</li>
-				<li><b>When was Lamb in a Pram released?</b>July 11th, 2014. Version 1.1.0 was released on July 22nd 2014.</li>
-				<li><b>When was Lamb in a Pram Lite released?</b>July 21th, 2014. Version 1.1.0 was released on July 30nd 2014.</li>
+				<li><b>When was Lamb in a Pram released?</b> July 11th, 2014. Version 1.1.0 was released on July 22nd 2014.</li>
+				<li><b>When was Lamb in a Pram Lite released?</b> July 21th, 2014. Version 1.1.0 was released on July 30nd 2014.</li>
 			</ul>
 			<h3>Contact</h3>
 			<p>To contact me, James Grams, the developer of Lamb in a Pram, send an email to <a href = "mailto:james@game103.net">james@game103.net</a>. Thanks for playing!</p>
