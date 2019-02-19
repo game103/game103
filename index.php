@@ -541,7 +541,12 @@
 			$css .= "<link rel='stylesheet' type='text/css' href='$css_file'>";
 		}
 		foreach( array_unique($widget->get_JS()) as $js_file ) {
-			$js .= "<script async src='$js_file'></script>";
+			$async = "";
+			// Load non-game103 files synchoronously (for blog)
+			if( strpos($js_file, 'http') === false ) {
+				$async = "async";
+			}
+			$js .= "<script $async src='$js_file'></script>";
 		}
 	}
 	
