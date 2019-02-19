@@ -541,7 +541,7 @@
 			$css .= "<link rel='stylesheet' type='text/css' href='$css_file'>";
 		}
 		foreach( array_unique($widget->get_JS()) as $js_file ) {
-			$js .= "<script src='$js_file'></script>";
+			$js .= "<script async src='$js_file'></script>";
 		}
 	}
 	
@@ -632,7 +632,7 @@
 		<?php echo $css ?>
 		
 		<!-- Load JS -->
-		<script src='/javascript/base.js'></script>
+		<script async src='/javascript/base.js'></script>
 		<?php echo $js ?>
 		
 		<!--Google Analytics Function-->
