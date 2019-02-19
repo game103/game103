@@ -73,7 +73,6 @@
 			<a name="$no_space_name"></a>
 			<div class='characters-image-container'>
 				<div class='characters-image-size-boundaries'>
-					<img class='characters-image' src="{$item['image_src']}"/>
 					<picture>
 						<source srcset="$webp_src" type="image/webp">
 						<source srcset="{$item['image_src']}"> 
