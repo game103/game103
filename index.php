@@ -632,7 +632,7 @@
 		<?php echo $css ?>
 		
 		<!-- Load JS -->
-		<script async src='/javascript/base.js'></script>
+		<script defer src='/javascript/base.js'></script>
 		<?php echo $js ?>
 		
 		<!--Google Analytics Function-->
