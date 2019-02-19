@@ -6,7 +6,7 @@
 	* Script to load random games of a certain category
 	*/
 	
-	set_include_path("/var/www/game103/modules");
+	set_include_path("C:/Users/James/Desktop/game103/modules");
 	
 	// Require modules
 	require_once( 'Constants.class.php');
@@ -102,7 +102,7 @@
 		</div>
 	</li>
 	<li class="nav-item">
-		<div class="nav-item-dropdown-title" id="more-title"><a href="/videos"><span class = "nav-item-dropdown-title-text">More</span></a></div>
+		<div class="nav-item-dropdown-title" id="more-title"><a href="javascript:;" onclick="toggleMoreMenuDisplay()"><span class = "nav-item-dropdown-title-text">More</span></a></div>
 		<div class="nav-item-dropdown" id="more-drop-down">
 			<div class="nav-item-dropdown-contents">
 				<div class="nav-item-list">

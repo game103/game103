@@ -19,6 +19,17 @@ function toggleMobileMenuDisplay() {
 	}
 }
 
+// Toggle the display of more content
+function toggleMoreMenuDisplay() {
+	var moreDropDown = document.getElementById("more-drop-down");
+	if(moreDropDown.classList.contains('nav-item-dropdown-mobile-visible')) {
+		moreDropDown.classList.remove('nav-item-dropdown-mobile-visible');
+	}
+	else {
+		moreDropDown.classList.add('nav-item-dropdown-mobile-visible');
+	}
+}
+
 // Log interaction
 function logInteraction(type, url) {
 	var xhttp = new XMLHttpRequest();

@@ -481,6 +481,13 @@ iframe {
 	.nav-item-dropdown {
 		display: none;
 	}
+
+	.nav-item-dropdown-mobile-visible {
+		display: block;
+		visibility: visible;
+		max-height: 100%;
+		border-top: 2px solid #285cae;
+	}
 	
 	.nav-item-dropdown-title {
 		border-left: none;
