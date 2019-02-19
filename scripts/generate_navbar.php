@@ -102,7 +102,11 @@
 		</div>
 	</li>
 	<li class="nav-item">
-		<div class="nav-item-dropdown-title" id="more-title"><a href="javascript:;" onclick="toggleMoreMenuDisplay()"><span class = "nav-item-dropdown-title-text">More</span></a></div>
+		<div class="nav-item-dropdown-title" id="more-title" onclick="toggleMoreMenuDisplay()"><span class = "nav-item-dropdown-title-text">More</span>
+			<span id='more-dropdown-arrow'>
+				&#9660;
+			</span>
+		</div>
 		<div class="nav-item-dropdown" id="more-drop-down">
 			<div class="nav-item-dropdown-contents">
 				<div class="nav-item-list">

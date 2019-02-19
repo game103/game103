@@ -24,9 +24,11 @@ function toggleMoreMenuDisplay() {
 	var moreDropDown = document.getElementById("more-drop-down");
 	if(moreDropDown.classList.contains('nav-item-dropdown-mobile-visible')) {
 		moreDropDown.classList.remove('nav-item-dropdown-mobile-visible');
+		document.getElementById('more-dropdown-arrow').innerHTML = '&#9660;';
 	}
 	else {
 		moreDropDown.classList.add('nav-item-dropdown-mobile-visible');
+		document.getElementById('more-dropdown-arrow').innerHTML = '&#9650;';
 	}
 }
 

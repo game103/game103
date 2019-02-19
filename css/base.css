@@ -439,12 +439,20 @@ iframe {
 	cursor: pointer;
 }
 
-#nav-dropdown-arrow {
+#more-title {
+	cursor: pointer;
+}
+
+#nav-dropdown-arrow, #more-dropdown-arrow {
 	position: absolute;
 	right: 10px;
 	top: 5px;
 	font-size: 16px;
 	color: white;
+}
+
+#more-dropdown-arrow {
+	top: 100px;
 }
 
 @media screen and (max-width: 810px) {
@@ -497,6 +505,10 @@ iframe {
 	#nav-menu-opener {
 		display: block;
 		border-top: 1px solid #285cae;
+	}
+
+	.nav .mobile-visible:nth-child(2) {
+		border-top: 2px solid #285cae;
 	}
 	
 	.mobile-visible {
