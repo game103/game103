@@ -8,12 +8,15 @@ do
     NAME="${NAME%.*}"
     DIR=$(dirname $f)
     OUTPUT="$DIR/$NAME.webp"
-    if [ $EXTENSION = "png" ] || [ $EXTENSION = "jpg" ] || [ $EXTENSION = "jpeg" ] ;
+    if [ $DIR != "/var/www/game103/images/icons/games/bordered" ] && [ $DIR != "/var/www/game103/images/archive" ];
     then
-        cwebp $f -o $OUTPUT -z 6
-    fi
-    if [ $EXTENSION = "gif" ] ;
-    then
-        gif2webp $f -o $OUTPUT 
+        if [ $EXTENSION = "png" ] || [ $EXTENSION = "jpg" ] || [ $EXTENSION = "jpeg" ] ;
+        then
+            cwebp $f -o $OUTPUT -z 6
+        fi
+        if [ $EXTENSION = "gif" ] ;
+        then
+            gif2webp $f -o $OUTPUT 
+        fi
     fi
 done

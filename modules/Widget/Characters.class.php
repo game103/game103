@@ -64,12 +64,21 @@
 			$games = implode( ", ", $games_list );
 			
 			$no_space_name = str_replace(" ", "+", $item['name']);
+
+			// Get the webp url
+			$webp_src = preg_replace('/\.[^.\s]{3,4}$/', '', $item['image_src']) . ".webp";
+
 			return <<<HTML
 		<div class='characters-entry'>
 			<a name="$no_space_name"></a>
 			<div class='characters-image-container'>
 				<div class='characters-image-size-boundaries'>
-					<img class='characters-image' src='{$item['image_src']}'/>
+					<img class='characters-image' src="{$item['image_src']}"/>
+					<picture>
+						<source srcset="$webp_src" type="image/webp">
+						<source srcset="{$item['image_src']}"> 
+						<img src="{$item['image_src']}" alt="{$item['name']}" class='characters-image'>
+					</picture>
 				</div>
 			</div>
 			<div class='characters-text-container'>
