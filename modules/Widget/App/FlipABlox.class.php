@@ -22,11 +22,19 @@
 		protected function generateContent() {
 			return <<<HTML
 			<a href='https://itunes.apple.com/us/app/flip-a-blox/id1241934713' target='_blank' rel="noopener" class='app-store-link'>
-				<img src='/images/banners/flip-a-blox.png'/>
+				<picture>
+					<source srcset="/images/banners/flip-a-blox.webp" type="image/webp">
+					<source srcset="/images/banners/flip-a-blox.png"> 
+					<img src="/images/banners/flip-a-blox.png" alt="Flip-a-Blox Banner">
+				</picture>
 			</a>
 			<br/>
 			<a href='https://play.google.com/store/apps/details?id=net.game103.flipablox' target='_blank' rel="noopener" class='app-store-link'>
-				<img style='height: 50px' src='/images/banners/googleplay.png'/>
+				<picture>
+					<source srcset="/images/banners/googleplay.webp" type="image/webp">
+					<source srcset="/images/banners/googleplay.png"> 
+					<img src="/images/banners/googleplay.png" alt="Flip-a-Blox Banner" style='height: 50px'>
+				</picture>
 			</a>
 			<br/>
 			<a href='/game/flip-a-blox'>Play online</a>

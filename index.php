@@ -655,7 +655,13 @@
 			<!-- Header -->
 			<header class="header">
 				<div class='header-title'>
-					<a href="/"><img src='/images/logo2016.png' alt='Game 103 logo' class='logo'/></a>
+					<a href="/">
+						<picture>
+							<source srcset="/images/logo2016.webp" type="image/webp">
+							<source srcset="/images/logo2016.png"> 
+							<img src="/images/logo2016.png" alt="Game 103 logo" class='logo'>
+						</picture>
+					</a>
 				</div>
 				<form class="site-search" action="/everything/popularity/1">
 					<input name='search' placeholder="Find games and more!" id="site-search-input" autocomplete="off" type="text"><input type="submit" value="Search" class="button" id="site-search-go">

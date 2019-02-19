@@ -17,4 +17,5 @@ find /var/www/game103_new/javascript -maxdepth 1 -iname "*.js" -exec uglifyjs --
 mv game103_new game103
 python /var/www/game103/scripts/cacher.py
 /var/www/game103/scripts/border_maker.sh
+/var/www/game103/scripts/webp_maker.sh
 /etc/init.d/cron start

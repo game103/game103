@@ -22,11 +22,19 @@
 		protected function generateContent() {
 			return <<<HTML
 			<a href='https://itunes.apple.com/us/app/duck-in-a-truck/id907135188' target='_blank' rel="noopener" class='app-store-link'>
-				<img src='/images/banners/duckinatruck.png'/>
+				<picture>
+					<source srcset="/images/banners/duckinatruck.webp" type="image/webp">
+					<source srcset="/images/banners/duckinatruck.png"> 
+					<img src="/images/banners/duckinatruck.png" alt="Duck in a Truck Banner">
+				</picture>
 			</a>
 			<br/>
 			<a href='https://play.google.com/store/apps/details?id=air.net.game103.duckinatruck' target='_blank' rel="noopener" class='app-store-link'>
-				<img style='height: 50px' src='/images/banners/googleplay.png'/>
+				<picture>
+					<source srcset="/images/banners/googleplay.webp" type="image/webp">
+					<source srcset="/images/banners/googleplay.png" type="image/png"> 
+					<img src="/images/banners/googleplay.png" alt="Duck in a Truck Banner" style="height:50px">
+				</picture>
 			</a>
 			<br/>
 			<a href='/game/duckinatruck'>Play online</a>

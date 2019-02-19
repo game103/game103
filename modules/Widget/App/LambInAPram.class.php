@@ -22,11 +22,19 @@
 		protected function generateContent() {
 			return <<<HTML
 			<a href='https://itunes.apple.com/us/app/lamb-in-a-pram/id894750816' target='_blank' rel="noopener" class='app-store-link'">
-				<img src='/images/banners/lambinapram.png'/>
+				<picture>
+					<source srcset="/images/banners/lambinapram.webp" type="image/webp">
+					<source srcset="/images/banners/lambinapram.png"> 
+					<img src="/images/banners/lambinapram.png" alt="Lamb in a Pram Banner">
+				</picture>
 			</a>
 			<br/>
 			<a href='https://play.google.com/store/apps/details?id=air.net.game103.lambinapram' target='_blank' rel="noopener" class='app-store-link'>
-				<img style='height: 50px' src='/images/banners/googleplay.png'/>
+				<picture>
+					<source srcset="/images/banners/googleplay.webp" type="image/webp">
+					<source srcset="/images/banners/googleplay.png"> 
+					<img src="/images/banners/googleplay.png" alt="Lamb in a Pram Banner" style='height: 50px'>
+				</picture>
 			</a>
 			<br/>
 			<a href='/game/lambinapram'>Play online</a>

@@ -67,11 +67,18 @@
 			if( $this->properties['rel'] ) {
 				$rel = 'rel="' . $this->properties['rel'] . '"';
 			}
+
+			// Get the webp url
+			$webp_src = preg_replace('/\.[^.\s]{3,4}$/', '', $this->properties['image_src']) . ".webp";
 			
 			$this->HTML .= <<<HTML
 <a title="{$this->properties['title']}" href="{$this->properties['link']}" $target $rel class='entry-link' data-type="{$this->properties['type']}" data-url-name="{$this->properties['url_name']}">
 	<span class="entry-item">
-		<img alt="{$this->properties['title']}" src="{$this->properties['image_src']}">
+		<picture>
+			<source srcset="$webp_src" type="image/webp">
+			<source srcset="{$this->properties['image_src']}"> 
+			<img src="{$this->properties['image_src']}" alt="{$this->properties['title']}">
+		</picture>
 		<span class="entry-title">{$this->properties['title']}</span>
 		$rating
 		<span class="entry-description"> {$this->properties['description']}</span>
