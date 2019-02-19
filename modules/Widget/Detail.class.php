@@ -79,9 +79,9 @@ RATING;
 		* Generate options box.
 		*/
 		protected function generate_options() {
-			$fb_link = "https://www.facebook.com/sharer/sharer.php?u=http%3A//game103.net/game/" . $this->properties['url_name'];
-			$twitter_link = "https://twitter.com/home?status=Check%20out%20{$this->properties['name']}%20on%20game103.net%3A%20http%3A//game103.net/game/" . $this->properties['url_name'];
-			$google_link = "https://plus.google.com/share?url=http%3A//game103.net/game/" . $this->properties['url_name'];
+			$fb_link = "https://www.facebook.com/sharer/sharer.php?u=https%3A//game103.net/game/" . $this->properties['url_name'];
+			$twitter_link = "https://twitter.com/home?status=Check%20out%20{$this->properties['name']}%20on%20game103.net%3A%20https%3A//game103.net/game/" . $this->properties['url_name'];
+			$pinterest_link = "https://www.pinterest.com/pin/create/link/?url=https%3A//game103.net/game/" . $this->properties['url_name'];
 			return <<<OPTIONS
 			<!--Options-->
 			<div id='options' class='detail-side-box-item responsive'>
@@ -98,7 +98,7 @@ RATING;
 				<br>Share<br>
 				<a class='button' target='_blank' href="$fb_link">Share on Facebook</a>
 				<a class='button' target='_blank' href="$twitter_link">Share on Twitter</a>
-				<a class='button' target='_blank' href="$google_link">Share on Google+</a>
+				<a class='button' target='_blank' href="$pinterest_link">Share on Pinterest</a>
 			</div>
 OPTIONS;
 		}
