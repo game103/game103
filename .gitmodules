@@ -82,3 +82,8 @@
 [submodule "game103games/flash/trampolinechickadee"]
 	path = game103games/flash/trampolinechickadee
 	url = https://github.com/game103/trampolinechickadee.git
+[submodule "game103games/flash/littledive"]
+	
+	path = game103games/flash/littledive
+	
+	url = https://github.com/game103/littledive.git
