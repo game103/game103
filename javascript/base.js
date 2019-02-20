@@ -332,9 +332,9 @@ document.addEventListener('DOMContentLoaded', function() {
 			window.removeEventListener("resize", lazyLoad);
 			window.removeEventListener("orientationchange", lazyLoad);
 
-			let active = false;
+			var active = false;
 		
-			const lazyLoad = function() {
+			var lazyLoad = function() {
 				if (active === false) {
 					active = true;
 		
@@ -364,7 +364,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			
 						active = false;
 					}, 200);
-			}
+				}
 			};
 		
 			document.addEventListener("scroll", lazyLoad);
