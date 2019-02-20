@@ -3,8 +3,8 @@
     "short_name": "Game 103",
     "display": "standalone",
     "start_url": "/",
-    "theme-color": "#3274da",
-    "background_color": "#dbf7ff",
+    "theme_color": "#3274da",
+    "background_color": "white",
     "icons": [
         {
             "src": "/images/logoiconsocialmedia.png",
@@ -13,6 +13,10 @@
         {
             "src": "/images/logoiconsocialmedia.png",
             "sizes": "192x192"
+        },
+        {
+            "src": "/images/logoiconsocialmedia512.png",
+            "sizes": "512x512"
         }
     ]
 }
