@@ -619,7 +619,7 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" class="no-js">
 	
 	<head>
 		<!-- Meta Tags -->
@@ -637,11 +637,12 @@
 		
 		<!-- Load Style Sheet -->
 		<?php $file = fopen( dirname(__FILE__) . "/css/base.css", "r" );
-			$css .= "<style>" . fread( $file,filesize(dirname(__FILE__) . "/css/base.css") ) . "</style>";
+			$css = "<style>" . fread( $file,filesize(dirname(__FILE__) . "/css/base.css") ) . "</style>" . $css;
 			fclose($file); ?>
 		<?php echo $css ?>
 		
 		<!-- Load JS -->
+		<script>document.documentElement.classList.remove("no-js");</script>
 		<script defer src='/javascript/base.js'></script>
 		<?php echo $js ?>
 		

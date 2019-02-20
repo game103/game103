@@ -149,6 +149,10 @@ iframe {
 	padding-right:	50px;
 }
 
+.no-js .lazy {
+	display: none;
+}
+
 /* Item permanently displayed on the navigation bar */
 .nav {
 	width: 100%;
