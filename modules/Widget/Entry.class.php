@@ -74,10 +74,10 @@
 			$this->HTML .= <<<HTML
 <a title="{$this->properties['title']}" href="{$this->properties['link']}" $target $rel class='entry-link' data-type="{$this->properties['type']}" data-url-name="{$this->properties['url_name']}">
 	<span class="entry-item">
-		<picture>
-			<source srcset="$webp_src" type="image/webp">
-			<source srcset="{$this->properties['image_src']}"> 
-			<img src="{$this->properties['image_src']}" alt="{$this->properties['title']}">
+		<picture class='lazy'>
+			<source srcset="/images/logoiconsocialmedia.webp" data-srcset="$webp_src" type="image/webp">
+			<source srcset="/images/logoiconsocialmedia.png" data-srcset="{$this->properties['image_src']}"> 
+			<img src="/images/logoiconsocialmedia.png" data-src="{$this->properties['image_src']}" alt="{$this->properties['title']}">
 		</picture>
 		<span class="entry-title">{$this->properties['title']}</span>
 		$rating
