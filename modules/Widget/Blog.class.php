@@ -89,8 +89,10 @@
             }
 
             $html .= "<script language='javascript' type='text/javascript'>
-                SyntaxHighlighter.config.bloggerMode = true;
-                SyntaxHighlighter.all();
+                document.addEventListener('DOMContentLoaded', function() {
+                    SyntaxHighlighter.config.bloggerMode = true;
+                    SyntaxHighlighter.all();
+                } );
             </script>";
 
             $box = new \Widget\Box( array(
