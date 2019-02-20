@@ -114,6 +114,10 @@ iframe {
 	-webkit-appearance: none;
 }
 
+#site-search-label-text {
+	display: none;
+}
+
 #site-search-input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: #C6E0E7;
 }

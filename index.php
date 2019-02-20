@@ -676,7 +676,10 @@
 					</a>
 				</div>
 				<form class="site-search" action="/everything/popularity/1">
-					<input name='search' placeholder="Find games and more!" id="site-search-input" autocomplete="off" type="text"><input type="submit" value="Search" class="button" id="site-search-go">
+					<label for="site-search-input" id="site-search-label">
+						<span id="site-search-label-text">Search: </span>
+						<input name='search' placeholder="Find games and more!" id="site-search-input" autocomplete="off" type="text"><input type="submit" value="Search" class="button" id="site-search-go">
+					</label>
 					<div class="header-dropdown">
 						<ul class="header-dropdown-menu" id="site-search-results-dropdown" style="display: block;">
 						</ul>

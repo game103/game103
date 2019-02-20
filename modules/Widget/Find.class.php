@@ -217,7 +217,7 @@ DROPDOWNS;
 		* Generate search box.
 		*/
 		protected function generate_search_box() {
-			return "<form method='GET'><input type='text' value='{$this->properties['search']}' name='search' placeholder='Search' id='search' autocomplete='off' /></form>";
+			return "<form method='GET'><label for='search' id='search-label'><span id='search-label-text'>Search: </span><input type='text' value='{$this->properties['search']}' name='search' placeholder='Search' id='search' autocomplete='off' /></label></form>";
 		}
 		
 		// values is key - url, values are array with name and potentially description.
