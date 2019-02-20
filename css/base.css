@@ -23,7 +23,7 @@ body {
 	font-family: "Open Sans", sans-serif;
 	min-width: 320px;
 	position: relative;
-	background-color: #DBF7FF;
+	background-color: white;
 	font-size: 16px;
 }
 
@@ -68,7 +68,7 @@ iframe {
 .logo {
 	width: 200px;
 	vertical-align: bottom;
-	background-color: #DBF7FF;
+	background-color: white;
 	border: 5px solid #285cae;
 	padding: 5px;
 	min-height: 34px;
