@@ -313,8 +313,12 @@ document.addEventListener('DOMContentLoaded', function() {
 						let lazyPicture = entry.target;
 						let lazyImageSources = lazyPicture.querySelectorAll("source, img");
 						lazyImageSources.forEach(function(lazyImage) {
-							lazyImage.src = lazyImage.dataset.src;
-							lazyImage.srcset = lazyImage.dataset.srcset;
+							if( lazyImage.src ) {
+								lazyImage.src = lazyImage.dataset.src;
+							}
+							if( lazyImage.srcset ) {
+								lazyImage.srcset = lazyImage.dataset.srcset;
+							}
 						});
 						lazyPicture.classList.remove("lazy");
 						lazyPictureObserver.unobserve(lazyPicture);
@@ -345,8 +349,12 @@ document.addEventListener('DOMContentLoaded', function() {
 								
 								var lazyImageSources = lazyPicture.querySelectorAll("source, img");
 								lazyImageSources.forEach(function(lazyImage) {
-									lazyImage.src = lazyImage.dataset.src;
-									lazyImage.srcset = lazyImage.dataset.srcset;
+									if( lazyImage.src ) {
+										lazyImage.src = lazyImage.dataset.src;
+									}
+									if( lazyImage.srcset ) {
+										lazyImage.srcset = lazyImage.dataset.srcset;
+									}
 								});
 
 								lazyPicture.classList.remove("lazy");
