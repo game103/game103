@@ -375,7 +375,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 
 	lazyListen();
-	setInterval(lazyListen, 1000);
+	setInterval(lazyListen, 700);
 });
 
 // Register service worker

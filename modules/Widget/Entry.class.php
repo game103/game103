@@ -79,6 +79,13 @@
 			<source srcset="/images/logoiconsocialmedia.png" data-srcset="{$this->properties['image_src']}"> 
 			<img src="/images/logoiconsocialmedia.png" data-src="{$this->properties['image_src']}" alt="{$this->properties['title']}">
 		</picture>
+		<noscript>
+			<picture>
+				<source srcset="$webp_src" type="image/webp">
+				<source srcset="{$this->properties['image_src']}"> 
+				<img src="{$this->properties['image_src']}" alt="{$this->properties['title']}">
+			</picture>
+		</noscript>
 		<span class="entry-title">{$this->properties['title']}</span>
 		$rating
 		<span class="entry-description"> {$this->properties['description']}</span>

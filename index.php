@@ -538,7 +538,15 @@
 	// Generate js and css for all the widgets
 	foreach( $widgets as $widget ) {
 		foreach ( array_unique($widget->get_CSS()) as $css_file ) {
-			$css .= "<link rel='stylesheet' type='text/css' href='$css_file'>";
+			if (strpos($css_file, 'http') !== false) {
+				$css .= "<link rel='stylesheet' type='text/css' href='$css_file'>";
+			}
+			// Inline Game 103 styles
+			else {
+				$file = fopen( dirname(__FILE__) . $css_file, "r" );
+				$css .= "<style>" . fread( $file,filesize(dirname(__FILE__) . $css_file) ) . "</style>";
+				fclose($file);
+			}
 		}
 		foreach( array_unique($widget->get_JS()) as $js_file ) {
 			$js .= "<script defer src='$js_file'></script>";
@@ -628,7 +636,9 @@
 		<title><?php echo $title ? $title . " - " . Constants::TITLE_APPEND : Constants::TITLE_APPEND?></title>
 		
 		<!-- Load Style Sheet -->
-		<link rel="stylesheet" type="text/css" href="/css/base.css">
+		<?php $file = fopen( dirname(__FILE__) . "/css/base.css", "r" );
+			$css .= "<style>" . fread( $file,filesize(dirname(__FILE__) . "/css/base.css") ) . "</style>";
+			fclose($file); ?>
 		<?php echo $css ?>
 		
 		<!-- Load JS -->
