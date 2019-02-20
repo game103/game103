@@ -236,7 +236,7 @@ DROPDOWNS;
 				}
 				$options .= "
 				<li class='find-dropdown-item $selected_class'>
-					<a href=\"{$details['link']}\" id='cat-$category_url_name' class='find-dropdown-item-text' $description>
+					<a href=\"{$details['link']}\" class='find-dropdown-item-text' $description>
 						{$details['name']}
 					</a>
 				</li>";

@@ -628,6 +628,7 @@
 		<meta name="author" content="James Grams">
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+		<meta name="theme-color" content="#3274da">
 		<link rel="apple-touch-icon" href="/images/logoiconsocialmedia.png">
 		<link rel="manifest" href="/manifest.json" />
 		<?php echo $meta ?>
