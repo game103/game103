@@ -29,7 +29,7 @@
 		"/gamepages/cocoaball/Ball%20Launch.swf" => "/game103games/flash/cocoaball/build/game.swf",
 		"/gamepages/cocoaball/" => "/game103games/flash/cocoaball/src/",
 		"/PasswordRecover.php" => "/game103games/flash/grandestuary/PasswordRecover.php",
-		"/HouseKey/" => "/game103games/flash/grandestuary/",
+		"/HouseKey/" => "/game103games/flash/grandestuary/src/",
 		"/HouseKey/HouseKey.swf" => "/game103games/flash/game.swf",
 		"/game103games/flash/duckdee/" => "/game103games/flash/thegreatduckdeechase/src/",
 		"/game103games/flash/thegreatduckdeechase.swf" => "/game103games/flash/thegreatduckdeechase/build/game.swf",
