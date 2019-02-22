@@ -2,6 +2,8 @@ import urllib2
 import re
 import os
 import ssl
+from os import listdir
+from os.path import isfile, join
 
 # output the navbar
 os.system("php /var/www/game103/scripts/generate_navbar.php > /var/www/game103/navbar.html")
@@ -51,3 +53,12 @@ for page_location in pages:
 	f = open(page_url + ".html", "w")
 	f.write(pages[page_location])
 	f.close()
+
+print "Looking for old files..."
+
+# Remove uncached files
+onlyfiles = [f for f in listdir("/var/www/game103/cache") if isfile(join("/var/www/game103/cache", f))]
+for filename in onlyfiles:
+	path = re.sub(r'-(?![^-]+=)', '/', filename).replace('-', '?').replace(".html","")
+	if not path in pages:
+		print path
