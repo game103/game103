@@ -61,4 +61,5 @@ onlyfiles = [f for f in listdir("/var/www/game103/cache") if isfile(join("/var/w
 for filename in onlyfiles:
 	path = re.sub(r'-(?![^-]+=)', '/', filename).replace('-', '?').replace(".html","")
 	if not path in pages:
-		print path
+		print "removing " + filename
+		os.remove(filename)
