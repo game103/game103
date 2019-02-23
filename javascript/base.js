@@ -310,8 +310,8 @@ document.addEventListener('DOMContentLoaded', function() {
 			lazyPictureObserver = new IntersectionObserver(function(entries, observer) {
 				entries.forEach(function(entry) {
 					if (entry.isIntersecting) {
-						let lazyPicture = entry.target;
-						let lazyImageSources = lazyPicture.querySelectorAll("source, img");
+						var lazyPicture = entry.target;
+						var lazyImageSources = lazyPicture.querySelectorAll("source, img");
 						lazyImageSources.forEach(function(lazyImage) {
 							if( lazyImage.src ) {
 								lazyImage.src = lazyImage.dataset.src;

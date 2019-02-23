@@ -51,7 +51,6 @@
             $return_arr["controls_keys"] = $all_controls["controls_keys"];
             $return_arr["actions_ids"] = $all_actions["actions_ids"];
             $return_arr["actions_names"] = $all_actions["actions_names"];
-
             $return_arr["listing"] = $this->listing();
 
             return $return_arr;
