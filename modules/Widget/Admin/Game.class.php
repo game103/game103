@@ -21,10 +21,7 @@
 		public function generate() {
 
             // Create the error message
-            $error_message = $this->properties["message"] ? '<div class="admin-error-message">'.$this->properties["message"].'</div>' : "";
-            if( $this->properties["status"] == "success" ) {
-                $error_message = '<div class="admin-success-message">Success!</div>';
-            }
+            $error_message = $this->generate_error_message();
 
             // Get the values for the list of all actions and keys
             $controls_ids = '[' . implode(',',$this->properties['controls_ids']) . ']';
@@ -45,7 +42,7 @@
                 $description = $this->properties['description'];
                 $cat1 = $this->properties['cat1'];
                 $cat2 = $this->properties['cat2'];
-                $type = $this->properties['game_type'];
+                $type = $this->properties['type'];
 
                 // These just contain what the use submitted
                 $current_actions = '[' . implode(',',$this->properties['actions']) . ']';
@@ -67,7 +64,7 @@
     var currentKeys = $current_keys;
     var cat1 = '$cat1';
     var cat2 = '$cat2';
-    var gameType = '$type';
+    var type = '$type';
 </script>
 <form class="admin" action = "/administration/game" method = "POST" enctype = "multipart/form-data">
 $error_message
@@ -82,9 +79,9 @@ $error_message
 <label id="admin-controls-section"><span class='admin-label-text'>Controls: </span><br>
 <input type='text' id='control_field'/><button onclick='addAControl(event)'>Add this new Control</button>
 <input type='text' id='action_field'/><button onclick='addAnAction(event)'>Add this new Action</button><br>
-<input type='hidden' name='id' value='$id'/>
 <div id='controls_area'><button onclick='addControl(event)'>Add Controls/Actions</button><button id='remove_control' style='display: none' onclick='removeControl(event)'>Remove Controls/Actions</button></div>
 </label>
+<input type='hidden' name='id' value='$id'/>
 <label for = "cat1">
 <span class='admin-label-text'>Category 1: </span>
 <select required id="cat1" name = "cat1">
@@ -138,39 +135,9 @@ HTML;
                 'tight'         => 1
 			) );
             $box->generate();
-            $this->HTML = $box->get_HTML() . $this->generate_listing();
+            $this->HTML = $box->get_HTML() . $this->generate_listing("game", "Current Games");
             $this->JS = array_merge( $this->JS, $box->get_JS() );
 			$this->CSS = array_merge( $this->CSS, $box->get_CSS() );
-        }
-        
-        /**
-		* Generate Listing
-        */
-        protected function generate_listing() {
-            $listing = $this->properties['listing'];
-            $html = "<table><thead><tr><th>ID</th><th>Name</th><th>Action</th></tr></thead><tbody>";
-            foreach ( $listing as $item ) {
-                $html .= "<tr>";
-                foreach( $item as $key => $value ) {
-                    if( $key == 'url_name' ) {
-                        $html .= "<td><a href='/administration/game/$value'>Edit</a></td>";
-                    }
-                    else {
-                        $html .= "<td>$value</td>";
-                    }
-                }
-                $html .= "</tr>";
-            }
-            $html .= "</tbody></table>";
-            // Place the HTML in a box
-            $box = new \Widget\Box( array(
-				'content'		=> array( 
-									array( 'title' => '-', 'content' => $html ),
-									),
-                'title'			=> "Current Games"
-			) );
-            $box->generate();
-            return $box->get_HTML();
         }
 		
 	}

@@ -85,19 +85,27 @@ function addAnAction(event) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('cat1').value = cat1;
-    document.getElementById('cat2').value = cat2;
-    document.getElementById('type').value = gameType;
+    if( cat1 ) {
+        document.getElementById('cat1').value = cat1;
+    }
+    if( cat2 ) {
+        document.getElementById('cat2').value = cat2;
+    }
+    if( type ) {
+        document.getElementById('type').value = type;
+    }
     
-    for(var i=0; i<currentKeys.length; i++) {
-        addControl(document.createEvent('Event'));
-        var keyList = document.getElementById('key_' + (controlCount - 1));
-        var actionList = document.getElementById('action_' + (controlCount - 1));
-        if( currentKeys[i] ) {
-            keyList.value = currentKeys[i];
-        }
-        if( currentActions[i] ) {
-            actionList.value = currentActions[i];
+    if( currentKeys ) {
+        for(var i=0; i<currentKeys.length; i++) {
+            addControl(document.createEvent('Event'));
+            var keyList = document.getElementById('key_' + (controlCount - 1));
+            var actionList = document.getElementById('action_' + (controlCount - 1));
+            if( currentKeys[i] ) {
+                keyList.value = currentKeys[i];
+            }
+            if( currentActions[i] ) {
+                actionList.value = currentActions[i];
+            }
         }
     }
 }, false );

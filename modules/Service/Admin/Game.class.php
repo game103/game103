@@ -23,8 +23,6 @@
 		*/
 		public function generate() {
 
-            $return_arr = array();
-
             // Load data if we have a url name
             if ( $this->url_name ) {
                 $return_val = $this->load(); // This will populate "post"
@@ -41,37 +39,20 @@
             // Process the post data if necessary
             // (If the user has given us some form of input be it data or a url_name)
             if( $this->post ) {
-                $return_arr = $this->process();
+                $this->process();
             }
 
-            $all_controls = $this->generate_controls();
-            $all_actions = $this->generate_actions();
+            $this->generate_controls();
+            $this->generate_actions();
+            $this->listing();
 
-            $return_arr["controls_ids"] = $all_controls["controls_ids"];
-            $return_arr["controls_keys"] = $all_controls["controls_keys"];
-            $return_arr["actions_ids"] = $all_actions["actions_ids"];
-            $return_arr["actions_names"] = $all_actions["actions_names"];
-            $return_arr["listing"] = $this->listing();
-
-            return $return_arr;
+            return $this->processed_post;
         }
 
         /**
 		* Process the user's input.
 		*/
         protected function process() {
-
-            $id = $this->post['id'];
-            $name = $this->post['name'];
-            $url = $this->post['url'];
-            $width = $this->post['width'];
-            $height = $this->post['height'];
-            $description = $this->post['description'];
-            $image_url = $this->post['image_url'];
-            $game_type = $this->post['type'];
-            $submit = $this->post['submit'];
-            $cat1 = $this->post['cat1'];
-            $cat2 = $this->post['cat2'];
 
             // Fetch the keys listed
             $keys = array();
@@ -94,83 +75,56 @@
             }
 
             // Create the return array at this point in case of failure
-            $return_arr = array(
-                'id'            =>  $id,
-                'name'          =>  $name,
-                'url'           =>  $url,
-                'width'         =>  $width,
-                'height'        =>  $height,
-                'description'   =>  $description,
-                'image_url'     =>  $image_url,
-                'game_type'     =>  $game_type,
-                'cat1'          =>  $cat1,
-                'cat2'          =>  $cat2,
+            $this->processed_post = array(
+                'id'            =>  $this->post['id'],
+                'name'          =>  $this->post['name'],
+                'url'           =>  $this->post['url'],
+                'width'         =>  $this->post['width'],
+                'height'        =>  $this->post['height'],
+                'description'   =>  $this->post['description'],
+                'image_url'     =>  $this->post['image_url'],
+                'type'          =>  $this->post['type'],
+                'cat1'          =>  $this->post['cat1'],
+                'cat2'          =>  $this->post['cat2'],
                 'keys'          =>  $keys,
                 'actions'       =>  $actions
             );
 
             // If we are submitting, then do an insert/update
-            if($submit) {
+            if($this->post['submit']) {
                 // Generate the url name
-                $url_name = $this->generate_url_name($name);
+                $this->generate_url_name();
                 
-                if($cat2 == "") {
-                    unset($cat2);
+                if($this->processed_post['cat2'] == "") {
+                    unset($this->processed_post['cat2']);
                 }     
 
                 // Check for errors
-                $return_arr = $this->error_check( $return_arr, $cat1, $keys, $actions );
-                if( $return_arr['status'] === 'error' ) {
-                    return $return_arr;
+                $this->error_check();
+                if( $this->processed_post['status'] === 'error' ) {
+                    return $this->processed_post;
                 }
 
                 // Insert actions and keys to the database that don't have IDs
-                $keys = $this->insert_new_actions_or_controls( $keys, "controls", "controls.key" );
-                $actions = $this->insert_new_actions_or_controls( $actions, "actions", "name" );
+                $this->processed_post['keys'] = $this->insert_new_actions_or_controls( $this->processed_post['keys'], "controls", "controls.key" );
+                $this->processed_post['actions'] = $this->insert_new_actions_or_controls( $this->processed_post['actions'], "actions", "name" );
                 
                 // Generate actions_controls
-                $actions_controls = $this->insert_actions_controls( $keys, $actions );
+                $this->insert_actions_controls();
             
                 // move files
-                $return_arr = $this->move_files( $return_arr, $url_name );
-		        $url = $return_arr['url'];
-		        $image_url = $return_arr['image_url'];
+                $this->move_image_files();
+                $this->move_game_files();
 
-                if( !$id ) {
-                    $return_arr = $this->insert_new_game( $return_arr, $name, $url, $width, $height, $description, $image_url, $url_name, $game_type, $actions_controls, $cat1, $cat2 );
+                if( !$this->processed_post['id'] ) {
+                    $this->insert_new_game();
                 }
                 else {
-                    $return_arr = $this->update_game( $return_arr, $name, $url, $width, $height, $description, $image_url, $url_name, $game_type, $actions_controls, $cat1, $cat2, $id );
+                    $this->update_game();
                 }
             }
 
-            return $return_arr;
-        }
-
-        /**
-         * Get a listing of the current entries
-         */
-        protected function listing() {
-            $sql = "select id, name, url_name from entries order by id desc";
-			// Prepare the statement
-			$statement = $this->mysqli->prepare($sql);
-			// Execute the statement
-			$statement->execute();
-			// Get the one result
-			$statement->bind_result($id, $name, $url_name);
-            // Fetch the result
-            $current_listing = array();
-			while( $statement->fetch() ) {
-                $current_listing[] = array(
-                    "id"        =>  $id,
-                    "name"      =>  $name,
-                    "url_name"  =>  $url_name
-                );
-            }
-			// Close the statement
-            $statement->close();
-            
-            return $current_listing;
+            return $this->processed_post;
         }
 
          /**
@@ -224,13 +178,24 @@
                 $statement->close();
             }
 
+            $this->load_categories();
+
+            return true;
+           
+        }
+
+        /**
+         * Load the values for an existing entry into the post data (this can later be processed)
+         * (Overrides to not include game103 or distributable categories)
+         */
+        protected function load_categories() {
             // Load category data if necessary
             if( !isset($this->post['cat1']) ) {
-                $controls_str = "SELECT categories.id FROM entries
+                $cat_str = "SELECT categories.id FROM entries
                     join categories_entries on categories_entries.entry_id = entries.id
                     join categories on categories.id = categories_entries.category_id
                     where entries.url_name = ? and categories.url_name != ? and categories.url_name != ?";
-                $statement = $this->mysqli->prepare($controls_str);
+                $statement = $this->mysqli->prepare($cat_str);
                 $statement->bind_param("sss", $this->url_name, $g = "game103", $d = "distributable");
                 $statement->execute();
                 $statement->bind_result($category);
@@ -242,117 +207,79 @@
                 }
                 $statement->close();
             }
-
-            return true;
-           
         }
 
         /**
-         * Move image and game files.
+         * Move game files.
          */
-        protected function move_files( $return_arr, $url_name ) {
-            $gamefile_target_dir = "/stock/games/flash/";
-            $gamefile_target_file = $gamefile_target_dir. $url_name . "." .  pathinfo($_FILES["gamefile_upload"]["name"], PATHINFO_EXTENSION);
-            $imagefile_target_dir = "/images/icons/games/";
-            $imagefile_target_file = $imagefile_target_dir. $url_name . "." . pathinfo($_FILES["imagefile_upload"]["name"], PATHINFO_EXTENSION);
-            
-            // move the files to the correct location
-            // if the upload is successful that is the url
-            if(move_uploaded_file($_FILES["gamefile_upload"]["tmp_name"],getcwd() . $gamefile_target_file)) {
-                $url = $gamefile_target_file;
-		        $return_arr['url'] = $url;
-                $return_arr["gamefile_status"] = "success";
+        protected function move_game_files() {
+            $move_game_response = $this->move_file( $_FILES['gamefile_upload'], "/stock/games/flash/", $this->processed_post['url_name'] );
+
+            if( $move_game_response ) {
+                $this->processed_post['url'] = $move_game_response;
             }
-            if(move_uploaded_file($_FILES["imagefile_upload"]["tmp_name"],getcwd() . $imagefile_target_file)) {
-                $image_url = $imagefile_target_file;
-		        $return_arr['image_url'] = $image_url;
-                $return_arr["imagefile_status"] = "success";
-                // Create a webp version
-                exec( "cwebp " . getcwd().$imagefile_target_file . " -o " . getcwd().$imagefile_target_dir.$url_name."webp" . " -z 6" );
-            }
-            return $return_arr;
         }
 
         /**
          * Insert a new game.
          * A file will override a url (for games and images)
          */
-        protected function insert_new_game( $return_arr, $name, $url, $width, $height, $description, $image_url, $url_name, $game_type, $actions_controls, $cat1, $cat2 ) {
+        protected function insert_new_game() {
             // Insert game    
             $sql = "INSERT INTO entries(name, url, width, height, description, image_url, url_name, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             $statement = $this->mysqli->prepare($sql);
-            $statement->bind_param("ssiissss", $name, $url, $width, $height, $description, $image_url, $url_name, $game_type);
+            $statement->bind_param("ssiissss", $this->processed_post['name'], $this->processed_post['url'], $this->processed_post['width'], 
+                $this->processed_post['height'], $this->processed_post['description'], $this->processed_post['image_url'], $this->processed_post['url_name'], $this->processed_post['type']);
             $statement->execute();
-            $id = $this->mysqli->insert_id;
+            $this->processed_post['id'] = $this->mysqli->insert_id;
             $statement->close();
 
-            $this->insert_actions_controls_entries( $actions_controls, $id );
-            $this->insert_categories_entries( $cat1, $cat2, $id );
-
-            return $return_arr;
+            $this->insert_actions_controls_entries();
+            $this->insert_categories_entries();
         }
 
         /**
          * Update a game.
          */
-        protected function update_game( $return_arr, $name, $url, $width, $height, $description, $image_url, $url_name, $game_type, $actions_controls, $cat1, $cat2, $id ) {
+        protected function update_game() {
             // Update
             $sql = "UPDATE entries set name = ?, url = ?, width = ?, height = ?, description = ?, image_url = ?, url_name = ?, type = ? where id = ?";
             $statement = $this->mysqli->prepare($sql);
-            $statement->bind_param("ssiissssi", $name, $url, $width, $height, $description, $image_url, $url_name, $game_type, $id);
+            $statement->bind_param("ssiissssi", $this->processed_post['name'], $this->processed_post['url'], $this->processed_post['width'], 
+                $this->processed_post['height'], $this->processed_post['description'], $this->processed_post['image_url'], 
+                $this->processed_post['url_name'], $this->processed_post['type'], $this->processed_post['id']);
             $statement->execute();
             $statement->close();
 
             // Delete current acctions controls
             $delete_sql = "DELETE FROM actions_controls_entries WHERE entry_id = ?";
             $statement = $this->mysqli->prepare($delete_sql);
-            $statement->bind_param("i", $id);
+            $statement->bind_param("i", $this->processed_post['id']);
             $statement->execute();
             $statement->close();
 
             // Insert new actions controls
-            $this->insert_actions_controls_entries( $actions_controls, $id );
+            $this->insert_actions_controls_entries();
             
             // Delete current categories entries
-            $delete_sql = "DELETE FROM categories_entries WHERE entry_id = ?";
-            $statement = $this->mysqli->prepare($delete_sql);
-            $statement->bind_param("i", $id);
-            $statement->execute();
-            $statement->close();
+            $this->delete_categories_entries();
 
             // Insert new categories entries
-            $this->insert_categories_entries( $cat1, $cat2, $id );
-
-            return $return_arr;
+            $this->insert_categories_entries();
         }
 
         /**
          * Insert values into actions controls entries.
          */
-        protected function insert_actions_controls_entries( $actions_controls, $id ) {
-            for($i=0;$i<count($actions_controls);$i++) {
-                $ac_id = $actions_controls[$i];
+        protected function insert_actions_controls_entries() {
+            for($i=0;$i<count($this->processed_post['actions_controls']);$i++) {
+                $ac_id = $this->processed_post['actions_controls'][$i];
                 $sql = "INSERT INTO actions_controls_entries(action_control_id, entry_id) VALUES (?,?)";
                 $statement = $this->mysqli->prepare($sql);
-                $statement->bind_param("ii", $ac_id, $id);
+                $statement->bind_param("ii", $ac_id, $this->processed_post['id']);
                 $statement->execute();
                 $statement->close();
             }
-        }
-
-        /**
-         * Insert values into categories entries.
-         */
-        protected function insert_categories_entries( $cat1, $cat2, $id ) {
-            $sql = "INSERT INTO categories_entries(category_id, entry_id) VALUES (?,?)";
-            $statement = $this->mysqli->prepare($sql);
-            $statement->bind_param("ii", $cat1, $id);
-            $statement->execute();
-            $statement->close();
-            $statement = $this->mysqli->prepare($sql);
-            $statement->bind_param("ii", $cat2, $id);
-            $statement->execute();
-            $statement->close();
         }
 
         /**
@@ -360,14 +287,14 @@
          * The array will be keyed by the id of the actions_controls entry
          * in the database.
          */
-        protected function insert_actions_controls( $keys, $actions ) {
+        protected function insert_actions_controls() {
             $actions_controls = array();
 
             // we have to do a lookup to see if each pair/value already exists in actions_controls
             // If it does, get the id, otherwise insert and get id. Put in actions_controls array.
-            for($i=0;$i<count($keys);$i++) {
-                $key_id = $keys[$i];
-                $action_id = $actions[$i];
+            for($i=0;$i<count($this->processed_post['keys']);$i++) {
+                $key_id = $this->processed_post['keys'][$i];
+                $action_id = $this->processed_post['actions'][$i];
                 
                 $sql = "SELECT id FROM actions_controls WHERE action_id = ? AND control_id = ?";
                 $statement = $this->mysqli->prepare($sql);
@@ -392,7 +319,7 @@
                 
             }
 
-            return $actions_controls;
+            $this->processed_post['actions_controls'] = $actions_controls;
         }
 
         /**
@@ -451,10 +378,8 @@
             }
             $controls_statement->close();
 
-            return array(
-                'controls_ids' => $controls_ids_arr,
-                'controls_keys' => $controls_keys_arr 
-            );
+            $this->processed_post['controls_ids'] = $controls_ids_arr;
+            $this->processed_post['controls_keys'] = $controls_keys_arr;
         }
 
         /**
@@ -478,38 +403,34 @@
             }
             $actions_statement->close();
 
-            return array(
-                'actions_ids' => $actions_ids_arr,
-                'actions_names' => $actions_names_arr 
-            );
+            $this->processed_post['actions_ids'] = $actions_ids_arr;
+            $this->processed_post['actions_names'] = $actions_names_arr;
         }
 
         /**
          * Error check.
          */
-        protected function error_check($return_arr, $cat1, $keys, $actions) {
-            $return_arr['status'] = "success";
+        protected function error_check() {
+            $this->processed_post['status'] = "success";
 
             // Need at least one category
-            if(!$cat1) {
-                die("Please select a category");
-                $return_arr['status'] = "error";
-                $return_arr['message'] = self::CATEGORY_ERROR_MESSAGE;
+            if(!$this->processed_post['cat1']) {
+                $this->processed_post['status'] = "error";
+                $this->processed_post['message'] = self::CATEGORY_ERROR_MESSAGE;
             }
 
             // Check for duplicates
             // Remember, keys[$i] and actions[$i] correspond to a key action pair.
-            for($i=0;$i<count($keys)-1;$i++) {
-                $key_check = $keys[$i];
-                for($j=$i+1; $j<count($keys);$j++) {
-                    if($keys[$i] == $keys[$j] && $actions[$i] == $actions[$j]) {
-                        $return_arr['status'] = "error";
-                        $return_arr['message'] = self::DUPLICATES_ERROR_MESSAGE;
+            for($i=0;$i<count($this->processed_post['keys'])-1;$i++) {
+                $key_check = $this->processed_post['keys'][$i];
+                for($j=$i+1; $j<count($this->processed_post['keys']);$j++) {
+                    if($this->processed_post['keys'][$i] == $this->processed_post['keys'][$j] 
+                        && $this->processed_post['actions'][$i] == $this->processed_post['actions'][$j]) {
+                        $this->processed_post['status'] = "error";
+                        $this->processed_post['message'] = self::DUPLICATES_ERROR_MESSAGE;
                     }
                 }
             }
-
-            return $return_arr;
         }
 		
 	}

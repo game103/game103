@@ -70,6 +70,7 @@
 	require_once("Service/Detail/Game/Download.class.php");
 	require_once("Service/Detail/Video.class.php");
 	require_once("Service/Admin/Game.class.php");
+	require_once("Service/Admin/Video.class.php");
 	require_once("Service/Login.class.php");
 	
 	require_once("Widget/Find.class.php");
@@ -90,6 +91,7 @@
 	require_once("Widget/PrivacyPolicy.class.php");
 	require_once("Widget/Blog.class.php");
 	require_once("Widget/Admin/Game.class.php");
+	require_once("Widget/Admin/Video.class.php");
 	require_once("Widget/Login.class.php");
 	
 	ob_start("\Constants::sanitize_output");
@@ -522,7 +524,7 @@
 							array_push( $widgets, $widget );
 							$content = $widget->get_HTML();
 							$title = "$class Admin";
-							$description = $generated['description'] . "Game 103 $class Admin";
+							$description = "Game 103 $class Admin";
 						}
 						else { $is_404 = true; }
 					}
