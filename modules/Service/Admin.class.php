@@ -79,8 +79,8 @@
         /**
          * Move files.
          */
-        protected function move_image_files() {
-            $move_image_response = $this->move_file( $_FILES['imagefile_upload'], "/images/icons/games/", $this->processed_post['url_name'] );
+        protected function move_image_files( $type ) {
+            $move_image_response = $this->move_file( $_FILES['imagefile_upload'], "/images/icons/$type/", $this->processed_post['url_name'] );
 
             if( $move_image_response ) {
                 $this->processed_post['image_url'] = $move_image_response;
@@ -103,10 +103,10 @@
 
                 // Create a webp version
                 if( strtolower($extension) == 'png' || strtolower($extension) == "jpeg" || strtolower($extension) == "jpg" ) {
-                    exec( "cwebp " . getcwd() . $target_file . " -o " . getcwd().$target_dir.$url_name."webp" . " -z 6" );
+                    exec( "cwebp " . getcwd() . $target_file . " -o " . getcwd().$target_dir.$url_name.".webp" . " -z 6" );
                 }
                 else if( strtolower($extension) == "gif" ) {
-                    exec( "gif2webp " . getcwd() . $target_file . " -o " . getcwd().$target_dir.$url_name."webp" );
+                    exec( "gif2webp " . getcwd() . $target_file . " -o " . getcwd().$target_dir.$url_name.".webp" );
                 }
             }
             return $url;

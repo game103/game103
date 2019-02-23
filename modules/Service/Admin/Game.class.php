@@ -113,7 +113,7 @@
                 $this->insert_actions_controls();
             
                 // move files
-                $this->move_image_files();
+                $this->move_image_files( "games" );
                 $this->move_game_files();
 
                 if( !$this->processed_post['id'] ) {

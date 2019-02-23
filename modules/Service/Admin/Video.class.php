@@ -80,7 +80,7 @@
                 }
             
                 // move files
-                $this->move_image_files();
+                $this->move_image_files( "videos" );
 
                 if( !$this->processed_post['id'] ) {
                     $this->insert_new_video();
