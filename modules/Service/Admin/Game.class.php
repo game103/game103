@@ -134,8 +134,8 @@
             
                 // move files
                 $return_arr = $this->move_files( $return_arr, $url_name );
-		$url = $return_arr['url'];
-		$image_url = $return_arr['image_url'];
+		        $url = $return_arr['url'];
+		        $image_url = $return_arr['image_url'];
 
                 if( !$id ) {
                     $return_arr = $this->insert_new_game( $return_arr, $name, $url, $width, $height, $description, $image_url, $url_name, $game_type, $actions_controls, $cat1, $cat2 );
@@ -261,13 +261,15 @@
             // if the upload is successful that is the url
             if(move_uploaded_file($_FILES["gamefile_upload"]["tmp_name"],getcwd() . $gamefile_target_file)) {
                 $url = $gamefile_target_file;
-		$return_arr['url'] = $url;
+		        $return_arr['url'] = $url;
                 $return_arr["gamefile_status"] = "success";
             }
             if(move_uploaded_file($_FILES["imagefile_upload"]["tmp_name"],getcwd() . $imagefile_target_file)) {
                 $image_url = $imagefile_target_file;
-		$return_arr['image_url'] = $image_url;
+		        $return_arr['image_url'] = $image_url;
                 $return_arr["imagefile_status"] = "success";
+                // Create a webp version
+                exec( "cwebp " . getcwd().$imagefile_target_file . " -o " . getcwd().$imagefile_target_dir.$url_name."webp" . " -z 6" );
             }
             return $return_arr;
         }

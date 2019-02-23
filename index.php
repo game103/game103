@@ -531,6 +531,8 @@
 				else { $is_404 = true; }
 			}
 			else {
+				// Generated will already exist if this was a previous login attempt
+				// and it will have a message
 				if( !$generated ) {
 					$generated = array();
 				}
