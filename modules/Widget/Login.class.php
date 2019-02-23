@@ -13,7 +13,6 @@
 		*/
 		public function __construct($properties) {
             \Widget::__construct( $properties );
-            $this->JS[] = '/javascript/admin.js';
 			$this->CSS[] = '/css/admin.css';
 		}
 		
