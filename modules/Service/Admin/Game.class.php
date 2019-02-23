@@ -134,6 +134,8 @@
             
                 // move files
                 $return_arr = $this->move_files( $return_arr, $url_name );
+		$url = $return_arr['url'];
+		$image_url = $return_arr['image_url'];
 
                 if( !$id ) {
                     $return_arr = $this->insert_new_game( $return_arr, $name, $url, $width, $height, $description, $image_url, $url_name, $game_type, $actions_controls, $cat1, $cat2 );
@@ -250,21 +252,21 @@
          * Move image and game files.
          */
         protected function move_files( $return_arr, $url_name ) {
-            $gamefile_target_dir = getcwd() . "/stock/games/flash/";
+            $gamefile_target_dir = "/stock/games/flash/";
             $gamefile_target_file = $gamefile_target_dir. $url_name . "." .  pathinfo($_FILES["gamefile_upload"]["name"], PATHINFO_EXTENSION);
-            $imagefile_target_dir = getcwd() . "/images/icons/games/";
+            $imagefile_target_dir = "/images/icons/games/";
             $imagefile_target_file = $imagefile_target_dir. $url_name . "." . pathinfo($_FILES["imagefile_upload"]["name"], PATHINFO_EXTENSION);
             
             // move the files to the correct location
             // if the upload is successful that is the url
-            if(move_uploaded_file($_FILES["gamefile_upload"]["tmp_name"],$gamefile_target_file)) {
+            if(move_uploaded_file($_FILES["gamefile_upload"]["tmp_name"],getcwd() . $gamefile_target_file)) {
                 $url = $gamefile_target_file;
-                $url = substr($url, 2);
+		$return_arr['url'] = $url;
                 $return_arr["gamefile_status"] = "success";
             }
-            if(move_uploaded_file($_FILES["imagefile_upload"]["tmp_name"],$imagefile_target_file)) {
+            if(move_uploaded_file($_FILES["imagefile_upload"]["tmp_name"],getcwd() . $imagefile_target_file)) {
                 $image_url = $imagefile_target_file;
-                $image_url = substr($image_url, 2);
+		$return_arr['image_url'] = $image_url;
                 $return_arr["imagefile_status"] = "success";
             }
             return $return_arr;
