@@ -5,7 +5,7 @@
 	require_once('Service.class.php');
 	
 	/**
-	* Class represening a game
+	* Class represening a detail page
 	*/
 	abstract class Detail extends \Service {
 				

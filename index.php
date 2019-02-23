@@ -69,6 +69,8 @@
 	require_once("Service/Detail/Game/Browser.class.php");
 	require_once("Service/Detail/Game/Download.class.php");
 	require_once("Service/Detail/Video.class.php");
+	require_once("Service/Admin/Game.class.php");
+	require_once("Service/Login.class.php");
 	
 	require_once("Widget/Find.class.php");
 	require_once("Widget/Detail/Game/Browser.class.php");
@@ -87,6 +89,8 @@
 	require_once("Widget/FunFacts.class.php");
 	require_once("Widget/PrivacyPolicy.class.php");
 	require_once("Widget/Blog.class.php");
+	require_once("Widget/Admin/Game.class.php");
+	require_once("Widget/Login.class.php");
 	
 	ob_start("\Constants::sanitize_output");
 	
@@ -475,6 +479,69 @@
 			}
 			else {
 				$is_404 = true;
+			}
+			break;
+		case 'administration':
+			session_start(); // Start the PHP session
+			$meta = '<meta name="robots" content="noindex">'; // Don't index administration
+
+			// If we are not logged in, but we have a username and password indicating
+			// a login attempt, attempt to login
+			if( !$_SESSION['logged_in'] && $_POST['username'] && $_POST['password'] ) {
+				$service = new \Service\Login( $_POST['username'], $_POST['password'] );
+				$generated = $service->generate(); // Attempt to login
+				$_POST = array(); // Clear out anything in post
+			}
+			// If we are logged in
+			if( $_SESSION['logged_in'] ) {
+				if(count($routes) == 3 || count($routes) == 4) {
+
+					$admin_type = $routes[2];
+					$url_name = $routes[3];
+
+					$class;
+					if( $admin_type == "game" ) {
+						$class = "Game";
+					}
+					else if( $admin_type == "video" ) {
+						$class = "Video";
+					}
+					else if( $class == "resource" ) {
+						$class = "Resource";
+					}
+					
+					if( $class ) {
+						$mysqli = new mysqli( Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD );
+						$service_class = "\Service\Admin\\$class";
+						$service = new $service_class( $_POST, $url_name, $mysqli );
+						$generated = $service->generate();
+						if( $generated["status"] != "failure" ) { // "failure" doesn't mean user error in form; rather, trying to edit an invalid item
+							$widget_class = "\Widget\Admin\\$class";
+							$widget = new $widget_class( $generated );
+							$widget->generate();
+							array_push( $widgets, $widget );
+							$content = $widget->get_HTML();
+							$title = "$class Admin";
+							$description = $generated['description'] . "Game 103 $class Admin";
+						}
+						else { $is_404 = true; }
+					}
+					else { $is_404 = true; }	
+				} 
+				else { $is_404 = true; }
+			}
+			else {
+				if( !$generated ) {
+					$generated = array();
+				}
+				// The action for the login form will be the current attempted location
+				$generated['action'] = "/administration/" . $routes[2] . "/" . $routes[3];
+				$widget = new \Widget\Login( $generated );
+				$widget->generate();
+				array_push( $widgets, $widget );
+				$content = $widget->get_HTML();
+				$title = "Login";
+				$description = "";
 			}
 			break;
 		case 'index';

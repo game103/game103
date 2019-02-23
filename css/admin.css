@@ -1,0 +1,74 @@
+.admin {
+    width: calc(100% - 20px);
+    text-align: left;
+    padding: 10px;
+    position: relative;
+    margin-bottom: 0;
+}
+.admin label {
+    width: 100%;
+    display: block;
+    padding-bottom: 10px;
+    clear: both;
+}
+.admin label.admin-close {
+    padding-bottom: 3px;
+}
+.admin .admin-label-text {
+    display: inline-block;
+    width: 150px;
+}
+.admin label input, .admin label select, .admin label textarea  {
+    background-color: white;
+    height: 20px;
+    border: 1px solid #3274DA;
+    padding: 5px;
+    color: #3274DA;
+    margin-left: 5px;
+    width: calc(100% - 170px);
+}
+.admin.login label input {
+    width: 175px;
+}
+.admin label input[type='number'] {
+    width: 100px;
+}
+.admin label input[type='file'] {
+    width: 200px;
+}
+.admin label select {
+    display: inline-block;
+    height: 30px;
+    width: 175px;
+    margin-bottom: 5px;
+}
+.admin label textarea {
+    width: calc(100% - 25px);
+    height: 100px;
+    margin-left: 0;
+    margin-top: 5px;
+}
+.admin #submit {
+    float: right;
+}
+.admin .clear {
+    clear: both;
+}
+.admin #admin-controls-section input {
+    width: 150px;
+    margin-left: 0;
+}
+.admin .admin-error-message {
+    font-weight: bold;
+    color: #d20101;
+    padding-bottom: 20px;
+}
+.admin .admin-success-message {
+    font-weight: bold;
+    padding-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    text-align: left;
+}
