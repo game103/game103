@@ -66,7 +66,7 @@
     var cat2 = '$cat2';
     var type = '$type';
 </script>
-<form class="admin" action = "/administration/game" method = "POST" enctype = "multipart/form-data">
+<form class="admin" action = "/admin/game" method = "POST" enctype = "multipart/form-data">
 $error_message
 <label for="name"><span class='admin-label-text'>Name: </span><input value="$name" required id="name" type = "text" name = "name"></label>
 <label class="admin-close" for="url"><span class='admin-label-text'>URL (if not in file): </span><input value="$url" id="url" type = "text" name = "url"></label>

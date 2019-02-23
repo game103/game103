@@ -43,7 +43,7 @@
                 $html .= "<tr>";
                 foreach( $item as $key => $value ) {
                     if( $key == 'url_name' ) {
-                        $html .= "<td><a href='/administration/$admin_path_name/$value'>Edit</a></td>";
+                        $html .= "<td><a href='/admin/$admin_path_name/$value'>Edit</a></td>";
                     }
                     else {
                         $html .= "<td>$value</td>";

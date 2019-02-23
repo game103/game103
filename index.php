@@ -71,6 +71,7 @@
 	require_once("Service/Detail/Video.class.php");
 	require_once("Service/Admin/Game.class.php");
 	require_once("Service/Admin/Video.class.php");
+	require_once("Service/Admin/Resource.class.php");
 	require_once("Service/Login.class.php");
 	
 	require_once("Widget/Find.class.php");
@@ -92,6 +93,7 @@
 	require_once("Widget/Blog.class.php");
 	require_once("Widget/Admin/Game.class.php");
 	require_once("Widget/Admin/Video.class.php");
+	require_once("Widget/Admin/Resource.class.php");
 	require_once("Widget/Login.class.php");
 	
 	ob_start("\Constants::sanitize_output");
@@ -483,7 +485,7 @@
 				$is_404 = true;
 			}
 			break;
-		case 'administration':
+		case 'admin':
 			session_start(); // Start the PHP session
 			$meta = '<meta name="robots" content="noindex">'; // Don't index administration
 
@@ -508,7 +510,7 @@
 					else if( $admin_type == "video" ) {
 						$class = "Video";
 					}
-					else if( $class == "resource" ) {
+					else if( $admin_type == "resource" ) {
 						$class = "Resource";
 					}
 					
@@ -539,7 +541,7 @@
 					$generated = array();
 				}
 				// The action for the login form will be the current attempted location
-				$generated['action'] = "/administration/" . $routes[2] . "/" . $routes[3];
+				$generated['action'] = "/admin/" . $routes[2] . "/" . $routes[3];
 				$widget = new \Widget\Login( $generated );
 				$widget->generate();
 				array_push( $widgets, $widget );

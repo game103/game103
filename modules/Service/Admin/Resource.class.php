@@ -7,13 +7,14 @@
 	/**
 	* Class represening an admin page
 	*/
-	class Video extends \Service\Admin {
+	class Resource extends \Service\Admin {
 		
 		/**
 		* Constructor.
 		*/
 		public function __construct( $post, $url_name, $mysqli ) {
-            \Service\Admin::__construct( $post, $url_name, $mysqli, "hallaby_videos" );
+            \Service\Admin::__construct( $post, $url_name, $mysqli, "hallaby_resources" );
+            $this->id_field = "id";
 		}
 
         /**
@@ -24,7 +25,7 @@
             $return_arr = array();
 
             // Load data if we have a url name
-            if ( $this->url_name ) {
+            if ( $this->url_name ) { // url name is id for resources
                 $return_val = $this->load(); // This will populate "post"
                 // The major difference!! submit will not be defined
                 // After going to the edit page through a post, the ID as a hidden variable will
@@ -56,10 +57,9 @@
             $this->processed_post = array(
                 'id'            =>  $this->post['id'],
                 'name'          =>  $this->post['name'],
-                'string'        =>  $this->post['string'],
+                'url'           =>  $this->post['url'],
                 'description'   =>  $this->post['description'],
                 'image_url'     =>  $this->post['image_url'],
-                'type'          =>  $this->post['type'],
                 'cat1'          =>  $this->post['cat1'],
                 'cat2'          =>  $this->post['cat2']
             );
@@ -68,7 +68,7 @@
             if($this->post['submit']) {
                 // Generate the url name
                 $this->generate_url_name();
-                
+
                 if($cat2 == "") {
                     unset($cat2);
                 }     
@@ -80,13 +80,13 @@
                 }
             
                 // move files
-                $this->move_image_files( "videos" );
+                $this->move_image_files( "resources" );
 
                 if( !$this->processed_post['id'] ) {
-                    $this->insert_new_video();
+                    $this->insert_new_resource();
                 }
                 else {
-                    $this->update_video();
+                    $this->update_resource();
                 }
             }
 
@@ -99,11 +99,11 @@
         protected function load() {
 
             // Load data for the entry
-            $sql = "select entries.id, entries.name, entries.string, entries.description, entries.image_url, entries.type from entries where url_name = ?";
+            $sql = "select entries.id, entries.name, entries.url, entries.description, entries.image_url from entries where id = ?";
             $statement = $this->mysqli->prepare($sql);
             $statement->bind_param("s", $this->url_name);
             $statement->execute();
-            $statement->bind_result($id, $name, $string, $description, $image_url, $type);
+            $statement->bind_result($id, $name, $url, $description, $image_url);
             $statement->fetch();
             $statement->close();
             if( !$id ) {
@@ -114,10 +114,9 @@
             // This could either be a request ot generate the edit form
             // or to actually edit.
             if( !$this->post['name'] ) { $this->post['name'] = $name; }
-            if( !$this->post['string'] ) { $this->post['string'] = $string; }
+            if( !$this->post['url'] ) { $this->post['url'] = $url; }
             if( !$this->post['description'] ) { $this->post['description'] = $description; }
             if( !$this->post['image_url'] ) { $this->post['image_url'] = $image_url; }
-            if( !$this->post['type'] ) { $this->post['type'] = $type; }
 
             $this->load_categories();
 
@@ -126,15 +125,14 @@
         }
  
         /**
-         * Insert a new video.
+         * Insert a new resource.
          */
-        protected function insert_new_video() {
+        protected function insert_new_resource() {
             // Insert game    
-            $sql = "INSERT INTO entries(name, string, description, image_url, type, url_name) VALUES (?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO entries(name, url, description, image_url) VALUES (?, ?, ?, ?)";
             $statement = $this->mysqli->prepare($sql);
-            $statement->bind_param("ssssss", $this->processed_post['name'], $this->processed_post['string'],
-                $this->processed_post['description'], $this->processed_post['image_url'], $this->processed_post['type'],
-                $this->processed_post['url_name'] );
+            $statement->bind_param("ssss", $this->processed_post['name'], $this->processed_post['url'],
+                $this->processed_post['description'], $this->processed_post['image_url'] );
             $statement->execute();
             $this->processed_post['id'] = $this->mysqli->insert_id;
             $statement->close();
@@ -145,15 +143,14 @@
         }
 
         /**
-         * Update a video.
+         * Update a resource.
          */
-        protected function update_video() {
+        protected function update_resource() {
             // Update
-            $sql = "UPDATE entries set name = ?, string = ?, description = ?, image_url = ?, type = ?, url_name = ? where id = ?";
+            $sql = "UPDATE entries set name = ?, url = ?, description = ?, image_url = ? where id = ?";
             $statement = $this->mysqli->prepare($sql);
-            $statement->bind_param("sssssss", $this->processed_post['name'], $this->processed_post['string'],
-                $this->processed_post['description'], $this->processed_post['image_url'], $this->processed_post['type'],
-                $this->processed_post['url_name'], $this->processed_post['id'] );
+            $statement->bind_param("sssss", $this->processed_post['name'], $this->processed_post['url'],
+                $this->processed_post['description'], $this->processed_post['image_url'], $this->processed_post['id'] );
             $statement->execute();
             $statement->close();
 

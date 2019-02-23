@@ -15,7 +15,9 @@
         protected $db;
         protected $post; // It's must simpler to just pass all post data to the admin
         protected $processed_post; // The processed post data that is returned to the user
-        protected $url_name;
+        protected $url_name; // This will hold the current value of the url_name, this is used to identify the record in the db, while 
+        // the post/processed post value is used for changing the value (can actually be an id if id_field is not url_name)
+        protected $id_field; // Defaults to url_name
 
 		/**
 		* Constructor.
@@ -26,6 +28,7 @@
             $this->mysqli = $mysqli;
             $this->db = $db;
             $this->url_name = $url_name;
+            $this->id_field = "url_name";
             $this->mysqli->select_db( $this->db );
 		}
 
@@ -38,7 +41,7 @@
 		* Get a listing of the current entries
 		*/
         protected function listing() {
-            $sql = "select id, name, url_name from entries order by id desc";
+            $sql = "select id, name, $this->id_field from entries order by id desc";
 			// Prepare the statement
 			$statement = $this->mysqli->prepare($sql);
 			// Execute the statement
@@ -121,7 +124,7 @@
                 $cat_str = "SELECT categories.id FROM entries
                     join categories_entries on categories_entries.entry_id = entries.id
                     join categories on categories.id = categories_entries.category_id
-                    where entries.url_name = ?";
+                    where entries.$this->id_field = ?";
                 $statement = $this->mysqli->prepare($cat_str);
                 $statement->bind_param("s", $this->url_name);
                 $statement->execute();
