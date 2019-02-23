@@ -102,10 +102,10 @@
                 $url = $target_file;
 
                 // Create a webp version
-                if( $extension == 'png' || $extension == "jpeg" || $extension == "jpg" ) {
+                if( strtolower($extension) == 'png' || strtolower($extension) == "jpeg" || strtolower($extension) == "jpg" ) {
                     exec( "cwebp " . getcwd() . $target_file . " -o " . getcwd().$target_dir.$url_name."webp" . " -z 6" );
                 }
-                else if( $extension == "gif" ) {
+                else if( strtolower($extension) == "gif" ) {
                     exec( "gif2webp " . getcwd() . $target_file . " -o " . getcwd().$target_dir.$url_name."webp" );
                 }
             }
