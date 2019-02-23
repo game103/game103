@@ -57,7 +57,7 @@ $error_message
 	<option value = "4">Images</option>
 	<option value = "5">Video</option>
 	<option value = "6">Web</option>
-    <option value = "25">Management</option>
+    <option value = "25">File Control</option>
     <option value = "26">Editor</option>
     <option value = "27">Language</option>
     <option value = "28">Api</option>
@@ -75,7 +75,7 @@ $error_message
 	<option value = "4">Images</option>
 	<option value = "5">Video</option>
 	<option value = "6">Web</option>
-    <option value = "25">Management</option>
+    <option value = "25">File Control</option>
     <option value = "26">Editor</option>
     <option value = "27">Language</option>
     <option value = "28">Api</option>
