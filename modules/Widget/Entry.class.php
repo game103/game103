@@ -46,9 +46,9 @@
 			if ( isset( $this->properties['type_icon'] ) ) {
 				$type = "<span class=\"entry-type\">{$this->properties['type_icon']}</span>";
 			}
-			if( $this->properties['count'] ) {
+			if( array_key_exists("count", $this->properties) ) {
 				$count_verb = $this->properties['count_verb'] ?: 'visit';
-				if( $this->properties['count'] > 1 || strpos($this->properties['count'], ',') ) {
+				if( $this->properties['count'] != 1 || strpos($this->properties['count'], ',') ) {
 					$count_verb = $this->properties['count_verb_plural'] ?: 'visits';
 				}
 				// Time frame count

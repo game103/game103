@@ -35,7 +35,6 @@ function toggleMoreMenuDisplay() {
 // Log interaction
 function logInteraction(type, url) {
 	var xhttp = new XMLHttpRequest();
-	// TODO -> update this service
 	xhttp.open('GET', '/ws/log_interaction.php?type='+type+'&url_name='+url, true);
 	xhttp.send();
 }

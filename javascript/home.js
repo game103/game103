@@ -119,6 +119,8 @@ function homeLoadNew() {
 						// This must be the first content load, so we allow for more content to load
 						else {
 							document.querySelector('#load-earlier-content').onclick = homeLoadNew;
+							// Make entry links work
+							entrySetLinks();
 						}
 					}
 					catch(e) {

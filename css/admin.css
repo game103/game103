@@ -27,9 +27,6 @@
     margin-left: 5px;
     width: calc(100% - 170px);
 }
-.admin.login label input {
-    width: 175px;
-}
 .admin label input[type='number'] {
     width: 100px;
 }
