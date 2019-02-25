@@ -48,18 +48,19 @@ crawl('/');
 
 os.chdir('/var/www/game103/cache')
 
+page_urls = []
 for page_location in pages:
 	page_url = page_location.replace('/', '-').replace('?', '-')
 	f = open(page_url + ".html", "w")
 	f.write(pages[page_location])
 	f.close()
+	page_urls.append(page_url + ".html")
 
 print "Looking for old files..."
 
 # Remove uncached files
 onlyfiles = [f for f in listdir("/var/www/game103/cache") if isfile(join("/var/www/game103/cache", f))]
 for filename in onlyfiles:
-	path = re.sub(r'-(?![^-]+=)', '/', filename).replace('-', '?').replace(".html","")
-	if not path in pages:
+	if not filename in page_urls:
 		print "removing " + filename
 		os.remove(filename)
