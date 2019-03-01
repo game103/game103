@@ -22,6 +22,7 @@ function toggleMobileMenuDisplay() {
 // Toggle the display of more content
 function toggleMoreMenuDisplay() {
 	var moreDropDown = document.getElementById("more-drop-down");
+	var moreTitle = document.getElementById("more-title");
 	if(moreDropDown.classList.contains('nav-item-dropdown-mobile-visible')) {
 		moreDropDown.classList.remove('nav-item-dropdown-mobile-visible');
 		document.getElementById('more-dropdown-arrow').innerHTML = '&#9660;';
@@ -30,6 +31,13 @@ function toggleMoreMenuDisplay() {
 		moreDropDown.classList.add('nav-item-dropdown-mobile-visible');
 		document.getElementById('more-dropdown-arrow').innerHTML = '&#9650;';
 	}
+	moreTitle.addEventListener("mouseout", removeFakeHover);
+	moreTitle.classList.add('fake-hover'); // For desktop
+}
+
+// Remove fake-hover
+function removeFakeHover() {
+	document.getElementById("more-title").classList.remove('fake-hover');
 }
 
 // Log interaction

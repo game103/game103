@@ -330,6 +330,9 @@ iframe {
 	visibility: visible;
 	transition-delay: 0.5s;
 }
+#more-title.fake-hover:hover + #more-drop-down {
+	transition: none;
+}
 
 /* End Navigation */
 
