@@ -13,7 +13,8 @@ base_url = 'https://game103.net'
 # This is shared between all calls to crawl, so we never crawl the
 # same page twice (like passing by reference)
 pages = {}
-bad_pages = {}
+# pages we don't want to include
+bad_pages = { '/random': '/random' }
 
 # crawl a root url (/<something>)
 # this will populate pages

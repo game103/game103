@@ -63,7 +63,9 @@
 	}
 	
 	require_once("Service/Find/GameFind.class.php");
+	require_once("Service/Find/GameFind/Random.class.php");
 	require_once("Service/Find/VideoFind.class.php");
+	require_once("Service/Find/VideoFind/Random.class.php");
 	require_once("Service/Find/ResourceFind.class.php");
 	require_once("Service/Find/AppFind.class.php");
 	require_once("Service/Detail/Game/Browser.class.php");
@@ -550,6 +552,12 @@
 				$description = "";
 			}
 			break;
+		case 'random':
+			$mysqli = new mysqli( Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD );
+			$service = new \Service\Find\GameFind\Random( 'all', null, $mysqli );
+			$generated = $service->generate();
+			header('Location: ' . '/game/' . $generated['items'][0]['url_name']);
+			break;
 		case 'index';
 		case '':
 			$mysqli = new mysqli( Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD );
@@ -797,12 +805,14 @@
 						<div class="additional-links-section-heading addition-links-section-heading-second">Stores</div>
 						<a target='_blank' rel="noopener" href="https://itunes.apple.com/tt/developer/james-grams/id894750819">Apple App Store</a>
 						<a target='_blank' rel="noopener" href="https://play.google.com/store/apps/developer?id=James+Grams">Google Play</a>
+						<a target="_blank" rel="noopener" href="https://www.customink.com/designs/game103/rjg0-0012-nke0/">Custom Ink T-Shirt</a>
 					</div>
 					<div class="additional-links-section">
 						<div class="additional-links-section-heading">Extras</div>
 						<a href="/about">About Us</a>
 						<a href="/facts">Fun Facts</a>
 						<a href="/characters">Characters</a>
+						<a href="/random">Random Game</a>
 						<div class="additional-links-section-heading addition-links-section-heading-second">Policies</div>
 						<a href="/privacy">Privacy Policy</a>
 					</div>
