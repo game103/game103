@@ -777,8 +777,46 @@
 
 			<!--Contact and Copyright-->
 			<footer class="footer">
-				<div class="additional-links"><a href="/about">About Us</a> | <a href="/privacy">Privacy Policy</a> | <a href="/facts">Fun Facts</a> | <a href="/characters">Characters</a> | <a href="/games/distributable">Developers</a> | <a href="/blog">Blog</a> | <a target="_blank" rel="noopener" href="https://github.com/game103/game103">Source</a></div>
-				<div class="copyright">&copy; 2019 <a href="https://game103.net">Game 103</a></div>
+				<div class="additional-links">
+					<div class="additional-links-section">
+						<div class="additional-links-section-heading">Navigation</div>
+						<a href="/">Home</a>
+						<a href="/games">Games</a>
+						<a href="/games/game103">Game 103 Games</a>
+						<a href="/videos">Videos</a>
+						<a href="/resources">Resources</a>
+						<a href="/apps">Mobile Apps</a>
+						<a href="/everything">Search</a>
+						<a href="/blog">Blog</a>
+					</div>
+					<div class="additional-links-section">
+						<div class="additional-links-section-heading">Social</div>
+						<a target='_blank' rel="noopener" href="https://www.facebook.com/game103">Facebook</a>
+						<a target='_blank' rel="noopener" href="https://twitter.com/game103games">Twitter</a>
+						<a target='_blank' rel="noopener" href="https://www.youtube.com/user/game103games">YouTube</a>
+						<div class="additional-links-section-heading addition-links-section-heading-second">Stores</div>
+						<a target='_blank' rel="noopener" href="https://itunes.apple.com/tt/developer/james-grams/id894750819">Apple App Store</a>
+						<a target='_blank' rel="noopener" href="https://play.google.com/store/apps/developer?id=James+Grams">Google Play</a>
+					</div>
+					<div class="additional-links-section">
+						<div class="additional-links-section-heading">Extras</div>
+						<a href="/about">About Us</a>
+						<a href="/facts">Fun Facts</a>
+						<a href="/characters">Characters</a>
+						<div class="additional-links-section-heading addition-links-section-heading-second">Policies</div>
+						<a href="/privacy">Privacy Policy</a>
+					</div>
+					<div class="additional-links-section">
+						<div class="additional-links-section-heading">Contact</div>
+						<a href="mailto:james@game103.net">Email</a>
+						<a target='_blank' rel="noopener" href="https://m.me/game103">Messenger</a>
+						<a target='_blank' rel="noopener" href="https://twitter.com/messages/compose?recipient_id=789785198707761156">Twitter DM</a>
+						<div class="additional-links-section-heading addition-links-section-heading-second">Developers</div>
+						<a href="/games/distributable">Games for Your Site</a>
+						<a target='_blank' rel="noopener" href="https://github.com/game103/game103">Source Code</a>
+					</div>
+				</div>
+				<div class="copyright">&copy; 2008-<?php echo date("Y");?> <a href="https://game103.net">Game 103</a></div>
 			</footer>
 		</div>
 
