@@ -34,6 +34,9 @@
             $type = 'Flash'; // Default type for games
             if( $this->properties['status'] != 'success' && $this->properties['name'] ) {
                 $id = $this->properties['id'];
+                if( $id ) {
+                    $feature = '<input id="feature" type = "submit" value = "Feature" name = "feature" class="button">';
+                }
                 $name = $this->properties['name'];
                 $url = $this->properties['url'];
                 $image_url = $this->properties['image_url'];
@@ -121,7 +124,8 @@ $error_message
     <option value = "JavaScript">JavaScript</option>
 </select>
 </label>
-<input id='submit' type = "submit" value = "Submit" name = "submit" class="button"><br>
+<input id='submit' type = "submit" value = "Submit" name = "submit" class="button">
+$feature<br>
 <div class='clear'></div>
 </form>
 HTML;

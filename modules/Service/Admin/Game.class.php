@@ -90,8 +90,26 @@
                 'actions'       =>  $actions
             );
 
+            // If we are featuring, then update the featured table
+            // We will not accept a non-existant game here, which is why
+            // we check for id
+            if($this->post['id'] && $this->post['feature']) {
+                // Remove the oldest featured game
+                $sql = "UPDATE featured set removed_date = now() where id = (select id from (select * from featured) as featured_inner where removed_date is null order by added_date asc limit 1)";
+                $statement = $this->mysqli->prepare($sql);
+                $statement->execute();
+                $statement->close();
+                // Insert the new game
+                $sql = "INSERT INTO featured(entry_id, added_date) VALUES (?, now())";
+                $statement = $this->mysqli->prepare($sql);
+                $statement->bind_param("i", $this->processed_post['id']);
+                $statement->execute();
+                $statement->close();
+                $this->processed_post['status'] = "success";
+            }
+
             // If we are submitting, then do an insert/update
-            if($this->post['submit']) {
+            else if($this->post['submit']) {
                 // Generate the url name
                 $this->generate_url_name();
                 
