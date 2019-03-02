@@ -63,7 +63,7 @@
                         <div class="store-item-quantity">Minimum Quantity: 1</div>
                         <div class="store-item-note">Design available on different shirts and sweatshirts</div>
                         <picture>
-                            <source srcset="/images/store/tshirt.webp" type="image/webp">
+                            <source srcset="/images/store/tshirt.webp" data-back-src="/images/store/tshirtback.webp" type="image/webp">
                             <source srcset="/images/store/tshirt.jpg" data-back-src="/images/store/tshirtback.jpg"> 
                             <img src="/images/store/tshirt.jpg" alt="Game 103 T-Shirt" id="tshirt-image" data-back-src="/images/store/tshirtback.jpg">
                         </picture>
