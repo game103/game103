@@ -115,6 +115,7 @@
 	$VIDEOS_BREADCRUMBS_NAME = "Videos";
 	$APPS_BREADCRUMBS_NAME = "Apps";
 	$RESOURCES_BREADCRUMBS_NAME = "Resources";
+	$COMMIT_HASH = shell_exec("git rev-parse HEAD");
 	
 	// Routing
 	//$is_404 = false;
@@ -649,6 +650,9 @@
 			}
 		}
 		foreach( array_unique($widget->get_JS()) as $js_file ) {
+			if( strpos($js_file, "http") === false ) {
+				$js_file .= "?v=$COMMIT_HASH";
+			}
 			$js .= "<script defer src='$js_file'></script>";
 		}
 	}
@@ -746,7 +750,7 @@
 		
 		<!-- Load JS -->
 		<script>document.documentElement.classList.remove("no-js");</script>
-		<script defer src='/javascript/base.js'></script>
+		<script defer src='/javascript/base.js?v=<?php echo $COMMIT_HASH?>'></script>
 		<?php echo $js ?>
 		
 		<!--Google Analytics Function-->
