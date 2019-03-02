@@ -505,6 +505,7 @@ iframe {
 
 #more-dropdown-arrow {
 	top: 100px;
+	display: none;
 }
 
 @media screen and (max-width: 810px) {
@@ -565,6 +566,10 @@ iframe {
 	
 	.mobile-visible {
 		display: block !important;
+	}
+
+	#more-dropdown-arrow {
+		display: block;
 	}
 	
 	
