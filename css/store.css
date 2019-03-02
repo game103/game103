@@ -1,0 +1,41 @@
+.store {
+    margin-top: 40px;
+}
+
+.store-column {
+    display: inline-block;
+    vertical-align: top;
+    padding: 20px;
+    padding-top: 0;
+}
+
+.store-item + .store-item {
+    padding-top: 20px;
+}
+
+.store-item-title {
+    font-size: 110%;
+}
+
+.store-item-price, .store-item-quantity, .store-item-note {
+    font-size: 75%;
+}
+
+.store-item img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+}
+
+#bumper-sticker-image {
+    width: 200px;
+}
+
+#stickers-image {
+    width: 100px;
+}
+
+#tshirt-image {
+    width: 280px;
+}

@@ -97,6 +97,7 @@
 	require_once("Widget/Admin/Video.class.php");
 	require_once("Widget/Admin/Resource.class.php");
 	require_once("Widget/Login.class.php");
+	require_once("Widget/Store.class.php");
 	
 	ob_start("\Constants::sanitize_output");
 	
@@ -553,10 +554,28 @@
 			}
 			break;
 		case 'random':
-			$mysqli = new mysqli( Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD );
-			$service = new \Service\Find\GameFind\Random( 'all', null, $mysqli );
-			$generated = $service->generate();
-			header('Location: ' . '/game/' . $generated['items'][0]['url_name']);
+			if(count($routes) == 2) {
+				$mysqli = new mysqli( Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD );
+				$service = new \Service\Find\GameFind\Random( 'all', null, $mysqli );
+				$generated = $service->generate();
+				header('Location: ' . '/game/' . $generated['items'][0]['url_name']);
+			}
+			else {
+				$is_404 = true;
+			}
+			break;
+		case 'store':
+			if(count($routes) == 2) {
+				$widget = new \Widget\Store();
+				$widget->generate();
+				$content = $widget->get_HTML();
+				$title = "Store";
+				$description = "A Store where you can order Game 103 Merchandise.";
+				array_push( $widgets, $widget );
+			}
+			else {
+				$is_404 = true;
+			}
 			break;
 		case 'index';
 		case '':
@@ -805,7 +824,7 @@
 						<div class="additional-links-section-heading addition-links-section-heading-second">Stores</div>
 						<a target='_blank' rel="noopener" href="https://itunes.apple.com/tt/developer/james-grams/id894750819">Apple App Store</a>
 						<a target='_blank' rel="noopener" href="https://play.google.com/store/apps/developer?id=James+Grams">Google Play</a>
-						<a target="_blank" rel="noopener" href="https://www.customink.com/designs/game103/rjg0-0012-nke0/">Custom Ink T-Shirt</a>
+						<a href="/store">Game 103 Store</a>
 					</div>
 					<div class="additional-links-section">
 						<div class="additional-links-section-heading">Extras</div>
@@ -821,6 +840,7 @@
 						<a href="mailto:james@game103.net">Email</a>
 						<a target='_blank' rel="noopener" href="https://m.me/game103">Messenger</a>
 						<a target='_blank' rel="noopener" href="https://twitter.com/messages/compose?recipient_id=789785198707761156">Twitter DM</a>
+						<a target='_blank' rel="noopener" href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LBT2FKM4SHUAQ&source=url">Donate</a>
 						<div class="additional-links-section-heading addition-links-section-heading-second">Developers</div>
 						<a href="/games/distributable">Games for Your Site</a>
 						<a target='_blank' rel="noopener" href="https://github.com/game103/game103">Source Code</a>
