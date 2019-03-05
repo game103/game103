@@ -269,6 +269,10 @@ iframe {
 	font-size: 90%;
 }
 
+#more-drop-down .nav-item-list-item {
+	width: calc(100% - 2px);
+}
+
 .nav-item:nth-child(even) .nav-item-list-item:nth-child(odd) {
 	background-color: #2d68c4 ;
 }
