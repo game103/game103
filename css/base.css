@@ -164,6 +164,10 @@ iframe {
 	display: none;
 }
 
+.lazy img {
+	opacity: 0.2; 
+}
+
 /* Item permanently displayed on the navigation bar */
 .nav {
 	width: 100%;

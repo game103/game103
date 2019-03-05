@@ -844,7 +844,7 @@
 						<a href="mailto:james@game103.net">Email</a>
 						<a target='_blank' rel="noopener" href="https://m.me/game103">Messenger</a>
 						<a target='_blank' rel="noopener" href="https://twitter.com/messages/compose?recipient_id=789785198707761156">Twitter DM</a>
-						<a target='_blank' rel="noopener" href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LBT2FKM4SHUAQ&source=url">Donate</a>
+						<a target='_blank' rel="noopener" href="https://www.patreon.com/game103">Support on Patreon</a>
 						<div class="additional-links-section-heading addition-links-section-heading-second">Developers</div>
 						<a href="/games/distributable">Games for Your Site</a>
 						<a target='_blank' rel="noopener" href="https://github.com/game103/game103">Source Code</a>
