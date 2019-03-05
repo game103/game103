@@ -98,6 +98,7 @@
 	require_once("Widget/Admin/Resource.class.php");
 	require_once("Widget/Login.class.php");
 	require_once("Widget/Store.class.php");
+	require_once("Widget/FlashGuide.class.php");
 	
 	ob_start("\Constants::sanitize_output");
 	
@@ -578,6 +579,19 @@
 				$is_404 = true;
 			}
 			break;
+		case 'flash':
+			if(count($routes) == 2) {
+				$widget = new \Widget\FlashGuide();
+				$widget->generate();
+				$content = $widget->get_HTML();
+				$title = "Flash Player Guide";
+				$description = "A guide to running Adobe Flash Player as painlessly as possible on various browsers and devices in 2019.";
+				array_push( $widgets, $widget );
+			}
+			else {
+				$is_404 = true;
+			}
+			break;
 		case 'index';
 		case '':
 			$mysqli = new mysqli( Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD );
@@ -838,6 +852,7 @@
 						<a href="/about">About Us</a>
 						<a href="/facts">Fun Facts</a>
 						<a href="/characters">Characters</a>
+						<a href="/flash">Flash Player Guide</a>
 						<a href="/random">Random Game</a>
 						<div class="additional-links-section-heading addition-links-section-heading-second">Policies</div>
 						<a href="/privacy">Privacy Policy</a>

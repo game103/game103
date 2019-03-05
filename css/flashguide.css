@@ -1,0 +1,28 @@
+.box-content-tab {
+    text-align: left;
+}
+
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.inline-pre {
+    display: inline;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.flash-guide-tested {
+    font-size: 12px;
+    font-weight: normal;
+    font-style: italic;
+    margin-top: -15px;
+}
+
+.table-of-contents {
+    border: 1px solid;
+    padding: 10px;
+    padding-right: 30px;
+    display: inline-block;
+}
