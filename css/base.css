@@ -394,6 +394,10 @@ iframe {
 	margin: 1px 0;
 }
 
+.additional-links-section a i {
+	padding-right: 5px;
+}
+
 .social-links {
 	height: 24px;
 	margin-bottom: 2px;

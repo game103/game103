@@ -746,6 +746,9 @@
 		<?php $file = fopen( dirname(__FILE__) . "/css/base.css", "r" );
 			$css = "<style>" . fread( $file,filesize(dirname(__FILE__) . "/css/base.css") ) . "</style>" . $css;
 			fclose($file); ?>
+		<?php $file = fopen( dirname(__FILE__) . "/css/fontawesome.css", "r" );
+			$css = "<style>" . fread( $file,filesize(dirname(__FILE__) . "/css/base.css") ) . "</style>" . $css;
+			fclose($file); ?>
 		<?php echo $css ?>
 		
 		<!-- Load JS -->
@@ -822,12 +825,12 @@
 					</div>
 					<div class="additional-links-section">
 						<div class="additional-links-section-heading">Social</div>
-						<a target='_blank' rel="noopener" href="https://www.facebook.com/game103">Facebook</a>
-						<a target='_blank' rel="noopener" href="https://twitter.com/game103games">Twitter</a>
-						<a target='_blank' rel="noopener" href="https://www.youtube.com/user/game103games">YouTube</a>
+						<a target='_blank' rel="noopener" href="https://www.facebook.com/game103"><i class="fab fa-facebook"></i>Facebook</a>
+						<a target='_blank' rel="noopener" href="https://twitter.com/game103games"><i class="fab fa-twitter"></i>Twitter</a>
+						<a target='_blank' rel="noopener" href="https://www.youtube.com/user/game103games"><i class="fab fa-youtube"></i>YouTube</a>
 						<div class="additional-links-section-heading addition-links-section-heading-second">Stores</div>
-						<a target='_blank' rel="noopener" href="https://itunes.apple.com/tt/developer/james-grams/id894750819">Apple App Store</a>
-						<a target='_blank' rel="noopener" href="https://play.google.com/store/apps/developer?id=James+Grams">Google Play</a>
+						<a target='_blank' rel="noopener" href="https://itunes.apple.com/tt/developer/james-grams/id894750819"><i class="fab fa-app-store-ios"></i>Apple App Store</a>
+						<a target='_blank' rel="noopener" href="https://play.google.com/store/apps/developer?id=James+Grams"><i class="fab fa-google-play"></i>Google Play</a>
 						<a href="/store">Game 103 Store</a>
 					</div>
 					<div class="additional-links-section">
@@ -841,13 +844,13 @@
 					</div>
 					<div class="additional-links-section">
 						<div class="additional-links-section-heading">Contact</div>
-						<a href="mailto:james@game103.net">Email</a>
-						<a target='_blank' rel="noopener" href="https://m.me/game103">Messenger</a>
-						<a target='_blank' rel="noopener" href="https://twitter.com/messages/compose?recipient_id=789785198707761156">Twitter DM</a>
-						<a target='_blank' rel="noopener" href="https://www.patreon.com/game103">Support on Patreon</a>
+						<a href="mailto:james@game103.net"><i class="fas fa-envelope"></i>Email</a>
+						<a target='_blank' rel="noopener" href="https://m.me/game103"><i class="fab fa-facebook-messenger"></i>Messenger</a>
+						<a target='_blank' rel="noopener" href="https://twitter.com/messages/compose?recipient_id=789785198707761156"><i class="fab fa-twitter"></i>Twitter DM</a>
+						<a target='_blank' rel="noopener" href="https://www.patreon.com/game103"><i class="fab fa-patreon"></i>Support on Patreon</a>
 						<div class="additional-links-section-heading addition-links-section-heading-second">Developers</div>
 						<a href="/games/distributable">Games for Your Site</a>
-						<a target='_blank' rel="noopener" href="https://github.com/game103/game103">Source Code</a>
+						<a target='_blank' rel="noopener" href="https://github.com/game103/game103"><i class="fab fa-github"></i>Source Code</a>
 					</div>
 				</div>
 				<div class="copyright">&copy; 2008-<?php echo date("Y");?> <a href="https://game103.net">Game 103</a></div>
