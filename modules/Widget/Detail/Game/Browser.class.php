@@ -123,7 +123,7 @@ HTML;
 					.box-content-container {
 						overflow: hidden;
 					}
-					.detail-zoom-options {
+					.detail-zoom-options input {
 						display: none;
 					}
 				}

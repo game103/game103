@@ -46,6 +46,24 @@ readers do not read off random characters that represent icons */
 .fa-app-store-ios:before {
   content: "\f370"; }
 
+.fa-gamepad:before {
+  content: "\f11b"; }
+
+.fa-html5:before {
+  content: "\f13b"; }
+
+.fa-video:before {
+  content: "\f03d"; }
+
+.fa-tools:before {
+  content: "\f7d9"; }
+
+.fa-save:before {
+  content: "\f0c7"; }
+
+.fa-pinterest:before {
+  content: "\f0d2"; }
+
 .sr-only-focusable:active, .sr-only-focusable:focus {
   clip: auto;
   height: auto;

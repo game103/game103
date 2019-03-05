@@ -13,9 +13,12 @@
 		*/
 		public function __construct($properties) {
 			$properties['type'] = 'game';
-			$properties['type_icon'] = '&#127918;';
+			$properties['type_icon'] = '<i class="fas fa-gamepad"></i>';
 			if( $properties['game_type'] == 'JavaScript' ) {
-				$properties['type_icon'] .= "&#128241;";
+				$properties['type_icon'] .= ' <i class="fab fa-html5"></i>';
+			}
+			else {
+				$properties['type_icon'] .= ' <i class="fab fa-adobe"></i>';
 			}
 			$properties['link'] = '/' . $properties['type'] . '/' . $properties['url_name'];
 			$properties['count_verb'] = 'play';

@@ -13,7 +13,7 @@
 		*/
 		public function __construct($properties) {
 			$properties['type'] = 'resource';
-			$properties['type_icon'] = '&#128218;';
+			$properties['type_icon'] = '<i class="fas fa-tools"></i>';
 			$properties['count_verb'] = 'visit';
 			$properties['count_verb_plural'] = $properties['count_verb'] . 's';
 			$properties['target'] = '_blank';

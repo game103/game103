@@ -21,8 +21,8 @@
 			}
 			$this->valid_platforms = array(
 				'any' => array( 'name' => 'Any Platform', 'link' => $this->generate_state_link( array( 'platform' => 'any', 'page' => 1 ) ) ), 
-				'computer' => array( 'name' => 'Computer', 'link' => $this->generate_state_link( array( 'platform' => 'computer', 'page' => 1 ) ) ), 
-				'mobile' => array( 'name' => 'Mobile', 'link' => $this->generate_state_link( array( 'platform' => 'mobile', 'page' => 1 ) ) )
+				'flash' => array( 'name' => 'Flash', 'link' => $this->generate_state_link( array( 'platform' => 'flash', 'page' => 1 ) ) ), 
+				'html5' => array( 'name' => 'HTML5', 'link' => $this->generate_state_link( array( 'platform' => 'html5', 'page' => 1 ) ) )
 			);
 		}
 		
@@ -162,7 +162,7 @@
 				}
 				else {
 					// We may need to change this at some point
-					$platform = $this->platform == 'mobile' ? 'JavaScript' : 'Flash';
+					$platform = $this->platform == 'html5' ? 'JavaScript' : 'Flash';
 					if( $this->category == 'all' && ! $this->search ) {
 						$select_statement->bind_param("ss", $platform, $platform);
 					}

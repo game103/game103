@@ -13,7 +13,7 @@
 		*/
 		public function __construct($properties) {
 			$properties['type'] = 'video';
-			$properties['type_icon'] = '&#127916;';
+			$properties['type_icon'] = '<i class="fas fa-video"></i>';
 			$properties['link'] = '/' . $properties['type'] . '/' . $properties['url_name'];
 			$properties['count_verb'] = 'view';
 			$properties['count_verb_plural'] = $properties['count_verb'] . 's';

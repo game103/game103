@@ -96,9 +96,9 @@ RATING;
 					<button id='grow'>Larger</button>
 				</span>
 				<br>Share<br>
-				<a class='button' target='_blank' href="$fb_link">Share on Facebook</a>
-				<a class='button' target='_blank' href="$twitter_link">Share on Twitter</a>
-				<a class='button' target='_blank' href="$pinterest_link">Share on Pinterest</a>
+				<a class='button' target='_blank' href="$fb_link"><i class="fab fa-facebook"></i> Share on Facebook</a>
+				<a class='button' target='_blank' href="$twitter_link"><i class="fab fa-twitter"></i> Share on Twitter</a>
+				<a class='button' target='_blank' href="$pinterest_link"><i class="fab fa-pinterest"></i> Share on Pinterest</a>
 			</div>
 OPTIONS;
 		}
