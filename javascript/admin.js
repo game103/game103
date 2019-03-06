@@ -85,17 +85,17 @@ function addAnAction(event) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    if( cat1 ) {
+    if( typeof cat1 !== 'undefined' && cat1 ) {
         document.getElementById('cat1').value = cat1;
     }
-    if( cat2 ) {
+    if( typeof cat2 !== 'undefined' && cat2 ) {
         document.getElementById('cat2').value = cat2;
     }
-    if( type ) {
+    if( typeof type !== 'undefined' && type ) {
         document.getElementById('type').value = type;
     }
     
-    if( currentKeys ) {
+    if( typeof currentKeys !== 'undefined' && currentKeys ) {
         for(var i=0; i<currentKeys.length; i++) {
             addControl(document.createEvent('Event'));
             var keyList = document.getElementById('key_' + (controlCount - 1));
