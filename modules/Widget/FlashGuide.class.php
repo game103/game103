@@ -38,6 +38,9 @@ Table of Contents
                 <a href="#chrome-running-flash-without-asking">Running Flash without Asking</a>
                 <ol type="i">
                     <li>
+                        <a href="#chrome-running-flash-without-asking-windows">Windows</a>
+                    </li>
+                    <li>
                         <a href="#chrome-running-flash-without-asking-mac">MacOS</a>
                     </li>
                     <li>
@@ -76,6 +79,27 @@ permanently by following the instructions below.
 <h3><a name="chrome-running-flash-without-asking">Running Flash without Asking</a></h3>
 Note: Please do this only if you understand the risks involved. 
 One of the reasons that Flash is being deprecated is due to security vulnerabilities.
+<h4><a name="chrome-running-flash-without-asking-windows">Windows</a></h4>
+<ol>
+    <li>Open Windows Registry.</li>
+    <ol type="a">
+        <li>On Windows 10, press Windows key + X.</li>
+        <li>Click run.</li>
+        <li>Type "regedit" and click OK (Allow the app to make changes if prompted).</li>
+    </ol>
+    <li>On the left side of the window, navigate to "Computer" > "HKEY_CURRENT_USER" > "Policies."
+    <li>If you do not have a "Google" folder/key under "Policies," create one by right clicking "Policies," then clicking "New" > "Key," and naming the key "Google".</li>
+    <li>If you do not have a "Chrome" folder/key under "Google," create one by right clicking "Google," then clicking "New" > "Key," and naming the key "Chrome".</li>
+    <li>Right click your Chrome folder/key, then click "New" > "DWORD," and name the DWORD, "RunAllFlashInAllowMode."</li>
+    <li>Make sure your Chrome folder is selected on the left side bar; then, double click your newly created DWORD on the right side of the window and set the value to 1.</li>
+    <li>Repeat the previous two steps for the following two DWORDS: "AllowOutdatedPlugins" and "DefaultPluginsSetting" (both values should again be set to 1).</li>
+    <li>Right click your Chrome folder/key; then, click "New" > "Key," and name the new key "PluginsAllowedForUrls."</li>
+    <li>Right click your new PluginsAllowedForUrls folder/key, and click "New" > "String Value" and name it "1".</li>
+    <li>Make sure your PluginsAllowedForUrls folder/key is selected on the left side and double click your newly created String value on the right side of the window. Set the value to the site you want to allow Flash on.</li>
+    <li>Repeat the previous two steps for each new site that you want to add. Let the name be one number higher than the previous name (2, 3, 4, etc...) and the value be the site that you want to allow.</li>
+    <ul><li>Note: If you understand the risks, you can use <pre class='inline-pre'>https://*</pre> and <pre class='inline-pre'>http://*</pre> as your site values to enable Flash everywhere.</li></ul>
+    <li>Restart Chrome, and you should be able to play Flash without being prompted to enable it.</li>
+</ol>
 <h4><a name="chrome-running-flash-without-asking-mac">MacOS</a></h4>
 <ol>
     <li>Open the terminal application.</li>
@@ -84,7 +108,7 @@ One of the reasons that Flash is being deprecated is due to security vulnerabili
     <li>Type <pre class='inline-pre'>defaults write com.google.Chrome DefaultPluginsSetting -int 1</pre> and press enter.</li>
     <li>Type <pre class='inline-pre'>defaults write com.google.Chrome PluginsAllowedForUrls -array "https://mysite1.com" "http://mysite2.com"</pre>, replacing <pre class='inline-pre'>https://mysite1.com</pre> and <pre class='inline-pre'>http://mysite2.com</pre> with sites that you want to allow Flash on (you can add more sites [seperated by a space] or delete one if you like),  and press enter.</li>
     <ul><li>Note: If you understand the risks, you can use <pre class='inline-pre'>https://*</pre> and <pre class='inline-pre'>http://*</pre> in the above command to enable Flash everywhere.</li></ul>
-    <li>Restart Chrome and you should be able to play Flash without being prompted to enable it.</li>
+    <li>Restart Chrome, and you should be able to play Flash without being prompted to enable it.</li>
 </ol>
 <h4><a name="chrome-running-flash-without-asking-linux">Linux & Chrome OS Developer Mode</a></h4>
 <ol>
@@ -99,7 +123,7 @@ One of the reasons that Flash is being deprecated is due to security vulnerabili
 }
 </pre></li>
 <ul><li>Note: If you understand the risks, you can use <pre class='inline-pre'>https://*</pre> and <pre class='inline-pre'>http://*</pre> in the above code as the values for <pre class='inline-pre'>PluginsAllowedForUrls</pre> to enable Flash everywhere.</li></ul>
-<li>Restart Chrome and you should be able to play Flash without being prompted to enable it.</li>
+<li>Restart Chrome, and you should be able to play Flash without being prompted to enable it.</li>
 </ol>
 <h2><a name="firefox">Firefox</a></h2>
 <div class='flash-guide-tested'>(Tested on version 65 - released January 29th, 2019)</div>
