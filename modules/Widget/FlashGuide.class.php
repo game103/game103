@@ -100,6 +100,11 @@ One of the reasons that Flash is being deprecated is due to security vulnerabili
     <ul><li>Note: If you understand the risks, you can use <pre class='inline-pre'>https://*</pre> and <pre class='inline-pre'>http://*</pre> as your site values to enable Flash everywhere.</li></ul>
     <li>Restart Chrome, and you should be able to play Flash without being prompted to enable it.</li>
 </ol>
+<div class="video-container-wrapper">
+    <div class="video-container">
+        <iframe allowfullscreen="allowfullscreen" src="https://www.youtube.com/embed/O8qW7U973dw?rel=0&amp;modestbranding=1&amp;theme=light&amp;iv_load_policy=3" frameborder="0"></iframe>
+    </div>
+</div>
 <h4><a name="chrome-running-flash-without-asking-mac">MacOS</a></h4>
 <ol>
     <li>Open the terminal application.</li>
