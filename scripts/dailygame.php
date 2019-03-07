@@ -114,7 +114,9 @@
 	$reply = $cb->statuses_update($params);
 
 	// Post to Instagram
-	//exec( "convert /var/www/game103$image_url /var/www/game103/temp.jpeg"); // Always convert to a jpeg
-	//exec( "node /var/www/game103/scripts/instagram-poster/index.js --username " . Constants::INSTAGRAM_USER . " --password " . Constants::INSTAGRAM_PASSWORD . " --image /var/www/game103$image_url --caption \"Check out today's daily game, $name, at https://game103.net/game/$url_name!\"" );
-	//exec( "rm /var/www/game103/temp.jpeg" );
+	$image_path = dirname("/var/www/game103$image_url");
+	$image_file = basename($image_url);
+	exec( "convert $image_path/bordered/$image_file /var/www/game103/temp.jpeg"); // Always convert to a jpeg
+	exec( "sudo -u james node /var/www/game103/scripts/instagram-poster/index.js --username " . Constants::INSTAGRAM_USER . " --password " . Constants::INSTAGRAM_PASSWORD . " --image /var/www/game103/temp.jpeg --caption \"Check out today's daily game, $name, at https://game103.net/game/$url_name!\" --executablePath /usr/bin/chromium-browser" );
+	exec( "rm /var/www/game103/temp.jpeg" );
 ?>
