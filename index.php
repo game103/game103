@@ -841,6 +841,7 @@
 						<div class="additional-links-section-heading">Social</div>
 						<a target='_blank' rel="noopener" href="https://www.facebook.com/game103"><i class="fab fa-facebook"></i>Facebook</a>
 						<a target='_blank' rel="noopener" href="https://twitter.com/game103games"><i class="fab fa-twitter"></i>Twitter</a>
+						<a target='_blank' rel="noopener" href="https://www.instagram.com/jamescocoagrams/"><i class="fab fa-instagram"></i>Instagram</a>
 						<a target='_blank' rel="noopener" href="https://www.youtube.com/user/game103games"><i class="fab fa-youtube"></i>YouTube</a>
 						<div class="additional-links-section-heading addition-links-section-heading-second">Stores</div>
 						<a target='_blank' rel="noopener" href="https://itunes.apple.com/tt/developer/james-grams/id894750819"><i class="fab fa-app-store-ios"></i>Apple App Store</a>

@@ -64,6 +64,9 @@ readers do not read off random characters that represent icons */
 .fa-pinterest:before {
   content: "\f0d2"; }
 
+.fa-instagram:before {
+  content: "\f16d"; }
+
 .sr-only-focusable:active, .sr-only-focusable:focus {
   clip: auto;
   height: auto;
