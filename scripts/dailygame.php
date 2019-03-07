@@ -114,5 +114,5 @@
 	$reply = $cb->statuses_update($params);
 
 	// Post to Instagram
-	exec( "node /var/www/game103/scripts/instagram-poster/index.js -username " . Constants::INSTAGRAM_USER . " -password " . Constants::INSTAGRAM_PASSWORD . " -image /var/www/game103$image_url -caption \"Check out today's daily game, $name, at https://game103.net/game/$url_name!\"" );
+	exec( "node /var/www/game103/scripts/instagram-poster/index.js --username " . Constants::INSTAGRAM_USER . " --password " . Constants::INSTAGRAM_PASSWORD . " --image /var/www/game103$image_url --caption \"Check out today's daily game, $name, at https://game103.net/game/$url_name!\"" );
 ?>
