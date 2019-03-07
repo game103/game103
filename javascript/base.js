@@ -393,6 +393,18 @@ document.addEventListener('DOMContentLoaded', function() {
 	setInterval(lazyListen, 100);
 });
 
+// Replace the navbar with the one with previews
+document.addEventListener("DOMContentLoaded", function() {
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (xhttp.readyState == 4) {
+			document.querySelector("#games-drop-down .nav-item-preview").innerHTML = xhttp.responseText;
+		}
+	};
+	xhttp.open('GET', "/navbar-preview.html", true);
+	xhttp.send();
+});
+
 // Register service worker
 navigator.serviceWorker && navigator.serviceWorker.register('/javascript/sw.js').then(function(registration) {
 	console.log('Registered with scope: ', registration.scope);

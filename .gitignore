@@ -12,4 +12,5 @@ images/icons/games/bordered/
 *.min.css
 *.min.js
 navbar.html
+navbar-preview.html
 *.webp

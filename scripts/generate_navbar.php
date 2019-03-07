@@ -6,7 +6,7 @@
 	* Script to load random games of a certain category
 	*/
 	
-	set_include_path("/var/www/game103/modules");
+	set_include_path("/Users/JRG/game103/modules");
 	
 	// Require modules
 	require_once( 'Constants.class.php');
@@ -48,6 +48,7 @@
 		$links .= "<div class='nav-item-list-item' onmouseover='showNavbarGames($i)'><a href='/games$category'><span class = 'nav-item-list-item-text'>$name</span></a></div>";
 		$i++;
 	}
+	
 	$service = new \Service\Find\AppFind( "", "popularity", "", 1, 6, $mysqli );
 	$properties = $service->generate();
 	// We will only include games
@@ -62,8 +63,12 @@
 	$widget = new \Widget\Find( $properties );
 	$widget->generate();
 	$previews .= "<div class='nav-item-preview-category'>" . $widget->get_HTML() . "</div>";
-   
-    $output = <<<HTML
+
+	if( $argv[1] && $argv[1] == "--preview" ) {
+		$output = $previews;
+	}
+	else {
+		$output = <<<HTML
 <ul class = "nav">
 	<li class="nav-item" id="nav-menu-opener" onclick='toggleMobileMenuDisplay()'>
 		<div class="nav-item-dropdown-title" id="menu-title">
@@ -82,7 +87,6 @@
 					<div class="nav-item-list-item" onmouseover="showNavbarGames(12)"><a href="/apps"><span class = "nav-item-list-item-text">Game 103 Mobile</span></a></div>
 				</div>
 				<div class="nav-item-preview">
-					$previews
 				</div>
 			</div>
 		</div>
@@ -119,6 +123,7 @@
 	</li>
 </ul>
 HTML;
+	}
 
 	print \Constants::sanitize_output( $output );
 ?>
