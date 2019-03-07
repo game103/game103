@@ -182,7 +182,7 @@
 			
 			if( $this->search ) {
 				$search_wildcards = '%' . $this->search . '%';
-				$select_statement->bind_param("ssssssssss", 
+				$select_statement->bind_param("ssssssss", 
 				$search_wildcards,
 				$search_wildcards,
 				$search_wildcards,
