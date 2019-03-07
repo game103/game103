@@ -87,3 +87,6 @@
 	path = game103games/flash/littledive
 	
 	url = https://github.com/game103/littledive.git
+[submodule "scripts/instagram-poster"]
+	path = scripts/instagram-poster
+	url = https://github.com/jamesgrams/instagram-poster.git
