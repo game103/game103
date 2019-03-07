@@ -7,6 +7,7 @@ from os.path import isfile, join
 
 # output the navbar
 os.system("php /var/www/game103/scripts/generate_navbar.php > /var/www/game103/navbar.html")
+os.system("php /var/www/game103/scripts/generate_navbar.php --preview > /var/www/game103/navbar-preview.html")
 
 pages = {}
 base_url = 'https://game103.net'
