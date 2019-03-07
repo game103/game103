@@ -153,8 +153,6 @@
 					UNION
 					SELECT name, description, url_name, image_url, rating, FORMAT(views, 0), views as numeric_interactions, added_date, -1 as store_url_android, -1 as store_url_apple, -1 as type, 'video', -1 as game_type FROM hallaby_videos.entries $where_sql
 					UNION
-					SELECT name, description, url, image_url, -1 as rating, FORMAT(visits, 0), visits as numeric_interactions, added_date, -1 as store_url_android, -1 as store_url_apple, -1 as type, 'resource', -1 as game_type FROM hallaby_resources.entries $where_sql
-					UNION
 					SELECT name, description, url_name, image_url, -1 as rating, FORMAT(visits, 0), visits as numeric_interactions, added_date, store_url_android, store_url_apple, type, 'app', -1 as game_type FROM hallaby_games.apps $apps_sql
 					ORDER BY $sort_sql
 					LIMIT $items_per_page
@@ -167,8 +165,6 @@
 					SELECT count(1) as c FROM hallaby_games.downloads $downloads_sql
 					UNION
 					SELECT count(1) as c FROM hallaby_videos.entries $where_sql
-					UNION
-					SELECT count(1) as c FROM hallaby_resources.entries $where_sql
 					UNION
 					SELECT count(1) as c FROM hallaby_games.apps $apps_sql)
 					AS inner_count_query
@@ -187,8 +183,6 @@
 			if( $this->search ) {
 				$search_wildcards = '%' . $this->search . '%';
 				$select_statement->bind_param("ssssssssss", 
-				$search_wildcards,
-				$search_wildcards,
 				$search_wildcards,
 				$search_wildcards,
 				$search_wildcards,

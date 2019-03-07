@@ -601,7 +601,7 @@
 			$widget->generate();
 			array_push( $widgets, $widget );
 			$content = $widget->get_HTML();
-			$description = "Game 103 creates and hosts family-friendly games, entertainment, and development resources. Come see what you can find on Game 103!";
+			$description = "Game 103 creates and hosts family-friendly games and entertainment. Come see what you can find on Game 103!";
 			$website_schema = array(
 				"@context" => "http://schema.org",
 				"@type" => "WebSite",
