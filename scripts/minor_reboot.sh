@@ -12,4 +12,5 @@ cd /var/www/game103/css
 rename -f "s/\.min/\.css/" *.min
 cd ../
 find /var/www/game103/javascript -maxdepth 1 -iname "*.js" -exec uglifyjs --compress --mangle -o {} -- {} \;
+uglifyjs --compress --mangle -o /var/www/game103/sw.js -- /var/www/game103/sw.js
 /etc/init.d/cron start

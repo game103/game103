@@ -406,6 +406,8 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // Register service worker
-navigator.serviceWorker && navigator.serviceWorker.register('/javascript/sw.js').then(function(registration) {
-	console.log('Registered with scope: ', registration.scope);
-});
+if ('serviceWorker' in navigator) {
+	navigator.serviceWorker && navigator.serviceWorker.register('/sw.js').then(function(registration) {
+		console.log('Registered with scope: ', registration.scope);
+	});
+}

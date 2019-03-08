@@ -14,6 +14,7 @@ cd /var/www/game103_new/css
 rename -f "s/\.min/\.css/" *.min
 cd ../
 find /var/www/game103_new/javascript -maxdepth 1 -iname "*.js" -exec uglifyjs --compress --mangle -o {} -- {} \;
+uglifyjs --compress --mangle -o /var/www/game103/sw.js -- /var/www/game103/sw.js
 mv game103_new game103
 python /var/www/game103/scripts/cacher.py
 /var/www/game103/scripts/border_maker.sh
