@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		zoom.onmouseup = function() { detailChangeZoom(); };
 		zoom.onchange = detailEnsureValue;
 		zoom.oninput = detailPreview;
+		window.addEventListener("resize", function() { detailChangeZoom(); detailEnsureValue();});
 		document.getElementById('full').onclick = detailFullscreen;
 		document.getElementById('shrink').onclick = detailShrink;
 		document.getElementById('grow').onclick = detailGrow;
@@ -90,7 +91,19 @@ document.addEventListener('DOMContentLoaded', function() {
 		};
 		xhttp.open('GET', "/ws/load_similar.php?type=" + path[1] + "&id=" + placeholder.getAttribute('data-id'), true);
 		xhttp.send();
-		
+
+		detailChangeZoom();
+		detailEnsureValue();
+
+		// Responsive elements will now be controlled by JavaScript after initial page load
+		// to deal properly with changes in the movie zoom
+		/* Make sure to update the Browser widget and detail-video.css if updating */
+		var css = ".detail-left-side-box.responsive{float:left;}.detail-right-side-box.responsive{float:right;}.detail-side-boxes.responsive{display:inline;background-color:transparent;}.detail-side-box.responsive{/*Thismarginreplacesthemarginthatwasonside-boxesbeforeside-boxesbecameinline*/margin-top:10px;display:inline-block;}.detail-side-box-item.responsive{margin-bottom:10px;display:block;}.detail-separator.responsive{display:none;}";
+		var head = document.head;
+		var style = document.createElement('style');
+		head.appendChild(style);
+		style.type = "text/css";
+		style.appendChild(document.createTextNode(css));
 	}
 	catch(e) {
 		// OK

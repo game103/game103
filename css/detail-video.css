@@ -25,6 +25,7 @@
 	}
 }
 
+/* Make sure to update the Browser widget and detail.js if updating */
 @media screen and (min-width: 1375px) {
     .detail-left-side-box.responsive {
 		float: left;

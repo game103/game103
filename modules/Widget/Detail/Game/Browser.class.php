@@ -114,6 +114,7 @@ HTML;
 			$game_ratio = $this->properties['height']/$this->properties['width'];
 			$padding_bottom = ( (string) $game_ratio * 100) . '%';
 			$side_panels_allowed_width  =( (string) $this->properties['width'] + 575 ) . 'px';
+			/* Make sure to update detail-video.css and detail.js if updating */
 			$css = "<style>
 				/* This has a known issue when scrollbars are included in the media screen width
 				as part of the game will be cut of to the user, even though it would be visible
