@@ -23,6 +23,10 @@
 	.detail-zoom-options input {
 		display: none;
 	}
+
+	#default {
+		display: none;
+	}
 }
 
 /* Make sure to update the Browser widget and detail.js if updating */

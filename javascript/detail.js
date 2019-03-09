@@ -37,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		if(document.getElementById('zoom-slider').type != 'range') {
 			document.getElementById('zoom-slider').style.display = 'none';
 			document.getElementById('full').style.display = 'none';
+			document.getElementById('default').style.display = 'none';
 			document.getElementById('shrink').style.display = 'inline-block';
 			document.getElementById('grow').style.display = 'inline-block';
 		}
@@ -53,6 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		zoom.oninput = detailPreview;
 		window.addEventListener("resize", function() { detailChangeZoom(); detailEnsureValue();});
 		document.getElementById('full').onclick = detailFullscreen;
+		document.getElementById('default').onclick = detailDefault;
 		document.getElementById('shrink').onclick = detailShrink;
 		document.getElementById('grow').onclick = detailGrow;
 
@@ -239,6 +241,12 @@ function detailFullscreen() {
 	}
 	detailChangeZoom(percentToSetGame);
 	window.scrollTo(document.getElementById('movie-container').offsetLeft-5, gameTop);
+	detailEnsureValue();
+}
+// Function to make the default its default size
+function detailDefault() {
+	var movie = document.getElementById('movie');
+	detailChangeZoom(1);
 	detailEnsureValue();
 }
 // Calculate the width nad height of the page

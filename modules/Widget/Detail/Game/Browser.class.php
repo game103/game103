@@ -141,6 +141,9 @@ HTML;
 					.detail-zoom-options input {
 						display: none;
 					}
+					#default {
+						display: none;
+					}
 				}
 				@media screen and (min-width: $side_panels_allowed_width) {
 					.detail-left-side-box.responsive {

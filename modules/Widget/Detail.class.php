@@ -92,6 +92,7 @@ RATING;
 					Zoom<br>
 					<input type='range' min='50' max='175' step='5' value='100' id='zoom-slider' autocomplete='off''/>
 					<button id='full'>Fit Screen</button>
+					<button id='default'>Default Size</button>
 					<button id='shrink'>Smaller</button>
 					<button id='grow'>Larger</button>
 				</span>
