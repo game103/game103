@@ -62,10 +62,12 @@ document.addEventListener('DOMContentLoaded', function() {
 				detailRate( this.getAttribute('data-value'), path[1], this.parentNode.getAttribute('data-id') );
 			}
 		}
-
+		
 		// Service Worker availability
 		if ('serviceWorker' in navigator) {
-			document.getElementById("detail-side-box-offline-available").style.display = "block";
+			if ( document.getElementById('detail-side-box-offline-available') ) {
+				document.getElementById("detail-side-box-offline-available").style.display = "block";
+			}
 		}
 
 		// Check if flash is enabled if necessary
@@ -100,22 +102,30 @@ document.addEventListener('DOMContentLoaded', function() {
 // This is called on input from the slider
 function detailChangeZoom(value) {
 	var movie = document.getElementById('movie');
+	var enableFlash = document.getElementById('enable-flash');
 	var preview = document.getElementById('preview-box');
 	if(value == null) {
 		value = document.getElementById('zoom-slider').value/100;
 	}
 	detailCurValue = value;
 	detailSetSizeFromMovieSize(movie, value);
+	if(enableFlash) {
+		detailSetSizeFromMovieSize(enableFlash, value);
+	}
 	preview.style.display = 'none';
 	movie.style.visibility = 'visible';
+	if(enableFlash) {
+		enableFlash.style.visibility = 'visible';
+	}
+	var dims = calculateDimensions();
 	if(detailResponsive) {
-		if(movie.offsetWidth > 825) {
+		if(movie.offsetWidth + 575 > dims.width || (enableFlash && enableFlash.offsetWidth + 575 > dims.width) ) {
 			detailStripResponsiveClasses();
 			detailResponsive = false;
 		}
 	}
 	else {
-		if(movie.offsetWidth <= 825) {
+		if( (movie.offsetWidth && movie.offsetWidth + 575 <= dims.width) || (enableFlash && enableFlash.offsetWidth && enableFlash.offsetWidth + 575 <= dims.width) ) {
 			detailAddResponsiveClasses();
 			detailResponsive = true;
 		}
@@ -137,9 +147,13 @@ function detailPreview() {
 // This is called on mouse down from the slider
 function detailHideGame() {
 	var movie = document.getElementById('movie');
+	var enableFlash = document.getElementById('enable-flash');
 	var preview = document.getElementById('preview-box');
 	preview.style.display = 'block';
 	movie.style.visibility = 'hidden';
+	if(enableFlash) {
+		enableFlash.style.visibility = 'hidden';
+	}
 }
 // Ensure that the slider displays the correct value
 // This is called on change from the slider
@@ -201,7 +215,21 @@ function detailGrow() {
 function detailFullscreen() {
 	var movie = document.getElementById('movie');
 	var gameTop = document.getElementsByClassName("header")[0].offsetHeight + 79;
-	var scrollX = 0;
+	//var scrollX = 0;
+	var dims = calculateDimensions();
+	var sizeToSetGame = dims.height;
+	var sizeToSetGameWidth = dims.width;
+	var percentToSetGame = sizeToSetGame/detailOriginalHeight;
+	var percentToSetGameWidth = (sizeToSetGameWidth-10)/detailOriginalWidth;
+	if(percentToSetGameWidth < percentToSetGame) {
+		percentToSetGame = percentToSetGameWidth;
+	}
+	detailChangeZoom(percentToSetGame);
+	window.scrollTo(document.getElementById('movie-container').offsetLeft-5, gameTop);
+	detailEnsureValue();
+}
+// Calculate the width nad height of the page
+function calculateDimensions() {
 	var widthCalculator = document.createElement('div');
 	widthCalculator.style.position = 'fixed';
 	widthCalculator.style.width = '1px';
@@ -211,18 +239,11 @@ function detailFullscreen() {
 	widthCalculator.style.visibility = 'hidden';
 	// Add to the page as sort of a 'Hack'
 	document.getElementsByClassName('page')[0].appendChild(widthCalculator);
-	var sizeToSetGame = widthCalculator.offsetTop + 1;
+	var dims = { "height": widthCalculator.offsetTop + 1 };
 	widthCalculator.style.position = 'absolute';
-	var sizeToSetGameWidth = widthCalculator.offsetLeft + 1;
-	var percentToSetGame = sizeToSetGame/detailOriginalHeight;
-	var percentToSetGameWidth = (sizeToSetGameWidth-10)/detailOriginalWidth;
-	if(percentToSetGameWidth < percentToSetGame) {
-		percentToSetGame = percentToSetGameWidth;
-	}
-	detailChangeZoom(percentToSetGame);
-	window.scrollTo(document.getElementById('movie-container').offsetLeft-5, gameTop);
-	detailEnsureValue();
+	dims.width = widthCalculator.offsetLeft + 1;
 	widthCalculator.parentNode.removeChild(widthCalculator);
+	return dims;
 }
 // Set an element's size based on the offset of the original game size
 function detailSetSizeFromMovieSize(element, value) {
@@ -304,7 +325,7 @@ function checkFlashEnabled() {
 		}
 		if( !hasFlash ) {
 			movieElement.style.display = "none";
-			movieElement.parentNode.style.overflow = "scroll";
+			movieElement.parentNode.style.overflowY = "auto";
 			flashEnabledElement.style.display = "table";
 			return;
 		}

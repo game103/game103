@@ -151,7 +151,7 @@ input[type=range]::-ms-track {
 }
 
 #preview-box {
-	border: 1px solid white;
+	border: 1px solid #5A8FE1;
 	display: none;
 	box-sizing: border-box;
 	position: absolute;
@@ -160,8 +160,8 @@ input[type=range]::-ms-track {
     margin-left: auto;
     margin-right: auto;
 	z-index: 50;
-	opacity: 0.5;
-	background-color: white;
+	opacity: 0.3;
+	background-color: #5A8FE1;
 	pointer-events: none;
 }
 
@@ -247,31 +247,6 @@ input[type=range]::-ms-track {
 .detail-download-body img {
 	width: 100%;
 	padding-top: 10px;
-}
-
-@media screen and (min-width: 1400px) {
-    .detail-left-side-box.responsive {
-		float: left;
-	}
-	.detail-right-side-box.responsive {
-		float: right;
-	}
-	.detail-side-boxes.responsive {
-		display: inline;
-		background-color: transparent;
-	}
-	.detail-side-box.responsive {
-		/* This margin replaces the margin that was on side-boxes before side-boxes became inline */
-		margin-top: 10px;
-		display: inline-block;
-	}
-	.detail-side-box-item.responsive {
-		margin-bottom: 10px;
-		display: block;
-	}
-	.detail-separator.responsive {
-		display: none;
-	}
 }
 
 /* Microsoft edge fix for side boxes */
