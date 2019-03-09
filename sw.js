@@ -45,7 +45,7 @@ self.addEventListener('fetch', function(event) {
       // We are actually going to fetch from the network each time.
       // If we fail, we are going to simply going to return the cached response.
       return caches.open(runtime).then( function(cache) {
-        return fetch(event.request).then( function(response) {
+        return fetch(event.request, { redirect: 'follow' }).then( function(response) {
           // Put a copy of the response in the runtime cache.
           return cache.put(event.request, response.clone()).then( function() {
             return response;
