@@ -62,6 +62,11 @@ document.addEventListener('DOMContentLoaded', function() {
 				detailRate( this.getAttribute('data-value'), path[1], this.parentNode.getAttribute('data-id') );
 			}
 		}
+
+		// Service Worker availability
+		if ('serviceWorker' in navigator) {
+			document.getElementById("detail-side-box-offline-available").style.display = "block";
+		}
 		
 		// Similar items load
 		var xhttp = new XMLHttpRequest();

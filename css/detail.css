@@ -44,6 +44,10 @@
 	color: white;
 }
 
+#detail-side-box-offline-available {
+	display: none;
+}
+
 /* For Zoom */
 input[type=range] {
   -webkit-appearance: none;

@@ -64,6 +64,9 @@ CONTROLS;
 			if( $this->properties['game_type'] == 'JavaScript' && $this->properties['creation_date'] ) {
 				array_push( $parts, $this->generate_fullscreen() );
 			}
+			if( $this->properties['game_type'] ) {
+				array_push( $parts, $this->generate_offline_play() );
+			}
 			$content = implode("<br>", $parts);
 			return <<<INFO
 			<div id='information' class='detail-side-box-item responsive'>
@@ -118,6 +121,14 @@ INFO;
 			return "<a class='detail-side-box-link' href='{$this->properties['url']}'>Play Full Screen</a>";
 		}
 		
+		/**
+		 * Generate offline play capability notice
+		 */
+		protected function generate_offline_play() {
+			return "<div id=detail-side-box-offline-available>
+				<i class='fas fa-check'></i>  Offline Play Available
+			</div>";
+		}
 	}
 
 ?>
