@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 		
 		// Service Worker availability
-		if ('serviceWorker' in navigator) {
+		if ('serviceWorker' in navigator && window.navigator.userAgent.indexOf("Edge") == -1) {
 			if ( document.getElementById('detail-side-box-offline-available') ) {
 				document.getElementById("detail-side-box-offline-available").style.display = "block";
 			}

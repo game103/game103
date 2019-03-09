@@ -30,6 +30,7 @@ self.addEventListener("install", function(event) {
     caches.open(precache)
       .then( function(cache) { return cache.addAll(precacheUrls); } )
   );
+  console.log("james");
 });
 
 // Fetch handler
@@ -37,22 +38,41 @@ self.addEventListener("install", function(event) {
 // fetching data for pages and storing them in the
 // dynamic cache
 self.addEventListener('fetch', function(event) {
-  // Don't cache GA requests
   event.respondWith(
     // Note how it is looking in any cache for a match.
     // This is why we must clear out the old caches on update.
     caches.match(event.request).then( function(cachedResponse) {
-      // We are actually going to fetch from the network each time.
-      // If we fail, we are going to simply going to return the cached response.
-      return caches.open(runtime).then( function(cache) {
-        return fetch(event.request, { redirect: 'follow' }).then( function(response) {
-          // Put a copy of the response in the runtime cache.
-          return cache.put(event.request, response.clone()).then( function() {
-            return response;
-          });
-        })
-        .catch( function(error) { console.log("Failed to fetch: " + event.request.url + " -- " + error); return cachedResponse; } );
-      });
+
+      var type = "";
+      if( cachedResponse ) {
+        var type = cachedResponse.headers.get("Content-type");
+      }
+      // We need to fetch json and text every time
+      // For other items, we'll simply save them in the background, so they'll be available next time
+      if( type && !type.startsWith('text') && !type.endsWith('json') && !type.endsWith('octet-stream') ) {
+        // Fetch the new version but serve the old one
+        setTimeout( function() { networkFirstCache(event, cachedResponse); }, 200 );
+        return cachedResponse;
+      }
+      else {
+        return networkFirstCache(event, cachedResponse);
+      }
+
     })
   );
 });
+
+// Fetch and place in cache
+function networkFirstCache(event, cachedResponse) {
+  // We are actually going to fetch from the network each time.
+  // If we fail, we are going to simply going to return the cached response.
+  return caches.open(runtime).then( function(cache) {
+    return fetch(event.request, { redirect: 'follow' }).then( function(response) {
+      // Put a copy of the response in the runtime cache.
+      return cache.put(event.request, response.clone()).then( function() {
+        return response;
+      });
+    })
+    .catch( function(error) { console.log("Failed to fetch: " + event.request.url + " -- " + error); return cachedResponse; } );
+  });
+}

@@ -351,18 +351,20 @@ document.addEventListener('DOMContentLoaded', function() {
 		
 					// Every 200 ms potentially lazy load
 					setTimeout(function() {
-						lazyPictures.forEach(function(lazyPicture) {
+						for( var i=0; i<lazyPictures.length; i++ ) {
+							var lazyPicture = lazyPictures[i];
 							if ((lazyPicture.getBoundingClientRect().top <= window.innerHeight && lazyPicture.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyPicture).display !== "none") {
 								
 								var lazyImageSources = lazyPicture.querySelectorAll("source, img");
-								lazyImageSources.forEach(function(lazyImage) {
+								for( var j=0; j<lazyImageSources.length; j++ ) {
+									var lazyImage = lazyImageSources[j];
 									if( lazyImage.src ) {
 										lazyImage.src = lazyImage.dataset.src;
 									}
 									if( lazyImage.srcset ) {
 										lazyImage.srcset = lazyImage.dataset.srcset;
 									}
-								});
+								};
 
 								lazyPicture.classList.remove("lazy");
 								lazyPictures = lazyPictures.filter(function(picture) {
@@ -375,7 +377,7 @@ document.addEventListener('DOMContentLoaded', function() {
 									window.removeEventListener("orientationchange", lazyLoad);
 								}
 							}
-						});
+						}
 			
 						active = false;
 					}, 200);
@@ -406,7 +408,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // Register service worker
-if ('serviceWorker' in navigator) {
+if ('serviceWorker' in navigator && window.navigator.userAgent.indexOf("Edge") == -1) {
 	navigator.serviceWorker && navigator.serviceWorker.register('/sw.js').then(function(registration) {
 		console.log('Registered with scope: ', registration.scope);
 	});

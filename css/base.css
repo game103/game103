@@ -64,6 +64,10 @@ iframe {
 	border: none;
 }
 
+img:-moz-loading {
+  visibility: hidden;
+}
+
 .header {
 	height: 130px;
 	background-image: url("/images/header2016.png");
