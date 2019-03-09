@@ -67,6 +67,9 @@ document.addEventListener('DOMContentLoaded', function() {
 		if ('serviceWorker' in navigator) {
 			document.getElementById("detail-side-box-offline-available").style.display = "block";
 		}
+
+		// Check if flash is enabled if necessary
+		checkFlashEnabled();
 		
 		// Similar items load
 		var xhttp = new XMLHttpRequest();
@@ -285,4 +288,25 @@ function detailRate(rating, type, id) {
 	};
 	xhttp.open('GET', '/ws/rating.php?id=' + id + '&rating=' + rating + '&type=' + type, true);
 	xhttp.send();
+}
+// Check to see if flash is available
+function checkFlashEnabled() {
+	// The flash enabled element will only be display on Flash games
+	var flashEnabledElement = document.getElementById('enable-flash');
+	var movieElement = document.getElementById("movie");
+	if( flashEnabledElement ) {
+		var hasFlash = false;
+		try {
+			hasFlash = Boolean(new ActiveXObject('ShockwaveFlash.ShockwaveFlash'));
+		} 
+		catch(exception) {
+			hasFlash = ('undefined' != typeof navigator.mimeTypes['application/x-shockwave-flash']);
+		}
+		if( !hasFlash ) {
+			movieElement.style.display = "none";
+			movieElement.parentNode.style.overflow = "scroll";
+			flashEnabledElement.style.display = "table";
+			return;
+		}
+	}
 }

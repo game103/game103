@@ -30,10 +30,23 @@
 			
 			$game_code = "<embed wmode='direct' src='{$this->properties['url']}' style='width:{$this->properties['width']}"."px;height:{$this->properties['height']}"."px;' id='movie'/>";
 			
+			if( $this->properties['game_type'] == 'Flash' ) {
+				$enable_flash = <<<HTML
+				<div id="enable-flash" style="width:{$this->properties['width']}px;height:{$this->properties['height']}px;">
+					<div id="enable-flash-message">
+						You need Flash Player to play {$this->properties['name']}.<br>Please click the button below to download/enable Flash.
+						<br><br><a href="https://get.adobe.com/flashplayer/" rel="noopener"><button>Enable Flash</button></a><br><br>
+						If you are having trouble getting Flash to work on your device, please visit our <a href="/flash">Flash Guide</a>.
+					</div>
+				</div>
+HTML;
+			}
+
 			$html = <<<HTML
 					<div id='preview-box' style='width:{$this->properties['width']}px;height:{$this->properties['height']}px;'></div>
 					<div id='movie-container' class='responsive'>
 						$game_code
+						$enable_flash
 					</div>
 HTML;
 			
@@ -114,7 +127,7 @@ HTML;
 						height: 0;
 						padding-bottom: $padding_bottom;
 					}
-					#movie {
+					#movie, #enable-flash {
 						position: absolute;
 						width: 100% !important;
 						height: 100% !important;
