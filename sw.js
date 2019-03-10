@@ -38,7 +38,9 @@ self.addEventListener("install", function(event) {
 // dynamic cache
 self.addEventListener('fetch', function(event) {
 
-  if( event.request.url.indexOf("/admin") != -1 || event.request.url.indexOf("/random") != -1  ) {
+  if( event.request.url.indexOf("/admin") != -1
+    || event.request.url.indexOf("/random") != -1
+    || event.request.url.indexOf("https://www.google-analytics.com") != -1 ) {
     return false;
   }
 
