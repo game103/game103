@@ -76,8 +76,10 @@
 				) );
 				$featured_box->generate();
 				
-				// Get box the find JS and CSS (includes box and entry)
-				$this->JS = array_merge( $this->JS, $top_box->get_JS(), $daily_section->get_JS(), $new_dummy_section->get_JS() );
+				// Get box the find CSS
+				// Note, we are not including Find JS here on purpose where we usually would.
+				// This is due to some errors caused trying to make the page ajaxy on some browsers on Load.
+				$this->JS = array_merge( $this->JS, $top_box->get_JS(), $daily_section->get_JS() );
 				$this->CSS = array_merge( $this->CSS, $top_box->get_CSS(), $daily_section->get_CSS(), $new_dummy_section->get_CSS() );
 				
 				$this->HTML = $top_box->get_HTML() . $featured_box->get_HTML() . "<span id='home-new-content-placeholder'></span>";
