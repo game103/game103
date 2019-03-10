@@ -348,6 +348,16 @@ function checkFlashEnabled() {
 			movieElement.style.display = "none";
 			movieElement.parentNode.style.overflowY = "auto";
 			flashEnabledElement.style.display = "table";
+			var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+			var android = navigator.userAgent.toLowerCase().indexOf("android") > -1;
+			if( iOS ) {
+				flashEnabledElement.querySelector("#enable-flash-message-default").style.display = "none";
+				flashEnabledElement.querySelector("#enable-flash-message-ios").style.display = "block";
+			}
+			else if( android ) {
+				flashEnabledElement.querySelector("#enable-flash-message-default").style.display = "none";
+				flashEnabledElement.querySelector("#enable-flash-message-android").style.display = "block";
+			}
 			return;
 		}
 	}

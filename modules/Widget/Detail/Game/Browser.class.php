@@ -34,8 +34,22 @@
 				$enable_flash = <<<HTML
 				<div id="enable-flash" style="width:{$this->properties['width']}px;height:{$this->properties['height']}px;">
 					<div id="enable-flash-message">
-						You need Flash Player to play {$this->properties['name']}.<br>Please click the button below to download/enable Flash.
-						<br><br><a href="https://get.adobe.com/flashplayer/" rel="noopener"><button>Enable Flash</button></a><br><br>
+						You need Flash Player to play {$this->properties['name']}.
+						<div id="enable-flash-message-default">
+							Please click the button below to download/enable Flash.
+						</div>
+						<div id="enable-flash-message-ios">
+							The best way to play Flash on iOS is with Puffin Web Browser (free).
+							<br><br><a href="https://itunes.apple.com/us/app/puffin-web-browser/id472937654" rel="noopener"><button>Get Puffin Web Browser</button></a>
+							<br><br>If you are not on iOS, click below to download/enable Flash.
+						</div>
+						<div id="enable-flash-message-android">
+							The best way to play Flash on Android is with Puffin Web Browser (free).
+							<br><br><a href="https://play.google.com/store/apps/details?id=com.cloudmosa.puffinFree" rel="noopener"><button>Get Puffin Web Browser</button></a>
+							<br><br>If you are not on Android, click below to download/enable Flash.
+						</div>
+						<br><a href="https://get.adobe.com/flashplayer/" rel="noopener"><button>Enable Flash</button></a>
+						<br><br>
 						If you are having trouble getting Flash to work on your device, please visit our <a href="/flash">Flash Guide</a>.
 					</div>
 				</div>

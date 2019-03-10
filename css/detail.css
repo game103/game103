@@ -174,6 +174,10 @@ input[type=range]::-ms-track {
 	vertical-align: middle;
 	padding: 20px;
 }
+
+#enable-flash-message-ios, #enable-flash-message-android {
+	display: none;
+}
 /* End for zoom */
 
 /* For rating */
