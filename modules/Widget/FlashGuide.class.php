@@ -171,7 +171,6 @@ Puffin Web Browser Pro<br>
 Photon Flash Player & Browser<br>
 <a target='_blank' rel="noopener" href="https://itunes.apple.com/us/app/photon-flash-player-for-iphone-flash-video-games-plus/id453546382">Apple App Store</a> ($3.99)<br>
 <a target='_blank' rel="noopener" href="https://play.google.com/store/apps/details?id=com.appsverse.photon">Google Play</a> (Free)<br>
-Note: You can adjust the settings to optimize Flash for different uses (games, movies) in Photon.<br>
 <h2><a name="tips">Tips</a></h2>
 <ul>
     <li>If you have not yet allowed Flash to run on a given site, many sites will ask you to "download" Flash. If you already
