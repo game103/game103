@@ -30,7 +30,6 @@ self.addEventListener("install", function(event) {
     caches.open(precache)
       .then( function(cache) { return cache.addAll(precacheUrls); } )
   );
-  console.log("james");
 });
 
 // Fetch handler
@@ -38,6 +37,11 @@ self.addEventListener("install", function(event) {
 // fetching data for pages and storing them in the
 // dynamic cache
 self.addEventListener('fetch', function(event) {
+
+  if( event.request.url.indexOf("/admin") != -1 || event.request.url.indexOf("/random") != -1  ) {
+    return false;
+  }
+
   event.respondWith(
     // Note how it is looking in any cache for a match.
     // This is why we must clear out the old caches on update.
