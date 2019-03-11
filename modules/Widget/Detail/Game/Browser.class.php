@@ -41,6 +41,8 @@
 						<div id="enable-flash-message-ios">
 							The best way to play Flash on iOS is with Puffin Web Browser (free).
 							<br><br><a href="https://itunes.apple.com/us/app/puffin-web-browser/id472937654" rel="noopener"><button>Get Puffin Web Browser</button></a>
+							<br><br>If you already have Puffin installed, click below to this page in Puffin Web Browser.
+							<br><br><a href="puffins://game103.net/game/{$this->properties['url_name']}" rel="noopener"><button>Open in Puffin Web Browser</button></a>
 							<br><br>If you are not on iOS, click below to download/enable Flash.
 						</div>
 						<div id="enable-flash-message-android">
