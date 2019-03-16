@@ -25,7 +25,8 @@ function findMakeLinksAjax() {
 		var input = document.querySelector(".find-refine input");
 		input.oninput = function( event ) {
 			var text = findStrip( this.value );
-			
+			text=encodeURIComponent(text);
+
 			// Create link from selected page link
 			var currentPage = document.querySelector('.find-dropdown-selected-in-list a').getAttribute('href');
 			currentPage = currentPage.split('/');
@@ -136,6 +137,7 @@ function findMakeRequest ( link, changeState, focusSearch, sStart ) {
 			}
 		}
 	};
+	console.log(link);
 	xhttp.open('GET', link + "?ws=1", true);
 	xhttp.send();
 }

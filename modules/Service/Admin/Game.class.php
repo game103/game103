@@ -440,12 +440,13 @@
             // Check for duplicates
             // Remember, keys[$i] and actions[$i] correspond to a key action pair.
             for($i=0;$i<count($this->processed_post['keys'])-1;$i++) {
-                $key_check = $this->processed_post['keys'][$i];
-                for($j=$i+1; $j<count($this->processed_post['keys']);$j++) {
-                    if($this->processed_post['keys'][$i] == $this->processed_post['keys'][$j] 
-                        && $this->processed_post['actions'][$i] == $this->processed_post['actions'][$j]) {
-                        $this->processed_post['status'] = "error";
-                        $this->processed_post['message'] = self::DUPLICATES_ERROR_MESSAGE;
+                if( $this->processed_post['keys'][$i] && $this->processed_post['actions'][$i] ) {
+                    for($j=$i+1; $j<count($this->processed_post['keys']);$j++) {
+                        if($this->processed_post['keys'][$i] == $this->processed_post['keys'][$j] 
+                            && $this->processed_post['actions'][$i] == $this->processed_post['actions'][$j]) {
+                            $this->processed_post['status'] = "error";
+                            $this->processed_post['message'] = self::DUPLICATES_ERROR_MESSAGE;
+                        }
                     }
                 }
             }

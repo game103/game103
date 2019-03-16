@@ -101,10 +101,9 @@
 		*/
 		protected function escape() {
 			// Escape bad characters
+			$this->search = urldecode( $this->search );
 			$this->category = $this->mysqli->real_escape_string($this->category);
 			$this->search = $this->mysqli->real_escape_string($this->search);
-			$this->search = str_replace('%20', ' ', $this->search);
-			$this->search = str_replace('+', ' ', $this->search);
 			$this->sort = $this->mysqli->real_escape_string($this->sort);
 			$this->page = $this->mysqli->real_escape_string($this->page);
 		}
