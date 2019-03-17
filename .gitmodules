@@ -90,6 +90,6 @@
 [submodule "scripts/instagram-poster"]
 	path = scripts/instagram-poster
 	url = https://github.com/jamesgrams/instagram-poster.git
-[submodule ".\\game103games\\flash\\dolphinvolleyball"]
-	path = .\\game103games\\flash\\dolphinvolleyball
+[submodule "game103games/flash/dolphinvolleyball"]
+	path = game103games/flash/dolphinvolleyball
 	url = https://github.com/game103/dolphinvolleyball.git
