@@ -15,7 +15,7 @@
 		const TITLE_APPEND = 'Game 103: Family-Friendly Games and Entertainment';
 		const MYSQL_MESSAGE = "Sorry, there was an error connecting to the database.";
 		const STAR_WIDTH = 22;
-		const NEW_CONTENT_ITEMS_PER_PAGE = 10;
+		const NEW_CONTENT_ITEMS_PER_PAGE = 50;
 		const GITHUB_WEBHOOK_TOKEN = "<github webook token>";
 		const ADMIN_USER = "<admin username>";
 		const ADMIN_PASSWORD = "<admin password>";
