@@ -41,7 +41,7 @@
 
 			// Check if it is a Facebook or YouTube video
 			if( strpos($type_string, "facebook") !== false ) {
-				$iframe = "<iframe style='width:800px;height:450px;' src='https://www.facebook.com/plugins/video.php?href={$type_string}&show_text=0&width=800' scrolling='no' frameborder='0' allowTransparency='true' allowFullScreen='true' id='movie'></iframe>";
+				$iframe = "<iframe style='width:800px;height:450px;' src='https://www.facebook.com/plugins/video.php?href={$type_string}&show_text=0&width=800&mute=0' scrolling='no' frameborder='0' allowTransparency='true' allowFullScreen='true' id='movie'></iframe>";
 			}
 			else {
 				$iframe = "<iframe style='width:800px;height:450px;' allowfullscreen='allowfullscreen' src='https://www.youtube.com/embed/{$type_string}rel=0&amp;modestbranding=1&amp;theme=light&amp;iv_load_policy=3' frameborder='0' id='movie'></iframe>";
