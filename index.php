@@ -14,7 +14,7 @@
 		if( file_exists( $cached_file ) ) {
 			$contents = file_get_contents( $cached_file );
 			if( $dark_mode ) {
-				$contents = preg_replace("/<body>/", "<body$dark_mode", $contents, 1);
+				$contents = preg_replace("/<body>/", "<body$dark_mode>", $contents, 1);
 			}
 			print $contents;
 			exit;
