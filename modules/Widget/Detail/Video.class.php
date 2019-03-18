@@ -17,7 +17,6 @@
 		*/
 		public function __construct($properties) {
 			\Widget\Detail::__construct($properties);
-			$this->CSS[] = "/css/detail-video.css";
 		}
 		
 		/**
@@ -39,16 +38,23 @@
 				$type_string = "videoseries?list={$this->properties['string']}&";
 			}
 
+			if( !$this->properties['width'] ) {
+				$this->properties['width'] = 800;
+			}
+			if( !$this->properties['height'] ) {
+				$this->properties['height'] = 450;
+			}
+
 			// Check if it is a Facebook or YouTube video
 			if( strpos($type_string, "facebook") !== false ) {
-				$iframe = "<iframe style='width:800px;height:450px;' src='https://www.facebook.com/plugins/video.php?href={$type_string}&show_text=0&width=800&mute=0' scrolling='no' frameborder='0' allowTransparency='true' allowFullScreen='true' id='movie'></iframe>";
+				$iframe = "<iframe style='width:{$this->properties['width']}px;height:{$this->properties['height']}px;' src='https://www.facebook.com/plugins/video.php?href={$type_string}&show_text=0&width=800&mute=0' scrolling='no' frameborder='0' allowTransparency='true' allowFullScreen='true' id='movie'></iframe>";
 			}
 			else {
-				$iframe = "<iframe style='width:800px;height:450px;' allowfullscreen='allowfullscreen' src='https://www.youtube.com/embed/{$type_string}rel=0&amp;modestbranding=1&amp;theme=light&amp;iv_load_policy=3' frameborder='0' id='movie'></iframe>";
+				$iframe = "<iframe style='width:{$this->properties['width']}px;height:{$this->properties['height']}px;' allowfullscreen='allowfullscreen' src='https://www.youtube.com/embed/{$type_string}rel=0&amp;modestbranding=1&amp;theme=light&amp;iv_load_policy=3' frameborder='0' id='movie'></iframe>";
 			}
 			
 			$html = <<<HTML
-					<div id='preview-box' style='width:800px;height:450px;'></div>
+					<div id='preview-box' style="width:{$this->properties['width']}px;height:{$this->properties['height']}px;"></div>
 					<div id='movie-container' class='responsive'>
 						$iframe
 					</div>
@@ -62,7 +68,7 @@ HTML;
 				'tight'			=> 1,
 			) );
 			$box->generate();
-			$this->HTML = $box->get_HTML() . $this->generate_side_boxes() . $this->generate_similar_items_placeholder();
+			$this->HTML = $this->generate_responsive_css() . $box->get_HTML() . $this->generate_side_boxes() . $this->generate_similar_items_placeholder();
 			$this->JS = array_merge( $this->JS, $box->get_JS() );
 			$this->CSS = array_merge( $this->CSS, $box->get_CSS() );
 			

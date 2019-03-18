@@ -34,7 +34,9 @@
                 $description = $this->properties['description'];
                 $cat1 = $this->properties['cat1'];
                 $cat2 = $this->properties['cat2'];
-                $type = $this->properties['type'];
+				$type = $this->properties['type'];
+				$width = $this->properties['width'];
+				$height = $this->properties['height'];
             }
 
 			$html = <<<HTML
@@ -49,6 +51,8 @@ $error_message
 <label for="string"><span class='admin-label-text'>String: </span><input value="$string" required id="string" type = "text" name = "string"></label>
 <label class="admin-close" for="image_url"><span class='admin-label-text'>Image URL: </span><input value="$image_url" id="image_url" type = "text" name = "image_url"></label>
 <label for="imagefile"><span class='admin-label-text'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or Image File: </span><input id="imagefile" type = "file" name = "imagefile_upload"></label>
+<label for="width"><span class='admin-label-text'>Width: </span><input value="$width" id="width" type = "number" name = "width"></label>
+<label for="height"><span class='admin-label-text'>Height: </span><input value="$height" id="height" type = "number" name = "height"></label>
 <label for="description"><span class='admin-label-text'>Description: </span><textarea required id="description" name = "description">$description</textarea></label>
 <label for = "cat1">
 <span class='admin-label-text'>Category 1: </span>

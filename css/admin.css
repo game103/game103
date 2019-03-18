@@ -71,3 +71,6 @@ table {
 .box-content-tight {
     min-width: 500px;
 }
+td {
+    border-bottom: 1px solid;
+}

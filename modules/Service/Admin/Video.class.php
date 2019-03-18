@@ -61,7 +61,9 @@
                 'image_url'     =>  $this->post['image_url'],
                 'type'          =>  $this->post['type'],
                 'cat1'          =>  $this->post['cat1'],
-                'cat2'          =>  $this->post['cat2']
+                'cat2'          =>  $this->post['cat2'],
+                'width'         =>  $this->post['width'],
+                'height'        =>  $this->post['height'],
             );
 
             // If we are submitting, then do an insert/update
@@ -99,11 +101,11 @@
         protected function load() {
 
             // Load data for the entry
-            $sql = "select entries.id, entries.name, entries.string, entries.description, entries.image_url, entries.type from entries where url_name = ?";
+            $sql = "select entries.id, entries.name, entries.string, entries.description, entries.image_url, entries.type, entries.width, entries.height from entries where url_name = ?";
             $statement = $this->mysqli->prepare($sql);
             $statement->bind_param("s", $this->url_name);
             $statement->execute();
-            $statement->bind_result($id, $name, $string, $description, $image_url, $type);
+            $statement->bind_result($id, $name, $string, $description, $image_url, $type, $width, $height);
             $statement->fetch();
             $statement->close();
             if( !$id ) {
@@ -118,6 +120,8 @@
             if( !$this->post['description'] ) { $this->post['description'] = $description; }
             if( !$this->post['image_url'] ) { $this->post['image_url'] = $image_url; }
             if( !$this->post['type'] ) { $this->post['type'] = $type; }
+            if( !$this->post['width'] ) { $this->post['width'] = $width; }
+            if( !$this->post['height'] ) { $this->post['height'] = $height; }
 
             $this->load_categories();
 
@@ -130,11 +134,11 @@
          */
         protected function insert_new_video() {
             // Insert game    
-            $sql = "INSERT INTO entries(name, string, description, image_url, type, url_name) VALUES (?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO entries(name, string, description, image_url, type, url_name, width, height) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             $statement = $this->mysqli->prepare($sql);
-            $statement->bind_param("ssssss", $this->processed_post['name'], $this->processed_post['string'],
+            $statement->bind_param("ssssssii", $this->processed_post['name'], $this->processed_post['string'],
                 $this->processed_post['description'], $this->processed_post['image_url'], $this->processed_post['type'],
-                $this->processed_post['url_name'] );
+                $this->processed_post['url_name'], $this->processed_post['width'], $this->processed_post['height'] );
             $statement->execute();
             $this->processed_post['id'] = $this->mysqli->insert_id;
             $statement->close();
@@ -149,11 +153,11 @@
          */
         protected function update_video() {
             // Update
-            $sql = "UPDATE entries set name = ?, string = ?, description = ?, image_url = ?, type = ?, url_name = ? where id = ?";
+            $sql = "UPDATE entries set name = ?, string = ?, description = ?, image_url = ?, type = ?, url_name = ?, width = ?, height = ? where id = ?";
             $statement = $this->mysqli->prepare($sql);
-            $statement->bind_param("sssssss", $this->processed_post['name'], $this->processed_post['string'],
+            $statement->bind_param("sssssssii", $this->processed_post['name'], $this->processed_post['string'],
                 $this->processed_post['description'], $this->processed_post['image_url'], $this->processed_post['type'],
-                $this->processed_post['url_name'], $this->processed_post['id'] );
+                $this->processed_post['url_name'], $this->processed_post['width'], $this->processed_post['height'], $this->processed_post['id'] );
             $statement->execute();
             $statement->close();
 

@@ -117,6 +117,75 @@ OPTIONS;
 		protected function generate_similar_items_placeholder() {
 			return "<span class='detail-similar-items-placeholder' data-id='{$this->properties['id']}'><span>";
 		}
+
+		/**
+		* Generate special responsive css
+		*/
+		protected function generate_responsive_css() {
+			// We add an extra 20 pixels to account for a possible scrollbar.
+			// It's OK if we switch to responsive a little early (the 10 is the border).
+			$screen_width = ( (string) $this->properties['width'] + 10 + 20 ) . 'px';
+			$game_ratio = $this->properties['height']/$this->properties['width'];
+			$padding_bottom = ( (string) $game_ratio * 100) . '%';
+			$side_panels_allowed_width  =( (string) $this->properties['width'] + 575 ) . 'px';
+			/* Make sure to update and detail.js if updating */
+			$css = "<style>
+				/* This has a known issue when scrollbars are included in the media screen width
+				as part of the game will be cut of to the user, even though it would be visible
+				if the scrollbars were gone */
+				@media screen and (max-width: $screen_width) {
+					.box-content-tight {
+						width: calc(100% - 10px);
+					}
+					#movie-container {
+						position: relative;
+						width: 100%;
+						height: 0;
+						padding-bottom: $padding_bottom;
+					}
+					#movie, #enable-flash {
+						position: absolute;
+						width: 100% !important;
+						height: 100% !important;
+						visibility: visible;
+					}
+					.box-content-container {
+						overflow: hidden;
+					}
+					.detail-zoom-options input {
+						display: none;
+					}
+					#default {
+						display: none;
+					}
+				}
+				@media screen and (min-width: $side_panels_allowed_width) {
+					.detail-left-side-box.responsive {
+						float: left;
+					}
+					.detail-right-side-box.responsive {
+						float: right;
+					}
+					.detail-side-boxes.responsive {
+						display: inline;
+						background-color: transparent;
+					}
+					.detail-side-box.responsive {
+						/* This margin replaces the margin that was on side-boxes before side-boxes became inline */
+						margin-top: 10px;
+						display: inline-block;
+					}
+					.detail-side-box-item.responsive {
+						margin-bottom: 10px;
+						display: block;
+					}
+					.detail-separator.responsive {
+						display: none;
+					}
+				}
+			</style>";
+			return $css;
+		}
 		
 	}
 
