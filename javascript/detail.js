@@ -182,7 +182,7 @@ function detailEnsureValue() {
 	}
 	else {
 		// Since IE treats onchange like oninput
-		preview();
+		detailPreview();
 	}
 }
 // Strip the classes that make this page responsive
