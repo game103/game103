@@ -299,6 +299,26 @@ function entrySetLinks() {
 	}
 }
 
+// Set dark mode
+function setDarkMode() {
+	document.cookie = "dark=1; path=/";
+	document.body.classList.add("dark");
+}
+// Disable dark mode
+function disableDarkMode() {
+   document.cookie = "dark=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+   document.body.classList.remove("dark");
+}
+// toggle dark mode
+function toggleDarkMode() {
+	if( document.body.classList.contains('dark') ) {
+		disableDarkMode();
+	}
+	else {
+		setDarkMode();
+	}
+}
+
 document.addEventListener('DOMContentLoaded', entrySetLinks, false );
 
 // Lazy load images

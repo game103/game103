@@ -29,6 +29,10 @@
 	padding: 10px;
 }
 
+.dark .box-content-container {
+	background-color: #191919;
+}
+
 .box-content-container-tight {
 	padding: 0;
 }

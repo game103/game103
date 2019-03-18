@@ -1,5 +1,10 @@
 <?php
 	error_reporting(E_ERROR);
+
+	// Check dark mode cookie
+	if(isset($_COOKIE['dark']) && $_COOKIE['dark']) {
+		$dark_mode = ' class="dark"';
+	}
 	
 	// Check if we can respond with Cache
 	
@@ -7,7 +12,11 @@
 		$cached_file = str_replace( "?", "-", str_replace("/", "-", $_SERVER["REQUEST_URI"]) );
 		$cached_file = $_SERVER['DOCUMENT_ROOT'] . "/cache/" . $cached_file . ".html";
 		if( file_exists( $cached_file ) ) {
-			print file_get_contents( $cached_file );
+			$contents = file_get_contents( $cached_file );
+			if( $dark_mode ) {
+				$contents = preg_replace("/<body>/", "<body$dark_mode", $contents, 1);
+			}
+			print $contents;
 			exit;
 		}
 	}
@@ -785,7 +794,7 @@
 		<?php echo $schema_json ?>
 	</head>
 	
-	<body>
+	<body<?php echo $dark_mode?>>
 		<div class="page">
 			
 			<!-- Header -->
@@ -851,12 +860,13 @@
 					</div>
 					<div class="additional-links-section">
 						<div class="additional-links-section-heading">Extras</div>
-						<a href="/about">About Us</a>
 						<a href="/facts">Fun Facts</a>
 						<a href="/characters">Characters</a>
-						<a href="/flash">Flash Player Guide</a>
 						<a href="/random">Random Game</a>
-						<div class="additional-links-section-heading addition-links-section-heading-second">Policies</div>
+						<a onclick="toggleDarkMode()" href="javascript:;">Toggle Dark Mode</a>
+						<div class="additional-links-section-heading addition-links-section-heading-second">Information</div>
+						<a href="/about">About Us</a>
+						<a href="/flash">Flash Player Guide</a>
 						<a href="/privacy">Privacy Policy</a>
 					</div>
 					<div class="additional-links-section">

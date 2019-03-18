@@ -34,6 +34,10 @@ body {
 	font-size: 16px;
 }
 
+body.dark {
+	background-color: #191919;
+}
+
 button, .button {
 	background-color: #3274DA;
 	border: none;
@@ -613,6 +617,10 @@ img:-moz-loading {
 
 .entry-item:hover { 
 	background-color: #DBF7FF;
+}
+
+.dark .entry-item:hover {
+	background-color: #122544;
 }
 
 .entry-item img {
