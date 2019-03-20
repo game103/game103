@@ -27,6 +27,9 @@
     margin-left: 5px;
     width: calc(100% - 170px);
 }
+.dark .admin label input, .dark .admin label select, .dark .admin label textarea {
+    background-color: #191919;
+}
 .admin label input[type='number'] {
     width: 100px;
 }
@@ -71,6 +74,10 @@ table {
 .box-content-tight {
     min-width: 500px;
 }
-td {
-    border-bottom: 1px solid;
+
+@media screen and (max-width: 500px) {
+    .box-content-tight {
+        width: calc(100% - 40px) !important;
+        min-width: 100px;
+    }
 }

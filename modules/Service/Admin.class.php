@@ -53,8 +53,8 @@
 			while( $statement->fetch() ) {
                 $current_listing[] = array(
                     "id"        =>  $id,
+                    "url_name"  =>  $url_name,
                     "name"      =>  $name,
-                    "url_name"  =>  $url_name
                 );
             }
 			// Close the statement
