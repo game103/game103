@@ -94,6 +94,26 @@ document.addEventListener('DOMContentLoaded', function() {
 		xhttp.open('GET', "/ws/load_similar.php?type=" + path[1] + "&id=" + placeholder.getAttribute('data-id'), true);
 		xhttp.send();
 
+		// Others also played load
+		var xhttp_others = new XMLHttpRequest();
+		var placeholder_others = document.querySelector('.detail-others-also-played-placeholder');
+		if( placeholder_others ) {
+			xhttp_others.onreadystatechange = function() {
+				if (xhttp_others.readyState == 4) {
+					try {
+						var response = JSON.parse(xhttp_others.responseText);
+						// Nothing will be displayed if content is not defined
+						placeholder_others.innerHTML = response.content;
+					}
+					catch(e) {
+						// Just don't show others also played
+					}
+				}
+			};
+			xhttp_others.open('GET', "/ws/load_others_also_played.php?id=" + placeholder.getAttribute('data-id'), true);
+			xhttp_others.send();
+        }
+
 		detailChangeZoom();
 		detailEnsureValue();
 

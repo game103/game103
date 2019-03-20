@@ -1,6 +1,7 @@
 .DS_Store
 Thumbs.db
 cache/
+cache-user/
 modules/Constants.class.php
 *.swf
 *.exe

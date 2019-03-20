@@ -75,7 +75,7 @@ HTML;
 			) );
 			$box->generate();
 						
-			$this->HTML = $this->generate_responsive_css() . $box->get_HTML() . $this->generate_side_boxes() . $this->generate_similar_items_placeholder();
+			$this->HTML = $this->generate_responsive_css() . $box->get_HTML() . $this->generate_side_boxes() . $this->generate_similar_items_placeholder() . $this->generate_others_also_played_placeholder();
 			$this->JS = array_merge( $this->JS, $box->get_JS() );
 			$this->CSS = array_merge( $this->CSS, $box->get_CSS() );
 			
@@ -119,7 +119,14 @@ HTML;
 			}
 			return $this->properties['plays'] . " " . $plays_str;
 		}
-		
+
+		/**
+		* Generate others also played placeholder
+		*/
+		protected function generate_others_also_played_placeholder() {
+			return "<span class='detail-others-also-played-placeholder' data-id='{$this->properties['id']}'></span>";
+		}
+
 	}
 
 ?>

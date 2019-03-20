@@ -115,7 +115,7 @@ OPTIONS;
 		* Generate similar items placeholder
 		*/
 		protected function generate_similar_items_placeholder() {
-			return "<span class='detail-similar-items-placeholder' data-id='{$this->properties['id']}'><span>";
+			return "<span class='detail-similar-items-placeholder' data-id='{$this->properties['id']}'></span>";
 		}
 
 		/**

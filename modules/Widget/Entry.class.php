@@ -55,6 +55,10 @@
 				if( $this->properties['time_frame'] && $this->properties['time_count'] ) {
 					$time_count = " ({$this->properties['time_count']} this {$this->properties['time_frame']})";
 				}
+				// Shared count
+				if( $this->properties['both_unique_plays'] ) {
+					$time_count = " ({$this->properties['both_unique_plays']} players in common)";
+				}
 				$count = "<span class='entry-plays'>$type {$this->properties['count']} $count_verb$time_count</span>";
 			}
 			if( isset( $this->properties['rating'] ) ) {
