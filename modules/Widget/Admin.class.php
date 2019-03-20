@@ -38,7 +38,7 @@
         */
         protected function generate_listing( $admin_path_name, $admin_name ) {
 			$listing = $this->properties['listing'];
-            $html = "<table><thead><tr><th>ID</th><th>Name</th><th>Action</th></tr></thead><tbody>";
+            $html = "<table><thead><tr><th>ID</th><th>Action</th><th>Name</th></tr></thead><tbody>";
             foreach ( $listing as $item ) {
                 $html .= "<tr>";
                 foreach( $item as $key => $value ) {
