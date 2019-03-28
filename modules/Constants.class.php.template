@@ -21,6 +21,7 @@
 		const ADMIN_PASSWORD = "<admin password>";
 		const INSTAGRAM_USER = "<instagram username>";
 		const INSTAGRAM_PASSWORD = "<instagram password>";
+		const LEVENSHTEIN_SEARCH_ENABLED = 1;
 		
 		// Sanitize output (remove unecessary space)
 		// https://stackoverflow.com/questions/6225351/how-to-minify-php-page-html-output
