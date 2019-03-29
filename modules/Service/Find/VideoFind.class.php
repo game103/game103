@@ -27,7 +27,7 @@
 			else {
 				$category_sql = "";
 			}
-			if($this->search != '') {
+			if($this->search != '' && !$this->levenshtein_search_enabled) {
 				$search_sql = "entries.name LIKE ?";
 				if($category_sql == "") {
 					$where_sql = "WHERE $search_sql";
@@ -51,6 +51,10 @@
 			$offset = $this->generate_offset();
 			$where_sql = $this->generate_where();
 			$sort_sql = $this->generate_sort();
+			$limit = "LIMIT $items_per_page OFFSET $offset";
+			if( $this->levenshtein_search_enabled ) {
+				$limit = "";
+			}
 			$select_str = "SELECT * FROM (
 							SELECT entries.name as name, entries.description, entries.url_name, entries.image_url, entries.rating, FORMAT(entries.views, 0), entries.views as numeric_interactions, entries.added_date
 							FROM hallaby_videos.entries JOIN hallaby_videos.categories_entries ON entries.id = categories_entries.entry_id
@@ -58,8 +62,7 @@
 							$where_sql
 							GROUP BY entries.id
 							ORDER BY $sort_sql
-							LIMIT $items_per_page
-							OFFSET $offset) AS main
+							$limit) AS main
 							LEFT JOIN (
 							SELECT count(distinct entries.id) AS total_count
 							FROM hallaby_videos.entries JOIN hallaby_videos.categories_entries ON entries.id = categories_entries.entry_id
@@ -80,9 +83,9 @@
 
 			$search_wildcards = '%' . $this->search . '%';
 
-			if ( $this->search || $this->category != 'all' ) {
+			if ( ($this->search && !$this->levenshtein_search_enabled) || $this->category != 'all' ) {
 				
-				if( $this->category != 'all' && ! $this->search ) {
+				if( $this->category != 'all' && ! ($this->search && !$this->levenshtein_search_enabled) ) {
 					$select_statement->bind_param("ss", $this->category, $this->category);
 				}
 				else if( $this->category == 'all' ) {
@@ -114,12 +117,17 @@
 					"url_name" => $url_name,
 					"rating" => $rating,
 					"type" => "video",
-					"added_date" => $added_date
+					"added_date" => $added_date,
+					"name" => $name
 				);
 				
 				$items[] = $item_object;
 			}
 			$select_statement->close();
+			
+			if( $this->levenshtein_search_enabled ) {
+				return $this->filter_result_levenshtein( $items );
+			}
 			return $this->supplement_items( $items, $total_count );
 		}
 		

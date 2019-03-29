@@ -36,7 +36,7 @@
 			else {
 				$category_sql = "";
 			}
-			if($this->search != '') {
+			if($this->search != '' && !$this->levenshtein_search_enabled) {
 				$search_sql = "entries.name LIKE ?";
 				if($category_sql == "") {
 					$where_sql = "WHERE $search_sql";
@@ -80,7 +80,7 @@
 			$union_sum_sql = "
 			SELECT sum(total_count) FROM (";
 			
-			if($this->search != '') {
+			if($this->search != '' && !$this->levenshtein_search_enabled) {
 				$union_sql .= " WHERE downloads.name LIKE ?";
 				$union_count_sql .= " WHERE downloads.name LIKE ?";
 			}
@@ -111,6 +111,10 @@
 					$union_sum_sql = $downloads_sections['union_sum_sql'];
 				}
 			}
+			$limit = "LIMIT $items_per_page OFFSET $offset";
+			if( $this->levenshtein_search_enabled ) {
+				$limit = "";
+			}
 			$select_str = "SELECT * FROM (
 								SELECT entries.name as name, entries.description, entries.url_name, entries.image_url, entries.rating, FORMAT(entries.plays, 0) as plays, entries.plays as numeric_interactions, entries.added_date as added_date, entries.type as game_type $game103_extra_select
 								FROM hallaby_games.entries JOIN hallaby_games.categories_entries ON entries.id = categories_entries.entry_id
@@ -119,8 +123,7 @@
 								GROUP BY entries.id
 								$union_sql
 								ORDER BY $sort_sql
-								LIMIT $items_per_page
-								OFFSET $offset) AS main
+								$limit) AS main
 								LEFT JOIN (
 								$union_sum_sql
 								SELECT count(distinct entries.id) AS total_count
@@ -142,10 +145,10 @@
 			$select_statement = $this->mysqli->prepare( $this->generate_sql() );
 			$search_wildcards = '%' . $this->search . '%';
 
-			if ( $this->search || $this->category != 'all' || $this->platform  != 'any'  ) {
+			if ( ($this->search && !$this->levenshtein_search_enabled) || $this->category != 'all' || $this->platform  != 'any'  ) {
 				
 				if( $this->platform == 'any' ) {
-					if( $this->category != 'all' && ! $this->search ) {
+					if( $this->category != 'all' && ! ($this->search && !$this->levenshtein_search_enabled) ) {
 						$select_statement->bind_param("ss", $this->category, $this->category);
 					}
 					else if( $this->category == 'all' ) {
@@ -163,10 +166,10 @@
 				else {
 					// We may need to change this at some point
 					$platform = $this->platform == 'html5' ? 'JavaScript' : 'Flash';
-					if( $this->category == 'all' && ! $this->search ) {
+					if( $this->category == 'all' && ! ($this->search && !$this->levenshtein_search_enabled) ) {
 						$select_statement->bind_param("ss", $platform, $platform);
 					}
-					else if( ! $this->search ) {
+					else if( ! ($this->search && !$this->levenshtein_search_enabled) ) {
 						$select_statement->bind_param("ssss", $this->category, $platform, $this->category, $platform);
 					}
 					else if( $this->category == 'all' ) {
@@ -210,7 +213,8 @@
 					"rating" => $rating,
 					"type" => $type,
 					"added_date" => $added_date,
-					"game_type" => $game_type
+					"game_type" => $game_type,
+					"name" => $name
 				);
 				
 				if( $this->category == 'game103' ) {
@@ -219,6 +223,10 @@
 				$items[] = $item_object;
 			}
 			$select_statement->close();
+
+			if( $this->levenshtein_search_enabled ) {
+				return $this->filter_result_levenshtein( $items );
+			}
 			return $this->supplement_items( $items, $total_count );
 		}
 		

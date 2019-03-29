@@ -28,12 +28,15 @@
 			$offset = $this->generate_offset();
 			$where_sql = $this->generate_where( 'apps' );
 			$sort_sql = $this->generate_sort();
+			$limit = "LIMIT $items_per_page OFFSET $offset";
+			if( $this->levenshtein_search_enabled ) {
+				$limit = "";
+			}
 			$select_str = "SELECT * FROM(
 				SELECT apps.name as name, apps.description, apps.url_name, apps.image_url, FORMAT(apps.visits, 0), apps.visits as numeric_interactions, apps.store_url_android, apps.store_url_apple, apps.type, apps.added_date 
 				FROM hallaby_games.apps $where_sql
 				ORDER BY $sort_sql
-				LIMIT $items_per_page
-				OFFSET $offset) AS main
+				$limit) AS main
 				LEFT JOIN (select count(1) AS total_count
 				FROM hallaby_games.apps 
 				$where_sql) AS count
@@ -50,7 +53,7 @@
 
 			$search_wildcards = '%' . $this->search . '%';
 
-			if ( $this->search ) {
+			if ( $this->search && !$this->levenshtein_search_enabled ) {
 				$select_statement->bind_param("ss", $search_wildcards, $search_wildcards);
 			}
 			
@@ -75,12 +78,17 @@
 					"store_url_apple" => $store_url_apple,
 					"type" => "app",
 					"app_type" => $app_type,
-					"added_date" => $added_date
+					"added_date" => $added_date,
+					"name" => $name
 				);
 				
 				$items[] = $item_object;
 			}
 			$select_statement->close();
+			
+			if( $this->levenshtein_search_enabled ) {
+				return $this->filter_result_levenshtein( $items );
+			}
 			return $this->supplement_items( $items, $total_count );
 		}
 		

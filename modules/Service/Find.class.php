@@ -243,78 +243,60 @@
 					"store_url_apple" => $store_url_apple,
 					"added_date" => $added_date,
 					"game_type" => $game_type,
+					"name" => $name
 				);
 
 				$items[] = $item_object;
 			}
 			$select_statement->close();
 
+			if( $this->levenshtein_search_enabled ) {
+				return $this->filter_result_levenshtein( $items );
+			}
 			return $this->supplement_items( $items, $total_count );
 		}
 
 		/**
-		 * Parse the result of a sql statement using similar text
+		 * Filter result by levenshtein matches
 		 */
-		protected function parse_result_similar_text( $select_statement ) {
-			$select_statement->bind_result( $name, $description, $url_name, $image_url, $rating, $interactions, $numeric_interactions, $added_date, $store_url_android, $store_url_apple, $app_type, $item_type, $game_type, $total_count );
-		
+		protected function filter_result_levenshtein( $items ) {
+
 			$manual_count = 0;
-			$items = array();
-			while($select_statement->fetch()) {
-				
-				$ratio = $this->levenshtein_ratio( $this->search, $name, true );
+			$new_items = array();
+			foreach ( $items as $item ) {
 
+				$ratio = $this->levenshtein_ratio( $this->search, $item['name'], true );
 				// If we have similar text match enabled, we do the search filter in php
-				if( $ratio['ratio'] > 85 || $ratio['boosted'] > 92 || $ratio['max_part_ratio'] > 70 || $ratio['word_ratio_boosted'] > 80 ) {
+				if( $ratio['ratio'] > 85 || 
+					$ratio['boosted'] > 92 || 
+					$ratio['max_part_ratio'] > 70 || 
+					$ratio['word_ratio_boosted'] > 80 ) {
 
-					$item_object = array (
-						"title" => htmlentities($name, ENT_QUOTES),
-						"description" => $description,
-						"image_src" => $image_url,
-						"count" => $interactions,
-						"url_name"	=> $url_name,
-						"rating" => $rating,
-						"type" => $item_type,
-						"app_type" => $app_type,
-						"store_url_android" => $store_url_android,
-						"store_url_apple" => $store_url_apple,
-						"added_date" => $added_date,
-						"game_type" => $game_type,
-						"ratio" => $ratio['ratio'],
-						"max_part_ratio" => $ratio['max_part_ratio'],
-						"boosted" => $ratio['boosted'],
-						"word_ratio_boosted" => $ratio['word_ratio_boosted'],
-						"name" => $name,
-						"original_place" => $manual_count
-					);
-	
-					$items[] = $item_object;
+					$item['word_ratio_boosted'] = $ratio['word_ratio_boosted'];
+					$item['max_part_ratio'] = $ratio['max_part_ratio'];
+					$item['original_place'] = $manual_count;
+					$new_items[] = $item;
+					
 					$manual_count ++;
-
 				}
 
 			}
 
 			// Sort by match num (how well matched), then string length diff absolute value, then string length (more text = more like what user wanted), then actual sort (popularity, etc.)
-			usort($items, function ($a, $b) { 
+			usort($new_items, function ($a, $b) { 
 				if( $a['word_ratio_boosted'] > $b['word_ratio_boosted'] ) { return -1; }
 				if( $a['word_ratio_boosted'] < $b['word_ratio_boosted'] ) { return 1; }
 				if( $a['max_part_ratio'] > $b['max_part_ratio'] ) { return -1; }
 				if( $a['max_part_ratio'] < $b['max_part_ratio'] ) { return 1; }
-				/*if( $a['ratio'] > $b['ratio'] ) { return -1; }
-				if( $a['ratio'] < $b['ratio'] ) { return 1; }*/
-				/*if( $a['boosted'] > $b['boosted'] ) { return -1; }
-				if( $a['boosted'] < $b['boosted'] ) { return 1; }*/
 				if( $a['original_place'] < $b['original_place'] ) { return -1; }
 				if( $a['original_place'] > $b['original_place'] ) { return 1; }
 				return 0;
 			});
 
-			$select_statement->close();
-
+			// Take care of pagination
 			$items_per_page = $this->items_per_page;
 			$offset = $this->generate_offset();
-			$paginated_items = array_splice( $items, $offset, $items_per_page );
+			$paginated_items = array_splice( $new_items, $offset, $items_per_page );
 
 			return $this->supplement_items( $paginated_items, $manual_count );
 		}
@@ -466,9 +448,6 @@
 			
 			try {
 				$this->error_check();
-				if( $this->levenshtein_search_enabled ) {
-					return $this->parse_result_similar_text( $this->run_sql ( $this->bind_params() ) );
-				}
 				return $this->parse_result( $this->run_sql ( $this->bind_params() ) );
 			}
 			catch (\Exception $e) {
