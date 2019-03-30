@@ -36,6 +36,7 @@ body {
 
 body.dark {
 	background-color: #191919;
+	color: #DBF7FF;
 }
 
 button, .button {
@@ -613,6 +614,10 @@ img:-moz-loading {
 	height:75px;
 	transition: background-color .3s ease;
 	display: block;
+}
+
+.dark .entry-item {
+	color: #DBF7FF;
 }
 
 .entry-item:hover { 

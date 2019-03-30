@@ -29,6 +29,7 @@
 }
 .dark .admin label input, .dark .admin label select, .dark .admin label textarea {
     background-color: #191919;
+	color: #DBF7FF;
 }
 .admin label input[type='number'] {
     width: 100px;
