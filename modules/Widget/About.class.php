@@ -27,6 +27,7 @@
 			Around the time Game 103 started, I began making downloadable games with a program called Game Maker in which I made some simple games. After Game Maker, I moved into Adobe Flash. Since then, I have created multiple flash games and gained a lot of experience in programming ActionScript.
 			The desire to learn how to create a website experience unique to different users caused me to start learning PHP and SQL. This began with a simple login system.
 			Learning Flash and PHP allowed me to pick up a good amount of HTML and CSS. That's how you're viewing this site today! In 2013, I began studying Computer Science at college and graduated in May, 2017. I currently work as a Web Developer.</p>
+			<p>For me information about me, visit <a href="https://jamesgrams.com" target="_blank" rel="noopener">https://jamesgrams.com</a></p>
 			<p>Thanks for visiting, and enjoy the site.</p>
 HTML;
 			
