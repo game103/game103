@@ -7,13 +7,14 @@ ip=$(dig +short myip.opendns.com @resolver1.opendns.com)
 date=$(date +%s)
 cat > /etc/bind/db.game103.net <<- EOM
 \$TTL   2
-@       IN      SOA     cocoapup.dog. james.game103.net. (
+@       IN      SOA     ns1.cocoapup.dog. james.game103.net. (
                           $date         ; Serial
                          604800         ; Refresh
                           86400         ; Retry
                         2419200         ; Expire
                          604800 )       ; Negative Cache TTL
-@	IN	NS	cocoapup.dog.	
+@	IN	NS	ns1.cocoapup.dog.
+@	IN	NS	ns2.cocoapup.dog.
 @       IN      A       $ip
 @	IN	MX	1	ASPMX.L.GOOGLE.COM.
 @	IN	MX	5	ALT1.ASPMX.L.GOOGLE.COM.
@@ -22,7 +23,7 @@ cat > /etc/bind/db.game103.net <<- EOM
 @	IN	MX	10	ALT4.ASPMX.L.GOOGLE.COM.
 www	IN	CNAME	game103.net.
 email	IN	CNAME	ghs.google.com.
-mail	IN	CNAME	ghs.google.com.
+mail	IN	CNAME	email.game103.net.
 backup	IN	A	10.0.0.65
 cocoa	IN	A	10.0.0.151
 EOM
