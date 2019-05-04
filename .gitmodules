@@ -93,3 +93,6 @@
 [submodule "game103games/flash/dolphinvolleyball"]
 	path = game103games/flash/dolphinvolleyball
 	url = https://github.com/game103/dolphinvolleyball.git
+[submodule "game103games/javascript/cocoatown"]
+	path = game103games/javascript/cocoatown
+	url = https://github.com/game103/cocoatown.git
