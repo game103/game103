@@ -69,9 +69,9 @@
                 // Generate the url name
                 $this->generate_url_name();
 
-                if($cat2 == "") {
-                    unset($cat2);
-                }     
+                if($this->processed_post['cat2'] == "") {
+                    unset($this->processed_post['cat2']);
+                }
 
                 // Check for errors
                 $this->error_check();

@@ -86,6 +86,8 @@
                 'type'          =>  $this->post['type'],
                 'cat1'          =>  $this->post['cat1'],
                 'cat2'          =>  $this->post['cat2'],
+                'cat3'          =>  $this->post['cat3'],
+                'cat4'          =>  $this->post['cat4'],
                 'keys'          =>  $keys,
                 'actions'       =>  $actions
             );
@@ -115,7 +117,13 @@
                 
                 if($this->processed_post['cat2'] == "") {
                     unset($this->processed_post['cat2']);
-                }     
+                }   
+                if($this->processed_post['cat3'] == "") {
+                    unset($this->processed_post['cat3']);
+                }
+                if($this->processed_post['cat4'] == "") {
+                    unset($this->processed_post['cat4']);
+                }  
 
                 // Check for errors
                 $this->error_check();
@@ -212,9 +220,9 @@
                 $cat_str = "SELECT categories.id FROM entries
                     join categories_entries on categories_entries.entry_id = entries.id
                     join categories on categories.id = categories_entries.category_id
-                    where entries.url_name = ? and categories.url_name != ? and categories.url_name != ?";
+                    where entries.url_name = ? order by sort asc";
                 $statement = $this->mysqli->prepare($cat_str);
-                $statement->bind_param("sss", $this->url_name, $g = "game103", $d = "distributable");
+                $statement->bind_param("s", $this->url_name);
                 $statement->execute();
                 $statement->bind_result($category);
 

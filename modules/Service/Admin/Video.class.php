@@ -62,6 +62,7 @@
                 'type'          =>  $this->post['type'],
                 'cat1'          =>  $this->post['cat1'],
                 'cat2'          =>  $this->post['cat2'],
+                'cat3'          =>  $this->post['cat3'],
                 'width'         =>  $this->post['width'],
                 'height'        =>  $this->post['height'],
             );
@@ -71,9 +72,12 @@
                 // Generate the url name
                 $this->generate_url_name();
                 
-                if($cat2 == "") {
-                    unset($cat2);
-                }     
+                if($this->processed_post['cat2'] == "") {
+                    unset($this->processed_post['cat2']);
+                }   
+                if($this->processed_post['cat3'] == "") {
+                    unset($this->processed_post['cat3']);
+                }  
 
                 // Check for errors
                 $this->error_check();

@@ -91,6 +91,12 @@ document.addEventListener('DOMContentLoaded', function() {
     if( typeof cat2 !== 'undefined' && cat2 ) {
         document.getElementById('cat2').value = cat2;
     }
+    if( typeof cat3 !== 'undefined' && cat3 ) {
+        document.getElementById('cat3').value = cat3;
+    }
+    if( typeof cat4 !== 'undefined' && cat4 ) {
+        document.getElementById('cat4').value = cat4;
+    }
     if( typeof type !== 'undefined' && type ) {
         document.getElementById('type').value = type;
     }

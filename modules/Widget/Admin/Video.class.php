@@ -33,7 +33,8 @@
                 $image_url = $this->properties['image_url'];
                 $description = $this->properties['description'];
                 $cat1 = $this->properties['cat1'];
-                $cat2 = $this->properties['cat2'];
+				$cat2 = $this->properties['cat2'];
+				$cat3 = $this->properties['cat3'];
 				$type = $this->properties['type'];
 				$width = $this->properties['width'];
 				$height = $this->properties['height'];
@@ -42,7 +43,8 @@
 			$html = <<<HTML
 <script>
     var cat1 = '$cat1';
-    var cat2 = '$cat2';
+	var cat2 = '$cat2';
+	var cat3 = '$cat3';
     var type = '$type';
 </script>
 <form class="admin" action = "/admin/video" method = "POST" enctype = "multipart/form-data">
@@ -65,6 +67,7 @@ $error_message
 	<option value = "5">Musical</option>
 	<option value = "6">Nature</option>
 	<option value = "7">Story</option>
+	<option value = "8">Game 103</option>
 </select>
 </label>
 <label for = "cat2">
@@ -78,6 +81,14 @@ $error_message
 	<option value = "5">Musical</option>
 	<option value = "6">Nature</option>
 	<option value = "7">Story</option>
+	<option value = "8">Game 103</option>
+</select>
+</label>
+<label for = "cat3">
+<span class='admin-label-text'>Category 3: </span>
+<select id="cat3" name = "cat3">
+    <option value = ""></option>
+	<option value = "8">Game 103</option>
 </select>
 </label>
 <input type='hidden' name='id' value='$id'/>

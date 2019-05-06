@@ -172,10 +172,24 @@
             $statement->bind_param("ii", $this->processed_post['cat1'], $this->processed_post['id']);
             $statement->execute();
             $statement->close();
-            $statement = $this->mysqli->prepare($sql);
-            $statement->bind_param("ii", $this->processed_post['cat2'], $this->processed_post['id']);
-            $statement->execute();
-            $statement->close();
+            if( $this->processed_post['cat2'] ) {
+                $statement = $this->mysqli->prepare($sql);
+                $statement->bind_param("ii", $this->processed_post['cat2'], $this->processed_post['id']);
+                $statement->execute();
+                $statement->close();
+            }
+            if( $this->processed_post['cat3'] ) {
+                $statement = $this->mysqli->prepare($sql);
+                $statement->bind_param("ii", $this->processed_post['cat3'], $this->processed_post['id']);
+                $statement->execute();
+                $statement->close();
+            }
+            if( $this->processed_post['cat4'] ) {
+                $statement = $this->mysqli->prepare($sql);
+                $statement->bind_param("ii", $this->processed_post['cat4'], $this->processed_post['id']);
+                $statement->execute();
+                $statement->close();
+            }
         }
 
         /**
