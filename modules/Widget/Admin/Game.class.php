@@ -130,6 +130,7 @@ $error_message
 <select id="cat3" name = "cat3">
     <option value = ""></option>
     <option value = "11">Game 103</option>
+    <option value = "12">Distributable</option>
 </select>
 </label>
 <label for = "cat4">
