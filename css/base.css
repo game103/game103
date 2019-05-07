@@ -162,6 +162,7 @@ img:-moz-loading {
 
 .content {
 	text-align: center;
+	margin-bottom: 10px;
 }
 
 .block-text {

@@ -834,6 +834,17 @@
 			<!-- End main part of the page -->
 
 			<!--Contact and Copyright-->
+			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+			<!-- Horizontal Responsive -->
+			<ins class="adsbygoogle"
+				style="display:block"
+				data-ad-client="ca-pub-7052450264351992"
+				data-ad-slot="7467435758"
+				data-ad-format="auto"
+				data-full-width-responsive="true"></ins>
+			<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+			</script>
 			<footer class="footer">
 				<div class="additional-links">
 					<div class="additional-links-section">
