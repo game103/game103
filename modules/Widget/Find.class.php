@@ -162,6 +162,11 @@
 			$paging_controls .= "<div id='forwards-paging' class='find-word-paging' $next_paging_style>
 					<a href='$next_link' id='next-paging' class='button'>$next_name</a><a href='$last_link' id='last-paging' class='button'>$last_name</a>
 				</div>";
+
+			$starting = ($this->properties['page']-1) * $this->properties['items_per_page'];
+			$ending = $starting + sizeof($this->properties['items']);
+			$starting = $starting + 1;
+			$paging_controls .= "<div class='find-paging-items-shown'>$starting-$ending of " . $this->properties['count'] . "</div>";
 			
 			return $paging_controls;
 		}

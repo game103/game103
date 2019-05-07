@@ -405,6 +405,7 @@
 					"status" => "success",
 					"count" => $total_count,
 					"items" => $items,
+					"items_per_page" => $this->items_per_page,
 					"valid_categories" => $this->valid_categories,
 					"valid_types" => $this->valid_types,
 					"valid_sort" => $this->valid_sort,

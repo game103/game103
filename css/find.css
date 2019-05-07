@@ -2,6 +2,12 @@
 	display: inline-block;
 }
 
+.find-paging-items-shown {
+	font-size: 12px;
+	float: right;
+	padding: 5px;
+}
+
 .find-word-paging {
 	display: inline-block;
 }
@@ -231,4 +237,7 @@
 	.find-word-paging {
 		display: block;
 	}
+	.find-paging-items-shown {
+		float: none;
+	}	
 }
