@@ -44,6 +44,7 @@
             while( $entries[$i] ) {
                 $title = str_replace(' & ', ' &amp; ', $entries[$i]['title']['$t']);
                 $description = $entries[$i]['content']['$t'];
+                $description = preg_replace( "/<img([^>]*) src=\"http/", "<img$1 src=\"https", $description);
                 $date = date('l, F d, Y', strtotime($entries[$i]['published']['$t']));
                 $author = $entries[$i]['author'][0]['name']['$t'];
                 $comments_link = $entries[$i]['link'][1];
