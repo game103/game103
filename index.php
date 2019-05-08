@@ -108,6 +108,7 @@
 	require_once("Widget/Login.class.php");
 	require_once("Widget/Store.class.php");
 	require_once("Widget/FlashGuide.class.php");
+	require_once("Widget/Account.class.php");
 	
 	ob_start("\Constants::sanitize_output");
 	
@@ -595,6 +596,19 @@
 				$content = $widget->get_HTML();
 				$title = "Flash Player Guide";
 				$description = "A guide to running Adobe Flash Player as painlessly as possible on various browsers and devices in 2019.";
+				array_push( $widgets, $widget );
+			}
+			else {
+				$is_404 = true;
+			}
+			break;
+		case 'account':
+			if(count($routes) == 2) {
+				$widget = new \Widget\Account();
+				$widget->generate();
+				$content = $widget->get_HTML();
+				$title = "Account";
+				$description = "Manage your Game 103 account.";
 				array_push( $widgets, $widget );
 			}
 			else {

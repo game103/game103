@@ -10,16 +10,17 @@
 		
 	$mysqli = new mysqli(Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD, "hallaby_scores");
 	
-	$select_str = "SELECT users.username FROM users WHERE id = ?" ;
+	$select_str = "SELECT users.username, users.email FROM users WHERE id = ?" ;
 	$statement = $mysqli->prepare($select_str);
 	$statement->bind_param("s", $id);
 	$statement->execute();
-	$statement->bind_result($username);
+	$statement->bind_result($username, $email);
 	
 	$results = array();
 	$statement->fetch();
 	$results['username'] = $username;
 	$results['id'] = $id;
+	$results['email'] = $email;
 	
 	// Username will be null if not found
 	echo json_encode( $results );

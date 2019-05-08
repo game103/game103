@@ -4,7 +4,7 @@
 	require_once('Widget.class.php');
 
 	/**
-	*	Widget representing the login page.
+	*	Widget representing the login page for the administration section of Game 103.
 	*/
 	class Login extends \Widget {
 		

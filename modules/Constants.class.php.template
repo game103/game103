@@ -22,6 +22,7 @@
 		const INSTAGRAM_USER = "<instagram username>";
 		const INSTAGRAM_PASSWORD = "<instagram password>";
 		const LEVENSHTEIN_SEARCH_ENABLED = 1;
+		const ENCRYPTION_KEY = "<encryption_key>";
 		
 		// Sanitize output (remove unecessary space)
 		// https://stackoverflow.com/questions/6225351/how-to-minify-php-page-html-output
