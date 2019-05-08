@@ -12,8 +12,8 @@
 	
 	// Notice how the actual id is different to the username id
 	// to prevent shady stuff :) with resetting
-	$id = uniqid();
-	$username = 'player_' . uniqid();
+	$id = bin2hex(random_bytes(7));
+	$username = 'player_' . bin2hex(random_bytes(7));
 	
 	$statement = $mysqli->prepare($insert_str);
 	$statement->bind_param("ss", $id, $username);
