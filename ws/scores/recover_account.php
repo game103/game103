@@ -48,16 +48,16 @@
     <body style="padding: 10px;font-family:sans-serif;">
     <img style="padding:5px;width:200px;margin-left:auto;margin-right:auto;display:block;border:5px solid #285cae;" src="https://game103.net/images/logo2016.png"/>
     Dear $username,<br><br>
-    We have received a request for you to reset your Game 103 password. Please click the link below to do so. If you did not request this, please ignore this message.<br><br>
+    We have received a request to help you recover your Game 103 account. Please click the link below to update your credentials. If you did not request this, please ignore this message.<br><br>
     <a href="$link">$link</a><br><br>
-    This link will expire in 24-48 hours<br><br>
+    This link will expire in 24-48 hours.<br><br>
     Sincerely,<br><br>
     Game 103
     </body>
 </html>
 HTML;
 
-        mail($to_email,$subject,$message,[$headers],[]);
+        mail($to_email,$subject,$message,$headers);
     }
     
     // We will always show success, even if no ID
