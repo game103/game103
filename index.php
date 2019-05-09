@@ -902,6 +902,7 @@
 						<a href="/about">About Us</a>
 						<a href="/flash">Flash Player Guide</a>
 						<a href="/privacy">Privacy Policy</a>
+						<a href="/account">Account Settings</a>
 					</div>
 					<div class="additional-links-section">
 						<div class="additional-links-section-heading">Contact</div>
