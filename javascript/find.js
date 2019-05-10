@@ -100,6 +100,11 @@ function findMakeRequest ( link, changeState, focusSearch, sStart ) {
 	xhttp.onreadystatechange = function() {
 		if (xhttp.readyState == 4) {
 			try {
+				// Scroll to the top of the outer box if below the inner box
+				var boxContentContainerY = document.querySelector(".box-content-container").offsetTop;
+				if( window.scrollY > boxContentContainerY ) {
+					window.scrollTo( 0, document.getElementsByClassName("box-content")[0].offsetTop );
+				}
 				
 				// Replace the box, title, and description with ajax
 				var object = JSON.parse(xhttp.responseText);
@@ -137,7 +142,6 @@ function findMakeRequest ( link, changeState, focusSearch, sStart ) {
 			}
 		}
 	};
-	console.log(link);
 	xhttp.open('GET', link + "?ws=1", true);
 	xhttp.send();
 }

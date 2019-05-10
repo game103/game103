@@ -714,10 +714,10 @@
 		}
 		
 		if( $platform ) {
-			$service = new $service_class( $search, $sort, $category, $page, 15, $platform, new mysqli( Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD ) );
+			$service = new $service_class( $search, $sort, $category, $page, 50, $platform, new mysqli( Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD ) );
 		}
 		else {
-			$service = new $service_class( $search, $sort, $category, $page, 15, new mysqli( Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD ) );
+			$service = new $service_class( $search, $sort, $category, $page, 50, new mysqli( Constants::DB_HOST, Constants::DB_USER, Constants::DB_PASSWORD ) );
 		}
 
 		$generated = $service->generate();
