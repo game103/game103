@@ -1,10 +1,12 @@
 var game103AccountID = null;
+var game103AccountUsername = null;
 var accountErrorMessage = "Sorry, an error has occured";
 var accountSuccessfullyUpdatedMessage = "Your account has been successfully updated";
 var accountLoggedInMessage = "You have logged in";
 var accountLoggedOutMessage = "You have logged out";
 var accountEmailSentMessage = "Please check your inbox for an email to update your account";
 var accountNoAccountFoundMessage = "Sorry, no account was found";
+var accountSuccessfullyMergedMessage = "Your account was successfully merged";
 
 document.addEventListener('DOMContentLoaded', function() {
     
@@ -28,16 +30,19 @@ function accountDisableButtons() {
     var logout = document.querySelector("#logout");
     var update = document.querySelector("#update");
     var recover = document.querySelector("#recover");
+    var merge = document.querySelector("#merge");
 
     login.onclick = null;
     logout.onclick = null;
     update.onclick = null;
     recover.onclick = null;
+    merge.onclick = null;
 
     login.style.opacity = "0.5";
     logout.style.opacity = "0.5";
     update.style.opacity = "0.5";
     recover.style.opacity = "0.5";
+    merge.style.opacity = "0.5";
 
 }
 
@@ -61,8 +66,10 @@ function accountLoginAccountID(id, callback) {
             var json = JSON.parse(response);
             if( json.id ) {
                 game103AccountID = id;
+                game103AccountUsername = json.username;
                 document.querySelector("#username").value = json.username;
                 document.querySelector("#email").value = json.email;
+                accountFillInUsername();
                 accountDisplayMessage(accountLoggedInMessage, "success");
             }
             else {
@@ -76,6 +83,15 @@ function accountLoginAccountID(id, callback) {
     }, function() { accountDisplayMessage(accountErrorMessage, "failure"); accountEnableButtons(); });
 }
 
+// Fill in the username
+function accountFillInUsername() {
+    var usernamePlaceholders = document.querySelectorAll(".current-account");
+
+    for( var i=0; i<usernamePlaceholders.length; i++ ) {
+        usernamePlaceholders[i].innerText = game103AccountUsername;
+    }
+}
+
 // Enable buttons that should be allowed to be clicked
 function accountEnableButtons() {
 
@@ -83,17 +99,51 @@ function accountEnableButtons() {
     var logout = document.querySelector("#logout");
     var update = document.querySelector("#update");
     var recover = document.querySelector("#recover");
+    var mergeSection = document.querySelector("#merge-section");
+    var merge = document.querySelector("#merge");
 
     login.style.opacity = 1;
     logout.style.opacity = 1;
     update.style.opacity = 1;
     recover.style.opacity = 1;
+    merge.style.opacity = 1;
 
     if( game103AccountID ) {
-        update.style.display = 'block';
-        logout.style.display = 'block';
         login.style.display = 'none';
         recover.style.display = 'none';
+        update.style.display = 'block';
+        logout.style.display = 'block';
+        mergeSection.style.display = 'block';
+
+        // Merge
+        merge.onclick = function() {
+            accountHideMessage();
+
+            // Sanity check - there should always be an account ID
+            if( game103AccountID ) {
+                var mergeUsername = document.querySelector("#username-merge").value;
+                var mergePassword = document.querySelector("#password-merge").value;
+
+                accountDisableButtons();
+                accountMerge( game103AccountID, mergeUsername, mergePassword, function(response) {
+                    try {
+                        var json = JSON.parse(response);
+                        if( json.status == "success" ) {
+                            document.querySelector("#username-merge").value = "";
+                            document.querySelector("#password-merge").value = "";
+                            accountDisplayMessage(accountSuccessfullyMergedMessage, json.status);
+                        }
+                        else {
+                            accountDisplayMessage(json.message, json.status);
+                        }
+                    }
+                    catch(err) {
+                        accountDisplayMessage(accountErrorMessage, "failure");
+                    }
+                    accountEnableButtons();
+                }, function() { accountDisplayMessage(accountErrorMessage, "failure"); accountEnableButtons(); });
+            }
+        }
 
         // Update
         update.onclick = function() {
@@ -132,14 +182,16 @@ function accountEnableButtons() {
             document.querySelector("#email").value = "";
             accountDisplayMessage(accountLoggedOutMessage, "success");
             game103AccountID = null;
+            game103AccountID = null;
             accountEnableButtons();
         }
     }
     else {
-        login.style.display = 'block';
-        recover.style.display = 'block';
         update.style.display = 'none';
         logout.style.display = 'none';
+        mergeSection.style.display = 'none';
+        login.style.display = 'block';
+        recover.style.display = 'block';
 
         // Log in
         login.onclick = function() {
@@ -154,6 +206,8 @@ function accountEnableButtons() {
                     var json = JSON.parse(response);
                     if( json.status == "success" ) {
                         game103AccountID = json.id;
+                        game103AccountUsername = username;
+                        accountFillInUsername();
                         accountDisplayMessage(accountLoggedInMessage, json.status);
                     }
                     else {
@@ -227,6 +281,11 @@ function accountLoginUser(username, password, callback, errorCallback) {
 // Recover a user's account
 function accountRecoverAccount(email, callback, errorCallback) {
     accountMakeRequest("POST", "/ws/scores/recover_account.php", { email: email }, callback, errorCallback);
+}
+
+// Merge a user's account
+function accountMerge(id, mergeUsername, mergePassword, callback, errorCallback) {
+    accountMakeRequest("POST", "/ws/scores/merge_accounts.php", { id: id, username: mergeUsername, password: mergePassword }, callback, errorCallback);
 }
 
 // Get the most up to date username for our user (they may have change it elsewhere)

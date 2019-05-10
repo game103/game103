@@ -51,7 +51,7 @@
 accounts for high scores. Your account is automatically created for you when you play these games and is used
 to associate you with your high scores. In these games, you have the option to change your username and create a password, so that you can log into 
 your account from other devices and games.<br><br>On this page, you can change your account username and password, set an email so that you can recover your account
-should you forget your password, and recover your account if you have forgetten your password and added an email.</div>
+should you forget your password, merge two accounts, and recover your account if you have forgetten your password and added an email.</div>
 <div class="admin login">
     <div class="admin-error-message"></div>
     <label for="username"><span class='admin-label-text'>Username: </span><input required id="username" type = "text" name = "username" minlength="5" maxlength="15"></label>
@@ -62,6 +62,13 @@ should you forget your password, and recover your account if you have forgetten 
     <input id='logout' type = "submit" value = "Logout" name = "submit" class="button">
     <input id='update' type = "submit" value = "Update Account" name = "submit" class="button">
     <input id='recover' type = "submit" value = "Recover Account" name = "submit" class="button">
+    <div id="merge-section">
+        Merge an account into the account that you are currently logged in to (<span class="current-account"></span>).<br>
+        NOTE: This will permanently delete the account that you enter below. It will NOT delete <span class="current-account"></span>.
+        <label for="username-merge"><span class='admin-label-text'>Merge Username: </span><input required id="username-merge" type = "text" name = "username-merge" minlength="5" maxlength="15"></label>
+        <label for="password-merge"><span class='admin-label-text'>Merge Password: </span><input required id="password-merge" type = "password" name = "password-merge" minlength="5" maxlength="15"></label>
+        <input id='merge' type = "submit" value = "Merge" name = "submit" class="button">
+    </div>
     <div class='clear'></div>
 </div>
 HTML;
