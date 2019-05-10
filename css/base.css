@@ -77,8 +77,14 @@ img:-moz-loading {
 	height: 130px;
 	background-image: url("/images/header2016.png");
 	background-repeat: no-repeat;
-    background-position: bottom center;
+  background-position: bottom center;
 	background-color: #4E85DB;
+	transition: background-size 0.5s ease;
+	background-size: 1050px;
+}
+
+.header:active {
+	background-size: 1150px;
 }
 
 .logo {
