@@ -31,6 +31,12 @@
 			'message'	=> 'Invalid credentials'
 		) );
     }
+    else if( $merge_id == $user_id ) {
+        echo json_encode ( array(
+			'status'	=> 'failure',
+			'message'	=> 'You cannot merge an account into itself'
+		) );
+    }
     else {
 
         // Make sure the merge account id is valid!
