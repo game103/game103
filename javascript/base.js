@@ -428,8 +428,8 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // Register service worker
-if ('serviceWorker' in navigator && window.navigator.userAgent.indexOf("Edge") == -1) {
+/*if ('serviceWorker' in navigator && window.navigator.userAgent.indexOf("Edge") == -1) {
 	navigator.serviceWorker && navigator.serviceWorker.register('/sw.js').then(function(registration) {
 		console.log('Registered with scope: ', registration.scope);
 	});
-}
+}*/
