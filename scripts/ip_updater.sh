@@ -28,7 +28,7 @@ backup	IN	A	10.0.0.65
 cocoa	IN	A	10.0.0.151
 EOM
 cat > /etc/bind/db.spokapi.com <<- EOM
-$TTL   2 
+\$TTL   2 
 @       IN      SOA     ns1.cocoapup.dog. james.spokapi.com. (
                           $date         ; Serial
                           43200         ; Refresh
