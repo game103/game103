@@ -4,15 +4,15 @@
 # TTL is 2 since google subtracts 1 and this is the shortest time we can have (needed since
 # domain could change at any second)
 ip=$(dig +short myip.opendns.com @resolver1.opendns.com)
-date=$(date +%s)
+date=$(date +%Y%m%d%S)
 cat > /etc/bind/db.game103.net <<- EOM
 \$TTL   2
 @       IN      SOA     ns1.cocoapup.dog. james.game103.net. (
                           $date         ; Serial
-                         604800         ; Refresh
-                          86400         ; Retry
+                          43200         ; Refresh
+                           7200         ; Retry
                         2419200         ; Expire
-                         604800 )       ; Negative Cache TTL
+                          86400 )       ; Negative Cache TTL
 @	IN	NS	ns1.cocoapup.dog.
 @	IN	NS	ns2.cocoapup.dog.
 @       IN      A       $ip
@@ -26,5 +26,19 @@ email	IN	CNAME	ghs.google.com.
 mail	IN	CNAME	email.game103.net.
 backup	IN	A	10.0.0.65
 cocoa	IN	A	10.0.0.151
+EOM
+cat > /etc/bind/db.spokapi.com <<- EOM
+$TTL   2 
+@       IN      SOA     ns1.cocoapup.dog. james.spokapi.com. (
+                          $date         ; Serial
+                          43200         ; Refresh
+                           7200         ; Retry
+                        2419200         ; Expire
+                          86400 )       ; Negative Cache TTL
+@	IN	NS	ns1.cocoapup.dog.
+@	IN	NS	ns2.cocoapup.dog.
+@       IN      A       $ip
+www	IN	CNAME	spokapi.com.
+okapi	IN	A	10.0.0.183
 EOM
 rndc reload
