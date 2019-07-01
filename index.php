@@ -793,17 +793,6 @@
 		<script defer src='/javascript/base.js?v=<?php echo $COMMIT_HASH?>'></script>
 		<?php echo $js ?>
 		
-		<!-- Google Analytics -->
-		<script>
-			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-			ga('create', ' UA-4577874-3', 'auto');
-			ga('send', 'pageview');
-		</script>
-		
 		<!--Include schema-->
 		<?php echo $schema_json ?>
 	</head>
@@ -848,17 +837,6 @@
 			<!-- End main part of the page -->
 
 			<!--Contact and Copyright-->
-			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-			<!-- Horizontal Responsive -->
-			<ins class="adsbygoogle"
-				style="display:block"
-				data-ad-client="ca-pub-7052450264351992"
-				data-ad-slot="7467435758"
-				data-ad-format="auto"
-				data-full-width-responsive="true"></ins>
-			<script>
-				(adsbygoogle = window.adsbygoogle || []).push({});
-			</script>
 			<footer class="footer">
 				<div class="additional-links">
 					<div class="additional-links-section">
@@ -900,7 +878,6 @@
 						<a href="mailto:james@game103.net"><i class="fas fa-envelope"></i>Email</a>
 						<a target='_blank' rel="noopener" href="https://m.me/game103"><i class="fab fa-facebook-messenger"></i>Messenger</a>
 						<a target='_blank' rel="noopener" href="https://twitter.com/messages/compose?recipient_id=789785198707761156"><i class="fab fa-twitter"></i>Twitter DM</a>
-						<a target='_blank' rel="noopener" href="https://www.patreon.com/game103"><i class="fab fa-patreon"></i>Support on Patreon</a>
 						<div class="additional-links-section-heading addition-links-section-heading-second">Developers</div>
 						<a href="/games/distributable">Games for Your Site</a>
 						<a target='_blank' rel="noopener" href="https://github.com/game103/game103"><i class="fab fa-github"></i>Source Code</a>
