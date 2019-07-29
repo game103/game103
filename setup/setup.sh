@@ -59,6 +59,8 @@ php scripts/generate_navbar.php > navbar.html
 cd scripts/instagram-poster
 npm install
 
+# set environment variables
+
 # restart everything
 service apache2 restart
 service php7.0-fpm restart

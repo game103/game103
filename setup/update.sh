@@ -25,7 +25,7 @@ cp /etc/apache2/sites-available/default default
 
 # get the mysql
 P=`php -r "include '/var/www/game103/modules/Constants.class.php'; echo Constants::DB_PASSWORD;"`
-mysqldump -u root -p$P --all-databases --skip-dump-date > schema.sql
+mysqldump -d -u root -p$P --all-databases --skip-dump-date --skip-comments --skip-add-drop-table > schema.sql
 
 PHP_DIFF=$(git diff php.ini) 
 BIND_DIFF=$(git diff named.conf.local) 
