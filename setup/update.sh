@@ -37,30 +37,24 @@ SCHEMA_DIFF=$(git diff schema.sql)
 if [ "$PHP_DIFF" != "" ]
 then
     echo "php.ini was modified."
-    service php7.0-fpm restart
 fi
 if [ "$BIND_DIFF" != "" ]
 then
     echo "named.conf.local was modified."
-    service bind9 restart
 fi
 if [ "$CRONTAB_DIFF" != "" ]
 then
     echo "crontab was modified."
-    service cron restart
 fi
 if [ "$APACHE_DIFF" != "" ]
 then
     echo "apache2.conf was modified."
-    service apache2 restart
 fi
 if [ "$DEFAULT_DIFF" != "" ]
 then
     echo "default was modified."
-    service apache2 restart
 fi
 if [ "$SCHEMA_DIFF" != "" ]
 then
     echo "schema.sql was modified."
-    service mysql restart
 fi
