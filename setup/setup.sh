@@ -1,7 +1,7 @@
 # script to set up Game 103 on a fresh OS
 # this script includes the installation of necessary files
 # currently works on debian
-# environment variables required
+# you should already have the game 103 repository in /var/www/game103 when running this
 
 # install required modules
 echo "Installing required modules..."
@@ -11,9 +11,7 @@ curl -sL https://deb.nodesource.com/setup_12.x | sh
 apt-get -y install nodejs
 
 # cd to the directory of game103 setup
-echo "Cloning Game 103..."
-git clone https://github.com/game103/game103
-mv game103 /var/www/game103
+echo "Moving to Game 103..."
 cd /var/www/game103/setup
 
 # enable necessary apache2 mods
