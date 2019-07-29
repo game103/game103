@@ -27,15 +27,12 @@ echo "Installing minifiers..."
 npm install -g uglify-js
 npm install -g uglifycss
 
-# load the submodules
-echo "Loading submodules..."
-git submodule update --init
-
 # create the game103_private directory
 echo "Create the private directory..."
 cd ../..
 mkdir game103_private
 mkdir game103_private/cache
+mkdir game103_private/cache-user
 mkdir game103_private/modules
 mkdir game103_private/stock
 mkdir game103_private/stock/games
@@ -44,7 +41,7 @@ cp game103/modules/Constants.class.php.template game103_private/modules/Constant
 # set up the defaults for mysql authentication
 echo "Updating MySQL Defaults..."
 sed -i 's/<mysql host>/localhost/g' game103_private/modules/Constants.class.php
-sed -i 's/<mysql user>/root/g' game103_private/modules/Constants.class.php
+sed -i 's/<mysql user>/cocoa/g' game103_private/modules/Constants.class.php
 sed -i 's/<mysql password>/cocoa/g' game103_private/modules/Constants.class.php
 
 # start mysql and set the password
@@ -53,7 +50,7 @@ service mysql start
 mysqladmin --user=root password "cocoa"
 
 # fix MySQL user 
-echo "Updating MySQL user..."
+echo "Creating MySQL user for PHP..."
 mysql -u root -pcocoa < /var/www/game103/setup/setup.sql
 
 # make sure permissions are correct for directories that we need to upload to
@@ -80,11 +77,6 @@ service mysql restart
 echo "Generating the navbar..."
 cd game103
 php scripts/generate_navbar.php > navbar.html
-
-# install instagram poster
-echo "Installing Instagram poster..."
-cd scripts/instagram-poster
-npm install
 
 # confirm apache configuration
 echo "Confirming Apache Configuration..."
