@@ -13,6 +13,7 @@ apt-get -y install nodejs
 # cd to the directory of game103 setup
 echo "Moving to Game 103..."
 cd /var/www/game103/setup
+git pull
 
 # enable necessary apache2 mods
 echo "Enabling Apache modules..."
