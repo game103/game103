@@ -6,7 +6,7 @@
 # install required modules
 echo "Installing required modules..."
 apt-get update
-apt-get -y install git cron gcc php7.0 php-mysql php7.0-fpm python2.7 curl apache2 mysql-server bind9 imagemagick openssl
+apt-get -y install git dnsutils curl vim cron gcc php7.0 php-mysql php7.0-fpm python2.7 curl apache2 mysql-server bind9 imagemagick openssl
 curl -sL https://deb.nodesource.com/setup_12.x | sh
 apt-get -y install nodejs
 
@@ -49,14 +49,14 @@ sed -i 's/<mysql host>/localhost/g' game103_private/modules/Constants.class.php
 sed -i 's/<mysql user>/root/g' game103_private/modules/Constants.class.php
 sed -i 's/<mysql password>/cocoa/g' game103_private/modules/Constants.class.php
 
-# fix MySQL user 
-echo "Updating MySQL user..."
-service mysql start
-mysql -u root -f < /var/www/game103/setup/setup.sql
-
 # start mysql and set the password
 echo "Changing MySQL password..."
+service mysql start
 mysqladmin --user=root password "cocoa"
+
+# fix MySQL user 
+echo "Updating MySQL user..."
+mysql -u root -pcocoa < /var/www/game103/setup/setup.sql
 
 # make sure permissions are correct for directories that we need to upload to
 echo "Changing admin directories' owner..."
@@ -93,7 +93,7 @@ echo "Confirming Apache Configuration..."
 rm /etc/apache2/sites-available/000-default.conf 
 rm /etc/apache2/sites-available/default-ssl.conf
 rm /etc/apache2/sites-enabled/000-default.conf
-ln -s ../sites-available/default default
+ln -s /etc/apache2/sites-available/default /etc/apache2/sites-enabled/default
 
 # remove ssl certificate
 echo "Remove default SSL configuration..."
