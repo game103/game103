@@ -12,6 +12,7 @@ cd /var/www/game103/setup
 
 # get the php configuration
 cp /etc/php/7.0/fpm/php.ini php.ini
+cp /etc/php/7.0/fpm/pool.d/www.conf www.conf
 
 # get the bind configuration
 cp /etc/bind/named.conf.local named.conf.local
