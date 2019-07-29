@@ -1,0 +1,32 @@
+//
+// Do any local configuration here
+//
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
+
+zone "game103.net" {
+    type master;
+    file "/etc/bind/db.game103.net";
+};
+
+zone "spokapi.com" {
+    type master;
+    file "/etc/bind/db.spokapi.com";
+};
+
+zone "jamesgrams.com" {
+    type master;
+    file "/etc/bind/db.jamesgrams.com";
+};
+
+zone "grams.family" {
+    type master;
+    file "/etc/bind/db.grams.family";
+};
+
+zone "cocoa" {
+    type master;
+    file "/etc/bind/db.cocoa";
+};

@@ -1,0 +1,52 @@
+<VirtualHost *:80>
+    ServerName game103.net 
+    RewriteEngine On
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=301,L]
+</VirtualHost>
+
+<VirtualHost *:443>
+	ServerAdmin james@game103.net 
+	
+	ServerName game103.net 
+	ServerAlias www.game103.net
+	DocumentRoot /var/www/game103
+
+	ExpiresActive on
+	ExpiresByType image/png "access plus 1 month"
+	ExpiresByType image/gif "access plus 1 month"
+	ExpiresByType image/jpeg "access plus 1 month"
+	AddType image/webp .webp
+	ExpiresByType image/webp "access plus 1 month"
+  	ExpiresByType image/icon "access plus 12 month"
+	ExpiresByType image/x-icon "access plus 12 month"
+  	ExpiresByType application/ico "access plus 12 month"
+	AddType image/ico .ico
+  	ExpiresByType image/ico "access plus 12 month"
+	ExpiresByType text/css "access plus 1 month"
+	ExpiresByType application/javascript "access plus 1 month"
+	ExpiresByType application/x-shockwave-flash "access 1 month"
+	AddType application/x-font-ttf .ttf
+	ExpiresByType application/x-font-ttf "access plus 12 month"
+	AddType application/x-font-woff2 .woff2
+	ExpiresByType application/x-font-woff2 "access plus 12 month"
+
+	AddOutputFilterByType DEFLATE image/ico application/x-font-ttf image/webp image/png image/gif image/jpeg text/css application/javascript text/html application/json
+	#SetOutputFilter DEFLATE
+	
+	SSLEngine on
+
+	Protocols    	h2 http/1.1
+
+	<FilesMatch "\.php$">
+            SetHandler "proxy:fcgi://127.0.0.1:9000/"
+        </FilesMatch>
+			Include 	/etc/letsencrypt/options-ssl-apache.conf
+SSLCertificateFile /etc/letsencrypt/live/www.game103.net/fullchain.pem
+SSLCertificateKeyFile /etc/letsencrypt/live/www.game103.net/privkey.pem
+</VirtualHost>
+
+<Directory /var/www/game103>
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
+</Directory>
