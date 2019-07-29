@@ -1,5 +1,6 @@
 /etc/init.d/cron stop
 cd /var/www/game103
+setup/distribute.sh
 git reset --hard
 git pull
 git submodule foreach git pull origin master

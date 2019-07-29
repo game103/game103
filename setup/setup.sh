@@ -92,3 +92,7 @@ openssl req -x509 -out /etc/apache2/ssl/localhost.crt -keyout localhost.key \
    printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
 
 cd /var/www/game103
+
+# fix MySQL user 
+P=`php -r "include '/var/www/game103/modules/Constants.class.php'; echo Constants::DB_PASSWORD;"`
+mysql -u root -p$P -f < setup.sql
