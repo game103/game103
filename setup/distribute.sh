@@ -1,4 +1,5 @@
 # distribute the files in the setup directory to their proper locations on the server
+etc/init.d/cron stop
 
 cd /var/www/game103/setup
 
@@ -21,3 +22,5 @@ cp default /etc/apache2/sites-available/
 cp php.ini /etc/php/7.0/fpm/php.ini
 
 cd /var/www/game103
+
+etc/init.d/cron start
