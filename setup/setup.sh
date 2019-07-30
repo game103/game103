@@ -6,7 +6,7 @@
 # install required modules
 echo "Installing required modules..."
 apt-get update
-apt-get -y install git dnsutils curl vim cron gcc php7.0 php-mysql php7.0-fpm python2.7 curl apache2 mysql-server bind9 imagemagick openssl
+apt-get -y install webp git dnsutils curl vim cron gcc php7.0 php-mysql php7.0-fpm python2.7 curl apache2 mysql-server bind9 imagemagick openssl
 curl -sL https://deb.nodesource.com/setup_12.x | sh
 apt-get -y install nodejs
 
