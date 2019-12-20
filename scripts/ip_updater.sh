@@ -5,6 +5,10 @@
 # domain could change at any second)
 ip=$(dig +short myip.opendns.com @resolver1.opendns.com)
 date=$(date +%Y%m%d%S)
+if [ -z "$ip" ]
+then
+	exit 1
+fi
 cat > /etc/bind/db.game103.net <<- EOM
 \$TTL   2
 @       IN      SOA     ns1.cocoapup.dog. james.game103.net. (
