@@ -75,7 +75,7 @@
 	$config['app_id'] = Constants::FB_APP_ID;
 	$config['app_secret'] = Constants::FB_APP_SECRET;
 	$config['fileUpload'] = false; // optional
-	$config['default_graph_version'] = "v2.10";
+	$config['default_graph_version'] = "v6.0";
 	 
 	$fb = new Facebook\Facebook($config);
 	 
