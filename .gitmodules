@@ -83,9 +83,7 @@
 	path = game103games/flash/trampolinechickadee
 	url = https://github.com/game103/trampolinechickadee.git
 [submodule "game103games/flash/littledive"]
-	
 	path = game103games/flash/littledive
-	
 	url = https://github.com/game103/littledive.git
 [submodule "scripts/instagram-poster"]
 	path = scripts/instagram-poster
@@ -96,3 +94,6 @@
 [submodule "game103games/javascript/cocoatown"]
 	path = game103games/javascript/cocoatown
 	url = https://github.com/game103/cocoatown.git
+[submodule "game103games/javascript/duckiedoo"]
+	path = game103games/javascript/duckiedoo
+	url = https://github.com/game103/duckiedoo
