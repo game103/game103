@@ -48,7 +48,8 @@
 		"/game103games/flash/pony/" => "/game103games/flash/ponyspredicament/src/",
 		"/game103games/flash/pony/game.swf" => "/game103games/flash/ponyspredicament/build/game.swf",
 		"/game103games/flash/daxpy/" => "/game103games/flash/daxpythedino/src/",
-		"/game103games/flash/daxpy/game.swf" => "/game103games/flash/daxpythedino/build/game.swf"
+		"/game103games/flash/daxpy/game.swf" => "/game103games/flash/daxpythedino/build/game.swf",
+		"/Solitaire.swf" => "/game103games/flash/wooltycoon/build/solitaire.swf"
 	);
 	// First check exact match
 	if( $redirects[$request_uri] ) {
