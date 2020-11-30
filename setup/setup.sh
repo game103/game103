@@ -80,21 +80,16 @@ php scripts/generate_navbar.php > navbar.html
 
 # confirm apache configuration
 echo "Confirming Apache Configuration..."
-cp setup/default.conf /etc/apache2/sites-available/default.conf
 rm /etc/apache2/sites-available/000-default.conf 
 rm /etc/apache2/sites-available/default-ssl.conf
 rm /etc/apache2/sites-enabled/000-default.conf
-ln -s /etc/apache2/sites-available/default.conf /etc/apache2/sites-enabled/default.conf
+ln -s /etc/apache2/sites-available/default /etc/apache2/sites-enabled/default
 
 # remove ssl certificate
 echo "Remove default SSL configuration..."
-sed -i 's/Include.*//g' /etc/apache2/sites-available/default.conf
-sed -i 's/SSLCertificateFile.*/SSLCertificateFile \/etc\/apache2\/ssl\/localhost.crt/g' /etc/apache2/sites-available/default.conf
-sed -i 's/SSLCertificateKeyFile.*/SSLCertificateKeyFile \/etc\/apache2\/ssl\/localhost.key/g' /etc/apache2/sites-available/default.conf
-
-# change php-fpm listen address
-echo "Changing php-fpm listen address"
-sed -i 's/\/run\/php\/php7.0-fpm.sock/127.0.0.1:9000/g' /etc/php/7.0/fpm/pool.d/www.conf
+sed -i 's/Include.*//g' /etc/apache2/sites-available/default
+sed -i 's/SSLCertificateFile.*/SSLCertificateFile \/etc\/apache2\/ssl\/localhost.crt/g' /etc/apache2/sites-available/default
+sed -i 's/SSLCertificateKeyFile.*/SSLCertificateKeyFile \/etc\/apache2\/ssl\/localhost.key/g' /etc/apache2/sites-available/default
 
 # install test ssl certificate 
 echo "Generating development SSL certificate..."
