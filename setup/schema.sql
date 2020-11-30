@@ -371,7 +371,7 @@ CREATE TABLE `high_scores` (
   `score` int(11) NOT NULL,
   `score_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=138 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 CREATE DATABASE /*!32312 IF NOT EXISTS*/ `hallaby_duckdee` /*!40100 DEFAULT CHARACTER SET latin1 */;
@@ -424,7 +424,7 @@ CREATE TABLE `saves` (
   PRIMARY KEY (`id`),
   KEY `level_id` (`level_id`),
   KEY `added_date` (`added_date`)
-) ENGINE=MyISAM AUTO_INCREMENT=148 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=154 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -493,7 +493,7 @@ CREATE TABLE `actions` (
   `name` varchar(40) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=170 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=172 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -507,7 +507,7 @@ CREATE TABLE `actions_controls` (
   KEY `action_id` (`action_id`),
   CONSTRAINT `fk_actions_controls_actions` FOREIGN KEY (`action_id`) REFERENCES `actions` (`id`),
   CONSTRAINT `fk_actions_controls_controls` FOREIGN KEY (`control_id`) REFERENCES `controls` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=357 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=364 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -535,7 +535,7 @@ CREATE TABLE `actions_controls_entries` (
   KEY `actions_controls_id` (`action_control_id`),
   CONSTRAINT `fk_actions_controls_entries_actions_controls` FOREIGN KEY (`action_control_id`) REFERENCES `actions_controls` (`id`),
   CONSTRAINT `fk_actions_controls_entries_entries` FOREIGN KEY (`entry_id`) REFERENCES `entries` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9411 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9478 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -611,7 +611,7 @@ CREATE TABLE `categories_entries` (
   KEY `entry_id` (`entry_id`),
   CONSTRAINT `fk_categories_entries_categories` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_categories_entries_entries` FOREIGN KEY (`entry_id`) REFERENCES `entries` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3753 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3767 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -651,7 +651,7 @@ CREATE TABLE `characters_entries` (
   KEY `entry_id` (`entry_id`),
   CONSTRAINT `fk_characters_entries_characters` FOREIGN KEY (`character_id`) REFERENCES `characters` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_characters_entries_entries` FOREIGN KEY (`entry_id`) REFERENCES `entries` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -672,7 +672,7 @@ CREATE TABLE `daily_game` (
   KEY `entry_id` (`entry_id`),
   KEY `added_date` (`added_date`),
   CONSTRAINT `fk_daily_game_entries` FOREIGN KEY (`entry_id`) REFERENCES `entries` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1002 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1425 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -732,7 +732,7 @@ CREATE TABLE `entries` (
   KEY `rating` (`rating`),
   KEY `creation_date` (`creation_date`),
   KEY `type` (`type`)
-) ENGINE=InnoDB AUTO_INCREMENT=269 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=274 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -759,7 +759,7 @@ CREATE TABLE `featured` (
   KEY `added_date` (`added_date`),
   KEY `removed_date` (`removed_date`),
   CONSTRAINT `fk_featured_entries` FOREIGN KEY (`entry_id`) REFERENCES `entries` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -792,7 +792,7 @@ CREATE TABLE `plays` (
   KEY `ip_address` (`ip_address`),
   KEY `added_date` (`added_date`),
   CONSTRAINT `fk_plays_entries` FOREIGN KEY (`entry_id`) REFERENCES `entries` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=52391 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=56818 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -847,7 +847,7 @@ CREATE TABLE `saves` (
   PRIMARY KEY (`id`),
   KEY `download_id` (`download_id`),
   CONSTRAINT `fk_saves_downloads` FOREIGN KEY (`download_id`) REFERENCES `downloads` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=964 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1882 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -915,7 +915,7 @@ CREATE TABLE `visits` (
   KEY `added_date` (`added_date`),
   KEY `app_id` (`app_id`),
   CONSTRAINT `fk_visits_apps` FOREIGN KEY (`app_id`) REFERENCES `apps` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -975,7 +975,7 @@ CREATE TABLE `votes` (
   KEY `added_date` (`added_date`),
   KEY `score` (`score`),
   CONSTRAINT `fk_votes_entries` FOREIGN KEY (`entry_id`) REFERENCES `entries` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=515 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=527 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -1372,7 +1372,7 @@ CREATE TABLE `high_scores` (
   `score` int(11) NOT NULL DEFAULT '0',
   `score_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 CREATE DATABASE /*!32312 IF NOT EXISTS*/ `hallaby_resources` /*!40100 DEFAULT CHARACTER SET latin1 */;
@@ -1433,7 +1433,7 @@ CREATE TABLE `visits` (
   KEY `ip_address` (`ip_address`),
   KEY `added_date` (`added_date`),
   CONSTRAINT `fk_visits_entries` FOREIGN KEY (`entry_id`) REFERENCES `entries` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -1496,7 +1496,7 @@ CREATE TABLE `high_scores` (
   KEY `score_date` (`score_date`),
   KEY `game` (`game`),
   CONSTRAINT `high_scores_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10093 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13869 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -1733,7 +1733,7 @@ CREATE TABLE `categories_entries` (
   KEY `entry_id` (`entry_id`),
   CONSTRAINT `fk_categories_entries_categories` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_categories_entries_entries` FOREIGN KEY (`entry_id`) REFERENCES `entries` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=290 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=294 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -1756,7 +1756,7 @@ CREATE TABLE `entries` (
   KEY `added_date` (`added_date`),
   KEY `views` (`views`),
   KEY `rating` (`rating`)
-) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -1787,7 +1787,7 @@ CREATE TABLE `views` (
   KEY `ip_address` (`ip_address`),
   KEY `added_date` (`added_date`),
   CONSTRAINT `fk_views_entries` FOREIGN KEY (`entry_id`) REFERENCES `entries` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8686 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9386 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -1847,7 +1847,7 @@ CREATE TABLE `votes` (
   KEY `ip_address` (`ip_address`),
   KEY `added_date` (`added_date`),
   CONSTRAINT `fk_votes_entries` FOREIGN KEY (`entry_id`) REFERENCES `entries` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
