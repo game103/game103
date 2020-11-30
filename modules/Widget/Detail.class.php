@@ -74,6 +74,13 @@
 			</div>
 RATING;
 		}
+
+		/**
+		 * Generate type specific options.
+		 */
+		protected function generate_type_specific_options() {
+			return "";
+		}
 		
 		/**
 		* Generate options box.
@@ -82,6 +89,8 @@ RATING;
 			$fb_link = "https://www.facebook.com/sharer/sharer.php?u=https%3A//game103.net/game/" . $this->properties['url_name'];
 			$twitter_link = "https://twitter.com/home?status=Check%20out%20{$this->properties['name']}%20on%20game103.net%3A%20https%3A//game103.net/game/" . $this->properties['url_name'];
 			$pinterest_link = "https://www.pinterest.com/pin/create/link/?url=https%3A//game103.net/game/" . $this->properties['url_name'];
+			$type_specific_options = $this->generate_type_specific_options();
+
 			return <<<OPTIONS
 			<!--Options-->
 			<div id='options' class='detail-side-box-item responsive'>
@@ -95,6 +104,7 @@ RATING;
 					<button id='default'>Default Size</button>
 					<button id='shrink'>Smaller</button>
 					<button id='grow'>Larger</button>
+					$type_specific_options
 				</span>
 				<br>Share<br>
 				<a class='button' target='_blank' href="$fb_link"><i class="fab fa-facebook"></i> Share on Facebook</a>

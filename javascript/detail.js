@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		document.getElementById('default').onclick = detailDefault;
 		document.getElementById('shrink').onclick = detailShrink;
 		document.getElementById('grow').onclick = detailGrow;
+		document.getElementById('html5').onclick = toggleHTML5;
 
 		// Rating
 		var stars = document.querySelectorAll('.detail-star');
@@ -380,5 +381,25 @@ function checkFlashEnabled() {
 			}
 			return;
 		}
+	}
+}
+
+// Use HTML5 for Flash
+function setHTML5() {
+	setCookie("html5", 1);
+	window.location.reload();
+}
+// Disable HTML5 for Flash
+function disableHTML5() {
+   deleteCookie("html5");
+   window.location.reload();
+}
+// Toggle HTML5 for Flash
+function toggleHTML5() {
+	if( document.querySelector("#html5").innerText.match("Flash") ) {
+		disableHTML5();
+	}
+	else {
+		setHTML5();
 	}
 }

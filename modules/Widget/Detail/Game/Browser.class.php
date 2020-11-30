@@ -34,15 +34,18 @@
 				$enable_flash = <<<HTML
 				<div id="enable-flash" style="width:{$this->properties['width']}px;height:{$this->properties['height']}px;">
 					<div id="enable-flash-message">
-						You need Flash Player to play {$this->properties['name']}.
+						You either need to install Flash Player or enable the "Play in HTML5" feature to play {$this->properties['name']}. To do the latter, please click the button below.
+						<br><br><button onclick="setHTML5()">Play in HTML5 (Beta)</button><br><br>
 						<div id="enable-flash-message-default">
 							Please click the button below to download/enable Flash.
 						</div>
 						<div id="enable-flash-message-ios">
-							The best way to play Flash on iOS is with Puffin Web Browser (free).
-							<br><br><a href="https://itunes.apple.com/us/app/puffin-web-browser/id472937654" rel="noopener"><button>Get Puffin Web Browser</button></a>
+							The best way to play Flash on iOS is with Puffin Web Browser (paid).
+							<br><br><a href="https://itunes.apple.com/us/app/puffin-browser-pro/id406239138" rel="noopener"><button>Get Puffin Web Browser</button></a>
 							<br><br>If you already have Puffin installed, click below to open this page in Puffin Web Browser.
 							<br><br><a href="puffins://game103.net/game/{$this->properties['url_name']}" rel="noopener"><button>Open in Puffin Web Browser</button></a>
+							<br><br>A free alternative is Photon Web Browser.<br><br>
+							<a href="https://itunes.apple.com/us/app/photon-flash-player-for-iphone-flash-video-games-plus/id453546382" rel="noopener"><button>Get Photon Web Browser</button></a>
 							<br><br>If you are not on iOS, click below to download/enable Flash.
 						</div>
 						<div id="enable-flash-message-android">
@@ -125,6 +128,22 @@ HTML;
 		*/
 		protected function generate_others_also_played_placeholder() {
 			return "<span class='detail-others-also-played-placeholder' data-id='{$this->properties['id']}'></span>";
+		}
+
+		/**
+		 * Generate type specific options.
+		 */
+		protected function generate_type_specific_options() {
+			$play_in_html5 = "";
+			if($this->properties['game_type'] == 'Flash') {
+				$label = "Play in HTML5 (Beta)";
+				if(isset($_COOKIE['html5']) && $_COOKIE['html5']) {
+					$label = 'Play in Flash';
+					array_push( $this->JS, "/javascript/ruffle/ruffle.js" );
+				}
+				$play_in_html5 = "<button id='html5'>$label</button>";
+			}
+			return $play_in_html5;
 		}
 
 	}

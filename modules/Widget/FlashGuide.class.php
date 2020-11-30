@@ -22,8 +22,11 @@
 		*/
 		public function generate() {
 			$html = <<<HTML
-			In 2019, many browsers and devices are making it more difficult to use Adobe Flash Player. However, the internet (including this site!) is full 
+			In 2020, many browsers and devices are making it more difficult to use Adobe Flash Player. However, the internet (including this site!) is full 
 of great Flash resources, mostly games, that many will want to use for years to come. This is a guide to make sure that Flash runs well on various devices/browsers.
+<br><br>
+The first option to try is to click the "Play in HTML5 (Beta)" button under the Options heading. This will enable <a href="https://ruffle.rs" rel="noopener" target="_blank">Ruffle</a>, which transforms
+Flash content into HTML5.
 <br><br>
 <div class="table-of-contents">
 Table of Contents
@@ -161,7 +164,6 @@ Note: the data centers for these applications are in the US,
 meaning your proximity to the United States will impact the lag involved.
 <br><br>
 Puffin Web Browser Free (Contains Ads)<br>
-<a target='_blank' rel="noopener" href="https://itunes.apple.com/us/app/puffin-web-browser/id472937654">Apple App Store</a> (Free)<br>
 <a target='_blank' rel="noopener" href="https://play.google.com/store/apps/details?id=com.cloudmosa.puffinFree">Google Play</a> (Free)<br>
 <br>
 <div class="video-container-wrapper">

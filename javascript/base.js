@@ -299,14 +299,23 @@ function entrySetLinks() {
 	}
 }
 
+// set cookie
+function setCookie(name, value) {
+	document.cookie = name + "=" + value + "; path=/";
+}
+// delete cookie
+function deleteCookie(name) {
+	document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+}
+// delete cookie
 // Set dark mode
 function setDarkMode() {
-	document.cookie = "dark=1; path=/";
+	setCookie("dark", 1);
 	document.body.classList.add("dark");
 }
 // Disable dark mode
 function disableDarkMode() {
-   document.cookie = "dark=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+   deleteCookie("dark");
    document.body.classList.remove("dark");
 }
 // toggle dark mode
