@@ -1,7 +1,9 @@
 <VirtualHost *:80>
-    ServerName game103.net 
+    Include /etc/apache2/le_http_01_challenge_pre.conf 
+    ServerName game103.net
     RewriteEngine On
-    RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=301,L]
+RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=301,L]
+Include /etc/apache2/le_http_01_challenge_post.conf
 </VirtualHost>
 
 <VirtualHost *:443>
@@ -29,6 +31,8 @@
 	ExpiresByType application/x-font-ttf "access plus 12 month"
 	AddType application/x-font-woff2 .woff2
 	ExpiresByType application/x-font-woff2 "access plus 12 month"
+	AddType application/wasm .wasm
+	ExpiresByType application/wasm "access plus 12 month"
 
 	AddOutputFilterByType DEFLATE image/ico application/x-font-ttf image/webp image/png image/gif image/jpeg text/css application/javascript text/html application/json
 	#SetOutputFilter DEFLATE
