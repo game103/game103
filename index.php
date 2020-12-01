@@ -16,6 +16,12 @@
 			if( $dark_mode ) {
 				$contents = preg_replace("/<body>/", "<body$dark_mode>", $contents, 1);
 			}
+			if(isset($_COOKIE['html5']) && $_COOKIE['html5']) {
+				$contents = preg_replace("/Play in HTML5 \(Beta\)<\/button>/", "Play in Flash</button>", $contents);
+				preg_match('/\?v=([^"\']+)/', $contents, $matches);
+				$commit_hash = $matches[1];
+				$contents = preg_replace("/<\/head>/", "<script defer src=\"/javascript/ruffle/ruffle.js?v=$commit_hash\"></script></head>", $contents, 1);
+			}
 			print $contents;
 			exit;
 		}

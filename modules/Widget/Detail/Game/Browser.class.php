@@ -135,6 +135,7 @@ HTML;
 		 */
 		protected function generate_type_specific_options() {
 			$play_in_html5 = "";
+			// Play in HTML5 (Beta) is a string both the JS and index.php cache look for, so be sure to update those if changing it here
 			if($this->properties['game_type'] == 'Flash') {
 				$label = "Play in HTML5 (Beta)";
 				if(isset($_COOKIE['html5']) && $_COOKIE['html5']) {
