@@ -97,3 +97,6 @@
 [submodule "game103games/javascript/duckiedoo"]
 	path = game103games/javascript/duckiedoo
 	url = https://github.com/game103/duckiedoo
+[submodule "game103games/flash/upupandaramp"]
+	path = game103games/flash/upupandaramp
+	url = https://github.com/game103/upupandaramp
