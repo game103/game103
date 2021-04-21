@@ -1,1 +1,129 @@
-.box-content{background-color:#3274da;display:inline-block;margin:10px;border:5px solid #3274da;border-top:0;width:95%;vertical-align:top;text-align:center}.box-content-tight{width:auto;margin-top:10px;margin-left:0;margin-right:0}.box-content-button{border:0}.box-content-button-selected{background-color:#285cae}.box-content-container{background-color:white;padding:10px}.dark .box-content-container{background-color:#191919}.box-content-container-tight{padding:0}.box-content-tab{display:none}.box-content-tab-selected{display:block}.box-hidden-subheading{display:none;color:white;margin:5px;height:30px;line-height:30px;font-style:italic;font-size:90%}.box-content-error-display-force{font-size:16px}@media screen and (min-width:1440px){#top-games{width:calc(64% - 35px);display:inline-block}#featured-games{width:31%;display:inline-block}.box-hidden-subheading{display:block}}.date-box{margin:15px 0}.date-box-title{font-size:80%}.box-content-title{color:white;padding:5px 0}.box-content-footer{color:white;margin-top:5px}.box-content-footer a,.box-content-footer-link{color:white;text-decoration:underline}.box-content-footer a:hover,.box-content-footer-link:hover{color:white;cursor:pointer}@media screen and (max-width:810px){.box-content-container{overflow:hidden}.video-box-content{width:calc(100% - 10px)}}@media screen and (max-width:600px){.box-content{margin:10px 0 10px 0}}
+.box-content {
+	background-color: #3274DA;
+	display: inline-block;
+	margin: 10px;
+	border: 5px solid #3274DA;
+	border-top: none;
+	width: 95%;
+    vertical-align: top;
+	text-align: center;
+}
+
+.box-content-tight {
+	width: auto;
+	margin-top: 10px;
+	margin-left: 0;
+	margin-right:0;
+}
+
+.box-content-button {
+	border: none;
+}
+
+.box-content-button-selected {
+	background-color: #285cae;
+}
+
+.box-content-container {
+	background-color: white;
+	padding: 10px;
+}
+
+.dark .box-content-container {
+	background-color: #191919;
+}
+
+.box-content-container-tight {
+	padding: 0;
+}
+
+.box-content-tab {
+	display: none;
+    /*font-size: 0;*/
+}
+
+.box-content-tab-selected {
+	display: block;
+}
+
+.box-hidden-subheading {
+	display: none;
+	color: white;
+	margin: 5px;
+	height: 30px;
+	line-height: 30px;
+	font-style: italic;
+	font-size: 90%;
+}
+
+.box-content-error-display-force {
+	font-size: 16px;
+}
+
+@media screen and (min-width: 1440px) {
+	#top-games {
+		width: calc(64% - 35px);
+		display: inline-block;
+	}
+	#featured-games {
+		width: 31%;
+		display: inline-block;
+	}
+	.box-hidden-subheading {
+		display: block;
+	}
+}
+
+/* End for top games widget */
+
+/* For new games widget */
+
+.date-box {
+	margin: 15px 0;
+}
+
+.date-box-title {
+	font-size: 80%;
+}
+
+.box-content-title {
+	color: white;
+	padding: 5px 0;
+}
+
+.box-content-footer {
+	color: white;
+	margin-top: 5px;
+}
+
+.box-content-footer a, .box-content-footer-link {
+	color: white;
+	text-decoration: underline;	
+}
+
+.box-content-footer a:hover, .box-content-footer-link:hover {
+	color: white;
+	cursor: pointer;
+}
+
+@media screen and (max-width: 810px) {
+	.box-content-container {
+		overflow: hidden;
+	}
+	
+	.video-box-content {
+		width: calc(100% - 10px);
+	}
+}
+
+/* At this point, entries need to change! */
+@media screen and (max-width: 600px) {
+	/*
+	* The margin only becomes a problem when 20px
+	* is greater than 5% of the screen (Box content is 95% of screen,
+	* and the margin is 20px)
+	*/
+	.box-content {
+		margin: 10px 0 10px 0;
+	}
+}

@@ -1,1 +1,143 @@
-function homeLoadRandom(){try{var t=new XMLHttpRequest,n=document.querySelector(".home-random-items-placeholder");n.style.opacity=.5,t.onreadystatechange=function(){if(4==t.readyState){try{var e=JSON.parse(t.responseText);n.innerHTML=e.content}catch(e){console.log(e)}n.style.opacity=1}},t.open("GET","/ws/load_similar.php?type=game&no_box=true",!0),t.send()}catch(e){}}document.addEventListener("DOMContentLoaded",function(){homeLoadRandom(),document.querySelector(".box-content-button:nth-child(6)").onclick=function(){document.querySelector(".box-content-button:nth-child(6)").classList.contains("box-content-button-selected")&&homeLoadRandom()},homeLoadNew()},!1);var homePage=0;function homeLoadNew(){var y,u="Sorry, there was an error loading similar items. Please try again later.",e="";if(.5!=(y=0==homePage?document.querySelector("#home-new-content-placeholder"):(e="&no_box=true",document.querySelector(".box-content:last-child .box-content-tab"))).style.opacity){var h=new XMLHttpRequest;y.style.opacity=.5,h.onreadystatechange=function(){if(4==h.readyState)if(200==h.status)try{y.style.opacity=1;var e=JSON.parse(h.responseText).content,t=document.getElementsByClassName("find-date-box"),n=document.getElementsByClassName("find-date-box-title"),o=t.length,a=t[o-1],r=n[n.length-1],c=y.innerHTML;y.innerHTML=y.innerHTML+e,t=document.getElementsByClassName("find-date-box"),n=document.getElementsByClassName("find-date-box-title");var l=t[o];if(l&&a){var s=n[o];if(r.innerHTML==s.innerHTML){for(var d=l.childNodes,i="",m=0;m<d.length;m++)"A"==d[m].tagName&&(i+=d[m].outerHTML);(a=document.getElementsByClassName("find-date-box")[o-1]).innerHTML=a.innerHTML+i,l.parentNode.removeChild(l)}entrySetLinks()}else a?(y.innerHTML=c,document.querySelector(".box-content:last-child .box-content-footer").style.display="none"):(document.querySelector("#load-earlier-content").onclick=homeLoadNew,entrySetLinks())}catch(e){console.log(e),y.innerHTML=u,y.style.opacity=1}else y.innerHTML=u},document.getElementsByClassName("game-entry").length,document.getElementsByClassName("video-entry").length,homePage++,h.open("GET","/ws/load_new.php?page="+homePage+e,!0),h.send()}}
+document.addEventListener('DOMContentLoaded', function() {
+	
+	// Load random on load
+	homeLoadRandom();
+	
+	// Random games on click
+	document.querySelector('.box-content-button:nth-child(6)').onclick = function() {
+		if( document.querySelector('.box-content-button:nth-child(6)').classList.contains('box-content-button-selected') ) {
+			homeLoadRandom();
+		}
+	}
+	
+	// Earlier content on click
+	homeLoadNew();
+	
+}, false );
+
+// Load random games
+function homeLoadRandom() {
+	try {
+		// Random items load
+		var xhttp = new XMLHttpRequest();
+		var placeholder = document.querySelector('.home-random-items-placeholder');
+		placeholder.style.opacity = 0.5;
+		xhttp.onreadystatechange = function() {
+			if (xhttp.readyState == 4) {
+				try {
+					var response = JSON.parse(xhttp.responseText);
+					// Nothing will be displayed if content is not defined
+					placeholder.innerHTML = response.content;
+				}
+				catch(e) {
+					console.log(e);
+					// Just don't show similar games
+				}
+				placeholder.style.opacity = 1;
+			}
+		};
+		xhttp.open('GET', "/ws/load_similar.php?type=game&no_box=true", true);
+		xhttp.send();
+		
+	}
+	catch(e) {
+		// OK
+	}
+}
+
+var homePage = 0;
+
+// Load new content
+function homeLoadNew() {
+	var errorText = 'Sorry, there was an error loading similar items. Please try again later.';
+	var content;
+	var noBox = '';
+	// We need to load the box if we are on the initial load
+	if( homePage == 0 ) {
+		content = document.querySelector("#home-new-content-placeholder");
+	}
+	else {
+		noBox = '&no_box=true';
+		content = document.querySelector(".box-content:last-child .box-content-tab");
+	}
+	// Don'y load if we are already loading
+	if(content.style.opacity != 0.5) {
+		var xhttp = new XMLHttpRequest();
+		content.style.opacity = 0.5;
+		xhttp.onreadystatechange = function() {
+			if (xhttp.readyState == 4) {
+				if(xhttp.status == 200) {
+					try {
+						content.style.opacity = 1;
+						
+						var response = JSON.parse(xhttp.responseText);
+						// Nothing will be displayed if content is not defined
+						var newContent = response.content;
+						
+						// Get the last date box and its title
+						var dateBoxes = document.getElementsByClassName('find-date-box');
+						var dateBoxTitles = document.getElementsByClassName('find-date-box-title');
+						var previousDateBoxCount = dateBoxes.length;
+						var lastDateBox = dateBoxes[previousDateBoxCount - 1];
+						var lastDateBoxTitle = dateBoxTitles[dateBoxTitles.length - 1];
+						
+						// Add the new data and get the first newly added game box and its title
+						var previousContent = content.innerHTML;
+						content.innerHTML = content.innerHTML + newContent;
+						dateBoxes = document.getElementsByClassName('find-date-box');
+						dateBoxTitles = document.getElementsByClassName('find-date-box-title');
+						var newestLoadedDateBox = dateBoxes[previousDateBoxCount];
+						
+						// We are on neither the first or last update (where last update contains nothing)
+						if(newestLoadedDateBox && lastDateBox) {
+							var newestLoadedDateBoxTitle = dateBoxTitles[previousDateBoxCount];
+							
+							// If the previous last and newest loaded boxes have the same title (date)
+							// Combine them
+							if(lastDateBoxTitle.innerHTML == newestLoadedDateBoxTitle.innerHTML) {
+								var innerContent = newestLoadedDateBox.childNodes;
+								var keptInnerContent = '';
+								for(var i = 0; i < innerContent.length; i++) {
+									if(innerContent[i].tagName == 'A') {
+										keptInnerContent += innerContent[i].outerHTML;
+									}
+								}
+								lastDateBox = document.getElementsByClassName('find-date-box')[previousDateBoxCount-1];
+								lastDateBox.innerHTML = lastDateBox.innerHTML + keptInnerContent;
+								newestLoadedDateBox.parentNode.removeChild(newestLoadedDateBox);
+							}
+							
+							// Make entry links work
+							entrySetLinks();
+						}
+						// We didn't load any new content, so hide
+						// Also, hide the error message by going back to previous content
+						else if(lastDateBox) {
+							content.innerHTML = previousContent;
+							document.querySelector('.box-content:last-child .box-content-footer').style.display = 'none';
+						}
+						// This must be the first content load, so we allow for more content to load
+						else {
+							document.querySelector('#load-earlier-content').onclick = homeLoadNew;
+							// Make entry links work
+							entrySetLinks();
+						}
+					}
+					catch(e) {
+						console.log(e);
+						content.innerHTML = errorText;
+						content.style.opacity = 1;
+					}
+				}
+				else {
+					content.innerHTML = errorText;
+				}
+			}
+		}
+		var gameOffset = document.getElementsByClassName('game-entry').length;
+		var videoOffset = document.getElementsByClassName('video-entry').length;
+		homePage ++;
+		xhttp.open('GET', '/ws/load_new.php?page=' + homePage + noBox, true);
+		xhttp.send();
+	};
+}

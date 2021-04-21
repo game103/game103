@@ -1,1 +1,41 @@
-document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".store-item picture").forEach(function(t){t.addEventListener("mouseover",function(){this.querySelectorAll("img, source").forEach(function(t){var e=t.getAttribute("data-back-src");e&&(t.src?(t.setAttribute("data-src",t.src),t.src=e):(t.setAttribute("data-src",t.srcset),t.srcset=e))})}),t.addEventListener("mouseout",function(){this.querySelectorAll("img, source").forEach(function(t){var e=t.getAttribute("data-src");e&&(t.src?t.src=e:t.srcset=e)})})})},!1);
+/**
+* This JS file is for a store widget
+*/
+
+document.addEventListener('DOMContentLoaded', function(){ 
+	var storePictures = document.querySelectorAll(".store-item picture");
+
+    storePictures.forEach( function(storePicture) {
+        storePicture.addEventListener( "mouseover", function() {
+            var storeImages = this.querySelectorAll("img, source");
+            storeImages.forEach( function(storeImage) {
+                var backSrc = storeImage.getAttribute('data-back-src');
+                if( backSrc ) {
+                    if( storeImage.src ) {
+                        storeImage.setAttribute("data-src", storeImage.src);
+                        storeImage.src = backSrc;
+                    }   
+                    else {
+                        storeImage.setAttribute("data-src", storeImage.srcset);
+                        storeImage.srcset = backSrc;
+                    }
+                }
+            } );
+        } ); 
+        storePicture.addEventListener( "mouseout", function() {
+            var storeImages = this.querySelectorAll("img, source");
+            storeImages.forEach( function(storeImage) {
+                var frontSrc = storeImage.getAttribute('data-src');
+                if( frontSrc ) {
+                    if( storeImage.src ) {
+                        storeImage.src = frontSrc;
+                    }   
+                    else {
+                        storeImage.srcset = frontSrc;
+                    }
+                }
+            } );
+        } );            
+    });
+
+}, false);

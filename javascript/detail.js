@@ -1,1 +1,405 @@
-var detailOriginalWidth,detailOriginalHeight,detailResponsive=!0,detailCurValue=1,detailMouseDown=0;function detailChangeZoom(e){var t=document.getElementById("movie"),i=document.getElementById("enable-flash"),a=document.getElementById("preview-box");null==e&&(e=document.getElementById("zoom-slider").value/100),detailSetSizeFromMovieSize(t,detailCurValue=e),i&&detailSetSizeFromMovieSize(i,e),a.style.display="none",t.style.visibility="visible",i&&(i.style.visibility="visible");var n=calculateDimensions();detailResponsive?(t.offsetWidth+575>n.width||i&&i.offsetWidth+575>n.width)&&(detailStripResponsiveClasses(),detailResponsive=!1):(t.offsetWidth&&t.offsetWidth+575<=n.width||i&&i.offsetWidth&&i.offsetWidth+575<=n.width)&&(detailAddResponsiveClasses(),detailResponsive=!0)}function detailPreview(){detailMouseDown&&(document.getElementById("movie"),detailSetSizeFromMovieSize(document.getElementById("preview-box"),document.getElementById("zoom-slider").value/100))}function detailHideGame(){var e=document.getElementById("movie"),t=document.getElementById("enable-flash");document.getElementById("preview-box").style.display="block",e.style.visibility="hidden",t&&(t.style.visibility="hidden")}function detailEnsureValue(){detailMouseDown?detailPreview():document.getElementById("zoom-slider").value=100*detailCurValue}function detailStripResponsiveClasses(){for(var e=Array.prototype.slice.call(document.getElementsByClassName("responsive"),0),t=0;t<e.length;t++)e[t].classList.remove("responsive"),e[t].classList.add("was-responsive")}function detailAddResponsiveClasses(){for(var e=Array.prototype.slice.call(document.getElementsByClassName("was-responsive"),0),t=0;t<e.length;t++)e[t].classList.add("responsive"),e[t].classList.remove("was-responsive")}function detailShrink(){document.getElementById("movie"),.5<detailCurValue-.25?detailCurValue-=.25:detailCurValue=.5,detailChangeZoom(detailCurValue),detailEnsureValue()}function detailGrow(){document.getElementById("movie"),detailCurValue+.25<1.75?detailCurValue+=.25:detailCurValue=1.75,detailChangeZoom(detailCurValue),detailEnsureValue()}function detailFullscreen(){document.getElementById("movie");var e=document.getElementsByClassName("header")[0].offsetHeight+79,t=calculateDimensions(),i=t.height,a=t.width,n=i/detailOriginalHeight,l=(a-10)/detailOriginalWidth;l<n&&(n=l),detailChangeZoom(n),window.scrollTo(document.getElementById("movie-container").offsetLeft-5,e),detailEnsureValue()}function detailDefault(){document.getElementById("movie"),detailChangeZoom(1),detailEnsureValue()}function calculateDimensions(){var e=document.createElement("div");e.style.position="fixed",e.style.width="1px",e.style.height="1px",e.style.bottom="0",e.style.right="0",e.style.visibility="hidden",document.getElementsByClassName("page")[0].appendChild(e);var t={height:e.offsetTop+1};return e.style.position="absolute",t.width=e.offsetLeft+1,e.parentNode.removeChild(e),t}function detailSetSizeFromMovieSize(e,t){e.style.width=(detailOriginalWidth*t).toString().concat("px"),e.style.height=(detailOriginalHeight*t).toString().concat("px")}function detailSetTotalStars(e,t){var i=document.getElementById(t);i.innerHTML="",e=parseFloat(e);var a=22*Math.max(0,Math.min(5,e)),n=document.createElement("span");n.style.width=a.toString().concat("px"),i.appendChild(n)}function detailRate(i,e,t){if(!(isNaN(Number(i))||Number(i)<0||5<Number(i))){var a=document.getElementById("show-rating-normal"),n=document.getElementById("show-rating-loading");n.style.display="block",a.style.display="none";var l=new XMLHttpRequest;l.onreadystatechange=function(){if(4==l.readyState&&200==l.status)try{var e=JSON.parse(l.responseText),t=e.status;"failure"!=t||e.your_rating?(document.getElementsByClassName("detail-your-rating")[0].innerHTML="<span class='detail-stars' id='your-stars'></span>",n.style.display="none",a.style.display="inline","failure"==t?(detailSetTotalStars(e.your_rating,"your-stars"),document.getElementsByClassName("detail-thanks-for-voting")[0].innerHTML=e.message):(detailSetTotalStars(i,"your-stars"),detailSetTotalStars(e.rating,"total-stars"),voteStr=" vote",1!=e.votes&&(voteStr=" votes"),document.getElementsByClassName("detail-total-votes")[0].innerHTML=e.votes+voteStr),document.getElementsByClassName("detail-thanks-for-voting")[0].style.display="block"):n.innerHTML=e.message}catch(e){console.log(e),n.innerHTML="Sorry, an error occured while trying to process your vote. Please try again later."}},l.open("GET","/ws/rating.php?id="+t+"&rating="+i+"&type="+e,!0),l.send()}}function checkFlashEnabled(){var e=document.getElementById("enable-flash"),t=document.getElementById("movie");if(e){var i=!1;try{i=Boolean(new ActiveXObject("ShockwaveFlash.ShockwaveFlash"))}catch(e){i=void 0!==navigator.mimeTypes["application/x-shockwave-flash"]}if(!i){t.style.display="none",t.parentNode.style.overflowY="auto",e.style.display="table";var a=/iPad|iPhone|iPod/.test(navigator.userAgent)&&!window.MSStream,n=-1<navigator.userAgent.toLowerCase().indexOf("android");return void(a?(e.querySelector("#enable-flash-message-default").style.display="none",e.querySelector("#enable-flash-message-ios").style.display="block"):n&&(e.querySelector("#enable-flash-message-default").style.display="none",e.querySelector("#enable-flash-message-android").style.display="block"))}}}function setHTML5(){setCookie("html5",1),window.location.reload()}function disableHTML5(){deleteCookie("html5"),window.location.reload()}function toggleHTML5(){document.querySelector("#html5").innerText.match("Flash")?disableHTML5():setHTML5()}document.addEventListener("DOMContentLoaded",function(){try{document.body.onmousedown=function(){++detailMouseDown},document.body.onmouseup=function(){--detailMouseDown};var e=window.location.pathname.split("/");if("download"==e[1])return;logInteraction(e[1],e[2]),"range"!=document.getElementById("zoom-slider").type&&(document.getElementById("zoom-slider").style.display="none",document.getElementById("full").style.display="none",document.getElementById("default").style.display="none",document.getElementById("shrink").style.display="inline-block",document.getElementById("grow").style.display="inline-block");var t=document.getElementById("movie");detailOriginalWidth=parseInt(t.style.width),detailOriginalHeight=parseInt(t.style.height);var i=document.getElementById("zoom-slider");i.onmousedown=detailHideGame,i.onmouseup=function(){detailChangeZoom()},i.onchange=detailEnsureValue,i.oninput=detailPreview,window.addEventListener("resize",function(){detailChangeZoom(),detailEnsureValue()}),document.getElementById("full").onclick=detailFullscreen,document.getElementById("default").onclick=detailDefault,document.getElementById("shrink").onclick=detailShrink,document.getElementById("grow").onclick=detailGrow,document.getElementById("html5").onclick=toggleHTML5;for(var a=document.querySelectorAll(".detail-star"),n=0;n<a.length;n++)a[n].onclick=function(){detailRate(this.getAttribute("data-value"),e[1],this.parentNode.getAttribute("data-id"))};checkFlashEnabled();var l=new XMLHttpRequest,o=document.querySelector(".detail-similar-items-placeholder");l.onreadystatechange=function(){if(4==l.readyState)try{var e=JSON.parse(l.responseText);o.innerHTML=e.content}catch(e){}},l.open("GET","/ws/load_similar.php?type="+e[1]+"&id="+o.getAttribute("data-id"),!0),l.send();var s=new XMLHttpRequest,d=document.querySelector(".detail-others-also-played-placeholder");d&&(s.onreadystatechange=function(){if(4==s.readyState)try{var e=JSON.parse(s.responseText);d.innerHTML=e.content}catch(e){}},s.open("GET","/ws/load_others_also_played.php?id="+o.getAttribute("data-id"),!0),s.send()),detailChangeZoom(),detailEnsureValue();var r=document.head,u=document.createElement("style");r.appendChild(u),u.type="text/css",u.appendChild(document.createTextNode(".detail-left-side-box.responsive{float:left;}.detail-right-side-box.responsive{float:right;}.detail-side-boxes.responsive{display:inline;background-color:transparent;}.detail-side-box.responsive{/*Thismarginreplacesthemarginthatwasonside-boxesbeforeside-boxesbecameinline*/margin-top:10px;display:inline-block;}.detail-side-box-item.responsive{margin-bottom:10px;display:block;}.detail-separator.responsive{display:none;}"))}catch(e){}},!1);
+// If the movie is small enough that the desktop view is possible
+var detailResponsive = true;
+// The current scaling factor of the game
+var detailCurValue = 1;
+// If the mouse is down
+var detailMouseDown = 0;
+// The original width of the game
+var detailOriginalWidth;
+// The original height of the game
+var detailOriginalHeight;
+
+document.addEventListener('DOMContentLoaded', function() {
+	try {
+		// Always check for mouse down
+		document.body.onmousedown = function() { 
+			++detailMouseDown;
+		}
+		document.body.onmouseup = function() {
+			--detailMouseDown;
+		}
+		
+		// log interaction
+		var path = window.location.pathname.split('/');
+		if( path[1] != 'download' ) {
+			// path[1] is type, path[2] is url_name
+			logInteraction( path[1], path[2] );
+		}
+		else {
+			// Download interactions will be logged server-side
+			// There is nothing else we need to do for a download,
+			// so we can return
+			return;
+		}
+		
+		// download will fail here
+		// See if range is supported
+		if(document.getElementById('zoom-slider').type != 'range') {
+			document.getElementById('zoom-slider').style.display = 'none';
+			document.getElementById('full').style.display = 'none';
+			document.getElementById('default').style.display = 'none';
+			document.getElementById('shrink').style.display = 'inline-block';
+			document.getElementById('grow').style.display = 'inline-block';
+		}
+		// Get the original dimensions
+		var movie = document.getElementById('movie');
+		detailOriginalWidth = parseInt(movie.style.width);
+		detailOriginalHeight = parseInt(movie.style.height);
+		
+		// Zoom
+		var zoom = document.getElementById('zoom-slider');
+		zoom.onmousedown = detailHideGame;
+		zoom.onmouseup = function() { detailChangeZoom(); };
+		zoom.onchange = detailEnsureValue;
+		zoom.oninput = detailPreview;
+		window.addEventListener("resize", function() { detailChangeZoom(); detailEnsureValue();});
+		document.getElementById('full').onclick = detailFullscreen;
+		document.getElementById('default').onclick = detailDefault;
+		document.getElementById('shrink').onclick = detailShrink;
+		document.getElementById('grow').onclick = detailGrow;
+		document.getElementById('html5').onclick = toggleHTML5;
+
+		// Rating
+		var stars = document.querySelectorAll('.detail-star');
+		for( var i=0; i<stars.length; i++ ) {
+			stars[i].onclick = function() {
+				detailRate( this.getAttribute('data-value'), path[1], this.parentNode.getAttribute('data-id') );
+			}
+		}
+		
+		// Service Worker availability
+		/*if ('serviceWorker' in navigator && window.navigator.userAgent.indexOf("Edge") == -1) {
+			if ( document.getElementById('detail-side-box-offline-available') ) {
+				document.getElementById("detail-side-box-offline-available").style.display = "block";
+			}
+		}*/
+
+		// Check if flash is enabled if necessary
+		checkFlashEnabled();
+		
+		// Similar items load
+		var xhttp = new XMLHttpRequest();
+		var placeholder = document.querySelector('.detail-similar-items-placeholder');
+		xhttp.onreadystatechange = function() {
+			if (xhttp.readyState == 4) {
+				try {
+					var response = JSON.parse(xhttp.responseText);
+					// Nothing will be displayed if content is not defined
+					placeholder.innerHTML = response.content;
+				}
+				catch(e) {
+					// Just don't show similar games
+				}
+			}
+		};
+		xhttp.open('GET', "/ws/load_similar.php?type=" + path[1] + "&id=" + placeholder.getAttribute('data-id'), true);
+		xhttp.send();
+
+		// Others also played load
+		var xhttp_others = new XMLHttpRequest();
+		var placeholder_others = document.querySelector('.detail-others-also-played-placeholder');
+		if( placeholder_others ) {
+			xhttp_others.onreadystatechange = function() {
+				if (xhttp_others.readyState == 4) {
+					try {
+						var response = JSON.parse(xhttp_others.responseText);
+						// Nothing will be displayed if content is not defined
+						placeholder_others.innerHTML = response.content;
+					}
+					catch(e) {
+						// Just don't show others also played
+					}
+				}
+			};
+			xhttp_others.open('GET', "/ws/load_others_also_played.php?id=" + placeholder.getAttribute('data-id'), true);
+			xhttp_others.send();
+        }
+
+		detailChangeZoom();
+		detailEnsureValue();
+
+		// Responsive elements will now be controlled by JavaScript after initial page load
+		// to deal properly with changes in the movie zoom
+		/* Make sure to update the Browser widget and detail-video.css if updating */
+		var css = ".detail-left-side-box.responsive{float:left;}.detail-right-side-box.responsive{float:right;}.detail-side-boxes.responsive{display:inline;background-color:transparent;}.detail-side-box.responsive{/*Thismarginreplacesthemarginthatwasonside-boxesbeforeside-boxesbecameinline*/margin-top:10px;display:inline-block;}.detail-side-box-item.responsive{margin-bottom:10px;display:block;}.detail-separator.responsive{display:none;}";
+		var head = document.head;
+		var style = document.createElement('style');
+		head.appendChild(style);
+		style.type = "text/css";
+		style.appendChild(document.createTextNode(css));
+	}
+	catch(e) {
+		// OK
+	}
+	
+}, false );
+
+// Change the zoom of the movie
+// This is called on input from the slider
+function detailChangeZoom(value) {
+	var movie = document.getElementById('movie');
+	var enableFlash = document.getElementById('enable-flash');
+	var preview = document.getElementById('preview-box');
+	if(value == null) {
+		value = document.getElementById('zoom-slider').value/100;
+	}
+	detailCurValue = value;
+	detailSetSizeFromMovieSize(movie, value);
+	if(enableFlash) {
+		detailSetSizeFromMovieSize(enableFlash, value);
+	}
+	preview.style.display = 'none';
+	movie.style.visibility = 'visible';
+	if(enableFlash) {
+		enableFlash.style.visibility = 'visible';
+	}
+	var dims = calculateDimensions();
+	if(detailResponsive) {
+		if(movie.offsetWidth + 575 > dims.width || (enableFlash && enableFlash.offsetWidth + 575 > dims.width) ) {
+			detailStripResponsiveClasses();
+			detailResponsive = false;
+		}
+	}
+	else {
+		if( (movie.offsetWidth && movie.offsetWidth + 575 <= dims.width) || (enableFlash && enableFlash.offsetWidth && enableFlash.offsetWidth + 575 <= dims.width) ) {
+			detailAddResponsiveClasses();
+			detailResponsive = true;
+		}
+	}
+}
+// Change the size of the preview box
+// This is called on mouse move on the slider
+// the mouseDown check ensures that this will only occur when the slider
+// is pressed
+function detailPreview() {
+	if(detailMouseDown) {
+		var movie = document.getElementById('movie');
+		var preview = document.getElementById('preview-box');
+		var value = document.getElementById('zoom-slider').value/100;
+		detailSetSizeFromMovieSize(preview, value);
+	}
+}
+// Hide the game and show the preview box
+// This is called on mouse down from the slider
+function detailHideGame() {
+	var movie = document.getElementById('movie');
+	var enableFlash = document.getElementById('enable-flash');
+	var preview = document.getElementById('preview-box');
+	preview.style.display = 'block';
+	movie.style.visibility = 'hidden';
+	if(enableFlash) {
+		enableFlash.style.visibility = 'hidden';
+	}
+}
+// Ensure that the slider displays the correct value
+// This is called on change from the slider
+// This is mainly to fix a bug where the slider
+// displays the wrong value after the view changes due to game size
+// The mouse down is solely for Internet Explorer since it calls on change
+// When the slider is still pressed
+function detailEnsureValue() {
+	if(!detailMouseDown) {
+		document.getElementById('zoom-slider').value = detailCurValue * 100;
+	}
+	else {
+		// Since IE treats onchange like oninput
+		detailPreview();
+	}
+}
+// Strip the classes that make this page responsive
+// because the game is too big
+function detailStripResponsiveClasses() {
+	var responsiveClasses = Array.prototype.slice.call(document.getElementsByClassName('responsive'), 0);
+	for (var i = 0; i < responsiveClasses.length; i++) {
+		responsiveClasses[i].classList.remove('responsive');
+		responsiveClasses[i].classList.add('was-responsive');
+	}
+}
+// Add the responsive classes back
+function detailAddResponsiveClasses() {
+	var responsiveClasses = Array.prototype.slice.call(document.getElementsByClassName('was-responsive'), 0);
+	for (var i = 0; i < responsiveClasses.length; i++) {
+		responsiveClasses[i].classList.add('responsive');
+		responsiveClasses[i].classList.remove('was-responsive');
+	}
+}
+// Function to shrink the game size for when range is not supported
+function detailShrink() {
+	var movie = document.getElementById('movie');
+	if(detailCurValue - 0.25 > 0.5) {
+		detailCurValue -= 0.25;
+	}
+	else {
+		detailCurValue = 0.5;
+	}
+	detailChangeZoom(detailCurValue);
+	detailEnsureValue();
+}
+// Function to grow the game size for when range is not supported
+function detailGrow() {
+	var movie = document.getElementById('movie');
+	if(detailCurValue + 0.25 < 1.75) {
+		detailCurValue += 0.25;
+	}
+	else {
+		detailCurValue = 1.75;
+	}
+	detailChangeZoom(detailCurValue);
+	detailEnsureValue();
+}
+// Function to make the game full screen
+function detailFullscreen() {
+	var movie = document.getElementById('movie');
+	var gameTop = document.getElementsByClassName("header")[0].offsetHeight + 79;
+	//var scrollX = 0;
+	var dims = calculateDimensions();
+	var sizeToSetGame = dims.height;
+	var sizeToSetGameWidth = dims.width;
+	var percentToSetGame = sizeToSetGame/detailOriginalHeight;
+	var percentToSetGameWidth = (sizeToSetGameWidth-10)/detailOriginalWidth;
+	if(percentToSetGameWidth < percentToSetGame) {
+		percentToSetGame = percentToSetGameWidth;
+	}
+	detailChangeZoom(percentToSetGame);
+	window.scrollTo(document.getElementById('movie-container').offsetLeft-5, gameTop);
+	detailEnsureValue();
+}
+// Function to make the default its default size
+function detailDefault() {
+	var movie = document.getElementById('movie');
+	detailChangeZoom(1);
+	detailEnsureValue();
+}
+// Calculate the width nad height of the page
+function calculateDimensions() {
+	var widthCalculator = document.createElement('div');
+	widthCalculator.style.position = 'fixed';
+	widthCalculator.style.width = '1px';
+	widthCalculator.style.height = '1px';
+	widthCalculator.style.bottom = '0';
+	widthCalculator.style.right = '0';
+	widthCalculator.style.visibility = 'hidden';
+	// Add to the page as sort of a 'Hack'
+	document.getElementsByClassName('page')[0].appendChild(widthCalculator);
+	var dims = { "height": widthCalculator.offsetTop + 1 };
+	widthCalculator.style.position = 'absolute';
+	dims.width = widthCalculator.offsetLeft + 1;
+	widthCalculator.parentNode.removeChild(widthCalculator);
+	return dims;
+}
+// Set an element's size based on the offset of the original game size
+function detailSetSizeFromMovieSize(element, value) {
+	element.style.width = (detailOriginalWidth * value).toString().concat('px');
+	element.style.height = (detailOriginalHeight * value).toString().concat('px');
+}
+// Set the total stars value for an element
+function detailSetTotalStars(value, id) {
+	var totalStars = document.getElementById(id);
+	totalStars.innerHTML = '';
+	value = parseFloat(value);
+	var size = Math.max(0, (Math.min(5, value))) * 22;
+	var ratingDisplay = document.createElement('span');
+	ratingDisplay.style.width = size.toString().concat('px');
+	totalStars.appendChild(ratingDisplay);
+}
+// Rate the game
+function detailRate(rating, type, id) {
+	if(isNaN(Number(rating)) || Number(rating) < 0 || Number(rating) > 5) {
+		return;
+	}
+	var normal = document.getElementById('show-rating-normal');
+	var loading = document.getElementById('show-rating-loading');
+	loading.style.display = 'block';
+	normal.style.display = 'none';
+	var xhttp = new XMLHttpRequest();
+	var errorText = 'Sorry, an error occured while trying to process your vote. Please try again later.';
+	xhttp.onreadystatechange = function() {
+		if (xhttp.readyState == 4 && xhttp.status == 200) {
+			try {
+				var object = JSON.parse(xhttp.responseText);
+				var status = object['status'];
+				if(status == 'failure' && !object.your_rating) {
+					loading.innerHTML = object['message'];
+				}
+				else {
+					document.getElementsByClassName('detail-your-rating')[0].innerHTML = "<span class='detail-stars' id='your-stars'></span>";
+					loading.style.display= 'none';
+					normal.style.display = 'inline';
+					
+					if(status == 'failure') {
+						// Set their previous rating to your stars and don't touch the total rating
+						detailSetTotalStars( object.your_rating, 'your-stars' );
+						document.getElementsByClassName('detail-thanks-for-voting')[0].innerHTML = object.message;
+					}
+					else {
+						detailSetTotalStars( rating, 'your-stars' );
+						detailSetTotalStars( object.rating, 'total-stars');
+						voteStr = ' vote';
+						if(object.votes != 1) {
+							voteStr = ' votes';
+						}
+						document.getElementsByClassName('detail-total-votes')[0].innerHTML = object.votes + voteStr;
+					}
+					document.getElementsByClassName('detail-thanks-for-voting')[0].style.display = 'block';
+				}
+			}
+			catch(e) {
+				console.log(e);
+				loading.innerHTML = errorText;
+			}
+		}
+	};
+	xhttp.open('GET', '/ws/rating.php?id=' + id + '&rating=' + rating + '&type=' + type, true);
+	xhttp.send();
+}
+// Check to see if flash is available
+function checkFlashEnabled() {
+	// The flash enabled element will only be display on Flash games
+	var flashEnabledElement = document.getElementById('enable-flash');
+	var movieElement = document.getElementById("movie");
+	if( flashEnabledElement ) {
+		var hasFlash = false;
+		try {
+			hasFlash = Boolean(new ActiveXObject('ShockwaveFlash.ShockwaveFlash'));
+		} 
+		catch(exception) {
+			hasFlash = ('undefined' != typeof navigator.mimeTypes['application/x-shockwave-flash']);
+		}
+		if( !hasFlash ) {
+			movieElement.style.display = "none";
+			movieElement.parentNode.style.overflowY = "auto";
+			flashEnabledElement.style.display = "table";
+			var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+			var android = navigator.userAgent.toLowerCase().indexOf("android") > -1;
+			if( iOS ) {
+				flashEnabledElement.querySelector("#enable-flash-message-default").style.display = "none";
+				flashEnabledElement.querySelector("#enable-flash-message-ios").style.display = "block";
+			}
+			else if( android ) {
+				flashEnabledElement.querySelector("#enable-flash-message-default").style.display = "none";
+				flashEnabledElement.querySelector("#enable-flash-message-android").style.display = "block";
+			}
+			return;
+		}
+	}
+}
+
+// Use HTML5 for Flash
+function setHTML5() {
+	setCookie("html5", 1);
+	window.location.reload();
+}
+// Disable HTML5 for Flash
+function disableHTML5() {
+   deleteCookie("html5");
+   window.location.reload();
+}
+// Toggle HTML5 for Flash
+function toggleHTML5() {
+	if( document.querySelector("#html5").innerText.match("Flash") ) {
+		disableHTML5();
+	}
+	else {
+		setHTML5();
+	}
+}

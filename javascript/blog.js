@@ -1,1 +1,28 @@
-document.addEventListener("DOMContentLoaded",function(){for(var o=document.querySelectorAll(".blog-post-contents-show"),n=[],e=0;e<o.length;e++)n[e]=o[e].onclick,o[e].onclick=function(){var o=this.closest(".blog-post"),n=o.querySelector(".blog-post-contents-hidden");null===n.offsetParent?(this.innerHTML="Collapse",n.style.display="inline"):(this.innerHTML="Show all",n.style.display="none",window.scrollTo(0,o.offsetTop))}},!1);
+/**
+* This JS file is for a blog widget
+*/
+
+document.addEventListener('DOMContentLoaded', function(){ 
+	var showAllLinks = document.querySelectorAll(".blog-post-contents-show");
+
+	var prevClick = [];
+	for( var i=0; i<showAllLinks.length; i++ ) {
+		// Allow for multiple on click events
+		prevClick[i] = showAllLinks[i].onclick;
+		showAllLinks[i].onclick = function() {
+            var blogPost = this.closest(".blog-post");
+            var blogPostHiddenContents = blogPost.querySelector(".blog-post-contents-hidden");
+            // If hidden, show and give option to hide
+            if( blogPostHiddenContents.offsetParent === null ) {
+                this.innerHTML = "Collapse";
+                blogPostHiddenContents.style.display = "inline";
+            }
+            // Otherwise, hide and give option to show
+            else {
+                this.innerHTML = "Show all";
+                blogPostHiddenContents.style.display = "none";
+                window.scrollTo(0, blogPost.offsetTop);
+            }
+        };
+	}
+}, false);

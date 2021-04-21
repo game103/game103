@@ -1,1 +1,112 @@
-.fa,.fas,.far,.fal,.fab{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:inline-block;font-style:normal;font-variant:normal;text-rendering:auto;line-height:1}.fa-500px:before{content:"\f26e"}.fa-app-store:before{content:"\f36f"}.fa-envelope:before{content:"\f0e0"}.fa-github:before{content:"\f09b"}.fa-google-play:before{content:"\f3ab"}.fa-facebook:before{content:"\f09a"}.fa-twitter:before{content:"\f099"}.fa-youtube:before{content:"\f167"}.fa-patreon:before{content:"\f3d9"}.fa-facebook-messenger:before{content:"\f39f"}.fa-app-store-ios:before{content:"\f370"}.fa-gamepad:before{content:"\f11b"}.fa-html5:before{content:"\f13b"}.fa-video:before{content:"\f03d"}.fa-tools:before{content:"\f7d9"}.fa-save:before{content:"\f0c7"}.fa-pinterest:before{content:"\f0d2"}.fa-instagram:before{content:"\f16d"}.fa-check:before{content:"\f00c"}.sr-only-focusable:active,.sr-only-focusable:focus{clip:auto;height:auto;margin:0;overflow:visible;position:static;width:auto}@font-face{font-family:'Font Awesome 5 Brands';font-style:normal;font-weight:normal;font-display:auto;src:url("/fonts/fa-brands-400.eot");src:url("/fonts/fa-brands-400.eot?#iefix") format("embedded-opentype"),url("/fonts/fa-brands-400.woff2") format("woff2"),url("/fonts/fa-brands-400.woff") format("woff"),url("/fonts/fa-brands-400.ttf") format("truetype"),url("/fonts/fa-brands-400.svg#fontawesome") format("svg")}.fab{font-family:'Font Awesome 5 Brands'}@font-face{font-family:'Font Awesome 5 Free';font-style:normal;font-weight:400;font-display:auto;src:url("/fonts/fa-regular-400.eot");src:url("/fonts/fa-regular-400.eot?#iefix") format("embedded-opentype"),url("/fonts/fa-regular-400.woff2") format("woff2"),url("/fonts/fa-regular-400.woff") format("woff"),url("/fonts/fa-regular-400.ttf") format("truetype"),url("/fonts/fa-regular-400.svg#fontawesome") format("svg")}.far{font-family:'Font Awesome 5 Free';font-weight:400}@font-face{font-family:'Font Awesome 5 Free';font-style:normal;font-weight:900;font-display:auto;src:url("/fonts/fa-solid-900.eot");src:url("/fonts/fa-solid-900.eot?#iefix") format("embedded-opentype"),url("/fonts/fa-solid-900.woff2") format("woff2"),url("/fonts/fa-solid-900.woff") format("woff"),url("/fonts/fa-solid-900.ttf") format("truetype"),url("/fonts/fa-solid-900.svg#fontawesome") format("svg")}.fa,.fas{font-family:'Font Awesome 5 Free';font-weight:900}
+.fa,
+.fas,
+.far,
+.fal,
+.fab {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1; }
+
+/* Font Awesome uses the Unicode Private Use Area (PUA) to ensure screen
+readers do not read off random characters that represent icons */
+.fa-500px:before {
+  content: "\f26e"; }
+
+.fa-app-store:before {
+  content: "\f36f"; }
+
+.fa-envelope:before {
+  content: "\f0e0"; }
+
+.fa-github:before {
+  content: "\f09b"; }
+
+.fa-google-play:before {
+  content: "\f3ab"; }
+
+.fa-facebook:before {
+  content: "\f09a"; }
+
+.fa-twitter:before {
+  content: "\f099"; }
+
+.fa-youtube:before {
+  content: "\f167"; }
+
+.fa-patreon:before {
+  content: "\f3d9"; }
+
+.fa-facebook-messenger:before {
+  content: "\f39f"; }
+
+.fa-app-store-ios:before {
+  content: "\f370"; }
+
+.fa-gamepad:before {
+  content: "\f11b"; }
+
+.fa-html5:before {
+  content: "\f13b"; }
+
+.fa-video:before {
+  content: "\f03d"; }
+
+.fa-tools:before {
+  content: "\f7d9"; }
+
+.fa-save:before {
+  content: "\f0c7"; }
+
+.fa-pinterest:before {
+  content: "\f0d2"; }
+
+.fa-instagram:before {
+  content: "\f16d"; }
+
+.fa-check:before{
+  content:"\f00c"; }
+
+.sr-only-focusable:active, .sr-only-focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto; }
+@font-face {
+  font-family: 'Font Awesome 5 Brands';
+  font-style: normal;
+  font-weight: normal;
+  font-display: auto;
+  src: url("/fonts/fa-brands-400.eot");
+  src: url("/fonts/fa-brands-400.eot?#iefix") format("embedded-opentype"), url("/fonts/fa-brands-400.woff2") format("woff2"), url("/fonts/fa-brands-400.woff") format("woff"), url("/fonts/fa-brands-400.ttf") format("truetype"), url("/fonts/fa-brands-400.svg#fontawesome") format("svg"); }
+
+.fab {
+  font-family: 'Font Awesome 5 Brands'; }
+@font-face {
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-weight: 400;
+  font-display: auto;
+  src: url("/fonts/fa-regular-400.eot");
+  src: url("/fonts/fa-regular-400.eot?#iefix") format("embedded-opentype"), url("/fonts/fa-regular-400.woff2") format("woff2"), url("/fonts/fa-regular-400.woff") format("woff"), url("/fonts/fa-regular-400.ttf") format("truetype"), url("/fonts/fa-regular-400.svg#fontawesome") format("svg"); }
+
+.far {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 400; }
+@font-face {
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-weight: 900;
+  font-display: auto;
+  src: url("/fonts/fa-solid-900.eot");
+  src: url("/fonts/fa-solid-900.eot?#iefix") format("embedded-opentype"), url("/fonts/fa-solid-900.woff2") format("woff2"), url("/fonts/fa-solid-900.woff") format("woff"), url("/fonts/fa-solid-900.ttf") format("truetype"), url("/fonts/fa-solid-900.svg#fontawesome") format("svg"); }
+
+.fa,
+.fas {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900; }
