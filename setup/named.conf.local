@@ -30,3 +30,8 @@ zone "cocoa" {
     type master;
     file "/etc/bind/db.cocoa";
 };
+
+zone "makingdorecipes.com" {
+    type master;
+    file "/etc/bind/db.makingdorecipes.com";
+};
