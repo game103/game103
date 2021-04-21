@@ -792,7 +792,7 @@ CREATE TABLE `plays` (
   KEY `ip_address` (`ip_address`),
   KEY `added_date` (`added_date`),
   CONSTRAINT `fk_plays_entries` FOREIGN KEY (`entry_id`) REFERENCES `entries` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=59544 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=59547 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
