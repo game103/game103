@@ -22,14 +22,18 @@
 		*/
 		public function generate() {
 			$html = <<<HTML
-			In 2020, many browsers and devices are making it more difficult to use Adobe Flash Player. However, the internet (including this site!) is full 
+			Today, almost all browsers have disabled the ability to play Flash. However, the internet (including this site!) is full 
 of great Flash resources, mostly games, that many will want to use for years to come. This is a guide to make sure that Flash runs well on various devices/browsers.
 <br><br>
-The first option to try is to click the "Play in HTML5 (Beta)" button under the Options heading. This will enable <a href="https://ruffle.rs" rel="noopener" target="_blank">Ruffle</a>, which transforms
-Flash content into HTML5.
+The best option to try is to click the "Play in HTML5 (Beta)" button under the Options heading. This will enable <a href="https://ruffle.rs" rel="noopener" target="_blank">Ruffle</a>, which transforms
+Flash content into HTML5. This, however, does not work will all Flash games, specifically newer ones (those written in ActionScript 3).
 <br><br>
+The next best option is to use <a href="https://pullupflash.com" target="_blank" rel="noopener">Pull Up Flash</a>. Pull Up Flash allows you to click to open flash content on web pages in Flash Player. Flash content is replaced
+by a button that you can click to open it in Flash Player. You can run Flash easily, with the click of a button, in a way still supported by Adobe. Just follow the instructions listed on the <a href="https://pullupflash.com" target="_blank" rel="noopener">Pull Up Flash website</a>.
+<br><br>
+If you still have an older version of Chrome (87 and below) and a version of Flash below 32.0.0.371, you can use the methods below. Additionally, you could use a higher version of Flash and set your computer's date to be prior to January 1st, 2021.
 <div class="table-of-contents">
-Table of Contents
+Lagacy Table of Contents (2020)
 <ol>
     <li>
         <a href="#chrome">Chrome</a>
@@ -75,7 +79,7 @@ Table of Contents
 <h2><a name="chrome">Chrome</a></h2>
 <div class='flash-guide-tested'>(Tested on version 72 - released January 29th, 2019)</div>
 <h3><a name="chrome-installing-flash">Installing Flash</a></h3>
-Chrome comes with Flash pre-installed.<br>
+Chrome comes with Flash pre-installed (versions 87 and below).<br>
 Note: By default, when you visit a page with Flash content, you will have to click the Flash content area and then 
 opt to allow Flash to run. This will enable Flash for the site that you are on. Your decision will be saved until you close your browser. You can make your decision last 
 permanently by following the instructions below.
