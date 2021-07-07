@@ -30,6 +30,7 @@ Flash content into HTML5. This, however, does not work will all Flash games, spe
 <br><br>
 The next best option is to use <a href="https://pullupflash.com" target="_blank" rel="noopener">Pull Up Flash</a>. Pull Up Flash allows you to click to open flash content on web pages in Flash Player. Flash content is replaced
 by a button that you can click to open it in Flash Player. You can run Flash easily, with the click of a button, in a way still supported by Adobe. Just follow the instructions listed on the <a href="https://pullupflash.com" target="_blank" rel="noopener">Pull Up Flash website</a>.
+Pull Up Flash is developed by Game 103!
 <br><br>
 If you still have an older version of Chrome (87 and below) and a version of Flash below 32.0.0.371, you can use the methods below. Additionally, you could use a higher version of Flash and set your computer's date to be prior to January 1st, 2021.
 <br><br>

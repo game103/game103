@@ -36,8 +36,10 @@
 					<div id="enable-flash-message">
 						You either need to install Flash Player or enable the "Play in HTML5" feature to play {$this->properties['name']}. To do the latter, please click the button below.
 						<br><br><button onclick="setHTML5()">Play in HTML5 (Beta)</button><br><br>
+						If the "Play in HTML5" feature does not work for this game, you should try Pull Up Flash to enable you to click to open flash content on web pages in Flash Player. Click the button below to get it.
+						<br><br><a href="https://pullupflash.com" rel="noopener" target="_blank"><button>Get Pull Up Flash</button></a><br><br>
 						<div id="enable-flash-message-default">
-							Please click the button below to download/enable Flash.
+							Please click the button below to download/enable Flash. Note that it may not be possible to do so in your browser.
 						</div>
 						<div id="enable-flash-message-ios">
 							The best way to play Flash on iOS is with Puffin Web Browser (paid).
