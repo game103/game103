@@ -178,6 +178,10 @@ input[type=range]::-ms-track {
 #enable-flash-message-ios, #enable-flash-message-android {
 	display: none;
 }
+
+.pullupflash-container {
+	z-index: 1 !important;
+}
 /* End for zoom */
 
 /* For rating */
