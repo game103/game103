@@ -424,7 +424,7 @@ CREATE TABLE `saves` (
   PRIMARY KEY (`id`),
   KEY `level_id` (`level_id`),
   KEY `added_date` (`added_date`)
-) ENGINE=MyISAM AUTO_INCREMENT=155 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=156 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -672,7 +672,7 @@ CREATE TABLE `daily_game` (
   KEY `entry_id` (`entry_id`),
   KEY `added_date` (`added_date`),
   CONSTRAINT `fk_daily_game_entries` FOREIGN KEY (`entry_id`) REFERENCES `entries` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1609 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1649 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -792,7 +792,7 @@ CREATE TABLE `plays` (
   KEY `ip_address` (`ip_address`),
   KEY `added_date` (`added_date`),
   CONSTRAINT `fk_plays_entries` FOREIGN KEY (`entry_id`) REFERENCES `entries` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=60324 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=61336 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -847,7 +847,7 @@ CREATE TABLE `saves` (
   PRIMARY KEY (`id`),
   KEY `download_id` (`download_id`),
   CONSTRAINT `fk_saves_downloads` FOREIGN KEY (`download_id`) REFERENCES `downloads` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2335 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2445 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -975,7 +975,7 @@ CREATE TABLE `votes` (
   KEY `added_date` (`added_date`),
   KEY `score` (`score`),
   CONSTRAINT `fk_votes_entries` FOREIGN KEY (`entry_id`) REFERENCES `entries` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=561 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=566 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -1372,7 +1372,7 @@ CREATE TABLE `high_scores` (
   `score` int(11) NOT NULL DEFAULT '0',
   `score_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 CREATE DATABASE /*!32312 IF NOT EXISTS*/ `hallaby_resources` /*!40100 DEFAULT CHARACTER SET latin1 */;
@@ -1496,7 +1496,7 @@ CREATE TABLE `high_scores` (
   KEY `score_date` (`score_date`),
   KEY `game` (`game`),
   CONSTRAINT `high_scores_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15350 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15746 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -1787,7 +1787,7 @@ CREATE TABLE `views` (
   KEY `ip_address` (`ip_address`),
   KEY `added_date` (`added_date`),
   CONSTRAINT `fk_views_entries` FOREIGN KEY (`entry_id`) REFERENCES `entries` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9711 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9755 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;

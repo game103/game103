@@ -3,7 +3,8 @@
 # This is the nameserver of cocoapup.dog which is the nameserver of game103.net
 # TTL is 2 since google subtracts 1 and this is the shortest time we can have (needed since
 # domain could change at any second)
-ip=$(dig +short myip.opendns.com @resolver1.opendns.com)
+ip=$(dig -4 +short myip.opendns.com @resolver1.opendns.com)
+ip6=$(ip -6 addr list scope global $device | grep -v " fd" | sed -n 's/.*inet6 \([0-9a-f:]\+\).*/\1/p' | head -n 1)
 date=$(date +%Y%m%d%S)
 if [ -z "$ip" ]
 then
@@ -20,6 +21,7 @@ cat > /etc/bind/db.game103.net <<- EOM
 @	IN	NS	ns1.cocoapup.dog.
 @	IN	NS	ns2.cocoapup.dog.
 @       IN      A       $ip
+@	IN	AAAA	$ip6
 @	IN	MX	1	ASPMX.L.GOOGLE.COM.
 @	IN	MX	5	ALT1.ASPMX.L.GOOGLE.COM.
 @	IN	MX	5	ALT2.ASPMX.L.GOOGLE.COM.
