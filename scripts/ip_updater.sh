@@ -32,4 +32,4 @@ email	IN	CNAME	ghs.google.com.
 mail	IN	CNAME	email.game103.net.
 backup	IN	A	10.0.5.19
 EOM
-rndc reload
+/usr/sbin/rndc reload
