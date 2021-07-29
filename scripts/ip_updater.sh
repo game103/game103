@@ -10,7 +10,8 @@ if [ -z "$ip" ]
 then
 	exit 1
 fi
-ping -w 10 -c 1 -I eth0 $ip && a_rec="@       IN      A       $ip"
+ip4=52.90.199.125
+ping -w 10 -c 1 -I eth0 $ip && ip4=$ip
 cat > /etc/bind/db.game103.net <<- EOM
 \$TTL   2
 @       IN      SOA     ns1.cocoapup.dog. james.game103.net. (
@@ -21,7 +22,7 @@ cat > /etc/bind/db.game103.net <<- EOM
                           86400 )       ; Negative Cache TTL
 @	IN	NS	ns1.cocoapup.dog.
 @	IN	NS	ns2.cocoapup.dog.
-$a_rec
+@	IN	A	$ip4
 @	IN	AAAA	$ip6
 @	IN	MX	1	ASPMX.L.GOOGLE.COM.
 @	IN	MX	5	ALT1.ASPMX.L.GOOGLE.COM.
