@@ -57,7 +57,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		document.getElementById('default').onclick = detailDefault;
 		document.getElementById('shrink').onclick = detailShrink;
 		document.getElementById('grow').onclick = detailGrow;
-		document.getElementById('html5').onclick = toggleHTML5;
+		var html5 = document.getElementById('html5');
+		if( html5 ) html5.onclick = toggleHTML5;
 
 		// Rating
 		var stars = document.querySelectorAll('.detail-star');
