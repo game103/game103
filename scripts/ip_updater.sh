@@ -10,7 +10,7 @@ if [ -z "$ip" ]
 then
 	exit 1
 fi
-ip4=3.86.187.249
+ip4=3.224.81.58
 ping -w 10 -c 1 -I eth0 $ip && ip4=$ip && ip6=$(ip -6 addr list scope global eth0 | grep -v " fd" | sed -n 's/.*inet6 \([0-9a-f:]\+\).*/\1/p' | head -n 1)
 cat > /etc/bind/db.game103.net <<- EOM
 \$TTL   2
