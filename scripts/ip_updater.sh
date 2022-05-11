@@ -4,14 +4,14 @@
 # TTL is 2 since google subtracts 1 and this is the shortest time we can have (needed since
 # domain could change at any second)
 ip=$(dig -4 +short myip.opendns.com @resolver1.opendns.com)
-ip6=$(ip -6 addr list scope global wlan0 | grep -v " fd" | sed -n 's/.*inet6 \([0-9a-f:]\+\).*/\1/p' | head -n 1)
+ip6=$(dig -6 +short myip.opendns.com aaaa @resolver1.opendns.com) # the interface_manager.sh controlling the routing table will ensure this is correct
 date=$(date +%Y%m%d%S)
 if [ -z "$ip" ]
 then
 	exit 1
 fi
 ip4=3.224.81.58
-ping -w 10 -c 1 -I eth0 $ip && ip4=$ip && ip6=$(ip -6 addr list scope global eth0 | grep -v " fd" | sed -n 's/.*inet6 \([0-9a-f:]\+\).*/\1/p' | head -n 1)
+ping -w 10 -c 1 -I eth0 $ip && ip4=$ip
 cat > /etc/bind/db.game103.net <<- EOM
 \$TTL   2
 @       IN      SOA     ns1.cocoapup.dog. james.game103.net. (
