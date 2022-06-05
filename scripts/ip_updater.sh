@@ -5,7 +5,7 @@
 # domain could change at any second)
 ip=$(dig -4 +short myip.opendns.com @resolver1.opendns.com)
 ip6=$(dig -6 +short myip.opendns.com aaaa @resolver1.opendns.com) # the interface_manager.sh controlling the routing table will ensure this is correct
-date=$(date +%Y%m%d%S)
+date=$(date +%s)
 if [ -z "$ip" ]
 then
 	exit 1
