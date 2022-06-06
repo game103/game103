@@ -34,15 +34,6 @@
 			}
 			
 			$properties['app_store_logo'] = "";
-			if( $properties['app_type'] == 'iOS' || $properties['app_type'] == "Both" ) {
-				$properties['app_store_logo'] .= "<span class='entry-ios-link' data-store-url='{$properties["store_url_apple"]}'></span>";
-			}
-			if( $properties['app_type'] == "Android" || $properties['app_type'] == "Both") {
-				$properties['app_store_logo'] .= "<span class='entry-android-link' data-store-url='{$properties["store_url_android"]}'>
-					<img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'
-					style ='height:100%;width:100%'/>
-				</span>";
-			}
 
 			\Widget\Entry::__construct($properties);
 		}

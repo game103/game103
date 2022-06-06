@@ -35,7 +35,7 @@ Pull Up Flash is developed by Game 103!
 If you still have an older version of Chrome (87 and below) and a version of Flash below 32.0.0.371, you can use the methods below. Additionally, you could use a higher version of Flash and set your computer's date to be prior to January 1st, 2021.
 <br><br>
 <div class="table-of-contents">
-Lagacy Table of Contents (2020)
+Legacy Table of Contents (2020)
 <ol>
     <li>
         <a href="#chrome">Chrome</a>

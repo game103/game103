@@ -21,21 +21,9 @@
 		*/
 		protected function generateContent() {
 			return <<<HTML
-			<a href='https://itunes.apple.com/us/app/duck-in-a-truck/id907135188' target='_blank' rel="noopener" class='app-store-link'>
-				<picture>
-					<source srcset="/images/banners/duckinatruck.webp" type="image/webp">
-					<source srcset="/images/banners/duckinatruck.png"> 
-					<img src="/images/banners/duckinatruck.png" alt="Duck in a Truck Banner">
-				</picture>
-			</a>
+			<a href="https://github.com/game103/duckinatruck/raw/master/build/game.apk">Download for Android</a>
 			<br/>
-			<a href='https://play.google.com/store/apps/details?id=air.net.game103.duckinatruck' target='_blank' rel="noopener" class='app-store-link'>
-				<picture>
-					<source srcset="/images/banners/googleplay.webp" type="image/webp">
-					<source srcset="/images/banners/googleplay.png" type="image/png"> 
-					<img src="/images/banners/googleplay.png" alt="Duck in a Truck Banner" style="height:50px">
-				</picture>
-			</a>
+			<a href="https://github.com/game103/duckinatruck/raw/master/build/DuckInATruckFinal.ipa">Download for iOS</a>
 			<br/>
 			<a href='/game/duckinatruck'>Play online</a>
 			<p>Thanks for playing the Game 103 app, Duck in a Truck. On this page you will find some gameplay tips tricks, and mechanics, credits, and a way to contact the developer with any questions that you have.</p>
