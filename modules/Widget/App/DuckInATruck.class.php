@@ -21,9 +21,9 @@
 		*/
 		protected function generateContent() {
 			return <<<HTML
-			<a href="https://github.com/game103/duckinatruck/raw/master/build/game.apk">Download for Android</a>
+			<a href="/game103games/distribute/duckinatruck.apk">Download for Android</a>
 			<br/>
-			<a href="https://github.com/game103/duckinatruck/raw/master/build/DuckInATruckFinal.ipa">Download for iOS</a>
+			<a href="/game103games/distribute/duckinatruck.ipa">Download for iOS</a>
 			<br/>
 			<a href='/game/duckinatruck'>Play online</a>
 			<p>Thanks for playing the Game 103 app, Duck in a Truck. On this page you will find some gameplay tips tricks, and mechanics, credits, and a way to contact the developer with any questions that you have.</p>

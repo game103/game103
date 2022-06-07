@@ -21,21 +21,9 @@
 		*/
 		protected function generateContent() {
 			return <<<HTML
-			<a href='https://itunes.apple.com/us/app/flip-a-blox/id1241934713' target='_blank' rel="noopener" class='app-store-link'>
-				<picture>
-					<source srcset="/images/banners/flip-a-blox.webp" type="image/webp">
-					<source srcset="/images/banners/flip-a-blox.png"> 
-					<img src="/images/banners/flip-a-blox.png" alt="Flip-a-Blox Banner">
-				</picture>
-			</a>
+			<a href="/game103games/distribute/flip-a-blox.apk">Download for Android</a>
 			<br/>
-			<a href='https://play.google.com/store/apps/details?id=net.game103.flipablox' target='_blank' rel="noopener" class='app-store-link'>
-				<picture>
-					<source srcset="/images/banners/googleplay.webp" type="image/webp">
-					<source srcset="/images/banners/googleplay.png"> 
-					<img src="/images/banners/googleplay.png" alt="Flip-a-Blox Banner" style='height: 50px'>
-				</picture>
-			</a>
+			<a href="/game103games/distribute/flip-a-blox.ipa">Download for iOS</a>
 			<br/>
 			<a href='/game/flip-a-blox'>Play online</a>
 			<p>Thanks for playing the Game 103 game, Flip-a-Blox. On this page you will a detailed account of how your data is handled, and a way to contact the developer with any questions that you have.</p>
