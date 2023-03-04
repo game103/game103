@@ -100,3 +100,6 @@
 [submodule "game103games/flash/upupandaramp"]
 	path = game103games/flash/upupandaramp
 	url = https://github.com/game103/upupandaramp
+[submodule "game103games/flash/findandslide"]
+	path = game103games/flash/findandslide
+	url = https://github.com/game103/findandslide
