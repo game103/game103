@@ -387,12 +387,12 @@ function checkFlashEnabled() {
 
 // Use HTML5 for Flash
 function setHTML5() {
-	setCookie("html5", 1);
+	setCookie("nohtml5", 1);
 	window.location.reload();
 }
 // Disable HTML5 for Flash
 function disableHTML5() {
-   deleteCookie("html5");
+   deleteCookie("nohtml5");
    window.location.reload();
 }
 // Toggle HTML5 for Flash

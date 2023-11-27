@@ -35,7 +35,7 @@
 				<div id="enable-flash" style="width:{$this->properties['width']}px;height:{$this->properties['height']}px;">
 					<div id="enable-flash-message">
 						You either need to install Flash Player or enable the "Play in HTML5" feature to play {$this->properties['name']}. To do the latter, please click the button below.
-						<br><br><button onclick="setHTML5()">Play in HTML5 (Beta)</button><br><br>
+						<br><br><button onclick="setHTML5()">Play in HTML5</button><br><br>
 						<div id="enable-flash-message-default">
 							If the "Play in HTML5" feature does not work for this game, you should try Pull Up Flash to enable you to click to open flash content on web pages in Flash Player. Click the button below to get it.
 							<br><br><a href="https://pullupflash.com" rel="noopener" target="_blank"><button>Get Pull Up Flash</button></a><br><br>
@@ -137,10 +137,10 @@ HTML;
 		 */
 		protected function generate_type_specific_options() {
 			$play_in_html5 = "";
-			// Play in HTML5 (Beta) is a string both the JS and index.php cache look for, so be sure to update those if changing it here
+			// Play in HTML5 is a string both the JS and index.php cache look for, so be sure to update those if changing it here
 			if($this->properties['game_type'] == 'Flash') {
-				$label = "Play in HTML5 (Beta)";
-				if(isset($_COOKIE['html5']) && $_COOKIE['html5']) {
+				$label = "Play in HTML5";
+				if( !isset($_COOKIE['nohtml5']) || !$_COOKIE['nohtml5'] ) {
 					$label = 'Play in Flash';
 					array_push( $this->JS, "/javascript/ruffle/ruffle.js" );
 				}
