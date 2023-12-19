@@ -23,7 +23,7 @@ cat > /etc/bind/db.game103.net <<- EOM
 @	IN	NS	ns1.cocoapup.dog.
 @	IN	NS	ns2.cocoapup.dog.
 @	IN	A	$ip4
-@	IN	AAAA	$ip6
+;@	IN	AAAA	$ip6
 @	IN	MX	1	ASPMX.L.GOOGLE.COM.
 @	IN	MX	5	ALT1.ASPMX.L.GOOGLE.COM.
 @	IN	MX	5	ALT2.ASPMX.L.GOOGLE.COM.
