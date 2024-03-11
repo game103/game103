@@ -20,7 +20,7 @@
 				$contents = preg_replace("/Play in Flash<\/button>/", "Play in HTML5</button>", $contents);
 				preg_match('/\?v=([^"\']+)/', $contents, $matches);
 				$commit_hash = $matches[1];
-				$contents = preg_replace("/<\/head>/", "<script defer src=\"/javascript/ruffle/ruffle.js?v=$commit_hash\"></script></head>", $contents, 1);
+				$contents = preg_replace("/<script[^>]+ruffle[^>]+><\/script>/", "", $contents, 1);
 			}
 			print $contents;
 			exit;
