@@ -27,7 +27,7 @@
 			<p>Elephants are my favorite animal.</p>
 			<p>Cocoa is the dog on the left in Rainin' Cats & Dogs. Sophie, the Jack Russell, is the dog on the right.</p>
 			<p>Grand Estuary was started in January 2013. It was mostly finished around the beginning of June 2013.</p>
-			<p>Kasey, the young lady in The Great Duckdee Chase, is my wife. She called ducks, "Duckdees," as a small child.</p>
+			<p>Kasey, the young lady in The Great Duckdee Chase, is my wife. She called ducks, "Duckdees," as a small child. We have three children.</p>
 			<p>Pony's Predicament is based on a classic problem called the Traveling Salesman Problem. The game's twist is having to return to the Post Office.</p>
 HTML;
 			
