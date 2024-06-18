@@ -24,7 +24,7 @@
 # 
 # m h  dom mon dow   command
 # Update the ip every minute 
-* * * * * /var/www/game103/scripts/ip_updater.sh
+#* * * * * /var/www/game103/scripts/ip_updater.sh
 
 # Notice the include path for all these scripts is different, since
 # we have no server root
@@ -59,21 +59,21 @@
 0 0 * * * /usr/bin/certbot renew
 
 # Other sites
-* * * * * /home/james/guystation_ip_updater.sh
-* * * * * /home/james/makingdorecipes_ip_updater.sh
+#* * * * * /home/james/guystation_ip_updater.sh
+#* * * * * /home/james/makingdorecipes_ip_updater.sh
 
 # Backup makingdorecipes
 0 3 * * * curl http://makingdorecipes.cocoa:9200/_search?size=10000 > /home/james/makingdorecipes-backup.json
 
 # Reboot if no network connection
-* * * * * bash -c 'ping -w 10 -c 1 8.8.8.8 -I eth0 > /dev/null && echo "up" || sudo service dhcpcd restart'
+#* * * * * bash -c 'ping -w 10 -c 1 8.8.8.8 -I eth0 > /dev/null && echo "up" || sudo service dhcpcd restart'
 
 # IPv6 && IPV4 update
-* * * * * /home/james/ipv6_ddns.sh
+#* * * * * /home/james/ipv6_ddns.sh
 
 # Switch over to WiFi if ethernet can't access the web
 # Sleep so not to interfere with reboot if no network connection
-* * * * * sleep 30;/home/james/interface-manager.sh
+#* * * * * sleep 30;/home/james/interface-manager.sh
 
 # Update the fortigate every minute
-* * * * * sleep 10;/home/james/fortigate_ip_updater.sh
+#* * * * * sleep 10;/home/james/fortigate_ip_updater.sh
