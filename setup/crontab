@@ -42,6 +42,9 @@
 # Backup the site nightly
 30 1 * * * scp -r /var/www/game103 james@backup.game103.net:/home/james/backup/site/
 
+# Backup the DNS files nightly
+50 1 * * * scp -r /etc/bind james@backup.game103.net:/home/james/backup/bind/
+
 # Update the FB images before posts
 0 2 * * * /var/www/game103/scripts/border_maker.sh
 # Post a game every day to FB and Twitter
