@@ -24,7 +24,7 @@
             $this->JS[] = "https://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushCss.js";
             $this->JS[] = "https://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushJScript.js";
             $this->JS[] = "https://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushJava.js";
-            $this->JS[] = "https://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushPhp.js";
+            //$this->JS[] = "https://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushPhp.js";
             $this->JS[] = "https://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushPython.js";
             $this->JS[] = "https://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushSql.js";
             $this->JS[] = "https://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushXml.js";

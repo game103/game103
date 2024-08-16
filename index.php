@@ -860,12 +860,10 @@
 					<div class="additional-links-section">
 						<div class="additional-links-section-heading">Social</div>
 						<a target='_blank' rel="noopener" href="https://www.facebook.com/game103"><i class="fab fa-facebook"></i>Facebook</a>
-						<a target='_blank' rel="noopener" href="https://twitter.com/game103games"><i class="fab fa-twitter"></i>Twitter</a>
+						<a target='_blank' rel="noopener" href="https://x.com/game103games"><i class="fab fa-x-twitter"></i>X</a>
 						<a target='_blank' rel="noopener" href="https://www.instagram.com/game103games/"><i class="fab fa-instagram"></i>Instagram</a>
 						<a target='_blank' rel="noopener" href="https://www.youtube.com/user/game103games"><i class="fab fa-youtube"></i>YouTube</a>
 						<div class="additional-links-section-heading addition-links-section-heading-second">Stores</div>
-						<a target='_blank' rel="noopener" href="https://itunes.apple.com/tt/developer/james-grams/id894750819"><i class="fab fa-app-store-ios"></i>Apple App Store</a>
-						<a target='_blank' rel="noopener" href="https://play.google.com/store/apps/developer?id=James+Grams"><i class="fab fa-google-play"></i>Google Play</a>
 						<a href="/store">Game 103 Store</a>
 					</div>
 					<div class="additional-links-section">
@@ -884,7 +882,7 @@
 						<div class="additional-links-section-heading">Contact</div>
 						<a href="mailto:james@game103.net"><i class="fas fa-envelope"></i>Email</a>
 						<a target='_blank' rel="noopener" href="https://m.me/game103"><i class="fab fa-facebook-messenger"></i>Messenger</a>
-						<a target='_blank' rel="noopener" href="https://twitter.com/messages/compose?recipient_id=789785198707761156"><i class="fab fa-twitter"></i>Twitter DM</a>
+						<a target='_blank' rel="noopener" href="https://x.com/messages/compose?recipient_id=789785198707761156"><i class="fab fa-x-twitter"></i>X DM</a>
 						<div class="additional-links-section-heading addition-links-section-heading-second">Developers</div>
 						<a href="/games/distributable">Games for Your Site</a>
 						<a target='_blank' rel="noopener" href="https://github.com/game103/game103"><i class="fab fa-github"></i>Source Code</a>

@@ -87,7 +87,7 @@ RATING;
 		*/
 		protected function generate_options() {
 			$fb_link = "https://www.facebook.com/sharer/sharer.php?u=https%3A//game103.net/game/" . $this->properties['url_name'];
-			$twitter_link = "https://twitter.com/home?status=Check%20out%20{$this->properties['name']}%20on%20game103.net%3A%20https%3A//game103.net/game/" . $this->properties['url_name'];
+			$x_link = "https://x.com/intent/tweet?text=Check%20out%20{$this->properties['name']}%20on%20game103.net%3A%20https%3A//game103.net/game/" . $this->properties['url_name'];
 			$pinterest_link = "https://www.pinterest.com/pin/create/link/?url=https%3A//game103.net/game/" . $this->properties['url_name'];
 			$type_specific_options = $this->generate_type_specific_options();
 
@@ -108,7 +108,7 @@ RATING;
 				</span>
 				<br>Share<br>
 				<a class='button' target='_blank' href="$fb_link"><i class="fab fa-facebook"></i> Share on Facebook</a>
-				<a class='button' target='_blank' href="$twitter_link"><i class="fab fa-twitter"></i> Share on Twitter</a>
+				<a class='button' target='_blank' href="$x_link"><i class="fab fa-x-twitter"></i> Share on X</a>
 				<a class='button' target='_blank' href="$pinterest_link"><i class="fab fa-pinterest"></i> Share on Pinterest</a>
 			</div>
 OPTIONS;
