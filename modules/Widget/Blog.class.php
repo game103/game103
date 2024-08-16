@@ -15,19 +15,7 @@
 		public function __construct($properties) {
 			\Widget::__construct($properties);
             $this->CSS[] = "/css/blog.css";
-            $this->CSS[] = "https://agorbatchev.typepad.com/pub/sh/3_0_83/styles/shCore.css";
-            $this->CSS[] = "https://agorbatchev.typepad.com/pub/sh/3_0_83/styles/shThemeEmacs.css";
             $this->JS[] = "/javascript/blog.js";
-            $this->JS[] = "https://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shCore.js";
-            $this->JS[] = "https://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushAS3.js";
-            $this->JS[] = "https://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushBash.js";
-            $this->JS[] = "https://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushCss.js";
-            $this->JS[] = "https://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushJScript.js";
-            $this->JS[] = "https://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushJava.js";
-            //$this->JS[] = "https://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushPhp.js";
-            $this->JS[] = "https://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushPython.js";
-            $this->JS[] = "https://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushSql.js";
-            $this->JS[] = "https://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushXml.js";
         }
 		
 		/**
@@ -88,13 +76,6 @@
                 $html .= "<div class='blog-post-end'></div></div>";
                 $i++;
             }
-
-            $html .= "<script language='javascript' type='text/javascript'>
-                document.addEventListener('DOMContentLoaded', function() {
-                    SyntaxHighlighter.config.bloggerMode = true;
-                    SyntaxHighlighter.all();
-                } );
-            </script>";
 
             $box = new \Widget\Box( array(
                 'content'		=> array( array( 'title' => 'Blog', 'content' => $html ) ),
