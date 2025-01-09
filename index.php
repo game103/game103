@@ -862,6 +862,7 @@
 					</div>
 					<div class="additional-links-section">
 						<div class="additional-links-section-heading">Social</div>
+						<a target='_blank' rel="noopener" href="https://patches.social/game103"><i class="fab fa-mastodon"></i>Mastodon</a>
 						<a target='_blank' rel="noopener" href="https://www.facebook.com/game103"><i class="fab fa-facebook"></i>Facebook</a>
 						<a target='_blank' rel="noopener" href="https://x.com/game103games"><i class="fab fa-x-twitter"></i>X</a>
 						<a target='_blank' rel="noopener" href="https://www.instagram.com/game103games/"><i class="fab fa-instagram"></i>Instagram</a>
@@ -884,8 +885,6 @@
 					<div class="additional-links-section">
 						<div class="additional-links-section-heading">Contact</div>
 						<a href="mailto:james@game103.net"><i class="fas fa-envelope"></i>Email</a>
-						<a target='_blank' rel="noopener" href="https://m.me/game103"><i class="fab fa-facebook-messenger"></i>Messenger</a>
-						<a target='_blank' rel="noopener" href="https://x.com/messages/compose?recipient_id=789785198707761156"><i class="fab fa-x-twitter"></i>X DM</a>
 						<div class="additional-links-section-heading addition-links-section-heading-second">Developers</div>
 						<a href="/games/distributable">Games for Your Site</a>
 						<a target='_blank' rel="noopener" href="https://github.com/game103/game103"><i class="fab fa-github"></i>Source Code</a>

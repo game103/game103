@@ -25,7 +25,7 @@
 			Today, almost all browsers have disabled the ability to play Flash. However, the internet (including this site!) is full 
 of great Flash resources, mostly games, that many will want to use for years to come. This is a guide to make sure that Flash runs well on various devices/browsers.
 <br><br>
-The best option to try is to click the "Play in HTML5 (Beta)" button under the Options heading. This will enable <a href="https://ruffle.rs" rel="noopener" target="_blank">Ruffle</a>, which transforms
+The best option to try is to use the "Play in HTML5" button (now enabled by default) under the Options heading. This will enable <a href="https://ruffle.rs" rel="noopener" target="_blank">Ruffle</a>, which transforms
 Flash content into HTML5. This, however, does not work will all Flash games, specifically newer ones (those written in ActionScript 3).
 <br><br>
 The next best option is to use <a href="https://pullupflash.com" target="_blank" rel="noopener">Pull Up Flash</a>. Pull Up Flash allows you to click to open flash content on web pages in Flash Player. Flash content is replaced
