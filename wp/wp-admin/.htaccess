@@ -1,0 +1,6 @@
+
+order deny,allow
+deny from all
+allow from 104.12.21.179
+allow from 10.0.5
+allow from 2600:1700:8430:ac9f:ba27::/64
