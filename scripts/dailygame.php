@@ -64,23 +64,36 @@
 		throw new Exception($mysql_message);
 	}
 	$daily_insert_statement->close();
+
+	$body = '{
+	  	"status": "Check out today\'s daily game, '.$name.', at https://game103.net/game/'.$url_name.'!"
+	}';
+	$options = [
+		'http' => [
+			'header' => ["Content-type: application/json","Authorization: Bearer " . Constants::PATCHES_TOKEN],
+			'method' => 'POST',
+			'content' => $body
+		],
+	];
+	$context = stream_context_create( $options );
+	$result = file_get_contents( "https://patches.social/api/v1/statuses", false, $context );
 	
 	// require Facebook PHP SDK
 	// see: https://developers.facebook.com/docs/php/gettingstarted/
-	require_once __DIR__ . '/php-graph-sdk-5.0.0/src/Facebook/autoload.php';
+	// require_once __DIR__ . '/php-graph-sdk-5.0.0/src/Facebook/autoload.php';
 	 
 	// initialize Facebook class using your own Facebook App credentials
 	// see: https://developers.facebook.com/docs/php/gettingstarted/#install
-	$config = array();
-	$config['app_id'] = Constants::FB_APP_ID;
-	$config['app_secret'] = Constants::FB_APP_SECRET;
-	$config['fileUpload'] = false; // optional
-	$config['default_graph_version'] = "v6.0";
+	// $config = array();
+	// $config['app_id'] = Constants::FB_APP_ID;
+	// $config['app_secret'] = Constants::FB_APP_SECRET;
+	// $config['fileUpload'] = false; // optional
+	// $config['default_graph_version'] = "v6.0";
 	 
-	$fb = new Facebook\Facebook($config);
+	// $fb = new Facebook\Facebook($config);
 	 
 	// define your POST parameters (replace with your own values)
-	$params = array(
+	/*$params = array(
 	  "access_token" => Constants::FB_TOKEN, // see: https://developers.facebook.com/docs/facebook-login/access-tokens/
 	  "message" => "Check out today's daily game, $name!",
 	  "link" => "https://game103.net/game/$url_name",
@@ -119,5 +132,5 @@
 	$image_file = basename($image_url);
 	exec( "convert $image_path/bordered/$image_file /var/www/game103/temp.jpeg"); // Always convert to a jpeg
 	exec( "sudo -u james node /var/www/game103/scripts/instagram-poster/index.js --username " . Constants::INSTAGRAM_USER . " --password " . Constants::INSTAGRAM_PASSWORD . " --image /var/www/game103/temp.jpeg --caption \"Check out today's daily game, $name, at https://game103.net/game/$url_name!\" --executablePath /usr/bin/chromium-browser" );
-	exec( "rm /var/www/game103/temp.jpeg" );
+	exec( "rm /var/www/game103/temp.jpeg" );*/
 ?>
