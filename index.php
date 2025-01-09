@@ -11,6 +11,9 @@
 	if( !$_GET['no_cache'] ) {
 		$cached_file = str_replace( "?", "-", str_replace("/", "-", $_SERVER["REQUEST_URI"]) );
 		$cached_file = $_SERVER['DOCUMENT_ROOT'] . "/cache/" . $cached_file . ".html";
+		if( ! file_exists( $cached_file ) ) {
+			if( preg_match('/-\.html$/', $cached_file ) ) $cached_file = substr( $cached_file, 0, -6 ) . ".html";
+		}
 		if( file_exists( $cached_file ) ) {
 			$contents = file_get_contents( $cached_file );
 			if( $dark_mode ) {
