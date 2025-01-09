@@ -46,3 +46,8 @@
 .blog-post-end {
     clear: both;
 }
+
+iframe, img, pre {
+    max-width: 100%;
+    white-space: pre-wrap;
+}
