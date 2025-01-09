@@ -22,28 +22,32 @@
 		* Generate HTML
 		*/
 		public function generate() {
-            $string = file_get_contents("https://game103blog.blogspot.com/feeds/posts/default?alt=json&max-results=10000");
-            $json = json_decode($string, true);
-            $feed = $json['feed'];
-            $entries = $feed['entry'];
+            $string = file_get_contents("https://game103.net/wp?rest_route=/wp/v2/posts&per_page=100&_embed");
+            $entries = json_decode($string, true);
             $limit = 10000;
             $max_characters = 1000;
             $i = 0;
             while( $entries[$i] ) {
-                $title = str_replace(' & ', ' &amp; ', $entries[$i]['title']['$t']);
-                $description = $entries[$i]['content']['$t'];
-                $description = preg_replace( "/<img([^>]*) src=\"http/", "<img$1 src=\"https", $description);
-                $date = date('l, F d, Y', strtotime($entries[$i]['published']['$t']));
-                $author = $entries[$i]['author'][0]['name']['$t'];
-                $comments_link = $entries[$i]['link'][1];
+                $title = str_replace(' & ', ' &amp; ', $entries[$i]['title']['rendered']);
+                $description = $entries[$i]['content']['rendered'];
+                $description = preg_replace( "/<img([^>]*) src=\"http:/", "<img$1 src=\"https:", $description);
+                $date = date('l, F d, Y', strtotime($entries[$i]['date']));
+                $author = $entries[$i]["_embedded"]["author"][0]["name"];
+                $comments_link = $entries[$i]['link'];
                 $tags = "";
-                $categories = $entries[$i]['category']; 
+                $categories = $entries[$i]['_embedded']['wp:term'][0]; 
+		$new_categories = array();
+		for( $j=0; $j<count($categories); $j++ ) {
+			if( $categories[$j]['name'] != "Uncategorized" ) array_push( $new_categories, $categories[$j] );
+		}
                 // Generate the tags
-                if( $categories ) {
+		if( $categories && count($new_categories) > 0 ) {
                     $tags = "<div class='blog-post-tags'>Tags: ";
                     $tags_arr = array();
                     foreach( $categories as $category ) {
-                        array_push( $tags_arr, $category['term'] );
+			if( $category[$name] == "Uncategorized" ) continue;
+		    	#if( $category["taxonomy"] != "category" ) continue;
+                        array_push( $tags_arr, $category['name'] );
                     }
                     $tags .= implode( ", ", $tags_arr );
                     $tags .= "</div>";
@@ -72,7 +76,7 @@
                 $html .= '<div class="blog-post-date">Posted on '.$date.' by '.$author.'</div>';
                 $html .= $tags;
                 $html .= '<div class="blog-post-content">'.$description.'</div>';
-                $html .= '<div class="blog-post-actions">' . $show_all_link . '<a target="_blank" rel="noopener" href="'.$comments_link['href'].'">'.$comments_link['title'].'</a></div>';
+                $html .= '<div class="blog-post-actions">' . $show_all_link . '<a target="_blank" rel="noopener" href="'.$comments_link.'">Comments</a></div>';
                 $html .= "<div class='blog-post-end'></div></div>";
                 $i++;
             }

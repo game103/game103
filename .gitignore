@@ -15,3 +15,7 @@ images/icons/games/bordered/
 navbar.html
 navbar-preview.html
 *.webp
+wp/wp-config.php
+wp/wp-content/plugins/hello.php
+wp/wp-content/uploads/
+wp/*.log

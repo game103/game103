@@ -26,6 +26,11 @@ zone "grams.family" {
     file "/etc/bind/db.grams.family";
 };
 
+zone "patches.social" {
+    type master;
+    file "/etc/bind/db.patches.social";
+};
+
 zone "cocoa" {
     type master;
     file "/etc/bind/db.cocoa";
