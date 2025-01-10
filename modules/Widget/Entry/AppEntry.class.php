@@ -18,7 +18,7 @@
 		*/
 		public function __construct($properties) {
 			$properties['type'] = 'app';
-			$properties['count_verb'] = 'visit';
+			$properties['count_verb'] = 'download';
 			$properties['count_verb_plural'] = $properties['count_verb'] . 's';
 			unset( $properties['rating'] );
 			
