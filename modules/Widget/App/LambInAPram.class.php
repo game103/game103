@@ -21,9 +21,9 @@
 		*/
 		protected function generateContent() {
 			return <<<HTML
-			<a href="/game103games/distribute/lambinapram.apk">Download for Android</a>
+			<a class="app-store-link" href="/game103games/distribute/lambinapram.apk">Download for Android</a>
 			<br/>
-			<a href="/game103games/distribute/lambinapram.ipa">Download for iOS</a>
+			<a class="app-store-link" href="/game103games/distribute/lambinapram.ipa">Download for iOS</a>
 			<br/>
 			<a href='/game/lambinapram'>Play online</a>
 			<p>Thanks for playing the Game 103 app, Lamb in a Pram. On this page you will find some gameplay tips, screenshots from the tutorial, credits, an FAQ, and a way to contact the developer with any questions that you have.</p>

@@ -21,9 +21,9 @@
 		*/
 		protected function generateContent() {
 			return <<<HTML
-			<a href="/game103games/distribute/flip-a-blox.apk">Download for Android</a>
+			<a class="app-store-link" href="/game103games/distribute/flip-a-blox.apk">Download for Android</a>
 			<br/>
-			<a href="/game103games/distribute/flip-a-blox.ipa">Download for iOS</a>
+			<a class="app-store-link" href="/game103games/distribute/flip-a-blox.ipa">Download for iOS</a>
 			<br/>
 			<a href='/game/flip-a-blox'>Play online</a>
 			<p>Thanks for playing the Game 103 game, Flip-a-Blox. On this page you will a detailed account of how your data is handled, and a way to contact the developer with any questions that you have.</p>
