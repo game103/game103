@@ -15,7 +15,7 @@ base_url = 'https://game103.net'
 # same page twice (like passing by reference)
 pages = {}
 # pages we don't want to include
-bad_pages = { '/random': '/random' }
+bad_pages = { '/random': '/random', '/blog': '/blog' }
 
 # crawl a root url (/<something>)
 # this will populate pages

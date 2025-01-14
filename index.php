@@ -136,6 +136,7 @@
 	$VIDEOS_BREADCRUMBS_NAME = "Videos";
 	$APPS_BREADCRUMBS_NAME = "Apps";
 	$RESOURCES_BREADCRUMBS_NAME = "Resources";
+	$BLOG_BREADCRUMBS_NAME = "Blog";
 	$COMMIT_HASH = shell_exec("git rev-parse HEAD");
 
 	if( isset( $custom ) ) {
@@ -509,6 +510,9 @@
 				$content = $widget->get_HTML();
 				$meta = '<link rel="alternate" type="application/rss+xml" title="Subscribe" href="https://game103.net/blog/feed"/>';
 				$description = "The Game 103 blog containing updates about the site.";
+				if( $custom["sub"] ) {
+					$breadcrumbs = add_breadcrumb( $breadcrumbs, $base_url . "/blog", $BLOG_BREADCRUMBS_NAME ); 
+				}	
 			}
 			else {
 				$is_404 = true;
