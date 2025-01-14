@@ -96,7 +96,7 @@ label[for="comment"] {
     border-radius: 0;
 }
 
-.comment-respond textarea {
+.comment-respond textarea, .comment-respond input[type="text"] {
     background-color: #3274da;
     color: white;
     border: 1px solid white;
