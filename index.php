@@ -507,7 +507,7 @@
 				$widget->generate();
 				array_push( $widgets, $widget );
 				$content = $widget->get_HTML();
-				$meta = '<link rel="alternate" type="application/rss+xml" title="Subscribe" href="https://game103.net/wp/feed"/>';
+				$meta = '<link rel="alternate" type="application/rss+xml" title="Subscribe" href="https://game103.net/blog/feed"/>';
 				$description = "The Game 103 blog containing updates about the site.";
 			}
 			else {
