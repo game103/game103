@@ -137,6 +137,10 @@
 	$APPS_BREADCRUMBS_NAME = "Apps";
 	$RESOURCES_BREADCRUMBS_NAME = "Resources";
 	$COMMIT_HASH = shell_exec("git rev-parse HEAD");
+
+	if( isset( $custom ) ) {
+		$routes = $custom["route"];
+	}
 	
 	// Routing
 	//$is_404 = false;
@@ -496,14 +500,14 @@
 				$is_404 = true;
 			}
 			break;
-		case 'blog':
-			if(count($routes) == 2) {
-				$widget = new \Widget\Blog();
+		case 'wp-blog':
+			if( isset($custom) ) {
+				$title = $custom["title"];
+				$widget = new \Widget\Blog( array( "title" => $custom["title"], "content" => $custom["content"] ) );
 				$widget->generate();
 				array_push( $widgets, $widget );
 				$content = $widget->get_HTML();
-				$title = 'Blog';
-				$meta = '<link rel="alternate" type="application/rss+xml" title="Subscribe" href="https://game103blog.blogspot.com/feeds/posts/default"/>';
+				$meta = '<link rel="alternate" type="application/rss+xml" title="Subscribe" href="https://game103.net/wp/feed"/>';
 				$description = "The Game 103 blog containing updates about the site.";
 			}
 			else {
