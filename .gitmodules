@@ -103,3 +103,6 @@
 [submodule "game103games/flash/findandslide"]
 	path = game103games/flash/findandslide
 	url = https://github.com/game103/findandslide
+[submodule "game103games/flash/sleepingbunnies"]
+	path = game103games/flash/sleepingbunnies
+	url = https://github.com/game103/sleepingbunnies
