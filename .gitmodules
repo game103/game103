@@ -106,3 +106,6 @@
 [submodule "game103games/flash/sleepingbunnies"]
 	path = game103games/flash/sleepingbunnies
 	url = https://github.com/game103/sleepingbunnies
+[submodule "game103games/flash/elisanimalrumble"]
+	path = game103games/flash/elisanimalrumble
+	url = https://github.com/game103/elisanimalrumble
