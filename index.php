@@ -870,7 +870,6 @@
 					</div>
 					<div class="additional-links-section">
 						<div class="additional-links-section-heading">Social</div>
-						<a target='_blank' rel="noopener" href="https://patches.social/@game103"><i class="fab fa-mastodon"></i>Mastodon</a>
 						<a target='_blank' rel="noopener" href="https://www.facebook.com/game103"><i class="fab fa-facebook"></i>Facebook</a>
 						<a target='_blank' rel="noopener" href="https://x.com/game103games"><i class="fab fa-x-twitter"></i>X</a>
 						<a target='_blank' rel="noopener" href="https://www.instagram.com/game103games/"><i class="fab fa-instagram"></i>Instagram</a>
